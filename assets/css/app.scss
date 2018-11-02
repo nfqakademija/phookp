@@ -1,3 +1,41 @@
 
 // the ~ allows you to reference things in node_modules
 @import "~bootstrap/scss/bootstrap";
+body {
+  padding-top: 50px;
+}
+.card-shadow{
+  box-shadow: 10px 10px 5px grey;
+}
+.container-index{
+  padding-bottom: 30px;
+}
+.masthead {
+  min-height: 30rem;
+  position: relative;
+  display: table;
+  width: 100%;
+  height: auto;
+  padding-top: 8rem;
+  padding-bottom: 8rem;
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.1) 0%, rgba(255, 255, 255, 0.1) 100%), url("public/images/back.jpg");
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+@media (min-width: 992px) {
+  body {
+    padding-top: 50px;
+  }
+  .container-index {
+    padding-left: 180px;
+    padding-bottom: 30px;
+  }
+.masthead{
+  padding-top: 14rem;
+  padding-bottom: 14rem;
+}
+
+
+}
