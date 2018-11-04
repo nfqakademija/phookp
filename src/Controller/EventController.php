@@ -5,6 +5,7 @@ namespace App\Controller;
 
 use App\Services\EventService;
 use Psr\Log\LoggerInterface;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
@@ -49,20 +50,23 @@ class EventController extends AbstractController
     public function create(Request $request)
     {
         $event = new Event();
+        $event->setEventDate(new \DateTime("tomorrow"));
         $form = $this->createForm(EventFormType::class, $event);
-
+        $form->add('save', SubmitType::class, array("label" => "Issaugoti"));
         $form->handleRequest($request);
-//        dump($form->getData());
         if($form->isSubmitted() && $form->isValid()){
             $this->eventService->create($form->getData());
             $this->addFlash('success', 'Renginys sekmingai pridetas! Patikrinkite nurodyta el. pasta, jums buvo issiustas laiskas su renginio patvirtinimo ir administravimo nuoroda.');
         }
 
 
-        return $this->render('event/index.html.twig', [
+        /*return $this->render('event/index.html.twig', [
             'controller_name' => 'EventController',
             'form' => $form->createView()
-        ]);
+        ]);*/
+        return $this->render("home/eventForm.html.twig", array(
+            "form" => $form->createView(),
+        ));
     }
 
     /**

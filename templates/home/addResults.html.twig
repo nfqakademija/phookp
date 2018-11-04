@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+{% block title %}Add command{{ parent() }}{% endblock %}
+{% form_theme form 'bootstrap_4_layout.html.twig' %}
+{% block body %}
+    <div class="container container-index">
+        <div class="row">
+            <div class="col-lg-10">
+                <div class="card mt-4 card-shadow">
+                    <div class="card-body">
+                        <h3 class="card-title">Rezultatų įvedimas</h3>
+                        <p class="card-text">
+                        <div class="form">
+                            {{ form_start(form) }}
+                            {{ form_errors(form) }}
+                            {{ form_row(form.sectorId) }}
+                            <div id="sections">
+                                <div class="section">
+                                        {{ form_row(form.result) }}
+                                    </div>
+                                </div>
+                        </div>
+                                    {{ form_row(form.save) }}
+                            </div>
+                            {{ form_end(form) }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+{% endblock %}

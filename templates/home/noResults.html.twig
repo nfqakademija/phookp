@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Rezultatai {{ parent() }}{% endblock %}
+
+{% block body %}
+    {{ include ('home/navBar.html.twig') }}
+    <div class="container">
+        <div class="row">
+            <h1> Renginio: {{ id }}</h1>
+            <h1>Rezultatų  nėra</h1>
+        </div>
+    </div>
+    </div>
+{% endblock %}

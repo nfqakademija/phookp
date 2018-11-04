@@ -10,6 +10,10 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class Event
 {
+
+    public const TYPE_TOP5 = "top5";
+    public const TYPE_TOTAL = "total";
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()

@@ -13,6 +13,7 @@ use App\Entity\Event;
 use App\Repository\EventRepository;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
+use JMS\Serializer\SerializerBuilder;
 
 final class EventService
 {
@@ -92,5 +93,22 @@ final class EventService
         }
 
         else return null;
+    }
+
+    public function getFutureEvents():?array
+    {
+        /*
+         * TODO imti tik busimus eventus
+         * */
+
+        $events = $this->eventRepository->findAll();
+        $array  = array();
+        foreach($events as $event){
+            $serializer = SerializerBuilder::create()->build();
+            $a = $serializer->toArray($event);
+            array_push($array, $a);
+
+        }
+        return $array;
     }
 }

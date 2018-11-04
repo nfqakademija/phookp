@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+{% block title %}Create event {{ parent() }}{% endblock %}
+{% form_theme form 'bootstrap_4_layout.html.twig' %}
+{% block body %}
+    {{ include ("home/navBar.html.twig") }}
+    <div class="container container-index">
+    <div class="row">
+        {% for label, messages in app.flashes %}
+            {% for message in messages %}
+                <div class="alert alert-{{ label }}">
+            {{ message }}
+        </div>
+            {% endfor %}
+        {% endfor %}
+    </div>
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <div class="card mt-4 card-shadow">
+                    <div class="card-body">
+                        <h3 class="card-title">Renginio sukūrimas </h3>
+                        <p class="card-text">
+                        <div class="form-group">
+                            {{ form_start(form) }}
+                            {{ form_widget(form) }}
+                            {{ form_end(form) }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
