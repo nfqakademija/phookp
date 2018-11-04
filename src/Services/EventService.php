@@ -10,29 +10,87 @@ namespace App\Services;
 
 
 use App\Entity\Event;
-use App\Interfaces\IEventRepository;
+use App\Repository\EventRepository;
+use Psr\Log\LoggerInterface;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 final class EventService
 {
+    /**
+     * @var EventRepository - Event entity repozitorija, injektinama automatiskai per konstruktoriaus parametrus
+     */
     private $eventRepository;
+    /**
+     * @var LoggerInterface - Logeris, naudojau debuginimui. Isveda zinutes i var/log/dev.log
+     */
+    private $logger;
+    /**
+     * @var ValidatorInterface - Entity objekto validatorius, injektinamas per konstruktoriaus parametrus
+     */
+    private $validator;
 
-    public function __construct(IEventRepository $eventRepository)
+    /**
+     * EventService constructor.
+     * @param EventRepository $eventRepository
+     * @param ValidatorInterface $validator
+     * @param LoggerInterface $logger
+     */
+    public function __construct(EventRepository $eventRepository, ValidatorInterface $validator, LoggerInterface $logger)
     {
+
         $this->eventRepository = $eventRepository;
+        $this->validator = $validator;
+        $this->logger = $logger;
+        $this->logger->notice("Service constructor called.");
     }
 
-    public function create():?string
+    /**
+     * @param Event $event
+     * @return Event|null
+     * Issaugo objekta i duombaze ir vel ji grazina (dabar jau su idEvent ir visom default reiksmem)
+     */
+    public function create(Event $event):?Event
     {
-
-
-        $event = new Event();
-        $event->setEventType("top5");
-        $event->setEventOrganiserEmail("mantas@carpro.lt");
-        $event->setEventOrganiser("Mantas ir CO");
-        $event->setEventDate(new \DateTime("2018-11-03"));
-        $event->setEventName("Paskutinis sansas...");
+        /**
+         * @TODO
+         * Padaryti success checka, jei tarkim failina prisijungt prie db, grazina null
+         */
         $this->eventRepository->save($event);
+        return $event;
+    }
 
-        return "Naujo evento ID: ".$event->getIdEvent();
+    /**
+     * @param int $id
+     * @return Event
+     * Pagal paduota id suranba ir grazina Event objekta. Jeigu neranda iraso pagal id - grazina null.
+     */
+
+    public function get(int $id): Event
+    {
+        /**
+         * @TODO
+         * Pakeist return tipa i ?Event, ir jeigu randa eventa pagal id grazina ji, jeigu neranda, grazina null
+         */
+        $this->logger->notice("Get from service called");
+        $event = $this->eventRepository->find($id);
+        return $event;
+    }
+
+    /**
+     * @param Event $event
+     * @return null|\Symfony\Component\Validator\ConstraintViolationListInterface
+     * Validatina paduota Event objekta, jeigu klaidu nera, grazina null, jeigu randa klaidu - string masyva
+     */
+    public function validate(Event $event):?array
+    {
+        $errors  = $this->validator->validate($event);
+
+        if(count($errors) > 0){
+
+            dump($errors);
+            return $errors;
+        }
+
+        else return null;
     }
 }
