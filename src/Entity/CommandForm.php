@@ -14,6 +14,8 @@ class CommandForm
     protected $commandName;
     protected $commandEmail;
 
+
+
     /**
      * @return mixed
      */
@@ -44,6 +46,22 @@ class CommandForm
     public function setCommandEmail($commandEmail): void
     {
         $this->commandEmail = $commandEmail;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getSectorId()
+    {
+        return $this->sectorId;
+    }
+
+    /**
+     * @param mixed $sectorId
+     */
+    public function setSectorId($sectorId): void
+    {
+        $this->sectorId = $sectorId;
     }
 
 

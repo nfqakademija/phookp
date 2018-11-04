@@ -30,7 +30,10 @@ class OrganizerController extends Controller
             ->getForm();
         return $this->render("home/addCommand.html.twig", array(
             "form" => $form->createView(),
+
         ));
+
     }
+
 
 }
