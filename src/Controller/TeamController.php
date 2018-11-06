@@ -4,6 +4,12 @@ namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Entity\SectionForm;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+
 
 class TeamController extends AbstractController
 {
@@ -20,7 +26,8 @@ class TeamController extends AbstractController
     /**
      * @Route("/team/sector", name="teamSector")
     */
-    /*public function new(Request $request)
+
+    public function new(Request $request)
     {
 
 
@@ -39,10 +46,11 @@ class TeamController extends AbstractController
     ));
     $form->add("save", SubmitType::class, array("label" => "Išsaugoti"));
     $form = $form->getForm();
-    return $this->render("home/sectors.html.twig", array(
+    return $this->render("team/sectors.html.twig", array(
     "form" => $form->createView(),
     "event" => $event
     ));
 
-    }*/
+    }
+
 }

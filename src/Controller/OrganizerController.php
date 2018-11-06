@@ -28,7 +28,7 @@ class OrganizerController extends Controller
             ->add("commandEmail", TextType::class, array("label" => "Elektroninis paštas"))
             ->add("save", SubmitType::class, array("label" => "Pridėti"))
             ->getForm();
-        return $this->render("home/addCommand.html.twig", array(
+        return $this->render("team/addCommand.html.twig", array(
             "form" => $form->createView(),
 
         ));

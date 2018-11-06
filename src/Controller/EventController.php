@@ -52,7 +52,7 @@ class EventController extends AbstractController
         $event = new Event();
         $event->setEventDate(new \DateTime("tomorrow"));
         $form = $this->createForm(EventFormType::class, $event);
-        $form->add('save', SubmitType::class, array("label" => "Issaugoti"));
+        $form->add('save', SubmitType::class, array("label" => "Sukurti"));
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid()){
             $this->eventService->create($form->getData());
@@ -64,7 +64,7 @@ class EventController extends AbstractController
             'controller_name' => 'EventController',
             'form' => $form->createView()
         ]);*/
-        return $this->render("home/eventForm.html.twig", array(
+        return $this->render("event/eventForm.html.twig", array(
             "form" => $form->createView(),
         ));
     }

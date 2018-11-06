@@ -37,32 +37,6 @@ class HomeController extends Controller
             ));
     }
 
-    /**
-     * @Route("/home/eventForm", name="home.eventForm")
-     */
-
-    public function new(Request $request)
-    {
-        $eventForm = new EventForm();
-        $eventForm->setStartDate(new \DateTime("tomorrow"));
-        $eventForm->setEndDate(new \DateTime("tomorrow"));
-
-        $form = $this->createFormBuilder($eventForm)
-            ->add("eventName", TextType::class, array("label" => "Renginio pavadinimas"))
-            ->add("email", TextType::class, array("label" => "Elektroninis paštas"))
-            ->add("eventType", ChoiceType::class, array("label" => "Renginio tipas",
-                    "choices" => array(
-                        "Top5" => EventForm::TYPE_TOP,
-                        "Didžiausia žuvis" => EventForm::TYPE_BIGGEST))
-            )
-            ->add("startDate", DateType::class, array("label" => "Renginio pradžia"))
-            ->add("endDate", DateType::class, array("label" => "Renginio pabaiga"))
-            ->add("save", SubmitType::class, array("label" => "Sukurti"))
-            ->getForm();
-        return $this->render("home/eventForm.html.twig", array(
-            "form" => $form->createView(),
-        ));
-    }
 
     /**
      * @Route("/home/event/{id}", name="home.event")

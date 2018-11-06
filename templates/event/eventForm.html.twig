@@ -2,9 +2,9 @@
 {% block title %}Create event {{ parent() }}{% endblock %}
 {% form_theme form 'bootstrap_4_layout.html.twig' %}
 {% block body %}
-    {{ include ("home/navBar.html.twig") }}
+    {{ include ("navBar/navBar.html.twig") }}
     <div class="container container-index">
-    <div class="row">
+    <div class="row justify-content-center">
         {% for label, messages in app.flashes %}
             {% for message in messages %}
                 <div class="alert alert-{{ label }}">
@@ -28,5 +28,6 @@
                 </div>
             </div>
         </div>
+    </div>
     </div>
 {% endblock %}

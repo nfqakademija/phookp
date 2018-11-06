@@ -19,7 +19,7 @@ class EventFormType extends AbstractType
         $builder
             ->add('eventName', TextType::class, array("label" => "Renginio pavadinimas"))
             ->add('eventDate', DateType::class, array("label" => "Renginio pradžia"))
-            ->add('eventDuration', NumberType::class, array("label" => "Renginio trukme"))
+            ->add('eventDuration', NumberType::class, array("label" => "Renginio trukmė"))
             ->add('eventOrganiser', TextType::class, array("label" => "Organizatorius"))
             ->add('eventOrganiserEmail', EmailType::class, array("label" => "Elektroninis paštas"))
             ->add("eventType", ChoiceType::class, array("label" => "Renginio tipas",

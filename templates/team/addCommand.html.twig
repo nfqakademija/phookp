@@ -2,9 +2,9 @@
 {% block title %}Add command{{ parent() }}{% endblock %}
 {% form_theme form 'bootstrap_4_layout.html.twig' %}
 {% block body %}
-    {{ include ('home/navBarOrganizer.html.twig') }}
+    {{ include ('navBar/navBarOrganizer.html.twig') }}
     <div class="container container-index">
-        <div class="row">
+        <div class="row justify-content-center">
             <div class="col-lg-10">
                 <div class="card mt-4 card-shadow">
                     <img class="card-img-top img-fluid" src="{{ asset('/images/back.jpg') }}" alt="">
@@ -14,12 +14,10 @@
                             {{ form_start(form) }}
                             {{ form_widget(form) }}
                             {{ form_end(form) }}
-                        </div>
                         </p>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
     </div>
 {% endblock %}

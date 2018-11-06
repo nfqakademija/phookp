@@ -2,7 +2,7 @@
 // the ~ allows you to reference things in node_modules
 @import "~bootstrap/scss/bootstrap";
 body {
-  padding-top: 50px;
+  padding-top: 30px;
 }
 .card-shadow{
   box-shadow: 10px 10px 5px grey;
@@ -10,7 +10,7 @@ body {
 .container-index{
   padding-bottom: 30px;
 }
-.masthead {
+.firstphoto {
   min-height: 30rem;
   position: relative;
   display: table;
@@ -28,13 +28,9 @@ body {
   body {
     padding-top: 50px;
   }
-  .container-index {
-    padding-left: 180px;
-    padding-bottom: 30px;
-  }
-.masthead{
+.firstphoto{
   padding-top: 14rem;
-  padding-bottom: 14rem;
+  padding-bottom: 10rem;
 }
 
 
