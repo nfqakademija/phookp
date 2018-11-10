@@ -34,15 +34,14 @@ class EventController extends AbstractController
     /**
      * @Route("/event", name="event")
      */
+    /*
     public function index()
     {
-        $event = new Competition();
-        $form = $this->createForm(CompetitionFormType::class, $event);
         return $this->render('event/index.html.twig', [
             'controller_name' => 'EventController',
-            'form' => $form->createView()
         ]);
     }
+    */
 
     /**
      * @Route("/event/create", name="eventCreate")
@@ -59,11 +58,6 @@ class EventController extends AbstractController
             $this->addFlash('success', 'Renginys sekmingai pridetas! Patikrinkite nurodyta el. pasta, jums buvo issiustas laiskas su renginio patvirtinimo ir administravimo nuoroda.');
         }
 
-
-        /*return $this->render('event/index.html.twig', [
-            'controller_name' => 'EventController',
-            'form' => $form->createView()
-        ]);*/
         return $this->render("event/eventForm.html.twig", array(
             "form" => $form->createView(),
         ));

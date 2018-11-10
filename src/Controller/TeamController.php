@@ -4,7 +4,7 @@ namespace App\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
-use App\Entity\SectionForm;
+use App\Entity\Sector;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -34,7 +34,7 @@ class TeamController extends AbstractController
     $event = array(array("commandName" => "zuviukai", "id" => 1, "sector" => 1),
     array("commandName" => "karpis", "id" => 2, "sector" => 2),
     array("commandName" => "debesys", "id" => 3, "sector" => null));
-    $sectionForm = new SectionForm();
+    $sectionForm = new Sector();
     $form = $this->createFormBuilder($sectionForm);
     $form->add('sectorId', CollectionType::class, array(
     // each entry in the array will be an "email" field
@@ -52,5 +52,4 @@ class TeamController extends AbstractController
     ));
 
     }
-
 }
