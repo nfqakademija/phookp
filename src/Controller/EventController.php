@@ -12,9 +12,9 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 
 
-use App\Form\EventFormType;
+use App\Form\CompetitionFormType;
 
-use App\Entity\Event;
+use App\Entity\Competition;
 
 class EventController extends AbstractController
 {
@@ -36,8 +36,8 @@ class EventController extends AbstractController
      */
     public function index()
     {
-        $event = new Event();
-        $form = $this->createForm(EventFormType::class, $event);
+        $event = new Competition();
+        $form = $this->createForm(CompetitionFormType::class, $event);
         return $this->render('event/index.html.twig', [
             'controller_name' => 'EventController',
             'form' => $form->createView()
@@ -49,9 +49,9 @@ class EventController extends AbstractController
      */
     public function create(Request $request)
     {
-        $event = new Event();
-        $event->setEventDate(new \DateTime("tomorrow"));
-        $form = $this->createForm(EventFormType::class, $event);
+        $event = new Competition();
+        $event->setCompetitionDate(new \DateTime("tomorrow"));
+        $form = $this->createForm(CompetitionFormType::class, $event);
         $form->add('save', SubmitType::class, array("label" => "Sukurti"));
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid()){

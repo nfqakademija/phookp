@@ -6,9 +6,9 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\EventRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\competitionRepository")
  */
-class Event
+class Competition
 {
 
     public const TYPE_TOP5 = "top5";
@@ -19,7 +19,7 @@ class Event
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
      */
-    private $idEvent;
+    private $idCompetition;
 
     /**
      * @ORM\Column(type="string", length=90)
@@ -33,7 +33,7 @@ class Event
      *     maxMessage = "Renginio pavadinimas negali buti ilgesnis nei 90 simboliai!"
      * )
      */
-    private $eventName;
+    private $competitionName;
 
     /**
      * @ORM\Column(type="datetime")
@@ -49,7 +49,7 @@ class Event
      *     maxMessage="Negalima planuoti renginiu daugiau nei du metai i prieki!"
      * )
      */
-    private $eventDate;
+    private $competitionDate;
 
     /**
      * @ORM\Column(type="integer")
@@ -60,7 +60,7 @@ class Event
      *     maxMessage="Renginio trukme negali virsyti 10 dienu!"
      * )
      */
-    private $eventDuration = 1;
+    private $competitionDuration = 1;
 
     /**
      * @ORM\Column(type="string", length=90)
@@ -71,7 +71,7 @@ class Event
      *     maxMessage="Organizatoriaus vardo ar pavadinimo ilgis turi buti tarp 3 ir 90 simboliu!"
      * )
      */
-    private $eventOrganiser;
+    private $competitionOrganiser;
 
     /**
      * @ORM\Column(type="string", length=90)
@@ -83,7 +83,7 @@ class Event
      *     maxMessage="El. pasto adreso ilgis negali virsyti 90 simboliu!"
      * )
      */
-    private $eventOrganiserEmail;
+    private $competitionOrganiserEmail;
 
     /**
      * @ORM\Column(type="string", length=30)
@@ -92,123 +92,123 @@ class Event
      *     message = "Nezinomas varzybu tipas!"
      * )
      */
-    private $eventType;
+    private $competitionType;
 
     /**
      * @ORM\Column(type="boolean")
      */
-    private $eventApproved = false;
+    private $competitionApproved = false;
 
     /**
      * @ORM\Column(type="string", length=30)
      */
-    private $eventStatus = "unconfirmed";
+    private $competitionStatus = "unconfirmed";
 
 
-    public function getIdEvent(): ?int
+    public function getIdCompetition(): ?int
     {
-        return $this->idEvent;
+        return $this->idCompetition;
     }
 
-    public function setIdEvent(int $idEvent): self
+    public function setIdCompetition(int $idCompetition): self
     {
-        $this->idEvent = $idEvent;
+        $this->idCompetition = $idCompetition;
 
         return $this;
     }
 
-    public function getEventName(): ?string
+    public function getCompetitionName(): ?string
     {
-        return $this->eventName;
+        return $this->competitionName;
     }
 
-    public function setEventName(string $eventName): self
+    public function setCompetitionName(string $competitionName): self
     {
-        $this->eventName = $eventName;
+        $this->competitionName = $competitionName;
 
         return $this;
     }
 
-    public function getEventDate(): ?\DateTimeInterface
+    public function getCompetitionDate(): ?\DateTimeInterface
     {
-        return $this->eventDate;
+        return $this->competitionDate;
     }
 
-    public function setEventDate(\DateTimeInterface $eventDate): self
+    public function setCompetitionDate(\DateTimeInterface $competitionDate): self
     {
-        $this->eventDate = $eventDate;
+        $this->competitionDate = $competitionDate;
 
         return $this;
     }
 
-    public function getEventDuration(): ?int
+    public function getCompetitionDuration(): ?int
     {
-        return $this->eventDuration;
+        return $this->competitionDuration;
     }
 
-    public function setEventDuration(int $eventDuration): self
+    public function setCompetitionDuration(int $competitionDuration): self
     {
-        $this->eventDuration = $eventDuration;
+        $this->competitionDuration = $competitionDuration;
 
         return $this;
     }
 
-    public function getEventOrganiser(): ?string
+    public function getCompetitionOrganiser(): ?string
     {
-        return $this->eventOrganiser;
+        return $this->competitionOrganiser;
     }
 
-    public function setEventOrganiser(string $eventOrganiser): self
+    public function setCompetitionOrganiser(string $competitionOrganiser): self
     {
-        $this->eventOrganiser = $eventOrganiser;
+        $this->competitionOrganiser = $competitionOrganiser;
 
         return $this;
     }
 
-    public function getEventOrganiserEmail(): ?string
+    public function getCompetitionOrganiserEmail(): ?string
     {
-        return $this->eventOrganiserEmail;
+        return $this->competitionOrganiserEmail;
     }
 
-    public function setEventOrganiserEmail(string $eventOrganiserEmail): self
+    public function setCompetitionOrganiserEmail(string $competitionOrganiserEmail): self
     {
-        $this->eventOrganiserEmail = $eventOrganiserEmail;
+        $this->competitionOrganiserEmail = $competitionOrganiserEmail;
 
         return $this;
     }
 
-    public function getEventType(): ?string
+    public function getCompetitionType(): ?string
     {
-        return $this->eventType;
+        return $this->competitionType;
     }
 
-    public function setEventType(string $eventType): self
+    public function setCompetitionType(string $competitionType): self
     {
-        $this->eventType = $eventType;
+        $this->competitionType = $competitionType;
 
         return $this;
     }
 
-    public function getEventApproved(): ?bool
+    public function getCompetitionApproved(): ?bool
     {
-        return $this->eventApproved;
+        return $this->competitionApproved;
     }
 
-    public function setEventApproved(bool $eventApproved): self
+    public function setCompetitionApproved(bool $competitionApproved): self
     {
-        $this->eventApproved = $eventApproved;
+        $this->competitionApproved = $competitionApproved;
 
         return $this;
     }
 
-    public function getEventStatus(): ?string
+    public function getCompetitionStatus(): ?string
     {
-        return $this->eventStatus;
+        return $this->competitionStatus;
     }
 
-    public function setEventStatus(string $eventStatus): self
+    public function setCompetitionStatus(string $competitionStatus): self
     {
-        $this->eventStatus = $eventStatus;
+        $this->competitionStatus = $competitionStatus;
 
         return $this;
     }

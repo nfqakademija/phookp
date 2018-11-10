@@ -9,7 +9,7 @@
 namespace App\Services;
 
 
-use App\Entity\Event;
+use App\Entity\Competition;
 use App\Repository\EventRepository;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
@@ -18,7 +18,7 @@ use JMS\Serializer\SerializerBuilder;
 final class EventService
 {
     /**
-     * @var EventRepository - Event entity repozitorija, injektinama automatiskai per konstruktoriaus parametrus
+     * @var EventRepository - Competition entity repozitorija, injektinama automatiskai per konstruktoriaus parametrus
      */
     private $eventRepository;
     /**
@@ -46,11 +46,11 @@ final class EventService
     }
 
     /**
-     * @param Event $event
-     * @return Event|null
+     * @param Competition $event
+     * @return Competition|null
      * Issaugo objekta i duombaze ir vel ji grazina (dabar jau su idEvent ir visom default reiksmem)
      */
-    public function create(Event $event):?Event
+    public function create(Competition $event):?Competition
     {
         /**
          * @TODO
@@ -62,15 +62,15 @@ final class EventService
 
     /**
      * @param int $id
-     * @return Event
-     * Pagal paduota id suranba ir grazina Event objekta. Jeigu neranda iraso pagal id - grazina null.
+     * @return Competition
+     * Pagal paduota id suranba ir grazina Competition objekta. Jeigu neranda iraso pagal id - grazina null.
      */
 
-    public function get(int $id): Event
+    public function get(int $id): Competition
     {
         /**
          * @TODO
-         * Pakeist return tipa i ?Event, ir jeigu randa eventa pagal id grazina ji, jeigu neranda, grazina null
+         * Pakeist return tipa i ?Competition, ir jeigu randa eventa pagal id grazina ji, jeigu neranda, grazina null
          */
         $this->logger->notice("Get from service called");
         $event = $this->eventRepository->find($id);
@@ -78,11 +78,11 @@ final class EventService
     }
 
     /**
-     * @param Event $event
+     * @param Competition $event
      * @return null|\Symfony\Component\Validator\ConstraintViolationListInterface
-     * Validatina paduota Event objekta, jeigu klaidu nera, grazina null, jeigu randa klaidu - string masyva
+     * Validatina paduota Competition objekta, jeigu klaidu nera, grazina null, jeigu randa klaidu - string masyva
      */
-    public function validate(Event $event):?array
+    public function validate(Competition $event):?array
     {
         $errors  = $this->validator->validate($event);
 
