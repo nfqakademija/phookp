@@ -8,7 +8,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 
-class EventRepository extends ServiceEntityRepository
+class CompetitionRepository extends ServiceEntityRepository
 {
     private $entityManager;
 
@@ -24,9 +24,9 @@ class EventRepository extends ServiceEntityRepository
         // TODO: Implement findByHash() method.
     }
 
-    public function save(Competition $event): void
+    public function save(Competition $competition): void
     {
-        $this->entityManager->persist($event);
+        $this->entityManager->persist($competition);
         $this->entityManager->flush();
     }
 }

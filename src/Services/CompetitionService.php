@@ -10,17 +10,17 @@ namespace App\Services;
 
 
 use App\Entity\Competition;
-use App\Repository\EventRepository;
+use App\Repository\CompetitionRepository;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 use JMS\Serializer\SerializerBuilder;
 
-final class EventService
+final class CompetitionService
 {
     /**
-     * @var EventRepository - Competition entity repozitorija, injektinama automatiskai per konstruktoriaus parametrus
+     * @var CompetitionRepository - Competition entity repozitorija, injektinama automatiskai per konstruktoriaus parametrus
      */
-    private $eventRepository;
+    private $competitionRepository;
     /**
      * @var LoggerInterface - Logeris, naudojau debuginimui. Isveda zinutes i var/log/dev.log
      */
@@ -31,33 +31,33 @@ final class EventService
     private $validator;
 
     /**
-     * EventService constructor.
-     * @param EventRepository $eventRepository
+     * CompetitionService constructor.
+     * @param CompetitionRepository $competitionRepository
      * @param ValidatorInterface $validator
      * @param LoggerInterface $logger
      */
-    public function __construct(EventRepository $eventRepository, ValidatorInterface $validator, LoggerInterface $logger)
+    public function __construct(CompetitionRepository $competitionRepository, ValidatorInterface $validator, LoggerInterface $logger)
     {
 
-        $this->eventRepository = $eventRepository;
+        $this->competitionRepository = $competitionRepository;
         $this->validator = $validator;
         $this->logger = $logger;
         $this->logger->notice("Service constructor called.");
     }
 
     /**
-     * @param Competition $event
+     * @param Competition $competition
      * @return Competition|null
-     * Issaugo objekta i duombaze ir vel ji grazina (dabar jau su idEvent ir visom default reiksmem)
+     * Issaugo objekta i duombaze ir vel ji grazina (dabar jau su idCompetition ir visom default reiksmem)
      */
-    public function create(Competition $event):?Competition
+    public function create(Competition $competition):?Competition
     {
         /**
          * @TODO
          * Padaryti success checka, jei tarkim failina prisijungt prie db, grazina null
          */
-        $this->eventRepository->save($event);
-        return $event;
+        $this->competitionRepository->save($competition);
+        return $competition;
     }
 
     /**
@@ -70,21 +70,21 @@ final class EventService
     {
         /**
          * @TODO
-         * Pakeist return tipa i ?Competition, ir jeigu randa eventa pagal id grazina ji, jeigu neranda, grazina null
+         * Pakeist return tipa i ?Competition, ir jeigu randa competitiona pagal id grazina ji, jeigu neranda, grazina null
          */
         $this->logger->notice("Get from service called");
-        $event = $this->eventRepository->find($id);
-        return $event;
+        $competition = $this->competitionRepository->find($id);
+        return $competition;
     }
 
     /**
-     * @param Competition $event
+     * @param Competition $competition
      * @return null|\Symfony\Component\Validator\ConstraintViolationListInterface
      * Validatina paduota Competition objekta, jeigu klaidu nera, grazina null, jeigu randa klaidu - string masyva
      */
-    public function validate(Competition $event):?array
+    public function validate(Competition $competition):?array
     {
-        $errors  = $this->validator->validate($event);
+        $errors  = $this->validator->validate($competition);
 
         if(count($errors) > 0){
 
@@ -95,17 +95,17 @@ final class EventService
         else return null;
     }
 
-    public function getFutureEvents():?array
+    public function getFutureCompetitions():?array
     {
         /*
-         * TODO imti tik busimus eventus
+         * TODO imti tik busimus competitionus
          * */
 
-        $events = $this->eventRepository->findAll();
+        $competitions = $this->competitionRepository->findAll();
         $array  = array();
-        foreach($events as $event){
+        foreach($competitions as $competition){
             $serializer = SerializerBuilder::create()->build();
-            $a = $serializer->toArray($event);
+            $a = $serializer->toArray($competition);
             array_push($array, $a);
 
         }

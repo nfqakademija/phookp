@@ -17,12 +17,12 @@ class CompetitionFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('competitionName', TextType::class, array("label" => "Renginio pavadinimas"))
-            ->add('competitionDate', DateType::class, array("label" => "Renginio pradžia"))
-            ->add('competitionDuration', NumberType::class, array("label" => "Renginio trukmė"))
-            ->add('competitionOrganiser', TextType::class, array("label" => "Organizatorius"))
-            ->add('competitionOrganiserEmail', EmailType::class, array("label" => "Elektroninis paštas"))
-            ->add("competitionType", ChoiceType::class, array("label" => "Renginio tipas",
+            ->add('competitionName', TextType::class, array("label" => "form.competition_registration.name"))
+            ->add('competitionDate', DateType::class, array("label" => "form.competition_registration.start_date"))
+            ->add('competitionDuration', NumberType::class, array("label" => "form.competition_registration.duration"))
+            ->add('competitionOrganiser', TextType::class, array("label" => "form.competition_registration.organiser"))
+            ->add('competitionOrganiserEmail', EmailType::class, array("label" => "form.competition_registration.mail"))
+            ->add("competitionType", ChoiceType::class, array("label" => "form.competition_registration.type",
                     "choices" => array(
                         "Top 5" => Competition::TYPE_TOP5,
                         "Bendras svoris" => Competition::TYPE_TOTAL))

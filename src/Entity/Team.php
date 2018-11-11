@@ -37,6 +37,11 @@ class Team
 
     private $email;
 
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     */
+    private $teamMember;
+
     /*
      * Getters
      * */

@@ -48,7 +48,7 @@ class TeamController extends AbstractController
     $form = $form->getForm();
     return $this->render("team/sectors.html.twig", array(
     "form" => $form->createView(),
-    "event" => $event
+    "competition" => $event
     ));
 
     }

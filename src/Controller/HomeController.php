@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-use App\Services\EventService;
+use App\Services\CompetitionService;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\RadioType;
 use Symfony\Component\Routing\Annotation\Route;
@@ -15,11 +15,11 @@ use Symfony\Component\Form\ChoiceList\Loader\CallbackChoiceLoader;
 
 class HomeController extends Controller
 {
-    private $eventService;
+    private $competitionService;
 
-    public function __construct(EventService $eventService)
+    public function __construct(CompetitionService $competitionService)
     {
-        $this->eventService = $eventService;
+        $this->competitionService = $competitionService;
     }
 
     /**
@@ -28,23 +28,23 @@ class HomeController extends Controller
     public function index()
     {
 
-        $events = $this->eventService->getFutureEvents();
-        dump($events);
+        $competitions = $this->competitionService->getFutureCompetitions();
+        dump($competitions);
         return $this->render("home/index.html.twig",
             array(
-                "events" => $events,
+                "competitions" => $competitions,
             ));
     }
 
 
     /**
-     * @Route("/home/event/{id}", name="home.event")
+     * @Route("/home/competition/{id}", name="home.competition")
      */
 
     public function getResults($id)
     {
 
-        $eventId = 1;
+        $competitionId = 1;
         $results = array(
             array(
                 "sectorId" => "1",
@@ -60,7 +60,7 @@ class HomeController extends Controller
                 "weights" => array("500", "6000", "500", "400"),
             )
         );
-        if ($id==$eventId) {
+        if ($id==$competitionId) {
 
             return $this->render("home/onGoingEvent.html.twig",
                 array(

@@ -14,14 +14,14 @@ final class Version20181110114224 extends AbstractMigration
     {
         // this up() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
-        $this->addSql('RENAME TABLE event TO competition');
+        $this->addSql('RENAME TABLE competition TO competition');
     }
 
     public function down(Schema $schema) : void
     {
         // this down() migration is auto-generated, please modify it to your needs
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
-        $this->addSql('RENAME TABLE competition TO event');
+        $this->addSql('RENAME TABLE competition TO competition');
 
     }
 }
