@@ -4,15 +4,6 @@
 
 {% block body %}
     {{ include ("navBar/navBar.html.twig") }}
-    <header class="firstphoto d-flex">
-        <div class="container text-center my-auto">
-            <h1 class="mb-1 text-white">PHookP <br> <i class="fas fa-fish"></i></h1>
-            <h3 class="mb-5 text-white">
-                <em> Čia galite registruoti savo ..... </em>
-            </h3>
-        </div>
-        <div class="overlay"></div>
-    </header>
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-lg-10 align-content-lg-center">
@@ -55,11 +46,11 @@
                 <div class="card my-4 card-shadow">
                     <div class="card-body">
                         <h4 class="card-title text-truncate">Vykstantys renginiai:</h4>
-                        {% for event in events %}
-                            <h5 class="card-subtitle mb-2 text-muted">{{ event["event_name"] }}</h5>
-                            <a href="/home/event/{{ event["id_event"] }}" class="card-link">Rezultatai</a>
+                        {% for competition in competitions %}
+                            <h5 class="card-subtitle mb-2 text-muted">{{ competition["competition_name"] }}</h5>
+                            <a href="/home/competition/{{ competition["id_competition"] }}" class="card-link">Rezultatai</a>
                             <br>
-                            <small class="text-muted">Data: {{ event["event_date"] }}</small>
+                            <small class="text-muted">Data: {{ competition["competition_date"] }}</small>
                             <hr>
                         {% endfor %}
                     </div>
@@ -67,9 +58,9 @@
                 <div class="card my-4 card-shadow">
                     <div class="card-body">
                         <h4 class="card-title text-truncate">Būsimi renginiai: </h4>
-                        {% for event in events %}
-                            <h5 class="card-subtitle mb-2 text-muted">{{ event["event_name"] }}</h5>
-                            <small class="text-muted">Data: {{ event["event_date"] }}</small>
+                        {% for competition in competitions %}
+                            <h5 class="card-subtitle mb-2 text-muted">{{ competition["competition_name"] }}</h5>
+                            <small class="text-muted">Data: {{ competition["competition_date"] }}</small>
                             <hr>
                         {% endfor %}
                     </div>
@@ -77,11 +68,11 @@
                 <div class="card my-4 card-shadow">
                     <div class="card-body">
                         <h4 class="card-title text-truncate">Pasibaigę renginiai: </h4>
-                        {% for event in events %}
-                            <h5 class="card-subtitle mb-2 text-muted">{{ event["event_name"] }}</h5>
-                            <a href="/home/event/{{ event["id_event"] }}" class="text-secondary">Rezultatai</a>
+                        {% for competition in competitions %}
+                            <h5 class="card-subtitle mb-2 text-muted">{{ competition["competition_name"] }}</h5>
+                            <a href="/home/competition/{{ competition["id_competition"] }}" class="text-secondary">Rezultatai</a>
                             <br>
-                            <small class="text-muted">Data: {{ event["event_date"] }}</small>
+                            <small class="text-muted">Data: {{ competition["competition_date"] }}</small>
                             <hr>
                         {% endfor %}
                     </div>

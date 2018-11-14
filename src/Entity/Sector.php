@@ -9,7 +9,7 @@
 namespace App\Entity;
 
 
-class SectionForm
+class Sector
 {
     protected $sectorId=array(null, null, null);
 

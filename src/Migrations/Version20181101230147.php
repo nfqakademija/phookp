@@ -16,7 +16,7 @@ final class Version20181101230147 extends AbstractMigration
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
         $this->addSql('CREATE TABLE team (id_team INT AUTO_INCREMENT NOT NULL, team_name TINYTEXT NOT NULL, sector_nr INT DEFAULT NULL, email VARCHAR(45) DEFAULT NULL, PRIMARY KEY(id_team)) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ENGINE = InnoDB');
-        $this->addSql('ALTER TABLE event CHANGE event_duration event_duration INT NOT NULL, CHANGE event_approved event_approved TINYINT(1) NOT NULL');
+        $this->addSql('ALTER TABLE competition CHANGE event_duration event_duration INT NOT NULL, CHANGE event_approved event_approved TINYINT(1) NOT NULL');
     }
 
     public function down(Schema $schema) : void
@@ -25,6 +25,6 @@ final class Version20181101230147 extends AbstractMigration
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
         $this->addSql('DROP TABLE team');
-        $this->addSql('ALTER TABLE event CHANGE event_duration event_duration INT DEFAULT 1, CHANGE event_approved event_approved TINYINT(1) DEFAULT \'0\'');
+        $this->addSql('ALTER TABLE competition CHANGE event_duration event_duration INT DEFAULT 1, CHANGE event_approved event_approved TINYINT(1) DEFAULT \'0\'');
     }
 }
