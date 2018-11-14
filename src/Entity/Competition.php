@@ -104,6 +104,58 @@ class Competition
      */
     private $competitionStatus = "unconfirmed";
 
+    /**
+     * @ORM\Column(type="integer")
+     * @Assert\Length(
+     *     min="1",
+     *     max="99",
+     *     minMessage="Varzybu sektoriu skaicius negali buti mazesnis nei 1!",
+     *     maxMessage="Varzybu sektoriu skaicius negali virsyti 99!"
+     * )
+     */
+    private $competitionSectorCount;
+
+    /**
+     * @ORM\Column(type="integer")
+     * @Assert\Length(
+     *     min="1",
+     *     max="20",
+     *     minMessage="Sverimu skaicius negali buti mazesnis nei 1!",
+     *     maxMessage="Sverimu skaicius negali virsyti 20!"
+     * )
+     */
+    private $competitionWeighingsCount;
+
+    /**
+     * @return mixed
+     */
+    public function getCompetitionWeighingsCount(): int
+    {
+        return $this->competitionWeighingsCount;
+    }
+
+    /**
+     * @param mixed $competitionWeighingsCount
+     */
+    public function setCompetitionWeighingsCount(int $competitionWeighingsCount): void
+    {
+        $this->competitionWeighingsCount = $competitionWeighingsCount;
+    }
+    /**
+     * @return mixed
+     */
+    public function getCompetitionSectorCount(): int
+    {
+        return $this->competitionSectorCount;
+    }
+
+    /**
+     * @param mixed $competitionSectorCount
+     */
+    public function setCompetitionSectorCount(int $competitionSectorCount): void
+    {
+        $this->competitionSectorCount = $competitionSectorCount;
+    }
 
     public function getIdCompetition(): ?int
     {
