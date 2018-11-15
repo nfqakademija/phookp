@@ -29,7 +29,7 @@ class HomeController extends Controller
     {
 
         $competitions = $this->competitionService->getFutureCompetitions();
-        dump($competitions);
+        //dump($competitions);
         return $this->render("home/index.html.twig",
             array(
                 "competitions" => $competitions,

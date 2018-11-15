@@ -4,6 +4,7 @@ namespace App\Controller;
 
 
 use App\Services\CompetitionService;
+use App\Services\HashService;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Response;
@@ -12,6 +13,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use App\Form\CompetitionFormType;
 use App\Entity\Competition;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class CompetitionController extends AbstractController
 {
@@ -30,7 +32,6 @@ class CompetitionController extends AbstractController
         $this->logger = $logger;
         $this->logger->notice("controllerio pradzia");
         $this->competitionService = $service;
-        $this->logger->notice("controllerio constructor pabaiga...");
     }
 
     /**
@@ -50,7 +51,7 @@ class CompetitionController extends AbstractController
      * @return Response
      * @Route("/competition/create", name="competitionCreate")
      */
-    public function create(Request $request)
+    public function create(Request $request, HashService $hashService)
     {
         $competition = new Competition();
         $competition->setCompetitionDate(new \DateTime("tomorrow"));
@@ -58,8 +59,11 @@ class CompetitionController extends AbstractController
         $form->add('save', SubmitType::class, array("label" => "Sukurti"));
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid()){
-            $this->competitionService->create($form->getData());
-            $this->addFlash('success', 'Renginys sekmingai pridetas! Patikrinkite nurodyta el. pasta, jums buvo issiustas laiskas su renginio patvirtinimo ir administravimo nuoroda.');
+
+            $competition = $this->competitionService->create($form->getData());
+            $hash = $hashService->create($competition);
+            $accessLink = $this->generateUrl("organiserMain", array("hash" => $hash->getHash()), UrlGeneratorInterface::ABSOLUTE_URL);
+            $this->addFlash('success', "Renginys sekmingai pridetas! Jusu renginio valdymo nuoroda: <a href='$accessLink'>$accessLink<a/>");
         }
 
         return $this->render("competition/competitionForm.html.twig", array(

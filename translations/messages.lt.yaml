@@ -4,6 +4,8 @@ form.competition_registration.duration: Renginio trukmė
 form.competition_registration.organiser: Organizatorius
 form.competition_registration.mail: Elektroninis paštas
 form.competition_registration.type: Renginio tipas
+form.competition_registration.sectorCount: Sektorių skaičius
+form.competition_registration.weighingCount: Svėrimų skaičius
 
 
 

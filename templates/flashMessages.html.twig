@@ -1,0 +1,11 @@
+{% if app.session.flashbag.has('success') %}
+<div class="alert alert-success my-2">
+    <ul>
+        {% for message in app.flashes('success') %}
+            <li>
+                {{ message|raw }}
+            </li>
+        {% endfor %}
+    </ul>
+</div>
+{% endif %}

@@ -57,6 +57,7 @@ final class CompetitionService
          * Padaryti success checka, jei tarkim failina prisijungt prie db, grazina null
          */
         $this->competitionRepository->save($competition);
+        $this->competitionRepository->flush();
         return $competition;
     }
 

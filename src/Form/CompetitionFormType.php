@@ -25,8 +25,10 @@ class CompetitionFormType extends AbstractType
             ->add("competitionType", ChoiceType::class, array("label" => "form.competition_registration.type",
                     "choices" => array(
                         "Top 5" => Competition::TYPE_TOP5,
-                        "Bendras svoris" => Competition::TYPE_TOTAL))
-            );
+                        "Bendras svoris" => Competition::TYPE_TOTAL)))
+            ->add('competitionSectorCount', NumberType::class, array("label" => "form.competition_registration.sectorCount"))
+            ->add('competitionWeighingsCount', NumberType::class, array("label" => "form.competition_registration.weighingCount"))
+            ;
     }
 
     public function configureOptions(OptionsResolver $resolver)

@@ -27,6 +27,10 @@ class CompetitionRepository extends ServiceEntityRepository
     public function save(Competition $competition): void
     {
         $this->entityManager->persist($competition);
+    }
+
+    public function flush(): void
+    {
         $this->entityManager->flush();
     }
 }

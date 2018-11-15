@@ -9,6 +9,7 @@
 namespace App\Controller;
 
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -17,6 +18,15 @@ use App\Form\TeamFormType;
 
 class OrganizerController extends AbstractController
 {
+
+
+    /**
+     * TODO
+     *  visas sitas kontroleris turetu turet middleware, kuris checkina
+     *  ar access hash teisingas
+     *  jei access hash neteisingas -> redirectina i main page...
+     * */
+
     /**
      * @Route("/organizer", name="organizer")
      */
@@ -31,6 +41,21 @@ class OrganizerController extends AbstractController
 
         ));
 
+    }
+
+    /**
+     * @Route("/organizer/{hash}", name="organiserMain")
+     */
+    public function index($hash)
+    {
+        return new Response("
+            <center>
+                <h1>
+                    Hoorray, organizatoriaus screenas! <br/>
+                    Tavo prieigos kodas: $hash
+                </h1>
+            </center>
+        ");
     }
 
 

@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -113,7 +115,7 @@ class Competition
      *     maxMessage="Varzybu sektoriu skaicius negali virsyti 99!"
      * )
      */
-    private $competitionSectorCount;
+    private $competitionSectorCount = 1;
 
     /**
      * @ORM\Column(type="integer")
@@ -124,38 +126,23 @@ class Competition
      *     maxMessage="Sverimu skaicius negali virsyti 20!"
      * )
      */
-    private $competitionWeighingsCount;
+    private $competitionWeighingsCount = 1;
 
     /**
-     * @return mixed
+     * @ORM\OneToMany(targetEntity="App\Entity\Hash", mappedBy="competition")
      */
-    public function getCompetitionWeighingsCount(): int
-    {
-        return $this->competitionWeighingsCount;
-    }
+    private $competitionHashes;
+
 
     /**
-     * @param mixed $competitionWeighingsCount
+     * Competition constructor.
+     * @param $competitionHashes
      */
-    public function setCompetitionWeighingsCount(int $competitionWeighingsCount): void
+    public function __construct()
     {
-        $this->competitionWeighingsCount = $competitionWeighingsCount;
-    }
-    /**
-     * @return mixed
-     */
-    public function getCompetitionSectorCount(): int
-    {
-        return $this->competitionSectorCount;
+        $this->competitionHashes = new ArrayCollection();
     }
 
-    /**
-     * @param mixed $competitionSectorCount
-     */
-    public function setCompetitionSectorCount(int $competitionSectorCount): void
-    {
-        $this->competitionSectorCount = $competitionSectorCount;
-    }
 
     public function getIdCompetition(): ?int
     {
@@ -264,4 +251,66 @@ class Competition
 
         return $this;
     }
+    /**
+     * @return mixed
+     */
+    public function getCompetitionWeighingsCount(): int
+    {
+        return $this->competitionWeighingsCount;
+    }
+
+    /**
+     * @param mixed $competitionWeighingsCount
+     */
+    public function setCompetitionWeighingsCount(int $competitionWeighingsCount): void
+    {
+        $this->competitionWeighingsCount = $competitionWeighingsCount;
+    }
+    /**
+     * @return mixed
+     */
+    public function getCompetitionSectorCount(): int
+    {
+        return $this->competitionSectorCount;
+    }
+
+    /**
+     * @param mixed $competitionSectorCount
+     */
+    public function setCompetitionSectorCount(int $competitionSectorCount): void
+    {
+        $this->competitionSectorCount = $competitionSectorCount;
+    }
+
+    /**
+     * @return Collection|Hash[]
+     */
+    public function getCompetitionHashes(): Collection
+    {
+        return $this->competitionHashes;
+    }
+
+    public function addCompetitionHash(Hash $competitionHash): self
+    {
+        if (!$this->competitionHashes->contains($competitionHash)) {
+            $this->competitionHashes[] = $competitionHash;
+            $competitionHash->setCompetition($this);
+        }
+
+        return $this;
+    }
+
+    public function removeCompetitionHash(Hash $competitionHash): self
+    {
+        if ($this->competitionHashes->contains($competitionHash)) {
+            $this->competitionHashes->removeElement($competitionHash);
+            // set the owning side to null (unless already changed)
+            if ($competitionHash->getCompetition() === $this) {
+                $competitionHash->setCompetition(null);
+            }
+        }
+
+        return $this;
+    }
+
 }
