@@ -3,30 +3,39 @@
 {% form_theme form 'bootstrap_4_layout.html.twig' %}
 {% block body %}
     <div class="container container-index">
-    <div class="row justify-content-center">
-        {% for label, messages in app.flashes %}
-            {% for message in messages %}
-                <div class="alert alert-{{ label }}">
-            {{ message }}
-        </div>
+        <div class="row justify-content-center">
+            {% for label, messages in app.flashes %}
+                {% for message in messages %}
+                    <div class="alert alert-{{ label }}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
             {% endfor %}
-        {% endfor %}
-    </div>
+        </div>
         <div class="row justify-content-center">
             <div class="col-lg-10">
                 <div class="card mt-4 card-shadow">
                     <div class="card-body">
                         <h3 class="card-title">Renginio sukūrimas </h3>
                         <p class="card-text">
-                        <div class="form-group">
                             {{ form_start(form) }}
-                            {{ form_widget(form) }}
+                            {{ form_errors(form) }}
+                            {{ form_row(form.competitionOrganiser) }}
+                            {{ form_row(form.competitionOrganiserEmail) }}
+                            {{ form_row(form.competitionName) }}
+                            {{ form_row(form.competitionDate) }}
+                            {{ form_row(form.competitionDuration) }}
+                            {{ form_row(form.competitionType) }}
+                            {{ form_row(form.competitionSectorCount) }}
+                            {{ form_row(form.competitionWeighingsCount) }}
+                            {{ form_row(form.competitionLink) }}
+                            {{ form_row(form.competitionRules) }}
+                            {{ form_row(form.save) }}
                             {{ form_end(form) }}
-                        </div>
+                        </p>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
     </div>
 {% endblock %}

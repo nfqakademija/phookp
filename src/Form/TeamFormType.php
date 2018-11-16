@@ -20,9 +20,7 @@ class TeamFormType extends AbstractType
     {
         $builder
             ->add('teamName', TextType::class, array("label" => "form.team_registration.team_name"))
-            ->add('firstTeamMember', TextType::class, array("label"=>"form.team_registration.team_member"))
-            ->add('secondTeamMember', TextType::class,array("label"=>"form.team_registration.team_member"))
-            ->add('thirdTeamMember', TextType::class,array("label"=>"form.team_registration.team_member")
+            ->add('teamMembers', TextType::class, array("label" => "form.team_registration.team_members")
             );
     }
 

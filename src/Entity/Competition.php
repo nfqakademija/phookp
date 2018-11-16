@@ -31,8 +31,8 @@ class Competition
      * @Assert\Length(
      *     min = 3,
      *     max = 90,
-     *     minMessage = "Renginio pavadinimas negali buti trumpesnis nei 3 simboliai!",
-     *     maxMessage = "Renginio pavadinimas negali buti ilgesnis nei 90 simboliai!"
+     *     minMessage = "Renginio pavadinimas negali būti trumpesnis nei 3 simboliai!",
+     *     maxMessage = "Renginio pavadinimas negali būti ilgesnis nei 90 simboliai!"
      * )
      */
     private $competitionName;
@@ -48,7 +48,7 @@ class Competition
      *     min="now",
      *     max="+2 years",
      *     minMessage="Neteisingai nurodyta renginio data!",
-     *     maxMessage="Negalima planuoti renginiu daugiau nei du metai i prieki!"
+     *     maxMessage="Negalima planuoti renginių daugiau nei du metai į priekį!"
      * )
      */
     private $competitionDate;
@@ -58,8 +58,8 @@ class Competition
      * @Assert\Range(
      *     min = 1,
      *     max = 10,
-     *     minMessage="Renginio trukme negali buti trumpesne nei viena diena!",
-     *     maxMessage="Renginio trukme negali virsyti 10 dienu!"
+     *     minMessage="Renginio trukmė negali būti trumpesnė nei viena diena!",
+     *     maxMessage="Renginio trukmė negali viršyti 10 dienų!"
      * )
      */
     private $competitionDuration = 1;
@@ -69,8 +69,8 @@ class Competition
      * @Assert\Length(
      *     min=3,
      *     max=90,
-     *     minMessage="Organizatoriaus vardo ar pavadinimo ilgis turi buti tarp 3 ir 90 simboliu!",
-     *     maxMessage="Organizatoriaus vardo ar pavadinimo ilgis turi buti tarp 3 ir 90 simboliu!"
+     *     minMessage="Organizatoriaus vardo ar pavadinimo ilgis turi būti tarp 3 ir 90 simbolių!",
+     *     maxMessage="Organizatoriaus vardo ar pavadinimo ilgis turi būti tarp 3 ir 90 simbolių!"
      * )
      */
     private $competitionOrganiser;
@@ -78,11 +78,11 @@ class Competition
     /**
      * @ORM\Column(type="string", length=90)
      * @Assert\Email(
-     *     message="El. pasto adresas ivestas neteisingai!"
+     *     message="El.pašto adresas įvestas neteisingai!"
      * )
      * @Assert\Length(
      *     max="90",
-     *     maxMessage="El. pasto adreso ilgis negali virsyti 90 simboliu!"
+     *     maxMessage="El. .pašto adreso ilgis negali virsyti 90 simboliu!"
      * )
      */
     private $competitionOrganiserEmail;
@@ -129,15 +129,22 @@ class Competition
     private $competitionWeighingsCount = 1;
 
     /**
+     * @ORM\Column(type="string", length=45, nullable=true)
+     * * @Assert\Url(
+     *     message="Nurodyta nuoroda yra neteisinga",
+     * )
+     */
+    private $competitionLink;
+
+    /**
+     * @ORM\Column(type="string", length=135, nullable=true)
+     */
+    private $competitionRules;
+
+    /**
      * @ORM\OneToMany(targetEntity="App\Entity\Hash", mappedBy="competition")
      */
     private $competitionHashes;
-
-    /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Team", mappedBy="competition", orphanRemoval=true)
-     */
-    private $competitionTeams;
-
 
     /**
      * Competition constructor.
@@ -315,6 +322,30 @@ class Competition
                 $competitionHash->setCompetition(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getCompetitionLink(): ?string
+    {
+        return $this->competitionLink;
+    }
+
+    public function setCompetitionLink(?string $competitionLink): self
+    {
+        $this->competitionLink = $competitionLink;
+
+        return $this;
+    }
+
+    public function getCompetitionRules(): ?string
+    {
+        return $this->competitionRules;
+    }
+
+    public function setCompetitionRules(?string $competitionRules): self
+    {
+        $this->competitionRules = $competitionRules;
 
         return $this;
     }

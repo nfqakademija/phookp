@@ -23,47 +23,12 @@ class HomeController extends Controller
      */
     public function index()
     {
-        //$competitions = $this->competitionService->getFutureCompetitions();
+        $competitions = $this->competitionService->getFutureCompetitions();
         //dump($competitions);
         return $this->render("home/index.html.twig",
             array(
-                "competitions" => "futureCompetitions",
+                "competitions" => $competitions,
             ));
     }
-    /**
-     * @Route("/home/competition/{id}", name="home.competition")
-     */
-    public function getResults($id)
-    {
-        $competitionId = 1;
-        $results = array(
-            array(
-                "sectorId" => "1",
-                "commandName" => "pikts karpis",
-                "amounts" => array("5", "5", "5"),
-                "weights" => array("5000", "6000", "5000"),
-            ),
-            array(
-                "sectorId" => "1",
-                "commandName" => "zuvininkai",
-                "amounts" => array("5", "4", "5", "4", "4"),
-                "weights" => array("500", "6000", "500", "400"),
-            )
-        );
-        if ($id==$competitionId) {
-            return $this->render("home/onGoingEvent.html.twig",
-                array(
-                    "results" => $results,
-                    "numberOfStages" => 4,
-                    "id" => $id,
-                )
-            );
-        }
-        else{
-            return $this->render("home/noResults.html.twig",
-                array(
-                    "id"=> $id,
-                ));
-        }
-    }
+
 }

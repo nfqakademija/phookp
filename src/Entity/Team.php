@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -18,6 +19,9 @@ class Team
 
     /**
      * @ORM\Column(type="string", length=45)
+     * * @Assert\Type(type = "string",
+     *              message = "Neteisingas komandos pavadinimo formatas"
+     * )
      */
     private $teamName;
 
@@ -27,20 +31,9 @@ class Team
     private $sectorNr;
 
     /**
-     * @ORM\Column(type="string", length=45, nullable=true)
+     * @ORM\Column(type="string", length=135)
      */
-    private $firstTeamMember;
-
-    /**
-     * @ORM\Column(type="string", length=45, nullable=true)
-     */
-    private $secondTeamMember;
-
-    /**
-     * @ORM\Column(type="string", length=45, nullable=true)
-     */
-    private $thirdTeamMember;
-
+    private $teamMembers;
 
     public function getidTeam(): ?int
     {
@@ -71,39 +64,16 @@ class Team
         return $this;
     }
 
-    public function getFirstTeamMember(): ?string
+    public function getTeamMembers(): ?string
     {
-        return $this->firstTeamMember;
+        return $this->teamMembers;
     }
 
-    public function setFirstTeamMember(?string $firstTeamMember): self
+    public function setTeamMembers(string $teamMembers): self
     {
-        $this->firstTeamMember = $firstTeamMember;
+        $this->teamMembers = $teamMembers;
 
         return $this;
     }
 
-    public function getSecondTeamMember(): ?string
-    {
-        return $this->secondTeamMember;
-    }
-
-    public function setSecondTeamMember(?string $secondTeamMember): self
-    {
-        $this->secondTeamMember = $secondTeamMember;
-
-        return $this;
-    }
-
-    public function getThirdTeamMember(): ?string
-    {
-        return $this->thirdTeamMember;
-    }
-
-    public function setThirdTeamMember(?string $thirdTeamMember): self
-    {
-        $this->thirdTeamMember = $thirdTeamMember;
-
-        return $this;
-    }
 }

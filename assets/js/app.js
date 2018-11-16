@@ -1,5 +1,5 @@
 require('bootstrap');
-var $= require('jquery');
+// var $ = require('jquery');
 // var template = $('#sections .section:first').clone();
 //
 // var sectionsCount = 1;

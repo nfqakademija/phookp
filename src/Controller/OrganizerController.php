@@ -47,7 +47,7 @@ class OrganizerController extends AbstractController
     public function createTeamForm(Request $request)
     {
         $teamForm = new Team();
-        $form = $this->createForm(TeamFormType::class, $teamForm);
+        $form = $this->createForm(TeamFormType::class, clone $teamForm);
         $form->add('save', SubmitType::class, array("label" => "form.team_registration.create_button"));
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
@@ -56,7 +56,6 @@ class OrganizerController extends AbstractController
         }
         return $this->render("team/addCommand.html.twig", array(
             "form" => $form->createView(),
-
         ));
 
     }
