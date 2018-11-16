@@ -5,46 +5,25 @@ namespace App\Repository;
 use App\Entity\Team;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
+use Doctrine\ORM\EntityManagerInterface;
 
-/**
- * @method Team|null find($id, $lockMode = null, $lockVersion = null)
- * @method Team|null findOneBy(array $criteria, array $orderBy = null)
- * @method Team[]    findAll()
- * @method Team[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
- */
 class TeamRepository extends ServiceEntityRepository
 {
-    public function __construct(RegistryInterface $registry)
+    private $entityManager;
+
+    public function __construct(RegistryInterface $registry, EntityManagerInterface $entityManager)
     {
         parent::__construct($registry, Team::class);
+        $this->entityManager = $entityManager;
     }
 
-//    /**
-//     * @return Team[] Returns an array of Team objects
-//     */
-    /*
-    public function findByExampleField($value)
+    public function save(Team $team): void
     {
-        return $this->createQueryBuilder('t')
-            ->andWhere('t.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('t.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
+        $this->entityManager->persist($team);
     }
-    */
 
-    /*
-    public function findOneBySomeField($value): ?Team
+    public function flush(): void
     {
-        return $this->createQueryBuilder('t')
-            ->andWhere('t.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
+        $this->entityManager->flush();
     }
-    */
 }

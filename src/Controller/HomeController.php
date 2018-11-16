@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Controller;
-
 use App\Services\CompetitionService;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\RadioType;
@@ -12,38 +11,30 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\ChoiceList\Loader\CallbackChoiceLoader;
-
 class HomeController extends Controller
 {
     private $competitionService;
-
     public function __construct(CompetitionService $competitionService)
     {
         $this->competitionService = $competitionService;
     }
-
     /**
      * @Route("/", name="home")
      */
     public function index()
     {
-
-        $competitions = $this->competitionService->getFutureCompetitions();
+        //$competitions = $this->competitionService->getFutureCompetitions();
         //dump($competitions);
         return $this->render("home/index.html.twig",
             array(
-                "competitions" => $competitions,
+                "competitions" => "futureCompetitions",
             ));
     }
-
-
     /**
      * @Route("/home/competition/{id}", name="home.competition")
      */
-
     public function getResults($id)
     {
-
         $competitionId = 1;
         $results = array(
             array(
@@ -51,7 +42,6 @@ class HomeController extends Controller
                 "commandName" => "pikts karpis",
                 "amounts" => array("5", "5", "5"),
                 "weights" => array("5000", "6000", "5000"),
-
             ),
             array(
                 "sectorId" => "1",
@@ -61,7 +51,6 @@ class HomeController extends Controller
             )
         );
         if ($id==$competitionId) {
-
             return $this->render("home/onGoingEvent.html.twig",
                 array(
                     "results" => $results,
@@ -76,8 +65,5 @@ class HomeController extends Controller
                     "id"=> $id,
                 ));
         }
-
     }
-
-
 }

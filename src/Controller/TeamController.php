@@ -27,7 +27,7 @@ class TeamController extends AbstractController
      * @Route("/team/sector", name="teamSector")
     */
 
-    public function new(Request $request)
+  /*  public function new(Request $request)
     {
 
 
@@ -52,4 +52,5 @@ class TeamController extends AbstractController
     ));
 
     }
+*/
 }

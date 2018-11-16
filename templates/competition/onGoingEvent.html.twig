@@ -4,40 +4,6 @@
     {{ include ('navBar/navBar.html.twig') }}
     <div class="container-fluid">
         <div class="row">
-            <h3>Renginio: {{ id }} rezultatų lentelė</h3>
-            <table class="table table-responsive-xl">
-                <tr>
-                    <th colspan="2">
-                        Etapai
-                    </th>
-                    {% for i in 1..numberOfStages %}
-                        <th colspan="2">
-                            {{ i }} Etapas
-                        </th>
-                    {% endfor %}
-                </tr>
-                <tr>
-                    <th>
-                        Sektorius
-                    </th>
-                    <th>
-                        Komanda
-                    </th>
-                    {% for i in 1..numberOfStages %}
-                        <th>
-                            Vnt.
-                        </th>
-                        <th>
-                            Svoris g.
-                        </th>
-                    {% endfor %}
-                </tr>
-                {% for value in results %}
-                    <tr>
-
-                    </tr>
-                {% endfor %}
-            </table>
         </div>
     </div>
 {% endblock %}

@@ -8,17 +8,20 @@
 
 namespace App\Controller;
 
+use App\Services\TeamService;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
+use Psr\Log\LoggerInterface;
 use App\Entity\Team;
 use App\Form\TeamFormType;
 
 class OrganizerController extends AbstractController
 {
-
+    private $teamService;
+    private $logger;
 
     /**
      * TODO
@@ -28,14 +31,29 @@ class OrganizerController extends AbstractController
      * */
 
     /**
+     * @param LoggerInterface $logger
+     * @param TeamService $service
+     */
+
+    public function __construct(LoggerInterface $logger, TeamService $service)
+    {
+        $this->logger = $logger;
+        $this->teamService = $service;
+    }
+
+    /**
      * @Route("/organizer", name="organizer")
      */
-    public function new(Request $request)
+    public function createTeamForm(Request $request)
     {
         $teamForm = new Team();
         $form = $this->createForm(TeamFormType::class, $teamForm);
-        $form->add('save', SubmitType::class, array("label" => "Sukurti"));
+        $form->add('save', SubmitType::class, array("label" => "form.team_registration.create_button"));
         $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $this->teamService->create($form->getData());
+            $this->addFlash('success', "Komanda prideta");
+        }
         return $this->render("team/addCommand.html.twig", array(
             "form" => $form->createView(),
 

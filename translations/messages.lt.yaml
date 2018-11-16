@@ -6,6 +6,10 @@ form.competition_registration.mail: Elektroninis paštas
 form.competition_registration.type: Renginio tipas
 form.competition_registration.sectorCount: Sektorių skaičius
 form.competition_registration.weighingCount: Svėrimų skaičius
+form.competition_registration.create_button: Sukurti
+form.team_registration.team_name: Komandos pavadinimas
+form.team_registration.team_member: Komandos narys
+form.team_registration.create_button: Pridėti komandas
 
 
 

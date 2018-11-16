@@ -133,6 +133,11 @@ class Competition
      */
     private $competitionHashes;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Team", mappedBy="competition", orphanRemoval=true)
+     */
+    private $competitionTeams;
+
 
     /**
      * Competition constructor.
@@ -141,6 +146,7 @@ class Competition
     public function __construct()
     {
         $this->competitionHashes = new ArrayCollection();
+        $this->competitionTeams = new ArrayCollection();
     }
 
 

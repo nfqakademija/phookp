@@ -56,10 +56,9 @@ class CompetitionController extends AbstractController
         $competition = new Competition();
         $competition->setCompetitionDate(new \DateTime("tomorrow"));
         $form = $this->createForm(CompetitionFormType::class, $competition);
-        $form->add('save', SubmitType::class, array("label" => "Sukurti"));
+        $form->add('save', SubmitType::class, array("label" => "form.competition_registration.create_button"));
         $form->handleRequest($request);
         if($form->isSubmitted() && $form->isValid()){
-
             $competition = $this->competitionService->create($form->getData());
             $hash = $hashService->create($competition);
             $accessLink = $this->generateUrl("organiserMain", array("hash" => $hash->getHash()), UrlGeneratorInterface::ABSOLUTE_URL);
