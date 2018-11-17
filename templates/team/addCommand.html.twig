@@ -11,9 +11,12 @@
                         <h3 class="card-title">Komandos pridėjimas</h3>
                         <p class="card-text">
                             {{ form_start(form) }}
-                            {{ form_row(form.teamName) }}
-                            {{ form_row(form.teamMembers) }}
-                            {{ form_row(form.save) }}
+                            {% for team in form.teams %}
+                                {{ form_row(team.teamName) }}
+                                {{ form_row(team.firstTeamMember) }}
+                                {{ form_row(team.secondTeamMember) }}
+                                {{ form_row(team.thirdTeamMember) }}
+                            {% endfor %}
                             {{ form_end(form) }}
                         </p>
                     </div>

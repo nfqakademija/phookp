@@ -8,6 +8,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Competition;
 use App\Services\TeamService;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Response;
@@ -17,6 +18,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Psr\Log\LoggerInterface;
 use App\Entity\Team;
 use App\Form\TeamFormType;
+use App\Form\TeamsFormType;
 
 class OrganizerController extends AbstractController
 {
@@ -46,8 +48,13 @@ class OrganizerController extends AbstractController
      */
     public function createTeamForm(Request $request)
     {
-        $teamForm = new Team();
-        $form = $this->createForm(TeamFormType::class, clone $teamForm);
+        $team = new Team();
+        $teams = new Competition();
+        $sectorsCount=2;
+        for ($i=0; $i<$sectorsCount; $i++) {
+            $teams->getTeams()->add($team);
+        }
+        $form = $this->createForm(TeamsFormType::class, $teams);
         $form->add('save', SubmitType::class, array("label" => "form.team_registration.create_button"));
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
@@ -56,7 +63,7 @@ class OrganizerController extends AbstractController
         }
         return $this->render("team/addCommand.html.twig", array(
             "form" => $form->createView(),
-        ));
+            ));
 
     }
 

@@ -15,14 +15,12 @@ class Competition
 
     public const TYPE_TOP5 = "top5";
     public const TYPE_TOTAL = "total";
-
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
      */
     private $idCompetition;
-
     /**
      * @ORM\Column(type="string", length=90)
      * @Assert\Type(type = "string",
@@ -36,7 +34,6 @@ class Competition
      * )
      */
     private $competitionName;
-
     /**
      * @ORM\Column(type="datetime")
      * @Assert\NotBlank()
@@ -52,7 +49,6 @@ class Competition
      * )
      */
     private $competitionDate;
-
     /**
      * @ORM\Column(type="integer")
      * @Assert\Range(
@@ -63,7 +59,6 @@ class Competition
      * )
      */
     private $competitionDuration = 1;
-
     /**
      * @ORM\Column(type="string", length=90)
      * @Assert\Length(
@@ -74,7 +69,6 @@ class Competition
      * )
      */
     private $competitionOrganiser;
-
     /**
      * @ORM\Column(type="string", length=90)
      * @Assert\Email(
@@ -86,7 +80,6 @@ class Competition
      * )
      */
     private $competitionOrganiserEmail;
-
     /**
      * @ORM\Column(type="string", length=30)
      * @Assert\Choice(
@@ -95,17 +88,14 @@ class Competition
      * )
      */
     private $competitionType;
-
     /**
      * @ORM\Column(type="boolean")
      */
     private $competitionApproved = false;
-
     /**
      * @ORM\Column(type="string", length=30)
      */
     private $competitionStatus = "unconfirmed";
-
     /**
      * @ORM\Column(type="integer")
      * @Assert\Length(
@@ -116,7 +106,6 @@ class Competition
      * )
      */
     private $competitionSectorCount = 1;
-
     /**
      * @ORM\Column(type="integer")
      * @Assert\Length(
@@ -127,7 +116,6 @@ class Competition
      * )
      */
     private $competitionWeighingsCount = 1;
-
     /**
      * @ORM\Column(type="string", length=45, nullable=true)
      * * @Assert\Url(
@@ -135,17 +123,19 @@ class Competition
      * )
      */
     private $competitionLink;
-
     /**
      * @ORM\Column(type="string", length=135, nullable=true)
      */
     private $competitionRules;
-
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Hash", mappedBy="competition")
      */
     private $competitionHashes;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Team", mappedBy="competition")
+     */
+    private $teams;
     /**
      * Competition constructor.
      * @param $competitionHashes
@@ -153,115 +143,87 @@ class Competition
     public function __construct()
     {
         $this->competitionHashes = new ArrayCollection();
-        $this->competitionTeams = new ArrayCollection();
+        $this->teams = new ArrayCollection();
     }
-
-
     public function getIdCompetition(): ?int
     {
         return $this->idCompetition;
     }
-
     public function setIdCompetition(int $idCompetition): self
     {
         $this->idCompetition = $idCompetition;
-
         return $this;
     }
-
     public function getCompetitionName(): ?string
     {
         return $this->competitionName;
     }
-
     public function setCompetitionName(string $competitionName): self
     {
         $this->competitionName = $competitionName;
-
         return $this;
     }
-
     public function getCompetitionDate(): ?\DateTimeInterface
     {
         return $this->competitionDate;
     }
-
     public function setCompetitionDate(\DateTimeInterface $competitionDate): self
     {
         $this->competitionDate = $competitionDate;
-
         return $this;
     }
-
     public function getCompetitionDuration(): ?int
     {
         return $this->competitionDuration;
     }
-
     public function setCompetitionDuration(int $competitionDuration): self
     {
         $this->competitionDuration = $competitionDuration;
-
         return $this;
     }
-
     public function getCompetitionOrganiser(): ?string
     {
         return $this->competitionOrganiser;
     }
-
     public function setCompetitionOrganiser(string $competitionOrganiser): self
     {
         $this->competitionOrganiser = $competitionOrganiser;
-
         return $this;
     }
-
     public function getCompetitionOrganiserEmail(): ?string
     {
         return $this->competitionOrganiserEmail;
     }
-
     public function setCompetitionOrganiserEmail(string $competitionOrganiserEmail): self
     {
         $this->competitionOrganiserEmail = $competitionOrganiserEmail;
-
         return $this;
     }
-
     public function getCompetitionType(): ?string
     {
         return $this->competitionType;
     }
-
     public function setCompetitionType(string $competitionType): self
     {
         $this->competitionType = $competitionType;
-
         return $this;
     }
-
     public function getCompetitionApproved(): ?bool
     {
         return $this->competitionApproved;
     }
-
     public function setCompetitionApproved(bool $competitionApproved): self
     {
         $this->competitionApproved = $competitionApproved;
-
         return $this;
     }
-
     public function getCompetitionStatus(): ?string
     {
         return $this->competitionStatus;
     }
-
     public function setCompetitionStatus(string $competitionStatus): self
     {
         $this->competitionStatus = $competitionStatus;
-
         return $this;
     }
     /**
@@ -271,7 +233,6 @@ class Competition
     {
         return $this->competitionWeighingsCount;
     }
-
     /**
      * @param mixed $competitionWeighingsCount
      */
@@ -286,7 +247,6 @@ class Competition
     {
         return $this->competitionSectorCount;
     }
-
     /**
      * @param mixed $competitionSectorCount
      */
@@ -294,7 +254,6 @@ class Competition
     {
         $this->competitionSectorCount = $competitionSectorCount;
     }
-
     /**
      * @return Collection|Hash[]
      */
@@ -302,17 +261,14 @@ class Competition
     {
         return $this->competitionHashes;
     }
-
     public function addCompetitionHash(Hash $competitionHash): self
     {
         if (!$this->competitionHashes->contains($competitionHash)) {
             $this->competitionHashes[] = $competitionHash;
             $competitionHash->setCompetition($this);
         }
-
         return $this;
     }
-
     public function removeCompetitionHash(Hash $competitionHash): self
     {
         if ($this->competitionHashes->contains($competitionHash)) {
@@ -322,32 +278,55 @@ class Competition
                 $competitionHash->setCompetition(null);
             }
         }
-
         return $this;
     }
-
     public function getCompetitionLink(): ?string
     {
         return $this->competitionLink;
     }
-
     public function setCompetitionLink(?string $competitionLink): self
     {
         $this->competitionLink = $competitionLink;
-
         return $this;
     }
-
     public function getCompetitionRules(): ?string
     {
         return $this->competitionRules;
     }
-
     public function setCompetitionRules(?string $competitionRules): self
     {
         $this->competitionRules = $competitionRules;
+        return $this;
+    }
+
+    /**
+     * @return Collection|Team[]
+     */
+    public function getTeams(): Collection
+    {
+        return $this->teams;
+    }
+
+    public function addTeam(Team $team): self
+    {
+        if (!$this->teams->contains($team)) {
+            $this->teams[] = $team;
+            $team->setCompetition($this);
+        }
 
         return $this;
     }
 
+    public function removeTeam(Team $team): self
+    {
+        if ($this->teams->contains($team)) {
+            $this->teams->removeElement($team);
+            // set the owning side to null (unless already changed)
+            if ($team->getCompetition() === $this) {
+                $team->setCompetition(null);
+            }
+        }
+
+        return $this;
+    }
 }
