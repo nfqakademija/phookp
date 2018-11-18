@@ -19,7 +19,7 @@ class Team
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
      */
-    private $idTeam;
+    private $id;
 
     /**
      * @ORM\Column(type="text", length=45)

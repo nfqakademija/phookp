@@ -22,6 +22,16 @@ class Result
      */
     private $weighing;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $weigh;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $specialFish;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -35,6 +45,30 @@ class Result
     public function setWeighing(?Weighing $weighing): self
     {
         $this->weighing = $weighing;
+
+        return $this;
+    }
+
+    public function getWeigh(): ?int
+    {
+        return $this->weigh;
+    }
+
+    public function setWeigh(int $weigh): self
+    {
+        $this->weigh = $weigh;
+
+        return $this;
+    }
+
+    public function getSpecialFish(): ?bool
+    {
+        return $this->specialFish;
+    }
+
+    public function setSpecialFish(bool $specialFish): self
+    {
+        $this->specialFish = $specialFish;
 
         return $this;
     }
