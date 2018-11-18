@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Entity;
 use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
@@ -8,12 +9,18 @@ use Doctrine\Common\Collections\ArrayCollection;
  */
 class Team
 {
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Results", inversedBy="teams")
+     */
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
      */
-    private $idTeam;
+    private $id;
+
     /**
      * @ORM\Column(type="string", length=45)
      * * @Assert\Type(type = "string",
@@ -46,6 +53,7 @@ class Team
     {
         return $this->idTeam;
     }
+
     public function getTeamName(): ?string
     {
         return $this->teamName;
@@ -101,4 +109,3 @@ class Team
         return $this;
     }
 }
-

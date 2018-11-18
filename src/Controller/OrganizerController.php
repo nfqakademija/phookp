@@ -29,6 +29,7 @@ class OrganizerController extends AbstractController
      *  ar access hash teisingas
      *  jei access hash neteisingas -> redirectina i main page...
      * */
+
     /**
      * @param LoggerInterface $logger
      * @param TeamService $service
@@ -58,7 +59,9 @@ class OrganizerController extends AbstractController
         }
         return $this->render("team/addCommand.html.twig", array(
             "form" => $form->createView(),
+
         ));
+
     }
 //    /**
 //     * @Route("/organizer/{hash}", name="organiserMain")
@@ -76,3 +79,24 @@ class OrganizerController extends AbstractController
 //    }
 }
 
+    /**
+     * @Route("/organizer/{hash}/results", name="organizerResults")
+     */
+    public function results($hash)
+    {
+        $sectors = array(
+          array("number" => 1),
+          array("number" => 2),
+          array("number" => 3),
+          array("number" => 4),
+          array("number" => 5),
+          array("number" => 6),
+          array("number" => 7)
+        );
+        return $this->render("organizer/results.html.twig", array(
+           "sectors" => $sectors
+        ));
+    }
+
+
+}
