@@ -7,6 +7,9 @@
  */
 namespace App\Controller;
 use App\Entity\Competition;
+use App\Entity\Hash;
+use App\Services\CompetitionService;
+use App\Services\HashService;
 use App\Entity\Team;
 use App\Form\TeamsFormType;
 use App\Services\TeamService;
@@ -26,7 +29,6 @@ class OrganizerController extends AbstractController
      *  ar access hash teisingas
      *  jei access hash neteisingas -> redirectina i main page...
      * */
-
     /**
      * @param LoggerInterface $logger
      * @param TeamService $service
@@ -39,20 +41,22 @@ class OrganizerController extends AbstractController
     /**
      * @Route("/organizer/{hash}", name="organiserMain")
      */
-    public function createTeamForm(Request $request, $hash)
+    public function createTeamForm(Request $request, $hash, HashService $hashService)
     {
-        $team = new Team();
-        $teams = new Competition();
+
+        $data = ['teams'=>[]];
         $sectorsCount=2;
         for ($i=0; $i<$sectorsCount; $i++) {
-            $teams->getTeams()->add($team);
+            $team = new Team();
+            $data['teams'][] = $team;
         }
-        $form = $this->createForm(TeamsFormType::class, $teams);
+        $form = $this->createForm(TeamsFormType::class, $data);
         $form->add('save', SubmitType::class, array("label" => "form.team_registration.create_button"));
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->teamService->create($form->getData());
-            $this->addFlash('success', "Komanda prideta");
+            $hash=$hashService->findByHash($hash);
+            $this->teamService->addTeams($form->getData()['teams'], $hash->getCompetition());
+            $this->addFlash('success', 'Komandos pridėtos');
         }
         return $this->render("team/addCommand.html.twig", array(
             "form" => $form->createView(),

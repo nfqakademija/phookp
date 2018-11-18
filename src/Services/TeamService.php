@@ -7,10 +7,13 @@
  */
 
 namespace App\Services;
+
+use App\Entity\Competition;
 use App\Entity\Team;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 use App\Repository\TeamRepository;
 use Psr\Log\LoggerInterface;
+
 class TeamService
 {
     /**
@@ -25,36 +28,45 @@ class TeamService
      * @var ValidatorInterface
      */
     private $validator;
+
     /**
      * TeamService constructor.
      * @param TeamRepository $teamRepository
      * @param LoggerInterface $logger
      */
-    public function __construct(TeamRepository $teamRepository, LoggerInterface $logger,ValidatorInterface $validator)
+    public function __construct(TeamRepository $teamRepository, LoggerInterface $logger, ValidatorInterface $validator)
     {
         $this->teamRepository = $teamRepository;
         $this->validator = $validator;
         $this->logger = $logger;
         $this->logger->notice(" ");
     }
+
+    public function addTeams(array $teams, Competition $competition)
+    {
+        foreach ($teams as $team) {
+            $team->setCompetition($competition);
+            $this->create($team);
+        }
+    }
+
     /**
      * @param Team $team
      * @return Team|null
      */
-    public function create(Team $team):?Team
+    public function create(Team $team): ?Team
     {
         $this->teamRepository->save($team);
         $this->teamRepository->flush();
         return $team;
     }
-    public function validate(Team $team):?array
+
+    public function validate(Team $team): ?array
     {
-        $errors  = $this->validator->validate($team);
-        if(count($errors) > 0){
-            dump($errors);
+        $errors = $this->validator->validate($team);
+        if (count($errors) > 0) {
             return $errors;
-        }
-        else return null;
+        } else return null;
     }
 }
 
