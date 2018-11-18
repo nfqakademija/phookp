@@ -38,6 +38,9 @@ class HashService
 
         return $hash;
     }
+    public function findByHash($hash){
+        return $this->hashRepository->findByHash($hash);
+    }
 
 
     private function generateHash(): string
