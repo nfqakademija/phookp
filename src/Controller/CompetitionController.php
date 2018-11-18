@@ -11,21 +11,26 @@ use Symfony\Component\HttpFoundation\Request;
 use App\Form\CompetitionFormType;
 use App\Entity\Competition;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+use Symfony\Component\Translation\TranslatorInterface;
+
 class CompetitionController extends AbstractController
 {
     private $competitionService;
     private $logger;
+    private $translator;
+
     /**
      * CompetitionController constructor.
      * @param LoggerInterface $logger
      * @param CompetitionService $service
-     *
+     * @param TranslatorInterface $translator
      */
-    public function __construct(LoggerInterface $logger, CompetitionService $service)
+    public function __construct(LoggerInterface $logger, CompetitionService $service, TranslatorInterface $translator)
     {
         $this->logger = $logger;
         $this->logger->notice("controllerio pradzia");
         $this->competitionService = $service;
+        $this->translator=$translator;
     }
     /**
      * @Route("/competition", name="competition")
@@ -40,6 +45,7 @@ class CompetitionController extends AbstractController
     */
     /**
      * @param Request $request
+     * @param HashService $hashService
      * @return Response
      * @Route("/competition/create", name="competitionCreate")
      */
@@ -54,7 +60,8 @@ class CompetitionController extends AbstractController
             $competition = $this->competitionService->create($form->getData());
             $hash = $hashService->create($competition);
             $accessLink = $this->generateUrl("organiserMain", array("hash" => $hash->getHash()), UrlGeneratorInterface::ABSOLUTE_URL);
-            $this->addFlash('success', "Renginys sekmingai pridetas! Jusu renginio valdymo nuoroda: <a href='$accessLink'>$accessLink<a/>");
+            $message=$this->translator->trans("form.competition_registration.success_message");
+            $this->addFlash('success', "$message: <a href='$accessLink'>$accessLink<a/>");
         }
         return $this->render("competition/competitionForm.html.twig", array(
             "form" => $form->createView(),

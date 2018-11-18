@@ -22,11 +22,13 @@ use Psr\Log\LoggerInterface;
 use App\Entity\Team;
 use App\Form\TeamFormType;
 use App\Form\TeamsFormType;
+use Symfony\Component\Translation\TranslatorInterface;
 
 class OrganizerController extends AbstractController
 {
     private $teamService;
     private $logger;
+    private $translator;
     /**
      * TODO
      *  visas sitas kontroleris turetu turet middleware, kuris checkina
@@ -36,21 +38,26 @@ class OrganizerController extends AbstractController
     /**
      * @param LoggerInterface $logger
      * @param TeamService $service
+     * @param TranslatorInterface $translator
      */
-    public function __construct(LoggerInterface $logger, TeamService $service)
+    public function __construct(LoggerInterface $logger, TeamService $service, TranslatorInterface $translator)
     {
         $this->logger = $logger;
         $this->teamService = $service;
+        $this->translator = $translator;
     }
 
     /**
      * @Route("/organizer/{hash}", name="organiserMain")
+     * @param Request $request
+     * @param $hash
+     * @param HashService $hashService
+     * @return Response
      */
     public function createTeamForm(Request $request, $hash, HashService $hashService)
     {
         $hash = $hashService->findByHash($hash);
-        if ($hash)
-        {
+        if ($hash) {
             $data = ['teams' => []];
             $sectorsCount = 2;
             for ($i = 0; $i < $sectorsCount; $i++) {
@@ -62,15 +69,14 @@ class OrganizerController extends AbstractController
             $form->handleRequest($request);
             if ($form->isSubmitted() && $form->isValid()) {
                 $this->teamService->addTeams($form->getData()['teams'], $hash->getCompetition());
-                $this->addFlash('success', "form.team_registration.success_message");
+                $message = $this->translator->trans("form.team_registration.success_message");
+                $this->addFlash('success', $message);
             }
             return $this->render("team/addCommand.html.twig", array(
                 "form" => $form->createView(),
             ));
         }
-
         return $this->redirectToRoute("home");
-
     }
 //    /**
 //     * @Route("/organizer/{hash}", name="organiserMain")
