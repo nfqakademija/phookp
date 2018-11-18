@@ -7,18 +7,15 @@
  */
 namespace App\Controller;
 use App\Entity\Competition;
-use App\Entity\Hash;
-use App\Services\CompetitionService;
-use App\Services\TeamService;
-use Symfony\Component\Form\Extension\Core\Type\SubmitType;
-use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\HttpFoundation\Request;
-use Psr\Log\LoggerInterface;
 use App\Entity\Team;
-use App\Form\TeamFormType;
 use App\Form\TeamsFormType;
+use App\Services\TeamService;
+use Psr\Log\LoggerInterface;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Routing\Annotation\Route;
+
 class OrganizerController extends AbstractController
 {
     private $teamService;
@@ -77,7 +74,7 @@ class OrganizerController extends AbstractController
 //            </center>
 //        ");
 //    }
-}
+//}
 
     /**
      * @Route("/organizer/{hash}/results", name="organizerResults")
@@ -93,6 +90,7 @@ class OrganizerController extends AbstractController
           array("number" => 6),
           array("number" => 7)
         );
+
         return $this->render("organizer/results.html.twig", array(
            "sectors" => $sectors
         ));
