@@ -21,7 +21,7 @@ class Competition
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
      */
-    private $idCompetition;
+    private $id;
 
     /**
      * @ORM\Column(type="string", length=90)
@@ -133,6 +133,11 @@ class Competition
      */
     private $competitionHashes;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Weighing", mappedBy="competition")
+     */
+    private $weighings;
+
 
     /**
      * Competition constructor.
@@ -141,17 +146,18 @@ class Competition
     public function __construct()
     {
         $this->competitionHashes = new ArrayCollection();
+        $this->weighings = new ArrayCollection();
     }
 
 
-    public function getIdCompetition(): ?int
+    public function getId(): ?int
     {
-        return $this->idCompetition;
+        return $this->id;
     }
 
-    public function setIdCompetition(int $idCompetition): self
+    public function setId(int $id): self
     {
-        $this->idCompetition = $idCompetition;
+        $this->id = $id;
 
         return $this;
     }
@@ -307,6 +313,37 @@ class Competition
             // set the owning side to null (unless already changed)
             if ($competitionHash->getCompetition() === $this) {
                 $competitionHash->setCompetition(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Weighing[]
+     */
+    public function getWeighings(): Collection
+    {
+        return $this->weighings;
+    }
+
+    public function addWeighing(Weighing $weighing): self
+    {
+        if (!$this->weighings->contains($weighing)) {
+            $this->weighings[] = $weighing;
+            $weighing->setCompetition($this);
+        }
+
+        return $this;
+    }
+
+    public function removeWeighing(Weighing $weighing): self
+    {
+        if ($this->weighings->contains($weighing)) {
+            $this->weighings->removeElement($weighing);
+            // set the owning side to null (unless already changed)
+            if ($weighing->getCompetition() === $this) {
+                $weighing->setCompetition(null);
             }
         }
 
