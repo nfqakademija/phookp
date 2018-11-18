@@ -1,43 +1,47 @@
 {% extends 'base.html.twig' %}
 {% block title %}Create event {{ parent() }}{% endblock %}
 {% block body %}
-    <div class="container-fluid">
+    <div class="container">
             <div class="card">
-                <div class="card-header text-center h5 bg-dark text-light>
-                    Sverimo #1 rezultatai
+                <div class="card-header text-center h5 bg-dark text-light">
+                    Sverimo nr. {{ app.request.attributes.get('weighingNr') }} rezultatai
                 </div>
                 <div class="card-body px-0">
-                    <div class="row ma-0">
-                        <div class="col-4 border-dark p-0" >
-                            <div class="table-responsive" style="height: 75vh;">
-                            {% for sector in sectors %}
-                                <div class="card">
+                    {{ form_start(form) }}
+                    <div class="row mx-0">
+                        <div class="col-4 col-sm-3 col-md-2 col-lg-1 border-dark p-0" >
+                            <div class="table-responsive" style="max-height: 75vh;">
+                            {% for team in teams %}
+                                <a href="{{ path('organizerResults',
+                                    {'hash': app.request.attributes.get('hash'),
+                                          'teamId': team.Id,
+                                          'weighingNr': app.request.attributes.get('weighingNr')}) }} " class="card">
                                     <div class="card-body px-0 py-2">
-                                        <div class="h3 text-center">{{ sector.number }}</div>
+
+                                        <div class="h3 text-center">{{ team.sectorNr }}</div>
+
                                         <div class="text-center">Sektorius</div>
                                     </div>
-                                </div>
+                                </a>
                             {% endfor %}
                             </div>
                         </div>
-                        <div class="col-8 border-dark">
 
-                            {% for num in range(0, 2 %}
-                                <div class="row">
-                                    <div class="col-8">
-                                        <input type="text" id="{{ num }}" placeholder="Svoris" class="form-control" />
-                                    </div>
-                                    <div class="col-4 text-light">
-                                        <input type="checkbox" value="true"> Amuras
-                                    </div>
-                                </div>
+                        <div class="col-8 col-sm-9 col-md-10 col-lg-11 border-dark">
+
+                            {% for result in form.results %}
+                                <div class="row m-0">{{ form_row(result.weigh) }} <div class="ml-1">{{ form_row(result.specialFish) }}</div> </div>
                             {% endfor %}
+<!--
+                            {{ form_row(form.submit, { 'label': 'Issaugoti'}) }}
+-->
                         </div>
                     </div>
-                    <div class="row mt-2 bg-light">
+                    <div class="row mt-2 bg-light mx-0">
                         <div class="btn btn-outline-dark col-6 text-center">Kitas sektorius >></div>
-                        <div class="btn btn-outline-dark col-6 text-center">Issaugoti</div>
+                        <button type="submit" class="btn btn-outline-dark col-6 text-center" id="weighing_submit" name="weighing[submit]">Issaugoti</button>
                     </div>
+                    {{ form_end(form) }}
                 </div>
             </div>
 

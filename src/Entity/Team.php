@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Entity;
+use Doctrine\Common\Collections\Collection;
 use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -34,7 +35,7 @@ class Team
     private $sectorNr;
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Competition", inversedBy="teams")
-     * @ORM\JoinColumn(nullable=false, referencedColumnName="id_competition" )
+     * @ORM\JoinColumn(nullable=false, referencedColumnName="id" )
      */
     private $competition;
     /**
@@ -49,9 +50,19 @@ class Team
      * @ORM\Column(type="string", length=45, nullable=true)
      */
     private $secondTeamMember;
-    public function getidTeam(): ?int
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Result", mappedBy="team")
+     */
+    private $results;
+
+    public function __construct()
     {
-        return $this->idTeam;
+        $this->results = new ArrayCollection();
+    }
+    public function getId(): ?int
+    {
+        return $this->id;
     }
 
     public function getTeamName(): ?string
@@ -106,6 +117,37 @@ class Team
     public function setSecondTeamMember(?string $secondTeamMember): self
     {
         $this->secondTeamMember = $secondTeamMember;
+        return $this;
+    }
+
+    /**
+     * @return Collection|Result[]
+     */
+    public function getResults(): Collection
+    {
+        return $this->results;
+    }
+
+    public function addResult(Result $result): self
+    {
+        if (!$this->results->contains($result)) {
+            $this->results[] = $result;
+            $result->setTeam($this);
+        }
+
+        return $this;
+    }
+
+    public function removeResult(Result $result): self
+    {
+        if ($this->results->contains($result)) {
+            $this->results->removeElement($result);
+            // set the owning side to null (unless already changed)
+            if ($result->getTeam() === $this) {
+                $result->setTeam(null);
+            }
+        }
+
         return $this;
     }
 }

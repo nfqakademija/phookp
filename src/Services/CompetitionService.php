@@ -12,6 +12,7 @@ namespace App\Services;
 use App\Entity\Competition;
 use App\Entity\Hash;
 use App\Repository\CompetitionRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 use JMS\Serializer\SerializerBuilder;
@@ -22,14 +23,8 @@ final class CompetitionService
      * @var CompetitionRepository - Competition entity repozitorija, injektinama automatiskai per konstruktoriaus parametrus
      */
     private $competitionRepository;
-    /**
-     * @var LoggerInterface - Logeris, naudojau debuginimui. Isveda zinutes i var/log/dev.log
-     */
-    private $logger;
-    /**
-     * @var ValidatorInterface - Entity objekto validatorius, injektinamas per konstruktoriaus parametrus
-     */
-    private $validator;
+
+    private $entityManager;
 
     /**
      * CompetitionService constructor.
@@ -37,20 +32,12 @@ final class CompetitionService
      * @param ValidatorInterface $validator
      * @param LoggerInterface $logger
      */
-    public function __construct(CompetitionRepository $competitionRepository, ValidatorInterface $validator, LoggerInterface $logger)
+    public function __construct(CompetitionRepository $competitionRepository)
     {
-
         $this->competitionRepository = $competitionRepository;
-        $this->validator = $validator;
-        $this->logger = $logger;
-        $this->logger->notice("Service constructor called.");
     }
 
-    /**
-     * @param Competition $competition
-     * @return Competition|null
-     * Issaugo objekta i duombaze ir vel ji grazina (dabar jau su idCompetition ir visom default reiksmem)
-     */
+
     public function create(Competition $competition):?Competition
     {
         /**
@@ -79,24 +66,6 @@ final class CompetitionService
         return $competition;
     }
 
-    /**
-     * @param Competition $competition
-     * @return null|\Symfony\Component\Validator\ConstraintViolationListInterface
-     * Validatina paduota Competition objekta, jeigu klaidu nera, grazina null, jeigu randa klaidu - string masyva
-     */
-    public function validate(Competition $competition):?array
-    {
-        $errors  = $this->validator->validate($competition);
-
-        if(count($errors) > 0){
-
-            dump($errors);
-            return $errors;
-        }
-
-        else return null;
-    }
-
     public function getFutureCompetitions():?array
     {
         /*
@@ -113,4 +82,6 @@ final class CompetitionService
         }
         return $array;
     }
+
+
 }

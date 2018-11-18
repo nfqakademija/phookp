@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Weighing;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
@@ -14,11 +15,24 @@ use Symfony\Bridge\Doctrine\RegistryInterface;
  */
 class WeighingRepository extends ServiceEntityRepository
 {
-    public function __construct(RegistryInterface $registry)
+
+    private $entityManager;
+
+    public function __construct(RegistryInterface $registry, EntityManagerInterface $entityManager)
     {
         parent::__construct($registry, Weighing::class);
+        $this->entityManager = $entityManager;
     }
 
+    public function save(Weighing $w): void
+    {
+        $this->entityManager->persist($w);
+    }
+
+    public function flush():void
+    {
+        $this->entityManager->flush();
+    }
     // /**
     //  * @return Weighing[] Returns an array of Weighing objects
     //  */

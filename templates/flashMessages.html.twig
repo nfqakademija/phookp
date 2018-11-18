@@ -9,3 +9,14 @@
     </ul>
 </div>
 {% endif %}
+{% if app.session.flashbag.has('error') %}
+    <div class="alert alert-danger my-2">
+        <ul>
+            {% for message in app.flashes('error') %}
+                <li>
+                    {{ message|raw }}
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+{% endif %}

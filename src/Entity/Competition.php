@@ -126,7 +126,17 @@ class Competition
      * )
      */
     private $competitionWeighingsCount = 1;
-
+    /**
+     * @ORM\Column(type="string", length=45, nullable=true)
+     * * @Assert\Url(
+     *     message="Nurodyta nuoroda yra neteisinga",
+     * )
+     */
+    private $competitionLink;
+    /**
+     * @ORM\Column(type="string", length=135, nullable=true)
+     */
+    private $competitionRules;
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Hash", mappedBy="competition")
      */
@@ -140,6 +150,7 @@ class Competition
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Team", mappedBy="competition")
+     *
      */
     private $teams;
     /**
@@ -150,6 +161,7 @@ class Competition
     {
         $this->competitionHashes = new ArrayCollection();
         $this->weighings = new ArrayCollection();
+        $this->teams = new ArrayCollection();
     }
 
 
