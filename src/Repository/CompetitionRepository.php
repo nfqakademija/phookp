@@ -20,8 +20,7 @@ class CompetitionRepository extends ServiceEntityRepository
 
 
     public function findByHash(string $hash): Competition
-    {
-        // TODO: Implement findByHash() method.
+    {        // TODO: Implement findByHash() method.
     }
 
     public function save(Competition $competition): void

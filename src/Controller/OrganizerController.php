@@ -5,10 +5,10 @@
  * Date: 18.10.29
  * Time: 21.19
  */
-
 namespace App\Controller;
-
 use App\Entity\Competition;
+use App\Entity\Hash;
+use App\Services\CompetitionService;
 use App\Services\TeamService;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Response;
@@ -19,34 +19,29 @@ use Psr\Log\LoggerInterface;
 use App\Entity\Team;
 use App\Form\TeamFormType;
 use App\Form\TeamsFormType;
-
 class OrganizerController extends AbstractController
 {
     private $teamService;
     private $logger;
-
     /**
      * TODO
      *  visas sitas kontroleris turetu turet middleware, kuris checkina
      *  ar access hash teisingas
      *  jei access hash neteisingas -> redirectina i main page...
      * */
-
     /**
      * @param LoggerInterface $logger
      * @param TeamService $service
      */
-
     public function __construct(LoggerInterface $logger, TeamService $service)
     {
         $this->logger = $logger;
         $this->teamService = $service;
     }
-
     /**
-     * @Route("/organizer", name="organizer")
+     * @Route("/organizer/{hash}", name="organiserMain")
      */
-    public function createTeamForm(Request $request)
+    public function createTeamForm(Request $request, $hash)
     {
         $team = new Team();
         $teams = new Competition();
@@ -63,24 +58,21 @@ class OrganizerController extends AbstractController
         }
         return $this->render("team/addCommand.html.twig", array(
             "form" => $form->createView(),
-            ));
-
+        ));
     }
-
-    /**
-     * @Route("/organizer/{hash}", name="organiserMain")
-     */
-    public function index($hash)
-    {
-        return new Response("
-            <center>
-                <h1>
-                    Hoorray, organizatoriaus screenas! <br/>
-                    Tavo prieigos kodas: $hash
-                </h1>
-            </center>
-        ");
-    }
-
-
+//    /**
+//     * @Route("/organizer/{hash}", name="organiserMain")
+//     */
+//    public function index($hash)
+//    {
+//        return new Response("
+//            <center>
+//                <h1>
+//                    Hoorray, organizatoriaus screenas! <br/>
+//                    Tavo prieigos kodas: $hash
+//                </h1>
+//            </center>
+//        ");
+//    }
 }
+

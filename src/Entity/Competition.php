@@ -1,18 +1,14 @@
 <?php
-
 namespace App\Entity;
-
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
-
 /**
  * @ORM\Entity(repositoryClass="App\Repository\competitionRepository")
  */
 class Competition
 {
-
     public const TYPE_TOP5 = "top5";
     public const TYPE_TOTAL = "total";
     /**
@@ -131,7 +127,6 @@ class Competition
      * @ORM\OneToMany(targetEntity="App\Entity\Hash", mappedBy="competition")
      */
     private $competitionHashes;
-
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Team", mappedBy="competition")
      */
@@ -298,7 +293,6 @@ class Competition
         $this->competitionRules = $competitionRules;
         return $this;
     }
-
     /**
      * @return Collection|Team[]
      */
@@ -306,17 +300,14 @@ class Competition
     {
         return $this->teams;
     }
-
     public function addTeam(Team $team): self
     {
         if (!$this->teams->contains($team)) {
             $this->teams[] = $team;
             $team->setCompetition($this);
         }
-
         return $this;
     }
-
     public function removeTeam(Team $team): self
     {
         if ($this->teams->contains($team)) {
@@ -326,7 +317,6 @@ class Competition
                 $team->setCompetition(null);
             }
         }
-
         return $this;
     }
 }

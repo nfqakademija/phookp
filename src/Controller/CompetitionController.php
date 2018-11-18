@@ -1,8 +1,5 @@
 <?php
-
 namespace App\Controller;
-
-
 use App\Services\CompetitionService;
 use App\Services\HashService;
 use Psr\Log\LoggerInterface;
@@ -14,13 +11,10 @@ use Symfony\Component\HttpFoundation\Request;
 use App\Form\CompetitionFormType;
 use App\Entity\Competition;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
-
 class CompetitionController extends AbstractController
 {
-
     private $competitionService;
     private $logger;
-
     /**
      * CompetitionController constructor.
      * @param LoggerInterface $logger
@@ -33,7 +27,6 @@ class CompetitionController extends AbstractController
         $this->logger->notice("controllerio pradzia");
         $this->competitionService = $service;
     }
-
     /**
      * @Route("/competition", name="competition")
      */
@@ -45,7 +38,6 @@ class CompetitionController extends AbstractController
         ]);
     }
     */
-
     /**
      * @param Request $request
      * @return Response
@@ -64,25 +56,20 @@ class CompetitionController extends AbstractController
             $accessLink = $this->generateUrl("organiserMain", array("hash" => $hash->getHash()), UrlGeneratorInterface::ABSOLUTE_URL);
             $this->addFlash('success', "Renginys sekmingai pridetas! Jusu renginio valdymo nuoroda: <a href='$accessLink'>$accessLink<a/>");
         }
-
         return $this->render("competition/competitionForm.html.twig", array(
             "form" => $form->createView(),
         ));
     }
-
     /**
      * @param string $id
      * @return Response
      * @Route("/competition/get/{id}", name="getCompetition", methods={"GET", "HEAD"})
      */
-
     public function get($id)
     {
         $this->logger->notice("get method called");
         $competition = $this->competitionService->get($id);
         $this->logger->notice("find ran...");
-
         return new Response(dump($competition));
-
     }
 }

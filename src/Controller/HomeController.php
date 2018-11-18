@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Controller;
 use App\Services\CompetitionService;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -30,5 +29,4 @@ class HomeController extends Controller
                 "competitions" => $competitions,
             ));
     }
-
 }

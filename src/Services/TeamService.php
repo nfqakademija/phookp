@@ -2,9 +2,10 @@
 /**
  * Created by PhpStorm.
  * User: sigita
- * Date: 18.11.16
- * Time: 02.22
+ * Date: 18.11.18
+ * Time: 00.04
  */
+
 namespace App\Services;
 use App\Entity\Team;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
@@ -56,3 +57,4 @@ class TeamService
         else return null;
     }
 }
+

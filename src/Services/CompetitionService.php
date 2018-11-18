@@ -10,6 +10,7 @@ namespace App\Services;
 
 
 use App\Entity\Competition;
+use App\Entity\Hash;
 use App\Repository\CompetitionRepository;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
