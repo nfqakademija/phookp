@@ -9,9 +9,11 @@ form.competition_registration.weighingCount: Svėrimų skaičius
 form.competition_registration.facebook_link: Facebook renginio nuoroda
 form.competition_registration.rules: Renginio reglamentas
 form.competition_registration.create_button: Sukurti
+form.competition_registration.success_message: Renginys sėkmingai pridėtas! Jūsų renginio valdymo nuoroda
 form.team_registration.team_name: Komandos pavadinimas
 form.team_registration.team_member: Komandos narys
 form.team_registration.create_button: Pridėti komandas
+form.team_registration.success_message: Komandos pridėtos
 
 
 

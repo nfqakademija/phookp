@@ -5,7 +5,9 @@
  * Date: 18.10.29
  * Time: 21.19
  */
+
 namespace App\Controller;
+
 use App\Entity\Competition;
 use App\Entity\Hash;
 use App\Services\CompetitionService;
@@ -20,6 +22,7 @@ use Psr\Log\LoggerInterface;
 use App\Entity\Team;
 use App\Form\TeamFormType;
 use App\Form\TeamsFormType;
+
 class OrganizerController extends AbstractController
 {
     private $teamService;
@@ -39,29 +42,35 @@ class OrganizerController extends AbstractController
         $this->logger = $logger;
         $this->teamService = $service;
     }
+
     /**
      * @Route("/organizer/{hash}", name="organiserMain")
      */
     public function createTeamForm(Request $request, $hash, HashService $hashService)
     {
+        $hash = $hashService->findByHash($hash);
+        if ($hash)
+        {
+            $data = ['teams' => []];
+            $sectorsCount = 2;
+            for ($i = 0; $i < $sectorsCount; $i++) {
+                $team = new Team();
+                $data['teams'][] = $team;
+            }
+            $form = $this->createForm(TeamsFormType::class, $data);
+            $form->add('save', SubmitType::class, array("label" => "form.team_registration.create_button"));
+            $form->handleRequest($request);
+            if ($form->isSubmitted() && $form->isValid()) {
+                $this->teamService->addTeams($form->getData()['teams'], $hash->getCompetition());
+                $this->addFlash('success', "form.team_registration.success_message");
+            }
+            return $this->render("team/addCommand.html.twig", array(
+                "form" => $form->createView(),
+            ));
+        }
 
-        $data = ['teams'=>[]];
-        $sectorsCount=2;
-        for ($i=0; $i<$sectorsCount; $i++) {
-            $team = new Team();
-            $data['teams'][] = $team;
-        }
-        $form = $this->createForm(TeamsFormType::class, $data);
-        $form->add('save', SubmitType::class, array("label" => "form.team_registration.create_button"));
-        $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
-            $hash=$hashService->findByHash($hash);
-            $this->teamService->addTeams($form->getData()['teams'], $hash->getCompetition());
-            $this->addFlash('success', 'Komandos pridėtos');
-        }
-        return $this->render("team/addCommand.html.twig", array(
-            "form" => $form->createView(),
-        ));
+        return $this->redirectToRoute("home");
+
     }
 //    /**
 //     * @Route("/organizer/{hash}", name="organiserMain")
