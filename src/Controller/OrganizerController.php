@@ -7,8 +7,12 @@
  */
 namespace App\Controller;
 use App\Entity\Competition;
+use App\Entity\Result;
 use App\Entity\Team;
+use App\Entity\Weighing;
+use App\Form\ResultType;
 use App\Form\TeamsFormType;
+use App\Form\WeighingType;
 use App\Services\TeamService;
 use Psr\Log\LoggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -79,7 +83,7 @@ class OrganizerController extends AbstractController
     /**
      * @Route("/organizer/{hash}/results", name="organizerResults")
      */
-    public function results($hash)
+    public function results($hash, Request $request)
     {
         $sectors = array(
           array("number" => 1),
@@ -91,8 +95,26 @@ class OrganizerController extends AbstractController
           array("number" => 7)
         );
 
+        $weighing = new Weighing();
+
+
+        for($i = 0; $i < 3; $i++){
+            $result = new Result();
+            $weighing->addResult($result);
+        }
+        $form = $this->createForm(WeighingType::class, $weighing);
+        $form->add('submit', SubmitType::class);
+
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $data = $form->getData();
+            dump($data);
+            $this->addFlash('success', "Rezultatai gauti...");
+        }
+
         return $this->render("organizer/results.html.twig", array(
-           "sectors" => $sectors
+           "sectors" => $sectors,
+            "form" => $form->createView()
         ));
     }
 

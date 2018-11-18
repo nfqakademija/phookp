@@ -14,7 +14,7 @@ class ResultType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('weigh', NumberType::class, array("label" => "Zuvis", "placeholder" => "svoris (g.)"))
+            ->add('weigh', NumberType::class, array("label" => "Zuvis"))
             ->add('specialFish', CheckboxType::class, array("label" => "Amuras"))
         ;
     }

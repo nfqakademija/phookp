@@ -128,6 +128,22 @@ class Competition
     private $competitionWeighingsCount = 1;
 
     /**
+     * @ORM\Column(type="string")
+     * @Assert\Length(
+     *     max="200",
+     *     maxMessage="Facebook'o linkas i eventa per ilgas.")
+     */
+    private $competitionLink;
+
+    /**
+     * @ORM\Column(type="string")
+     * @Assert\Length(
+     *    max="2000",
+     *    maxMessage="Taisykliu sarasas negali virsyti 2000 simboliu"
+     * )
+     */
+    private $competitionRules;
+    /**
      * @ORM\OneToMany(targetEntity="App\Entity\Hash", mappedBy="competition")
      */
     private $competitionHashes;

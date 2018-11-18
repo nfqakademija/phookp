@@ -34,7 +34,7 @@ class Team
     private $sectorNr;
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Competition", inversedBy="teams")
-     * @ORM\JoinColumn(nullable=false, referencedColumnName="id_competition" )
+     * @ORM\JoinColumn(nullable=false, referencedColumnName="id" )
      */
     private $competition;
     /**

@@ -3,7 +3,7 @@
 {% block body %}
     <div class="container-fluid">
             <div class="card">
-                <div class="card-header text-center h5 bg-dark text-light>
+                <div class="card-header text-center h5 bg-dark text-light">
                     Sverimo #1 rezultatai
                 </div>
                 <div class="card-body px-0">
@@ -21,22 +21,17 @@
                             </div>
                         </div>
                         <div class="col-8 border-dark">
-
-                            {% for num in range(0, 2 %}
-                                <div class="row">
-                                    <div class="col-8">
-                                        <input type="text" id="{{ num }}" placeholder="Svoris" class="form-control" />
-                                    </div>
-                                    <div class="col-4 text-light">
-                                        <input type="checkbox" value="true"> Amuras
-                                    </div>
-                                </div>
+                            {{ form_start(form) }}
+                            {% for result in form.results %}
+                                <div class="row m-0">{{ form_row(result.weigh) }} <div class="ml-1">{{ form_row(result.specialFish) }}</div> </div>
                             {% endfor %}
+                            {{ form_row(form.submit, { 'label': 'Issaugoti'}) }}
+                            {{ form_end(form) }}
                         </div>
                     </div>
                     <div class="row mt-2 bg-light">
                         <div class="btn btn-outline-dark col-6 text-center">Kitas sektorius >></div>
-                        <div class="btn btn-outline-dark col-6 text-center">Issaugoti</div>
+                        <!--{{ form_row(form.submit, { 'label': 'Issaugoti', 'attr': {"class" : "btn btn-outline-dark col-6 text-center"} }) }}-->
                     </div>
                 </div>
             </div>
