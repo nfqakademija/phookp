@@ -1,20 +1,9 @@
 
 // the ~ allows you to reference things in node_modules
 @import "~bootstrap/scss/bootstrap";
-body {
- margin-top: 20px;
-}
-.card-shadow{
-  box-shadow: 10px 10px 5px grey;
-}
-.container-index{
-  padding-bottom: 40px;
-  padding-top: 20px;
-}
+@import "./styles";
 
-@media (min-width: 992px) {
-  body {
-    padding-top: 50px;
-  }
 
-}
+
+
+
