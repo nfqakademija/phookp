@@ -6,15 +6,12 @@
  * Time: 21.19
  */
 namespace App\Controller;
-use App\Entity\Competition;
-use App\Entity\Hash;
-use App\Services\CompetitionService;
-use App\Services\HashService;
+use App\Entity\Result;
 use App\Entity\Team;
 use App\Entity\Weighing;
-use App\Entity\Result;
-use App\Form\WeighingType;
 use App\Form\TeamsFormType;
+use App\Form\WeighingType;
+use App\Services\HashService;
 use App\Services\ResultService;
 use App\Services\TeamService;
 use App\Services\WeighingService;
@@ -25,7 +22,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-class OrganizerController extends AbstractController
+class OrganizerController extends AbstractController implements IAuthorizedController
 {
     private $teamService;
     private $logger;
@@ -69,20 +66,6 @@ class OrganizerController extends AbstractController
 
         ));
 
-    }
-    /**
-     * @Route("/organizer/{hash}", name="organiserMain")
-     */
-    public function index($hash)
-    {
-        return new Response("
-            <center>
-                <h1>
-                    Hoorray, organizatoriaus screenas! <br/>
-                    Tavo prieigos kodas: $hash
-                </h1>
-            </center>
-        ");
     }
 
     /**
