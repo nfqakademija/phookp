@@ -126,24 +126,15 @@ class Competition
      * )
      */
     private $competitionWeighingsCount = 1;
-    /**
-     * @ORM\Column(type="string", length=45, nullable=true)
-     * * @Assert\Url(
-     *     message="Nurodyta nuoroda yra neteisinga",
-     * )
-     */
-    private $competitionLink;
-    /**
-     * @ORM\Column(type="string", length=135, nullable=true)
-     */
-    private $competitionRules;
+
+
     /**
      * @ORM\Column(type="string")
      * @Assert\Length(
      *     max="200",
      *     maxMessage="Facebook'o linkas i eventa per ilgas.")
      */
-    private $competitionLink;
+     private $competitionLink;
 
     /**
      * @ORM\Column(type="string")
