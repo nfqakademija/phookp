@@ -102,7 +102,6 @@ final class CompetitionService
         /*
          * TODO imti tik busimus competitionus
          * */
-
         $competitions = $this->competitionRepository->findAll();
         $array  = array();
         foreach($competitions as $competition){

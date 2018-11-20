@@ -5,11 +5,21 @@
     {{ include ('navBar/navBarOrganizer.html.twig') }}
     <div class="container container-index">
         <div class="row justify-content-center">
+            {% for label, messages in app.flashes %}
+                {% for message in messages %}
+                    <div class="alert alert-{{ label }}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endfor %}
+        </div>
+        <div class="row justify-content-center">
             <div class="col-lg-10">
                 <div class="card mt-4 card-shadow">
                     <div class="card-body">
-                        <h3 class="card-title">Komandos pridėjimas</h3>
+                        <h3 class="card-title">Komandų pridėjimas</h3>
                         <p class="card-text">
+                            {% if sectors!=0 %}
                             {{ form_start(form) }}
                             {{ form_errors(form) }}
                             {% for team in form.teams %}
@@ -19,10 +29,14 @@
                                 {{ form_row(team.thirdTeamMember) }}
                             {% endfor %}
                             {{ form_end(form) }}
+                            {% else %}
+                                <h4>Komandos pridėtos</h4>
+                            {% endif %}
                         </p>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
     </div>
 {% endblock %}

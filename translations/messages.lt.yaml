@@ -13,7 +13,9 @@ form.competition_registration.success_message: Renginys sėkmingai pridėtas! J�
 form.team_registration.team_name: Komandos pavadinimas
 form.team_registration.team_member: Komandos narys
 form.team_registration.create_button: Pridėti komandas
-form.team_registration.success_message: Komandos pridėtos
+form.team_registration.success_message: Pridėtų komandų skaičius:
+form.team_registration.error_message: Nepridėjote komandos. Privalote įvesti komandos pavadinimą bei vieną komandos narį
+form.team_registration.notAddedName_message: Norint pridėti komandą privalote įvesti komandos pavadinimą bei vieną komandos narį
 
 
 

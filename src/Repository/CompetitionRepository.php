@@ -18,11 +18,6 @@ class CompetitionRepository extends ServiceEntityRepository
         $this->entityManager = $entityManager;
     }
 
-
-    public function findByHash(string $hash): Competition
-    {        // TODO: Implement findByHash() method.
-    }
-
     public function save(Competition $competition): void
     {
         $this->entityManager->persist($competition);

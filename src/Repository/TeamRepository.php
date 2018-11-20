@@ -20,6 +20,10 @@ class TeamRepository extends ServiceEntityRepository
     {
         $this->entityManager->flush();
     }
+    public function countRows(int $competitionId) :?int
+    {
+        return $this->count(['competition'=>$competitionId]);
+    }
 
 
     // /**

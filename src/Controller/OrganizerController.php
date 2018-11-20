@@ -59,7 +59,10 @@ class OrganizerController extends AbstractController
         $hash = $hashService->findByHash($hash);
         if ($hash) {
             $data = ['teams' => []];
-            $sectorsCount = 2;
+            $competitionByHash = $hash->getCompetition();
+            $competitionId = $competitionByHash->getIdCompetition();
+            $totalSectors = $competitionByHash->getCompetitionSectorCount();
+            $sectorsCount = $this->teamService->countSectors($competitionId, $totalSectors);
             for ($i = 0; $i < $sectorsCount; $i++) {
                 $team = new Team();
                 $data['teams'][] = $team;
@@ -68,16 +71,27 @@ class OrganizerController extends AbstractController
             $form->add('save', SubmitType::class, array("label" => "form.team_registration.create_button"));
             $form->handleRequest($request);
             if ($form->isSubmitted() && $form->isValid()) {
-                $this->teamService->addTeams($form->getData()['teams'], $hash->getCompetition());
-                $message = $this->translator->trans("form.team_registration.success_message");
-                $this->addFlash('success', $message);
+                $additionNotifications = $this->teamService->addTeams($form->getData()['teams'], $competitionByHash);
+                $successMessage = $this->translator->trans("form.team_registration.success_message");
+                $errorMessage = $this->translator->trans("form.team_registration.error_message");
+                $notAddedNameMessage = $this->translator->trans("form.team_registration.notAddedName_message");
+                if ($additionNotifications["addedTeamsQuantity"] > 0) {
+                    $this->addFlash("success", $successMessage . $additionNotifications["addedTeamsQuantity"]);
+                    if ($additionNotifications["notAddedName"] === true) {
+                        $this->addFlash("danger", $notAddedNameMessage);
+                    }
+                } else {
+                    $this->addFlash("danger", $errorMessage);
+                }
             }
             return $this->render("team/addCommand.html.twig", array(
                 "form" => $form->createView(),
+                "sectors" => $sectorsCount,
             ));
         }
         return $this->redirectToRoute("home");
     }
+
 //    /**
 //     * @Route("/organizer/{hash}", name="organiserMain")
 //     */
