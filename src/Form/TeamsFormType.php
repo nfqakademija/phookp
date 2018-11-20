@@ -25,9 +25,6 @@ class TeamsFormType extends AbstractType
 
     public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults([
-            'data_class' => Competition::class,
-        ]);
     }
 
 }

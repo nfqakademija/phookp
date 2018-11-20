@@ -4,6 +4,9 @@ namespace App\Repository;
 
 use App\Entity\Result;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
@@ -14,11 +17,36 @@ use Symfony\Bridge\Doctrine\RegistryInterface;
  */
 class ResultRepository extends ServiceEntityRepository
 {
-    public function __construct(RegistryInterface $registry)
+    private $entityManager;
+
+    public function __construct(RegistryInterface $registry, EntityManagerInterface $entityManager)
     {
+        $this->entityManager = $entityManager;
         parent::__construct($registry, Result::class);
     }
 
+    public function save(Result $result): void
+    {
+        $this->entityManager->persist($result);
+    }
+
+    public function  flush(): void
+    {
+        $this->entityManager->flush();
+    }
+
+    public function findByTeamAndWeighing(int $teamId, int $weighingId): Collection
+    {
+       $results = $this->createQueryBuilder('r')
+            ->where('r.team = :teamid')
+            ->andWhere('r.weighing = :weighingid')
+            ->setParameter('teamid', $teamId)
+            ->setParameter('weighingid', $weighingId)
+            ->getQuery()
+            ->getResult();
+
+       return new ArrayCollection($results);
+    }
     // /**
     //  * @return Result[] Returns an array of Result objects
     //  */

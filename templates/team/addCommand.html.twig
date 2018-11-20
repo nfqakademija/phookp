@@ -11,6 +11,7 @@
                         <h3 class="card-title">Komandos pridėjimas</h3>
                         <p class="card-text">
                             {{ form_start(form) }}
+                            {{ form_errors(form) }}
                             {% for team in form.teams %}
                                 {{ form_row(team.teamName) }}
                                 {{ form_row(team.firstTeamMember) }}

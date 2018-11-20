@@ -48,7 +48,7 @@
                         <h4 class="card-title text-truncate">Vykstantys renginiai:</h4>
                         {% for competition in competitions %}
                             <h5 class="card-subtitle mb-2 text-muted">{{ competition["competition_name"] }}</h5>
-                            <a href="/home/competition/{{ competition["id_competition"] }}" class="card-link">Rezultatai</a>
+                            <a href="/home/competition/{{ competition["id"] }}" class="card-link">Rezultatai</a>
                             <br>
                             <small class="text-muted">Data: {{ competition["competition_date"] }}</small>
                             <hr>
@@ -70,7 +70,7 @@
                         <h4 class="card-title text-truncate">Pasibaigę renginiai: </h4>
                         {% for competition in competitions %}
                             <h5 class="card-subtitle mb-2 text-muted">{{ competition["competition_name"] }}</h5>
-                            <a href="/home/competition/{{ competition["id_competition"] }}" class="text-secondary">Rezultatai</a>
+                            <a href="/home/competition/{{ competition["id"] }}" class="text-secondary">Rezultatai</a>
                             <br>
                             <small class="text-muted">Data: {{ competition["competition_date"] }}</small>
                             <hr>

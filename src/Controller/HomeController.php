@@ -12,18 +12,12 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\ChoiceList\Loader\CallbackChoiceLoader;
 class HomeController extends Controller
 {
-    private $competitionService;
-    public function __construct(CompetitionService $competitionService)
-    {
-        $this->competitionService = $competitionService;
-    }
-    /**
+       /**
      * @Route("/", name="home")
      */
-    public function index()
+    public function index(CompetitionService $competitionService)
     {
-        $competitions = $this->competitionService->getFutureCompetitions();
-        //dump($competitions);
+        $competitions = $competitionService->getFutureCompetitions();
         return $this->render("home/index.html.twig",
             array(
                 "competitions" => $competitions,

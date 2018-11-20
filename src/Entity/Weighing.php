@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Services\ResultService;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -30,7 +31,7 @@ class Weighing
     private $competition;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Result", mappedBy="weighing", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="App\Entity\Result", mappedBy="weighing")
      */
     private $results;
 
@@ -68,9 +69,11 @@ class Weighing
         return $this;
     }
 
-    /**
-     * @return Collection|Result[]
-     */
+    public function setResults(Collection $results)
+    {
+        $this->results = $results;
+    }
+
     public function getResults(): Collection
     {
         return $this->results;

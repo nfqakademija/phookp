@@ -32,6 +32,12 @@ class Result
      */
     private $specialFish;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Team", inversedBy="results")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $team;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -69,6 +75,18 @@ class Result
     public function setSpecialFish(bool $specialFish): self
     {
         $this->specialFish = $specialFish;
+
+        return $this;
+    }
+
+    public function getTeam(): ?Team
+    {
+        return $this->team;
+    }
+
+    public function setTeam(?Team $team): self
+    {
+        $this->team = $team;
 
         return $this;
     }

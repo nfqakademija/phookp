@@ -23,6 +23,9 @@ class HashRepository extends ServiceEntityRepository
         $this->entityManager = $entityManager;
         parent::__construct($registry, Hash::class);
     }
+    public function findByHash($hash){
+        return $this->findOneBy(['hash'=>$hash]);
+    }
 
     public function save(Hash $hash): void
     {

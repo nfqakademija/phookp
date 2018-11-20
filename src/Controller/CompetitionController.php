@@ -54,7 +54,7 @@ class CompetitionController extends AbstractController
             $competition = $this->competitionService->create($form->getData());
             $hash = $hashService->create($competition);
             $accessLink = $this->generateUrl("organiserMain", array("hash" => $hash->getHash()), UrlGeneratorInterface::ABSOLUTE_URL);
-            $this->addFlash('success', "Renginys sekmingai pridetas! Jusu renginio valdymo nuoroda: <a href='$accessLink'>$accessLink<a/>");
+            $this->addFlash('success', "Renginys sėkmingai pridėtas! Jūsų renginio valdymo nuoroda: <a href='$accessLink'>$accessLink<a/>");
         }
         return $this->render("competition/competitionForm.html.twig", array(
             "form" => $form->createView(),
