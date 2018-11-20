@@ -61,12 +61,10 @@ class TeamService
         return $team;
     }
 
-    public function validate(Team $team): ?array
+    public function find(int $id): ?Team
     {
-        $errors = $this->validator->validate($team);
-        if (count($errors) > 0) {
-            return $errors;
-        } else return null;
+        return $this->teamRepository->find($id);
     }
+
 }
 

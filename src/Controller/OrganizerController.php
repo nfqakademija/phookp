@@ -15,7 +15,9 @@ use App\Entity\Weighing;
 use App\Entity\Result;
 use App\Form\WeighingType;
 use App\Form\TeamsFormType;
+use App\Services\ResultService;
 use App\Services\TeamService;
+use App\Services\WeighingService;
 use Psr\Log\LoggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -86,7 +88,9 @@ class OrganizerController extends AbstractController
     /**
      * @Route("/organizer/{hash}/results/{teamId}/{weighingNr}", name="organizerResults")
      */
-    public function results(string $hash, int $teamId, int $weighingNr = 1, Request $request, HashService $hashService, CompetitionService $competitionService)
+    public function results(string $hash, int $teamId, int $weighingNr = 1, Request $request,
+                            HashService $hashService, ResultService $resultService, WeighingService $weighingService,
+                            TeamService $teamService)
     {
         $competition = $hashService->findByHash($hash)->getCompetition();
         $weighings = $competition->getWeighings();
@@ -103,7 +107,7 @@ class OrganizerController extends AbstractController
         if(count($weighings)+1 < $weighingNr)
         {
             $this->addFlash("error", "Klaida: negalite praleisti sverimu!");
-            $this->redirectToRoute("organizerResults", array("teamId" => $teams[0]->getId()));
+            $this->redirectToRoute("organizerResults", array("hash" => $hash, "teamId" => $teams[0]->getId()));
         }
 
         if(!$teams->exists(function($key, $element) use ($teamId){
@@ -114,10 +118,10 @@ class OrganizerController extends AbstractController
             $this->redirectToRoute("organiserMain", array("hash" => $hash));
         }
 
+        $team = $teamService->find($teamId);
+
         if(count($weighings) === 0 || count($weighings) < $weighingNr){
             $weighing = new Weighing();
-           /* $competition->addWeighing($weighing);
-            $competitionService->create($competition);*/
 
             for($i = 0; $i < 3; $i++){
                 $result = new Result();
@@ -126,6 +130,12 @@ class OrganizerController extends AbstractController
         }
         else{
             $weighing = $weighings[$weighingNr-1];
+            $results = $resultService->getTeamResults($teamId, $weighing->getId());
+            $weighing->setResults($results);
+            for($i = 0; $i < 3; $i++){
+                $result = new Result();
+                $weighing->addResult($result);
+            }
         }
 
 
@@ -136,8 +146,9 @@ class OrganizerController extends AbstractController
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $data = $form->getData();
-            dump($data);
-            $this->addFlash('success', "Rezultatai gauti...");
+            $data->setCompetition($competition);
+            $weighingService->create($data, $team, $resultService);
+            $this->addFlash('success', "Rezultatai issaugoti...");
         }
 
         return $this->render("organizer/results.html.twig", array(
