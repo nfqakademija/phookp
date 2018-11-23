@@ -12,6 +12,43 @@ body {
   padding-top: 20px;
 }
 
+.check-box{
+  height: 20px;
+  width: 20px;
+  margin: 0 15px;
+}
+
+.sector-button {
+  min-height: 40px;
+  min-width: 80px;
+  background: #DDDDDD;
+  color: #3E8AEC;
+  border: 1px solid transparent;
+}
+
+.sector-button:hover{
+  text-decoration: none;
+  color: #3E8AEC;
+  border-color: #000;
+}
+
+
+.sector-button--active{
+  background: #FFF;
+  border-color: #3E8AEC;
+}
+
+.text-box{
+  border-color: #3E8AEC;
+  border-width: 0 0 1px 0;
+}
+.text-box--results{
+  max-width: 100px;
+  line-height: 0;
+  margin: 10px;
+}
+
+
 @media (min-width: 992px) {
   body {
     padding-top: 50px;

@@ -31,6 +31,7 @@ class HashSubscriber implements EventSubscriberInterface
 
         if($controller[0] instanceof IAuthorizedController)
         {
+
             $hash = $event->getRequest()->attributes->get('hash');
             if(!$this->hashService->findByHash($hash))
             {
