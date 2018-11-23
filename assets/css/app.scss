@@ -23,7 +23,7 @@ body {
   min-width: 80px;
   background: #DDDDDD;
   color: #3E8AEC;
-  border: 1px solid transparent;
+  border-right: 1px solid #3E8AEC;
 }
 
 .sector-button:hover{
@@ -35,7 +35,8 @@ body {
 
 .sector-button--active{
   background: #FFF;
-  border-color: #3E8AEC;
+  border: 1px solid #3E8AEC;
+  border-right-color: transparent;
 }
 
 .text-box{
@@ -48,7 +49,15 @@ body {
   margin: 10px;
 }
 
+.results-entry-container{
+  border-width: 1px 1px 1px 0;
+  border-color: #3E8AEC;
+  border-style: solid;
+}
 
+.lh-1{
+  line-height: 1;
+}
 @media (min-width: 992px) {
   body {
     padding-top: 50px;
