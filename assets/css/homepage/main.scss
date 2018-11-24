@@ -1,0 +1,43 @@
+.home-start {
+  height: 100vh;
+}
+.heading {
+  font-size: 50px;
+  color: #000;
+  padding-bottom: 10px;
+}
+
+.heading--grey {
+  color: #616161;
+}
+
+.heading--blue-border{
+  border-bottom: 1px solid $mainBlue;
+}
+
+.event {
+  font-size: 18px;
+}
+
+.event__date {
+
+}
+
+.event__heading {
+  font-size: 23px;
+}
+
+.event__name {
+  font-size: 28px;
+}
+
+.btn__blue-transparent {
+
+}
+
+
+.home-left-side {
+  height: 100vh;
+  background-size: cover;
+  background-image: url("./images/main_background.png");
+}
