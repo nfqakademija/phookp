@@ -1,0 +1,42 @@
+@media (min-width: 1200px) {
+  .section {
+    height: 100vh;
+  }
+}
+
+/* Smartphones (portrait and landscape) ----------- */
+@media only screen
+and (max-device-width : 767px)
+{
+
+  .heading {
+    font-size: 38px;
+  }
+
+  .start-right-side-wrapper {
+    text-align: center;
+    margin-left: 0;
+  }
+
+  .section {
+    height: auto;
+    display: flex;
+    justify-content: center;
+  }
+  .home-right-side {
+    display: none;
+  }
+
+
+  .home-start {
+    color: white;
+    background-image: url("./images/main_background_mobile.png");
+    -webkit-background-size: cover;
+    background-size: cover;
+
+    .heading {
+      margin-top: 5rem;
+      color: white;
+    }
+  }
+}
