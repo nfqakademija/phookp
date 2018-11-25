@@ -39,7 +39,6 @@ class TeamService
         $this->teamRepository = $teamRepository;
         $this->validator = $validator;
         $this->logger = $logger;
-        $this->logger->notice(" ");
     }
 
     /**
@@ -51,6 +50,7 @@ class TeamService
     {
         $addedTeamsQuantity = 0;
         $notAddedName = false;
+
         foreach ($teams as $team) {
             $teamName = $team->getTeamName();
             $firstTeamMember = $team->getFirstTeamMember();
@@ -95,12 +95,13 @@ class TeamService
     }
 
     /**
-     * @param int $competitionId
-     * @param int $totalSectors
+     * @param Competition $competition
      * @return int|null
      */
-    public function countSectors(int $competitionId, int $totalSectors)
+    public function countSectors(Competition $competition) :int
     {
+        $competitionId=$competition->getIdCompetition();
+        $totalSectors=$competition->getCompetitionSectorCount();
         $completeSectors = $this->teamRepository->countRows($competitionId);
         return $sectors = $totalSectors - $completeSectors;
     }

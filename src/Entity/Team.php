@@ -42,7 +42,7 @@ class Team
      * @ORM\Column(type="string", length=45, nullable=true)
      */
     private $secondTeamMember;
-    public function getidTeam(): ?int
+    public function getIdTeam(): ?int
     {
         return $this->idTeam;
     }

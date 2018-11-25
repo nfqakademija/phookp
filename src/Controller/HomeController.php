@@ -23,7 +23,6 @@ class HomeController extends Controller
     public function index()
     {
         $competitions = $this->competitionService->getFutureCompetitions();
-        //dump($competitions);
         return $this->render("home/index.html.twig",
             array(
                 "competitions" => $competitions,

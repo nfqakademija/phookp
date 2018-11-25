@@ -31,58 +31,51 @@ final class CompetitionService
      */
     private $validator;
 
+    private $hashService;
     /**
      * CompetitionService constructor.
      * @param CompetitionRepository $competitionRepository
      * @param ValidatorInterface $validator
      * @param LoggerInterface $logger
      */
-    public function __construct(CompetitionRepository $competitionRepository, ValidatorInterface $validator, LoggerInterface $logger)
+    public function __construct(CompetitionRepository $competitionRepository, ValidatorInterface $validator, LoggerInterface $logger,HashService $hashService)
     {
 
         $this->competitionRepository = $competitionRepository;
         $this->validator = $validator;
+        $this->hashService=$hashService;
         $this->logger = $logger;
-        $this->logger->notice("Service constructor called.");
     }
 
     /**
      * @param Competition $competition
      * @return Competition|null
-     * Issaugo objekta i duombaze ir vel ji grazina (dabar jau su idCompetition ir visom default reiksmem)
      */
     public function create(Competition $competition):?Competition
     {
-        /**
-         * @TODO
-         * Padaryti success checka, jei tarkim failina prisijungt prie db, grazina null
-         */
         $this->competitionRepository->save($competition);
+        $this->hashService->create($competition);
         $this->competitionRepository->flush();
         return $competition;
     }
 
     /**
-     * @param int $id
+     * @param Competition $competition
      * @return Competition
-     * Pagal paduota id suranba ir grazina Competition objekta. Jeigu neranda iraso pagal id - grazina null.
      */
-
-    public function get(int $id): Competition
+    public function get(Competition $competition): Competition
     {
         /**
          * @TODO
          * Pakeist return tipa i ?Competition, ir jeigu randa competitiona pagal id grazina ji, jeigu neranda, grazina null
          */
-        $this->logger->notice("Get from service called");
-        $competition = $this->competitionRepository->find($id);
+        $competition = $this->competitionRepository->find($competition);
         return $competition;
     }
 
     /**
      * @param Competition $competition
      * @return null|\Symfony\Component\Validator\ConstraintViolationListInterface
-     * Validatina paduota Competition objekta, jeigu klaidu nera, grazina null, jeigu randa klaidu - string masyva
      */
     public function validate(Competition $competition):?array
     {
@@ -96,6 +89,7 @@ final class CompetitionService
 
         else return null;
     }
+
 
     public function getFutureCompetitions():?array
     {

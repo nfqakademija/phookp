@@ -5,7 +5,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 /**
- * @ORM\Entity(repositoryClass="App\Repository\competitionRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\CompetitionRepository")
  */
 class Competition
 {
@@ -80,7 +80,7 @@ class Competition
      * @ORM\Column(type="string", length=30)
      * @Assert\Choice(
      *     choices = {"total", "top5"},
-     *     message = "Nezinomas varzybu tipas!"
+     *     message = "Nežinomas varžybų tipas!"
      * )
      */
     private $competitionType;
@@ -97,8 +97,8 @@ class Competition
      * @Assert\Length(
      *     min="1",
      *     max="99",
-     *     minMessage="Varzybu sektoriu skaicius negali buti mazesnis nei 1!",
-     *     maxMessage="Varzybu sektoriu skaicius negali virsyti 99!"
+     *     minMessage="Varžybų sektorių skaičius negali būti mažesnis nei 1!",
+     *     maxMessage="Varžybų sektorių skaičius negali viršyti 99!"
      * )
      */
     private $competitionSectorCount = 1;
@@ -107,8 +107,8 @@ class Competition
      * @Assert\Length(
      *     min="1",
      *     max="20",
-     *     minMessage="Sverimu skaicius negali buti mazesnis nei 1!",
-     *     maxMessage="Sverimu skaicius negali virsyti 20!"
+     *     minMessage="Svėrimų skaičius negali būti mažesnis nei 1!",
+     *     maxMessage="SSvėrimų skaičius negali viršyti 20!"
      * )
      */
     private $competitionWeighingsCount = 1;
@@ -131,9 +131,9 @@ class Competition
      * @ORM\OneToMany(targetEntity="App\Entity\Team", mappedBy="competition")
      */
     private $teams;
+
     /**
      * Competition constructor.
-     * @param $competitionHashes
      */
     public function __construct()
     {
@@ -228,12 +228,15 @@ class Competition
     {
         return $this->competitionWeighingsCount;
     }
+
     /**
-     * @param mixed $competitionWeighingsCount
+     * @param int $competitionWeighingsCount
+     * @return Competition
      */
-    public function setCompetitionWeighingsCount(int $competitionWeighingsCount): void
+    public function setCompetitionWeighingsCount(int $competitionWeighingsCount): self
     {
         $this->competitionWeighingsCount = $competitionWeighingsCount;
+        return $this;
     }
     /**
      * @return mixed
@@ -242,12 +245,15 @@ class Competition
     {
         return $this->competitionSectorCount;
     }
+
     /**
-     * @param mixed $competitionSectorCount
+     * @param int $competitionSectorCount
+     * @return Competition
      */
-    public function setCompetitionSectorCount(int $competitionSectorCount): void
+    public function setCompetitionSectorCount(int $competitionSectorCount): self
     {
         $this->competitionSectorCount = $competitionSectorCount;
+        return $this;
     }
     /**
      * @return Collection|Hash[]

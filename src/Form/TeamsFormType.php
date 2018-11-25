@@ -23,5 +23,4 @@ class TeamsFormType extends AbstractType
 
     }
 
-
 }
