@@ -47,7 +47,7 @@ class CompetitionController extends AbstractController
      * @return Response
      * @Route("/competition/get/{id}", name="getCompetition", methods={"GET", "HEAD"})
      */
-    public function getCompetition(Competition $competition,CompetitionService $competitionService)
+    public function get(Competition $competition,CompetitionService $competitionService)
     {
         $competition = $competitionService->get($competition);
         return new Response(dump($competition));
