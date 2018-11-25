@@ -1,0 +1,41 @@
+*:focus {
+  outline: none !important;
+}
+
+.form-control {
+  &:focus {
+    box-shadow: none;
+  }
+}
+
+.form__input {
+  border: none;
+  border-bottom: 3px solid $mainGrey;
+  border-radius: 0;
+  width: 50%;
+  transition: 0.5s;
+
+  &:active {
+    border-color: $mainBlue;
+  }
+
+  &:focus {
+    outline-width: 0;
+  }
+}
+
+.form__input--blue {
+  border: none;
+  border-bottom: 2px solid $mainBlue;
+}
+
+.form__select {
+  select {
+    border-radius: 0;
+    border-color: $mainGrey;
+    width: 50%;
+    &:active {
+      border-color: $mainBlue;
+    }
+  }
+}
