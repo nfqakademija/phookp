@@ -1,0 +1,6 @@
+.navbar__link--black {
+  color: #000000;
+  &:hover{
+    color: $mainBlue;
+  }
+}
