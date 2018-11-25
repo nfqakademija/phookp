@@ -1,6 +1,6 @@
 const resultFieldsCount = () => {
     const parent = document.querySelector('.results-entry-container');
-    return parent.childElementCount-2;
+    return parent.childElementCount-1;
 };
 
 const generateResultsFormHtml = () => {

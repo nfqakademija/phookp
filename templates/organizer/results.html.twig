@@ -32,7 +32,7 @@
                     {{ form_start(form) }}
                     <div class="row mx-0">
                         <div class="col-4 col-sm-3 col-md-2 col-lg-2 border-dark p-0" >
-                            <div class="table-responsive" style="max-height: 75vh;">
+                            <div class="table-responsive" style="max-height: 75vh;" >
                             {% for team in teams %}
                                 <a href="{{ path('organizerResults',
                                     {'hash': app.request.attributes.get('hash'),
