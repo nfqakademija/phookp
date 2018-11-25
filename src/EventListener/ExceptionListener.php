@@ -35,16 +35,14 @@ class ExceptionListener
 
 
         if ($exception instanceof HttpExceptionInterface) {
-            if($exception instanceof AccessDeniedHttpException){
+            if ($exception instanceof AccessDeniedHttpException) {
                 $session = new Session();
                 $session->start();
                 $session->getFlashBag()->add('error', "Varzybos neegzistuoja, arba prieigos nuoroda buvo panaikinta administratoriaus.");
 
                 $response = new RedirectResponse($this->router->generate('home'));
 
-            }
-            else
-            {
+            } else {
                 $response = new Response();
                 $response->setStatusCode($exception->getStatusCode());
                 $response->headers->replace($exception->getHeaders());

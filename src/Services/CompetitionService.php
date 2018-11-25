@@ -19,6 +19,16 @@ use JMS\Serializer\SerializerBuilder;
 
 final class CompetitionService
 {
+
+    /**
+     * Array for competition status: event name -> state value in database
+     */
+    private const STATUS = array(
+        'CREATED' => 'unconfirmed',
+        'CONFIRMED' => 'confirmed',
+        'STARTED' => 'started',
+        'FINISHED' => 'finished'
+    );
     /**
      * @var CompetitionRepository - Competition entity repozitorija, injektinama automatiskai per konstruktoriaus parametrus
      */
@@ -40,28 +50,13 @@ final class CompetitionService
 
     public function create(Competition $competition):?Competition
     {
-        /**
-         * @TODO
-         * Padaryti success checka, jei tarkim failina prisijungt prie db, grazina null
-         */
         $this->competitionRepository->save($competition);
         $this->competitionRepository->flush();
         return $competition;
     }
 
-    /**
-     * @param int $id
-     * @return Competition
-     * Pagal paduota id suranba ir grazina Competition objekta. Jeigu neranda iraso pagal id - grazina null.
-     */
-
     public function get(int $id): Competition
     {
-        /**
-         * @TODO
-         * Pakeist return tipa i ?Competition, ir jeigu randa competitiona pagal id grazina ji, jeigu neranda, grazina null
-         */
-        $this->logger->notice("Get from service called");
         $competition = $this->competitionRepository->find($id);
         return $competition;
     }
@@ -82,6 +77,5 @@ final class CompetitionService
         }
         return $array;
     }
-
 
 }

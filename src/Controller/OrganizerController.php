@@ -5,7 +5,9 @@
  * Date: 18.10.29
  * Time: 21.19
  */
+
 namespace App\Controller;
+
 use App\Entity\Result;
 use App\Entity\Team;
 use App\Entity\Weighing;
@@ -41,15 +43,16 @@ class OrganizerController extends AbstractController implements IAuthorizedContr
         $this->logger = $logger;
         $this->teamService = $service;
     }
+
     /**
      * @Route("/organizer/{hash}", name="organiserMain")
      */
     public function createTeamForm(Request $request, $hash, HashService $hashService)
     {
 
-        $data = ['teams'=>[]];
-        $sectorsCount=2;
-        for ($i=0; $i<$sectorsCount; $i++) {
+        $data = ['teams' => []];
+        $sectorsCount = 2;
+        for ($i = 0; $i < $sectorsCount; $i++) {
             $team = new Team();
             $data['teams'][] = $team;
         }
@@ -57,7 +60,7 @@ class OrganizerController extends AbstractController implements IAuthorizedContr
         $form->add('save', SubmitType::class, array("label" => "form.team_registration.create_button"));
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            $hash=$hashService->findByHash($hash);
+            $hash = $hashService->findByHash($hash);
             $this->teamService->addTeams($form->getData()['teams'], $hash->getCompetition());
             $this->addFlash('success', 'Komandos pridėtos');
         }
@@ -82,43 +85,39 @@ class OrganizerController extends AbstractController implements IAuthorizedContr
 
         // Validation
 
-        if(count($teams) < 1){
+        if (count($teams) < 1) {
             $this->addFlash("error", "Klaida: negalima prideti rezultatu nepridejus dalyviu komandu!");
             $this->redirectToRoute("organizerMain", array("hash" => $hash));
         }
 
-        if(count($weighings)+1 < $weighingNr)
-        {
+        if (count($weighings) + 1 < $weighingNr) {
             $this->addFlash("error", "Klaida: negalite praleisti sverimu!");
             $this->redirectToRoute("organizerResults", array("hash" => $hash, "teamId" => $teams[0]->getId()));
         }
 
-        if(!$teams->exists(function($key, $element) use ($teamId){
+        if (!$teams->exists(function ($key, $element) use ($teamId) {
             return $teamId === $element->getId();
-        }))
-        {
+        })) {
             $this->addFlash("error", "Klaida: nurodyta komanda nedalyvauja varzybose!");
             $this->redirectToRoute("organiserMain", array("hash" => $hash));
         }
 
         $team = $teamService->find($teamId);
 
-        if(count($weighings) === 0 || count($weighings) < $weighingNr){
+        if (count($weighings) === 0 || count($weighings) < $weighingNr) {
             $weighing = new Weighing();
 
-            for($i = 0; $i < 2; $i++){
+            for ($i = 0; $i < 2; $i++) {
                 $result = new Result();
                 $weighing->addResult($result);
             }
-        }
-        else{
-            $weighing = $weighings[$weighingNr-1];
+        } else {
+            $weighing = $weighings[$weighingNr - 1];
             $results = $resultService->getTeamResults($teamId, $weighing->getId());
             $weighing->setResults($results);
             $result = new Result();
             $weighing->addResult($result);
         }
-
 
 
         $form = $this->createForm(WeighingType::class, $weighing);
@@ -132,8 +131,8 @@ class OrganizerController extends AbstractController implements IAuthorizedContr
         }
 
         return $this->render("organizer/results.html.twig", array(
-           "teams" => $teams,
-           "form" => $form->createView(),
+            "teams" => $teams,
+            "form" => $form->createView(),
             "competition" => $competition,
             "weighings" => $weighings
         ));
