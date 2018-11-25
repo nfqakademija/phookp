@@ -71,6 +71,7 @@ class Team
     public function setCompetition(?Competition $competition): self
     {
         $this->competition = $competition;
+        $competition->getTeams()->add($this);
         return $this;
     }
     public function getFirstTeamMember(): ?string

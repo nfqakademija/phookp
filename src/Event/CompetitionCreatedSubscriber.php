@@ -32,25 +32,25 @@ class CompetitionCreatedSubscriber implements EventSubscriberInterface
     /**
      * @var Environment
      */
-    private $engine;
+    private $environment;
 
     /**
      * CompetitionCreatedSubscriber constructor.
      * @param \Swift_Mailer $mailer
      * @param UrlGeneratorInterface $urlGenerator
      * @param TranslatorInterface $translator
-     * @param Environment $engine
+     * @param Environment $environment
      */
     public function __construct(
         \Swift_Mailer $mailer,
         UrlGeneratorInterface $urlGenerator,
         TranslatorInterface $translator,
-    Environment $engine
+        Environment $environment
     ) {
         $this->mailer = $mailer;
         $this->urlGenerator = $urlGenerator;
         $this->translator = $translator;
-        $this->engine=$engine;
+        $this->environment = $environment;
     }
 
     /**
@@ -74,18 +74,15 @@ class CompetitionCreatedSubscriber implements EventSubscriberInterface
         $accessLink = $this->urlGenerator->generate("organizerMain", array("hash" => $hash->getHash()),
             UrlGeneratorInterface::ABSOLUTE_URL);
         $subjectMessage = $this->translator->trans("mail.subject_message");
-        try {
+
             $message = (new \Swift_Message($subjectMessage))
                 ->setFrom('sportinekarpiuzukle@gmail.com')
                 ->setTo($email)
-                ->setBody($this->engine->render("email/email.html.twig", array(
+                ->setBody($this->environment->render("email/email.html.twig", array(
                     "accessLink" => $accessLink
                 )),
-                            'text/html');
+                    'text/html');
             $this->mailer->send($message);
-        } catch (\Twig_Error_Loader $e) {
-        } catch (\Twig_Error_Runtime $e) {
-        } catch (\Twig_Error_Syntax $e) {
-        }
+
     }
 }

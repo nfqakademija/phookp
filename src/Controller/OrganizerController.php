@@ -9,15 +9,17 @@
 namespace App\Controller;
 
 use App\Entity\Team;
+use App\Form\SectorFormType;
 use App\Form\TeamsFormType;
 use App\Services\HashService;
 use App\Services\TeamService;
+use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Translation\TranslatorInterface;
-use Symfony\Component\Routing\Annotation\Route;
+
 
 
 class OrganizerController extends AbstractController
@@ -25,7 +27,7 @@ class OrganizerController extends AbstractController
     /**
      * @Route("/organizer/{hash}", name="organizerMain")
      * @param Request $request
-     * @param $hash
+     * @param string $hash
      * @param HashService $hashService
      * @param TeamService $teamService
      * @param TranslatorInterface $translator
@@ -53,10 +55,8 @@ class OrganizerController extends AbstractController
             $form->handleRequest($request);
             if ($form->isSubmitted() && $form->isValid()) {
                 $additionNotifications = $teamService->addTeams($form->getData()['teams'], $competition);
-                $successMessage = $translator->trans("form.team_registration.success_message");
                 $notAddedNameMessage = $translator->trans("form.team_registration.notAddedName_message");
                 if ($additionNotifications["addedTeamsQuantity"] > 0) {
-                    $this->addFlash("success", $successMessage . $additionNotifications['addedTeamsQuantity']);
                     if ($additionNotifications["notAddedName"] === true) {
                         $this->addFlash("danger", $notAddedNameMessage);
                     }
@@ -64,14 +64,28 @@ class OrganizerController extends AbstractController
                     $this->addFlash("danger", $notAddedNameMessage);
                 }
             }
-            return $this->render("team/addCommand.html.twig", array(
+            $teamsArray = $competition->getTeams();
+            return $this->render("team/addTeam.html.twig", array(
                 "form" => $form->createView(),
                 "sectors" => $sectorsCount,
+                "teams" => $teamsArray,
             ));
         }
         return $this->redirectToRoute("home");
     }
 
+
+    /**
+     * @param $idTeam
+     * @param TeamService $teamService
+     * @Route("/organizer/{hash}/deleteTeam/{idTeam}")
+     */
+    public function deleteTeam($idTeam, TeamService $teamService)
+    {
+
+        $teamService->remove($idTeam);
+
+    }
 
 
 //    /**

@@ -19,7 +19,18 @@
                     <div class="card-body">
                         <h3 class="card-title">Komandų pridėjimas</h3>
                         <p class="card-text">
-                            {% if sectors!=0 %}
+                            <input type="hidden" id="_hash" value="{{ app.request.attributes.get('hash') }}"/>
+                        {% for team in teams %}
+                        <div class="row justify-content-center">
+                        <div class="col">
+                        <h1>{{ team.teamName }}</h1>
+                            </div>
+                            <div class="col">
+                        <button type="button" class="btn btn-danger deleteButton"  data-id="{{ team.idTeam }}">Ištrinti</button>
+                            </div>
+                        </div>
+                            {% endfor %}
+                        {% if sectors!=0 %}
                             {{ form_start(form) }}
                             {{ form_errors(form) }}
                             {% for team in form.teams %}
@@ -30,13 +41,12 @@
                             {% endfor %}
                             {{ form_end(form) }}
                             {% else %}
-                                <h4>Komandos pridėtos</h4>
+                              Visos komandos pridėtos
                             {% endif %}
                         </p>
                     </div>
                 </div>
-            </div>
+            </div>d
         </div>
-    </div>
     </div>
 {% endblock %}

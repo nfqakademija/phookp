@@ -105,5 +105,12 @@ class TeamService
         $completeSectors = $this->teamRepository->countRows($competitionId);
         return $sectors = $totalSectors - $completeSectors;
     }
+
+    public function remove(int $id){
+        $team=$this->teamRepository->findById($id);
+        $this->teamRepository->removeTeam($team);
+        $this->teamRepository->flush();
+    }
+
 }
 
