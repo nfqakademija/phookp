@@ -1,9 +1,7 @@
 
 // the ~ allows you to reference things in node_modules
 @import "~bootstrap/scss/bootstrap";
-body {
- margin-top: 20px;
-}
+
 .card-shadow{
   box-shadow: 10px 10px 5px grey;
 }
@@ -44,7 +42,7 @@ body {
   border-width: 0 0 1px 0;
 }
 .text-box--results{
-  max-width: 100px;
+  max-width: 90px;
   line-height: 0;
   margin: 10px;
 }
@@ -58,9 +56,14 @@ body {
 .lh-1{
   line-height: 1;
 }
+
+.btn-icon--round{
+  border-radius: 50%;
+  line-height: 0;
+  height: 32px;
+  width: 32px;
+}
 @media (min-width: 992px) {
-  body {
-    padding-top: 50px;
-  }
+
 
 }

@@ -1,4 +1,5 @@
 require('bootstrap');
+require('./resultsForm');
 // var $ = require('jquery');
 // var template = $('#sections .section:first').clone();
 //
@@ -23,4 +24,3 @@ require('bootstrap');
 //         .appendTo('#sections');
 //     return false;
 // });
-

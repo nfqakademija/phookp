@@ -35,7 +35,9 @@ class WeighingService
                 $w->removeResult($r);
                 continue;
             }
-
+            if(!$r->getWeighing()){
+                $r->setWeighing($w);
+            }
             $r->setTeam($team);
             $resultService->persist($r);
         }

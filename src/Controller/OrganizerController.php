@@ -106,7 +106,7 @@ class OrganizerController extends AbstractController implements IAuthorizedContr
         if(count($weighings) === 0 || count($weighings) < $weighingNr){
             $weighing = new Weighing();
 
-            for($i = 0; $i < 3; $i++){
+            for($i = 0; $i < 2; $i++){
                 $result = new Result();
                 $weighing->addResult($result);
             }
@@ -115,16 +115,13 @@ class OrganizerController extends AbstractController implements IAuthorizedContr
             $weighing = $weighings[$weighingNr-1];
             $results = $resultService->getTeamResults($teamId, $weighing->getId());
             $weighing->setResults($results);
-            for($i = 0; $i < 3; $i++){
-                $result = new Result();
-                $weighing->addResult($result);
-            }
+            $result = new Result();
+            $weighing->addResult($result);
         }
 
 
 
         $form = $this->createForm(WeighingType::class, $weighing);
-        $form->add('submit', SubmitType::class);
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {

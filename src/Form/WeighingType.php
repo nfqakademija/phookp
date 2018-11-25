@@ -13,7 +13,7 @@ class WeighingType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('results', CollectionType::class, array("entry_type" => ResultType::class))
+            ->add('results', CollectionType::class, array("entry_type" => ResultType::class, 'allow_add' => true))
         ;
     }
 
@@ -21,6 +21,7 @@ class WeighingType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Weighing::class,
+            'allow_extra_fields' => true
         ]);
     }
 }

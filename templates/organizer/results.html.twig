@@ -1,23 +1,28 @@
 {% extends 'base.html.twig' %}
 {% block title %}Create event {{ parent() }}{% endblock %}
 {% block body %}
+    {% set hash = app.request.attributes.get('hash') %}
+    {% set teamId = app.request.attributes.get('teamId') %}
+    {% set weighing = app.request.attributes.get('weighingNr') %}
     <div class="container">
         {#{{ dump(app.request.uri) }}#}
             <div class="card">
                 <div class="card-header text-center h5 bg-dark text-light px-0">
+                    {% if weighing > 1 %}
                     <a href="{{ path(app.request.attributes.get('_route'), {
-                        'hash': app.request.attributes.get('hash'),
-                        'teamId':app.request.attributes.get('teamId') ,
-                        'weighingNr': app.request.attributes.get('weighingNr')-1}) }}">
+                        'hash': hash,
+                        'teamId': teamId ,
+                        'weighingNr': weighing-1}) }}">
                         <button class="float-left btn btn-outline-primary mx-2 lh-1">
                             <span class="fas fa-arrow-left text-light"></span>
                         </button>
                     </a>
+                    {% endif %}
                         Sverimo nr. {{ app.request.attributes.get('weighingNr') }} rezultatai
                     <a href="{{ path(app.request.attributes.get('_route'), {
-                        'hash': app.request.attributes.get('hash'),
-                        'teamId':app.request.attributes.get('teamId') ,
-                        'weighingNr': app.request.attributes.get('weighingNr')+1}) }}">
+                        'hash': hash,
+                        'teamId':teamId ,
+                        'weighingNr': weighing+1}) }}">
                         <button class="float-right btn btn-outline-primary mx-2 lh-1">
                             <span class="fas fa-arrow-right text-light"></span>
                         </button>
@@ -50,9 +55,9 @@
                             {% for result in form.results %}
                                 <div class="m-0">{{ form_row(result.weigh, {'attr': {'placeholder': 'Žuvis (g.)', 'class': 'text-box text-box--results'}}) }} <div class="ml-1">{{ form_row(result.specialFish, {'attr': {'class': 'check-box'}}) }}</div> </div>
                             {% endfor %}
-<!--
-                            {{ form_row(form.submit, { 'label': 'Issaugoti'}) }}
--->
+                            <button type="button" class="btn btn-primary btn-icon--round text text-white p-2" id="addButton">
+                                <span class="fas fa-plus"></span>
+                            </button>
                         </div>
                     </div>
                     <div class="row mt-2 bg-light mx-0">
