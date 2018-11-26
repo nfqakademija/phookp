@@ -50,7 +50,6 @@ class HashService
         return $this->hashRepository->findByHash($hash);
     }
 
-
     /**
      * @return string
      */

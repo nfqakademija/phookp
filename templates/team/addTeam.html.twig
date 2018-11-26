@@ -26,7 +26,7 @@
                         <h1>{{ team.teamName }}</h1>
                             </div>
                             <div class="col">
-                        <button type="button" class="btn btn-danger deleteButton"  data-id="{{ team.idTeam }}">Ištrinti</button>
+                        <button type="button" class="btn btn-danger deleteButton"  data-id="{{ team.id }}">Ištrinti</button>
                             </div>
                         </div>
                             {% endfor %}
@@ -41,7 +41,7 @@
                             {% endfor %}
                             {{ form_end(form) }}
                             {% else %}
-                              Visos komandos pridėtos
+                            <br>
                             {% endif %}
                         </p>
                     </div>

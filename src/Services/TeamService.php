@@ -83,13 +83,24 @@ class TeamService
     }
 
     /**
+     * @param int $id
+     * @return Team|null
+     */
+    public function find(int $id): ?Team
+    {
+        return $this->teamRepository->findOneBy(['id' => $id]);
+    }
+
+    /**
      * @param Team $team
      * @return array|null
      */
     public function validate(Team $team): ?array
-    public function find(int $id): ?Team
     {
-        return $this->teamRepository->find($id);
+        $errors = $this->validator->validate($team);
+        if (count($errors) > 0) {
+            return $errors;
+        } else return null;
     }
 
     /**
@@ -101,10 +112,15 @@ class TeamService
         $competitionId=$competition->getIdCompetition();
         $totalSectors=$competition->getCompetitionSectorCount();
         $completeSectors = $this->teamRepository->countRows($competitionId);
+
         return $sectors = $totalSectors - $completeSectors;
     }
 
-    public function remove(int $id){
+    /**
+     * @param int $id
+     */
+    public function remove(int $id): void
+    {
         $team=$this->teamRepository->findById($id);
         $this->teamRepository->removeTeam($team);
         $this->teamRepository->flush();

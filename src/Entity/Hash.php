@@ -23,7 +23,7 @@ class Hash
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Competition", inversedBy="competitionHashes")
-     * @ORM\JoinColumn(nullable=false, referencedColumnName="id" )
+     * @ORM\JoinColumn(nullable=false, referencedColumnName="id_competition" )
      */
     private $competition;
 
@@ -52,7 +52,7 @@ class Hash
     public function setCompetition(?Competition $competition): self
     {
         $this->competition = $competition;
-
+        $competition->getCompetitionHashes()->add($this);
         return $this;
     }
 }

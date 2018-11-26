@@ -16,16 +16,14 @@
                                     <h5>Sektorius</h5>
                                 </div>
                             </div>
-                            {% for value in competition %}
-                                {{ form_start(form) }}
-                                {{ form_errors(form) }}
-                                <div class="row justify-content-center">
-                                    <div class="col-4">{{ value["commandName"] }}</div>
-                                    <div class="col-4">{{ form_row(form.sectorId[loop.index0]) }}</div>
-                                </div>
+                            {{ form_start(form) }}
+                            {{ form_errors(form) }}
+                            {% for team in form.teams %}
+                                {{ form_row(team.teamName) }}
+                                {{ form_row(team.firstTeamMember) }}
+                                {{ form_row(team.secondTeamMember) }}
+                                {{ form_row(team.thirdTeamMember) }}
                             {% endfor %}
-                            {{ form_widget(form.save) }}
-                            {{ form_end(form) }}
                         </div>
                     </div>
                 </div>
