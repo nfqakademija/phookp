@@ -23,8 +23,4 @@ class TeamsFormType extends AbstractType
 
     }
 
-    public function configureOptions(OptionsResolver $resolver)
-    {
-    }
-
 }

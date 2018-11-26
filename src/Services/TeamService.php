@@ -39,15 +39,36 @@ class TeamService
         $this->teamRepository = $teamRepository;
         $this->validator = $validator;
         $this->logger = $logger;
-        $this->logger->notice(" ");
     }
 
-    public function addTeams(array $teams, Competition $competition)
+    /**
+     * @param array $teams
+     * @param Competition $competition
+     * @return array
+     */
+    public function addTeams(array $teams, Competition $competition): array
     {
+        $addedTeamsQuantity = 0;
+        $notAddedName = false;
+
         foreach ($teams as $team) {
-            $team->setCompetition($competition);
-            $this->create($team);
+            $teamName = $team->getTeamName();
+            $firstTeamMember = $team->getFirstTeamMember();
+            $secondTeamMember = $team->getSecondTeamMember();
+            $thirdTeamMember = $team->getThirdTeamMember();
+            if ($teamName != null && ($firstTeamMember != null || $secondTeamMember != null || $thirdTeamMember != null))
+            {
+                $team->setCompetition($competition);
+                $this->create($team);
+                $addedTeamsQuantity++;
+            } elseif (
+                ($teamName === null && ($firstTeamMember != null || $secondTeamMember != null || $thirdTeamMember != null)) ||
+                ($teamName != null && ($firstTeamMember === null && $secondTeamMember === null && $thirdTeamMember != null)))
+            {
+                $notAddedName = true;
+            }
         }
+        return array('addedTeamsQuantity' => $addedTeamsQuantity, 'notAddedName' => $notAddedName);
     }
 
     /**
@@ -61,10 +82,34 @@ class TeamService
         return $team;
     }
 
+    /**
+     * @param Team $team
+     * @return array|null
+     */
+    public function validate(Team $team): ?array
     public function find(int $id): ?Team
     {
         return $this->teamRepository->find($id);
     }
+
+    /**
+     * @param Competition $competition
+     * @return int|null
+     */
+    public function countSectors(Competition $competition) :int
+    {
+        $competitionId=$competition->getIdCompetition();
+        $totalSectors=$competition->getCompetitionSectorCount();
+        $completeSectors = $this->teamRepository->countRows($competitionId);
+        return $sectors = $totalSectors - $completeSectors;
+    }
+
+    public function remove(int $id){
+        $team=$this->teamRepository->findById($id);
+        $this->teamRepository->removeTeam($team);
+        $this->teamRepository->flush();
+    }
+
 
 }
 

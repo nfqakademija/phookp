@@ -25,8 +25,10 @@ class HashService
         $this->hashRepository = $hashRepository;
     }
 
-
-
+    /**
+     * @param Competition $competition
+     * @return Hash|null
+     */
     public function create(Competition $competition): ?Hash
     {
         $hash = new Hash();
@@ -38,11 +40,20 @@ class HashService
 
         return $hash;
     }
-    public function findByHash($hash){
+
+    /**
+     * @param $hash
+     * @return Hash|null
+     */
+    public function findByHash($hash): ?Hash
+    {
         return $this->hashRepository->findByHash($hash);
     }
 
 
+    /**
+     * @return string
+     */
     private function generateHash(): string
     {
         $randString = "";
