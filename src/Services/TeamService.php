@@ -107,7 +107,7 @@ class TeamService
      * @param Competition $competition
      * @return int|null
      */
-    public function countSectors(Competition $competition) :int
+    public function countTeams(Competition $competition) :int
     {
         $competitionId=$competition->getIdCompetition();
         $totalSectors=$competition->getCompetitionSectorCount();

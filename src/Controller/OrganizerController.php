@@ -49,8 +49,8 @@ class OrganizerController extends AbstractController implements IAuthorizedContr
         if ($hash) {
             $data = ['teams' => []];
             $competition = $hash->getCompetition();
-            $sectorsCount = $teamService->countSectors($competition);
-            for ($i = 0; $i < $sectorsCount; $i++) {
+            $teamsCount = $teamService->countTeams($competition);
+            for ($i = 0; $i < $teamsCount; $i++) {
                 $team = new Team();
                 $data['teams'][] = $team;
             }
@@ -75,7 +75,7 @@ class OrganizerController extends AbstractController implements IAuthorizedContr
 
             return $this->render("team/addTeam.html.twig", [
                 "form" => $form->createView(),
-                "sectors" => $sectorsCount,
+                "teamsCount" => $teamsCount,
                 "teams" => $teamsArray,
             ]);
         }
@@ -108,7 +108,7 @@ class OrganizerController extends AbstractController implements IAuthorizedContr
         $competition = $hash->getCompetition();
         $data = ['teams' => $competition->getTeams()->toArray()];
         $form = $this->createForm(TeamsSectorsFormType::class, $data);
-        $form->add('save', SubmitType::class, array("label" => "form.team_registration.create_button"));
+        $form->add('save', SubmitType::class, array("label" => "form.team_registration_sectors.add_button"));
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
 

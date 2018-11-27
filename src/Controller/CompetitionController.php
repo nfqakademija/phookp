@@ -36,6 +36,7 @@ class CompetitionController extends AbstractController
             $dispatcher->dispatch(CompetitionCreatedEvent::NAME,$event);
             $message=$translator->trans("form.competition_registration.success_message");
             $this->addFlash('success', $message);
+            return $this->redirectToRoute("home");
         }
 
         return $this->render("competition/competitionForm.html.twig", array(
