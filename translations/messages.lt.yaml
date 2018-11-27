@@ -4,7 +4,7 @@ form.competition_registration.duration: Renginio trukmė
 form.competition_registration.organiser: Organizatorius
 form.competition_registration.mail: Elektroninis paštas
 form.competition_registration.type: Renginio tipas
-form.competition_registration.sectorCount: Sektorių skaičius
+form.competition_registration.teamCount: Maksimalus komandų kiekis
 form.competition_registration.weighingCount: Svėrimų skaičius
 form.competition_registration.facebook_link: Facebook renginio nuoroda
 form.competition_registration.rules: Renginio reglamentas
@@ -13,7 +13,7 @@ form.competition_registration.success_message: Renginys sėkmingai pridėtas! Nu
 form.team_registration.team_name: Komandos pavadinimas
 form.team_registration.team_member: Komandos narys
 form.team_registration.create_button: Pridėti komandas
-form.team_registration.success_message: Pridėtų komandų skaičius:
+form.team_registration_sectors.add_button: Pridėti sektorius
 form.team_registration.error_message: Nepridėjote komandos. Privalote įvesti komandos pavadinimą bei vieną komandos narį
 form.team_registration.notAddedName_message: Norint pridėti komandą privalote įvesti komandos pavadinimą bei vieną komandos narį
 mail.subject_message: Renginio nuoroda

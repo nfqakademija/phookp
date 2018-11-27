@@ -28,6 +28,9 @@ class Team
     private $teamName;
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * * @Assert\Type(type = "int",
+     *              message = "Privalote įvesti skaičių"
+     * )
      */
     private $sectorNr;
     /**

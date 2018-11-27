@@ -107,13 +107,13 @@ class TeamService
      * @param Competition $competition
      * @return int|null
      */
-    public function countSectors(Competition $competition) :int
+    public function countTeams(Competition $competition) :int
     {
         $competitionId=$competition->getIdCompetition();
-        $totalSectors=$competition->getCompetitionSectorCount();
-        $completeSectors = $this->teamRepository->countRows($competitionId);
+        $totalTeams=$competition->getCompetitionTeamsCount();
+        $completeTeams = $this->teamRepository->countRows($competitionId);
 
-        return $sectors = $totalSectors - $completeSectors;
+        return $sectors = $totalTeams - $completeTeams;
     }
 
     /**
@@ -125,7 +125,14 @@ class TeamService
         $this->teamRepository->removeTeam($team);
         $this->teamRepository->flush();
     }
-
-
+    public function addTeamsSectors(array $teams){
+        foreach ($teams as $team){
+            $sectorNr=$team->getSectorNr();
+            $team->setSectorNr($sectorNr);
+            $this->create($team);
+        }
+    }
 }
+
+
 

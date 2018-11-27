@@ -27,7 +27,7 @@ class CompetitionFormType extends AbstractType
                     "choices" => array(
                         "Top 5" => Competition::TYPE_TOP5,
                         "Bendras svoris" => Competition::TYPE_TOTAL)))
-            ->add('competitionSectorCount', NumberType::class, array("label" => "form.competition_registration.sectorCount"))
+            ->add('competitionTeamsCount', NumberType::class, array("label" => "form.competition_registration.teamCount"))
             ->add('competitionWeighingsCount', NumberType::class, array("label" => "form.competition_registration.weighingCount"))
             ->add('competitionLink', TextType::class, array("required"=> false,"label" => "form.competition_registration.facebook_link"))
             ->add('competitionRules', TextareaType::class, array("required"=> false,"label" => "form.competition_registration.rules"))

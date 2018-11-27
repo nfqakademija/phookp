@@ -110,11 +110,11 @@ class Competition
      * @Assert\Length(
      *     min="1",
      *     max="99",
-     *     minMessage="Varžybų sektorių skaičius negali būti mažesnis nei 1!",
-     *     maxMessage="Varžybų sektorių skaičius negali viršyti 99!"
+     *     minMessage="Varžybų komandų skaičius negali būti mažesnis nei 1!",
+     *     maxMessage="Varžybų komandų skaičius negali viršyti 99!"
      * )
      */
-    private $competitionSectorCount = 1;
+    private $competitionTeamsCount = 1;
 
     /**
      * @ORM\Column(type="integer")
@@ -178,7 +178,7 @@ class Competition
         return $this->idCompetition;
     }
 
-    public function setidCompetition(int $idCompetition): self
+    public function setIdCompetition(int $idCompetition): self
     {
         $this->idCompetition = $idCompetition;
 
@@ -301,18 +301,18 @@ class Competition
     /**
      * @return mixed
      */
-    public function getCompetitionSectorCount(): int
+    public function getCompetitionTeamsCount(): int
     {
-        return $this->competitionSectorCount;
+        return $this->competitionTeamsCount;
     }
 
     /**
-     * @param int $competitionSectorCount
+     * @param int $competitionTeamsCount
      * @return Competition
      */
-    public function setCompetitionSectorCount(int $competitionSectorCount): self
+    public function setCompetitionTeamsCount(int $competitionTeamsCount): self
     {
-        $this->competitionSectorCount = $competitionSectorCount;
+        $this->competitionTeamsCount = $competitionTeamsCount;
         return $this;
     }
 

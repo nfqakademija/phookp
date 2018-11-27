@@ -36,6 +36,7 @@ class TeamRepository extends ServiceEntityRepository
         $this->entityManager->flush();
     }
 
+
     /**
      * @param int $competitionId
      * @return int|null
@@ -57,7 +58,7 @@ class TeamRepository extends ServiceEntityRepository
     /**
      * @param Team $team
      */
-    public function removeTeam(Team $team)
+    public function removeTeam(Team $team) :void
     {
         $this->entityManager->remove($team);
     }
