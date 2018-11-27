@@ -107,7 +107,7 @@ class OrganizerController extends AbstractController implements IAuthorizedContr
         if (count($weighings) === 0 || count($weighings) < $weighingNr) {
             $weighing = new Weighing();
 
-            for ($i = 0; $i < 2; $i++) {
+            for ($i = 0; $i < 5; $i++) {
                 $result = new Result();
                 $weighing->addResult($result);
             }
