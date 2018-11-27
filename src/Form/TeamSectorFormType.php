@@ -19,7 +19,6 @@ class TeamSectorFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('teamName', TextType::class, array('required'=> false,"label" => " "))
             ->add('sectorNr', TextType::class, array('required'=> false,"label" => " ")
             );
     }

@@ -106,16 +106,19 @@ class OrganizerController extends AbstractController implements IAuthorizedContr
     {
         $hash = $hashService->findByHash($hash);
         $competition = $hash->getCompetition();
+        $teams=$competition->getTeams();
         $data = ['teams' => $competition->getTeams()->toArray()];
         $form = $this->createForm(TeamsSectorsFormType::class, $data);
         $form->add('save', SubmitType::class, array("label" => "form.team_registration_sectors.add_button"));
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $teamService->addTeamsSectors($form->getData()['teams']);
+            $this->addFlash("success", "sektoriai sekmingai prideti");
+
         }
         return $this->render("team/sectors.html.twig", [
             "form" => $form->createView(),
-            "teams"=>$data,
+            "teams"=>$teams,
         ]);
 
     }

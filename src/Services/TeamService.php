@@ -110,10 +110,10 @@ class TeamService
     public function countTeams(Competition $competition) :int
     {
         $competitionId=$competition->getIdCompetition();
-        $totalSectors=$competition->getCompetitionSectorCount();
-        $completeSectors = $this->teamRepository->countRows($competitionId);
+        $totalTeams=$competition->getCompetitionTeamsCount();
+        $completeTeams = $this->teamRepository->countRows($competitionId);
 
-        return $sectors = $totalSectors - $completeSectors;
+        return $sectors = $totalTeams - $completeTeams;
     }
 
     /**
