@@ -125,6 +125,14 @@ class TeamService
         $this->teamRepository->removeTeam($team);
         $this->teamRepository->flush();
     }
-
+    public function addTeamsSectors(array $teams){
+        foreach ($teams as $team){
+            $sectorNr=$team->getSectorNr();
+            $team->setSectorNr($sectorNr);
+            $this->create($team);
+        }
+    }
 }
+
+
 

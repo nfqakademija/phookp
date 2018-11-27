@@ -111,10 +111,11 @@ class OrganizerController extends AbstractController implements IAuthorizedContr
         $form->add('save', SubmitType::class, array("label" => "form.team_registration_sectors.add_button"));
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-
+            $teamService->addTeamsSectors($form->getData()['teams']);
         }
         return $this->render("team/sectors.html.twig", [
             "form" => $form->createView(),
+            "teams"=>$data,
         ]);
 
     }

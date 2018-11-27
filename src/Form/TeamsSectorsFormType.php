@@ -11,6 +11,8 @@ namespace App\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
+
 
 class TeamsSectorsFormType extends AbstractType
 {
@@ -20,5 +22,4 @@ class TeamsSectorsFormType extends AbstractType
             ->add("teams", CollectionType::class, array("entry_type" => TeamSectorFormType::class));
 
     }
-
 }
