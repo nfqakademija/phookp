@@ -126,6 +126,5 @@ class TeamService
         $this->teamRepository->flush();
     }
 
-
 }
 

@@ -12,6 +12,7 @@ use App\Entity\Result;
 use App\Entity\Team;
 use App\Entity\Weighing;
 use App\Form\TeamsFormType;
+use App\Form\TeamsSectorsFormType;
 use App\Form\WeighingType;
 use App\Services\HashService;
 use App\Services\ResultService;
@@ -22,7 +23,6 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Routing\Generator\UrlGenerator;
 use Symfony\Component\Translation\TranslatorInterface;
 
 
@@ -95,6 +95,31 @@ class OrganizerController extends AbstractController implements IAuthorizedContr
     }
 
     /**
+     * @Route("/organizer/{hash}/teamsSectors", name="organizerMain.teamsSectors")
+     * @param Request $request
+     * @param string $hash
+     * @param HashService $hashService
+     * @param TeamService $teamService
+     * @return Response
+     */
+    public function addSectors(Request $request, string $hash, HashService $hashService, TeamService $teamService)
+    {
+        $hash = $hashService->findByHash($hash);
+        $competition = $hash->getCompetition();
+        $data = ['teams' => $competition->getTeams()->toArray()];
+        $form = $this->createForm(TeamsSectorsFormType::class, $data);
+        $form->add('save', SubmitType::class, array("label" => "form.team_registration.create_button"));
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+
+        }
+        return $this->render("team/sectors.html.twig", [
+            "form" => $form->createView(),
+        ]);
+
+    }
+
+    /**
      * @param string $hash
      * @param int $teamId
      * @param int $weighingNr
@@ -140,7 +165,7 @@ class OrganizerController extends AbstractController implements IAuthorizedContr
             $this->redirectToRoute("organizerMain", array("hash" => $hash));
         }
         $em = $this->get('doctrine.orm.default_entity_manager');
-        $team =$em->findOneById($teamId);
+        $team = $em->findOneById($teamId);
 
         if (count($weighings) === 0 || count($weighings) < $weighingNr) {
             $weighing = new Weighing();

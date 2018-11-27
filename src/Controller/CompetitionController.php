@@ -29,6 +29,7 @@ class CompetitionController extends AbstractController
         $form = $this->createForm(CompetitionFormType::class, $competition);
         $form->add('save', SubmitType::class, array("label" => "form.competition_registration.create_button"));
         $form->handleRequest($request);
+
         if($form->isSubmitted() && $form->isValid()){
             $competition = $competitionService->create($form->getData());
             $event = new CompetitionCreatedEvent($competition);
@@ -36,6 +37,7 @@ class CompetitionController extends AbstractController
             $message=$translator->trans("form.competition_registration.success_message");
             $this->addFlash('success', $message);
         }
+
         return $this->render("competition/competitionForm.html.twig", array(
             "form" => $form->createView(),
         ));

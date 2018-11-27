@@ -1,5 +1,6 @@
 {% extends 'base.html.twig' %}
 {% block title %}Results{{ parent() }}{% endblock %}
+{% form_theme form 'bootstrap_4_layout.html.twig' %}
 {% block body %}
     <div class="container container-index">
         <div class="row justify-content-center">
@@ -16,14 +17,17 @@
                                     <h5>Sektorius</h5>
                                 </div>
                             </div>
-                            {{ form_start(form) }}
-                            {{ form_errors(form) }}
                             {% for team in form.teams %}
+                                <div class="row">
+                                    <div class="col-6">
                                 {{ form_row(team.teamName) }}
-                                {{ form_row(team.firstTeamMember) }}
-                                {{ form_row(team.secondTeamMember) }}
-                                {{ form_row(team.thirdTeamMember) }}
+                                    </div>
+                                    <div class="col-6">
+                                {{ form_row(team.sectorNr) }}
+                                    </div>
+                                </div>
                             {% endfor %}
+                            {{ form_end(form) }}
                         </div>
                     </div>
                 </div>
