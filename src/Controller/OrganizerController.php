@@ -28,13 +28,6 @@ use Symfony\Component\Translation\TranslatorInterface;
 
 class OrganizerController extends AbstractController implements IAuthorizedController
 {
-
-    private $teamService;
-
-    public function __construct(TeamService $service)
-    {
-        $this->teamService = $service;
-    }
     /**
      * @Route("/organizer/{hash}", name="organizerMain")
      * @param Request $request
@@ -107,10 +100,16 @@ class OrganizerController extends AbstractController implements IAuthorizedContr
      * @param string $hash
      * @param HashService $hashService
      * @param TeamService $teamService
+     * @param TranslatorInterface $translator
      * @return Response
      */
-    public function addSectors(Request $request, string $hash, HashService $hashService, TeamService $teamService)
-    {
+    public function addSectors(
+        Request $request,
+        string $hash,
+        HashService $hashService,
+        TeamService $teamService,
+        TranslatorInterface $translator
+    ) {
         $hash = $hashService->findByHash($hash);
         $competition = $hash->getCompetition();
         $teams=$competition->getTeams();
@@ -118,31 +117,51 @@ class OrganizerController extends AbstractController implements IAuthorizedContr
         $form = $this->createForm(TeamsSectorsFormType::class, $data);
         $form->add('save', SubmitType::class, array("label" => "form.team_registration_sectors.add_button"));
         $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
-            $teamService->addTeamsSectors($form->getData()['teams']);
-            $this->addFlash("success", "sektoriai sekmingai prideti");
 
+        if ($form->isSubmitted() && $form->isValid()) {
+            $isAdded=$teamService->addTeamsSectors($form->getData()['teams']);
+
+            if ($isAdded===true) {
+                $message = $translator->trans("form.team_registration_sectors.success_message");
+                $this->addFlash("success", $message);
+            }
         }
         return $this->render("team/sectors.html.twig", [
             "form" => $form->createView(),
-            "teams"=>$teams,
+            "teams" => $teams,
         ]);
 
     }
 
     /**
      * @Route("/organizer/{hash}/results/{teamId}/{weighingNr}", name="organizerResults")
+     * @param string $hash
+     * @param int $teamId
+     * @param int $weighingNr
+     * @param Request $request
+     * @param HashService $hashService
+     * @param ResultService $resultService
+     * @param WeighingService $weighingService
+     * @param TeamService $teamService
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
      */
-    public function results(string $hash, int $teamId, int $weighingNr = 1, Request $request,
-                            HashService $hashService, ResultService $resultService, WeighingService $weighingService,
-                            TeamService $teamService)
-    {
+    public function results(
+        string $hash,
+        int $teamId,
+        int $weighingNr = 1,
+        Request $request,
+        HashService $hashService,
+        ResultService $resultService,
+        WeighingService $weighingService,
+        TeamService $teamService
+    ) {
         $competition = $hashService->findByHash($hash)->getCompetition();
         $weighings = $competition->getWeighings();
         $teams = $competition->getTeams();
 
-        if($teamId === null)
+        if ($teamId === null) {
             $teamId = $teams[0]->getId();
+        }
 
         // Validation
 
@@ -153,20 +172,20 @@ class OrganizerController extends AbstractController implements IAuthorizedContr
 
         if (count($weighings) + 1 < $weighingNr) {
             $this->addFlash("error", "Klaida: negalite praleisti sverimu!");
-            return $this->redirectToRoute("organizerResults", array("hash" => $hash, "teamId" => $teams[0]->getId(), "weighingNr" => count($weighings) + 1));
+            return $this->redirectToRoute("organizerResults",
+                array("hash" => $hash, "teamId" => $teams[0]->getId(), "weighingNr" => count($weighings) + 1));
         }
 
-        if(!$teams->exists(function($key, $element) use ($teamId){
+        if (!$teams->exists(function ($key, $element) use ($teamId) {
             return $teamId === $element->getId();
-        }))
-        {
+        })) {
             $this->addFlash("error", "Klaida: nurodyta komanda nedalyvauja varzybose!");
             $this->redirectToRoute("organizerMain", array("hash" => $hash));
         }
 
         $team = $teamService->find($teamId);
 
-        if(count($weighings) === 0 || count($weighings) < $weighingNr){
+        if (count($weighings) === 0 || count($weighings) < $weighingNr) {
             $weighing = new Weighing();
 
             for ($i = 0; $i < 5; $i++) {
@@ -177,11 +196,10 @@ class OrganizerController extends AbstractController implements IAuthorizedContr
             $weighing = $weighings[$weighingNr - 1];
             $results = $resultService->getTeamResults($teamId, $weighing->getId());
             $weighing->setResults($results);
-            do{
+            do {
                 $result = new Result();
                 $weighing->addResult($result);
-            }
-            while(count($weighing->getResults()) < 5);
+            } while (count($weighing->getResults()) < 5);
 
         }
 

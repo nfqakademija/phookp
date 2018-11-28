@@ -11,3 +11,4 @@ console.log(deleteButtons);
 Array.from(deleteButtons).forEach(function(element) {
     element.addEventListener('click', sendApiCall);
 });
+

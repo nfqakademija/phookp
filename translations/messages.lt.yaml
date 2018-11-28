@@ -14,6 +14,7 @@ form.team_registration.team_name: Komandos pavadinimas
 form.team_registration.team_member: Komandos narys
 form.team_registration.create_button: Pridėti komandas
 form.team_registration_sectors.add_button: Pridėti sektorius
+form.team_registration_sectors.success_message: Sektoriai sėkmingai pridėti
 form.team_registration.error_message: Nepridėjote komandos. Privalote įvesti komandos pavadinimą bei vieną komandos narį
 form.team_registration.notAddedName_message: Norint pridėti komandą privalote įvesti komandos pavadinimą bei vieną komandos narį
 mail.subject_message: Renginio nuoroda

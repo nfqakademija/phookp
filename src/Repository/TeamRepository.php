@@ -36,7 +36,6 @@ class TeamRepository extends ServiceEntityRepository
         $this->entityManager->flush();
     }
 
-
     /**
      * @param int $competitionId
      * @return int|null
