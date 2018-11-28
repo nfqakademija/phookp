@@ -13,7 +13,7 @@ use App\Entity\Team;
 use App\Entity\Weighing;
 use App\Form\TeamsFormType;
 use App\Form\TeamsSectorsFormType;
-use App\Form\WeighingType;
+use App\Form\WeighingFormType;
 use App\Services\HashService;
 use App\Services\ResultService;
 use App\Services\TeamService;
@@ -58,14 +58,14 @@ class OrganizerController extends AbstractController implements IAuthorizedContr
 
             if ($form->isSubmitted() && $form->isValid()) {
                 $additionNotifications = $teamService->addTeams($form->getData()['teams'], $competition);
-                $notAddedNameMessage = $translator->trans("form.team_registration.notAddedName_message");
+                $errorMessage = $translator->trans("form.team_registration.not_added_name_message");
 
                 if ($additionNotifications["addedTeamsQuantity"] > 0) {
-                    if ($additionNotifications["notAddedName"] === true) {
-                        $this->addFlash("danger", $notAddedNameMessage);
+                    if ($additionNotifications["isAddedName"] === false) {
+                        $this->addFlash("danger", $errorMessage);
                     }
                 } else {
-                    $this->addFlash("danger", $notAddedNameMessage);
+                    $this->addFlash("danger", $errorMessage);
                 }
                 return $this->redirectToRoute("organizerMain", ['hash' => $hash->getHash()]);
             }
@@ -108,18 +108,17 @@ class OrganizerController extends AbstractController implements IAuthorizedContr
     ) {
         $hash = $hashService->findByHash($hash);
         $competition = $hash->getCompetition();
-        $teams=$competition->getTeams();
+        $teams = $competition->getTeams();
         $data = ['teams' => $competition->getTeams()->toArray()];
         $form = $this->createForm(TeamsSectorsFormType::class, $data);
-        $form->add('save', SubmitType::class, array("label" => "form.team_registration_sectors.add_button"));
+        $form->add('save', SubmitType::class, array("label" => "form.team_sectors_assignment.add_button"));
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $isAdded=$teamService->addTeamsSectors($form->getData()['teams']);
+            $isAdded = $teamService->addTeamsSectors($form->getData()['teams']);
 
-            if ($isAdded===true) {
-                $message = $translator->trans("form.team_registration_sectors.success_message");
-                $this->addFlash("success", $message);
+            if ($isAdded === true) {
+                $this->addFlash("success", $translator->trans("form.team_sectors_assignment.success_message"));
             }
         }
         return $this->render("team/sectors.html.twig", [
@@ -138,6 +137,7 @@ class OrganizerController extends AbstractController implements IAuthorizedContr
      * @param ResultService $resultService
      * @param WeighingService $weighingService
      * @param TeamService $teamService
+     * @param TranslatorInterface $translator
      * @return Response
      */
     public function results(
@@ -148,7 +148,8 @@ class OrganizerController extends AbstractController implements IAuthorizedContr
         HashService $hashService,
         ResultService $resultService,
         WeighingService $weighingService,
-        TeamService $teamService
+        TeamService $teamService,
+        TranslatorInterface $translator
     ) {
         $competition = $hashService->findByHash($hash)->getCompetition();
         $weighings = $competition->getWeighings();
@@ -158,15 +159,14 @@ class OrganizerController extends AbstractController implements IAuthorizedContr
             $teamId = $teams[0]->getId();
         }
 
-        // Validation
 
         if (count($teams) < 1) {
-            $this->addFlash("error", "Klaida: negalima prideti rezultatu nepridejus dalyviu komandu!");
+            $this->addFlash("error", $translator->trans("form.results_entry.error_not_added_teams_message"));
             $this->redirectToRoute("organizerMain", array("hash" => $hash));
         }
 
         if (count($weighings) + 1 < $weighingNr) {
-            $this->addFlash("error", "Klaida: negalite praleisti sverimu!");
+            $this->addFlash("error", $translator->trans("form.results_entry.error_skip_weighing_message"));
             return $this->redirectToRoute("organizerResults",
                 array("hash" => $hash, "teamId" => $teams[0]->getId(), "weighingNr" => count($weighings) + 1));
         }
@@ -174,7 +174,7 @@ class OrganizerController extends AbstractController implements IAuthorizedContr
         if (!$teams->exists(function ($key, $element) use ($teamId) {
             return $teamId === $element->getId();
         })) {
-            $this->addFlash("error", "Klaida: nurodyta komanda nedalyvauja varzybose!");
+            $this->addFlash("error", $translator->trans("form.results_entry.error_not_found_team_message"));
             $this->redirectToRoute("organizerMain", array("hash" => $hash));
         }
 
@@ -199,13 +199,13 @@ class OrganizerController extends AbstractController implements IAuthorizedContr
         }
 
 
-        $form = $this->createForm(WeighingType::class, $weighing);
+        $form = $this->createForm(WeighingFormType::class, $weighing);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $data = $form->getData();
             $data->setCompetition($competition);
             $weighingService->create($data, $team);
-            $this->addFlash('success', "Rezultatai issaugoti...");
+            $this->addFlash('success', $translator->trans("form.results_entry.success_message"));
         }
 
         return $this->render("organizer/results.html.twig", array(
@@ -215,6 +215,5 @@ class OrganizerController extends AbstractController implements IAuthorizedContr
             "weighings" => $weighings
         ));
     }
-
 
 }

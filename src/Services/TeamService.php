@@ -49,7 +49,7 @@ class TeamService
     public function addTeams(array $teams, Competition $competition): array
     {
         $addedTeamsQuantity = 0;
-        $notAddedName = false;
+        $isAddedName = true;
 
         foreach ($teams as $team) {
             $teamName = $team->getTeamName();
@@ -63,10 +63,10 @@ class TeamService
             } elseif (
                 ($teamName === null && ($firstTeamMember != null || $secondTeamMember != null || $thirdTeamMember != null)) ||
                 ($teamName != null && ($firstTeamMember === null && $secondTeamMember === null && $thirdTeamMember != null))) {
-                $notAddedName = true;
+                $isAddedName =false;
             }
         }
-        return array('addedTeamsQuantity' => $addedTeamsQuantity, 'notAddedName' => $notAddedName);
+        return array('addedTeamsQuantity' => $addedTeamsQuantity, 'isAddedName' => $isAddedName);
     }
 
     /**
