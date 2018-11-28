@@ -9,6 +9,7 @@
 namespace App\Services;
 
 use App\Entity\Competition;
+use App\Entity\Hash;
 use App\Repository\CompetitionRepository;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
@@ -16,6 +17,15 @@ use JMS\Serializer\SerializerBuilder;
 
 final class CompetitionService
 {
+    /**
+     * Array for competition status: event name -> state value in database
+     */
+    private const STATUS = array(
+        'CREATED' => 'unconfirmed',
+        'CONFIRMED' => 'confirmed',
+        'STARTED' => 'started',
+        'FINISHED' => 'finished'
+    );
     /**
      * @var CompetitionRepository
      */
@@ -69,27 +79,6 @@ final class CompetitionService
         $competition = $this->competitionRepository->find($competition);
         return $competition;
     }
-
-    /**
-     * @param Competition $competition
-     * @return array|null
-     */
-    public function validate(Competition $competition):?array
-    {
-        $errors  = $this->validator->validate($competition);
-
-        if(count($errors) > 0){
-
-            dump($errors);
-            return $errors;
-        }
-
-        else return null;
-    }
-
-    /**
-     * @return array|null
-     */
 
     public function getFutureCompetitions():?array
     {

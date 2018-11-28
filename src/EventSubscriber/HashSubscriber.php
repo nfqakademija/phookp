@@ -6,7 +6,6 @@ use App\Controller\HomeController;
 use App\Controller\IAuthorizedController;
 use App\Services\HashService;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 
