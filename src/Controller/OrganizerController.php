@@ -82,6 +82,8 @@ class OrganizerController extends AbstractController implements IAuthorizedContr
         $weighings = $competition->getWeighings();
         $teams = $competition->getTeams();
 
+        if($teamId === null)
+            $teamId = $teams[0]->getId();
 
         // Validation
 
@@ -92,7 +94,7 @@ class OrganizerController extends AbstractController implements IAuthorizedContr
 
         if (count($weighings) + 1 < $weighingNr) {
             $this->addFlash("error", "Klaida: negalite praleisti sverimu!");
-            $this->redirectToRoute("organizerResults", array("hash" => $hash, "teamId" => $teams[0]->getId()));
+            return $this->redirectToRoute("organizerResults", array("hash" => $hash, "teamId" => $teams[0]->getId(), "weighingNr" => count($weighings) + 1));
         }
 
         if (!$teams->exists(function ($key, $element) use ($teamId) {
@@ -115,18 +117,21 @@ class OrganizerController extends AbstractController implements IAuthorizedContr
             $weighing = $weighings[$weighingNr - 1];
             $results = $resultService->getTeamResults($teamId, $weighing->getId());
             $weighing->setResults($results);
-            $result = new Result();
-            $weighing->addResult($result);
+            do{
+                $result = new Result();
+                $weighing->addResult($result);
+            }
+            while(count($weighing->getResults()) < 5);
+
         }
 
 
         $form = $this->createForm(WeighingType::class, $weighing);
-
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $data = $form->getData();
             $data->setCompetition($competition);
-            $weighingService->create($data, $team, $resultService);
+            $weighingService->create($data, $team);
             $this->addFlash('success', "Rezultatai issaugoti...");
         }
 

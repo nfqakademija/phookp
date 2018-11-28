@@ -34,26 +34,19 @@ class ExceptionListener
         $exception = $event->getException();
 
 
-        if ($exception instanceof HttpExceptionInterface) {
-            if ($exception instanceof AccessDeniedHttpException) {
-                $session = new Session();
-                $session->start();
-                $session->getFlashBag()->add('error', "Varzybos neegzistuoja, arba prieigos nuoroda buvo panaikinta administratoriaus.");
+        if ($exception instanceof AccessDeniedHttpException) {
+            $session = new Session();
+            $session->start();
+            $session->getFlashBag()->add('error', "Varzybos neegzistuoja, arba prieigos nuoroda buvo panaikinta administratoriaus.");
 
-                $response = new RedirectResponse($this->router->generate('home'));
+            $response = new RedirectResponse($this->router->generate('home'));
 
-            } else {
-                $response = new Response();
-                $response->setStatusCode($exception->getStatusCode());
-                $response->headers->replace($exception->getHeaders());
-            }
-
-        } else {
-            $response = new Response();
-            $response->setStatusCode(Response::HTTP_INTERNAL_SERVER_ERROR);
+        }
+        else
+        {
+            return;
         }
 
-        // sends the modified response object to the event
         $event->setResponse($response);
     }
 }

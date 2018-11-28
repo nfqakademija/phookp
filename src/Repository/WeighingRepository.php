@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\Weighing;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\NonUniqueResultException;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
@@ -32,6 +33,16 @@ class WeighingRepository extends ServiceEntityRepository
     public function flush():void
     {
         $this->entityManager->flush();
+    }
+
+    public function countWeighingsByCompetition(int $competitionID): int
+    {
+        return $result = $this->createQueryBuilder('w')
+            ->where('w.competition = :competitionid')
+            ->setParameter('competitionid', $competitionID)
+            ->select('COUNT(w.weighingNr) as weighingsCount')
+            ->getQuery()
+            ->getSingleScalarResult();
     }
     // /**
     //  * @return Weighing[] Returns an array of Weighing objects

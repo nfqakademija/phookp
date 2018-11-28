@@ -19,6 +19,7 @@
                     </a>
                     {% endif %}
                         Sverimo nr. {{ app.request.attributes.get('weighingNr') }} rezultatai
+                    {% if weighing < competition.competitionWeighingsCount %}
                     <a href="{{ path(app.request.attributes.get('_route'), {
                         'hash': hash,
                         'teamId':teamId ,
@@ -27,6 +28,7 @@
                             <span class="fas fa-arrow-right text-light"></span>
                         </button>
                     </a>
+                    {% endif %}
                 </div>
                 <div class="card-body px-0">
                     {{ form_start(form) }}
