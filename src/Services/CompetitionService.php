@@ -8,11 +8,8 @@
 
 namespace App\Services;
 
-
 use App\Entity\Competition;
-use App\Entity\Hash;
 use App\Repository\CompetitionRepository;
-use Doctrine\ORM\EntityManagerInterface;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 use JMS\Serializer\SerializerBuilder;
@@ -20,68 +17,89 @@ use JMS\Serializer\SerializerBuilder;
 final class CompetitionService
 {
     /**
-     * @var CompetitionRepository - Competition entity repozitorija, injektinama automatiskai per konstruktoriaus parametrus
+     * @var CompetitionRepository
      */
     private $competitionRepository;
+    /**
+     * @var LoggerInterface
+     */
+    private $logger;
+    /**
+     * @var ValidatorInterface
+     */
+    private $validator;
+    /**
+     * @var HashService
+     */
 
-    private $entityManager;
-
+    private $hashService;
     /**
      * CompetitionService constructor.
      * @param CompetitionRepository $competitionRepository
      * @param ValidatorInterface $validator
      * @param LoggerInterface $logger
      */
-    public function __construct(CompetitionRepository $competitionRepository)
+    public function __construct(CompetitionRepository $competitionRepository, ValidatorInterface $validator, LoggerInterface $logger,HashService $hashService)
     {
+
         $this->competitionRepository = $competitionRepository;
+        $this->validator = $validator;
+        $this->hashService=$hashService;
+        $this->logger = $logger;
     }
 
-
+    /**
+     * @param Competition $competition
+     * @return Competition|null
+     */
     public function create(Competition $competition):?Competition
     {
-        /**
-         * @TODO
-         * Padaryti success checka, jei tarkim failina prisijungt prie db, grazina null
-         */
         $this->competitionRepository->save($competition);
+        $this->hashService->create($competition);
         $this->competitionRepository->flush();
         return $competition;
     }
 
     /**
-     * @param int $id
+     * @param Competition $competition
      * @return Competition
-     * Pagal paduota id suranba ir grazina Competition objekta. Jeigu neranda iraso pagal id - grazina null.
      */
-
-    public function get(int $id): Competition
+    public function get(Competition $competition): Competition
     {
-        /**
-         * @TODO
-         * Pakeist return tipa i ?Competition, ir jeigu randa competitiona pagal id grazina ji, jeigu neranda, grazina null
-         */
-        $this->logger->notice("Get from service called");
-        $competition = $this->competitionRepository->find($id);
+        $competition = $this->competitionRepository->find($competition);
         return $competition;
     }
 
+    /**
+     * @param Competition $competition
+     * @return array|null
+     */
+    public function validate(Competition $competition):?array
+    {
+        $errors  = $this->validator->validate($competition);
+
+        if(count($errors) > 0){
+
+            dump($errors);
+            return $errors;
+        }
+
+        else return null;
+    }
+
+    /**
+     * @return array|null
+     */
+
     public function getFutureCompetitions():?array
     {
-        /*
-         * TODO imti tik busimus competitionus
-         * */
-
         $competitions = $this->competitionRepository->findAll();
         $array  = array();
         foreach($competitions as $competition){
             $serializer = SerializerBuilder::create()->build();
             $a = $serializer->toArray($competition);
             array_push($array, $a);
-
         }
         return $array;
     }
-
-
 }

@@ -1,20 +1,17 @@
 <?php
 
 namespace App\Entity;
-use Doctrine\Common\Collections\Collection;
-use Symfony\Component\Validator\Constraints as Assert;
-use Doctrine\ORM\Mapping as ORM;
+
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
 /**
  * @ORM\Entity(repositoryClass="App\Repository\TeamRepository")
  */
 class Team
 {
-
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Results", inversedBy="teams")
-     */
-
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -31,11 +28,14 @@ class Team
     private $teamName;
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * * @Assert\Type(type = "int",
+     *              message = "Privalote įvesti skaičių"
+     * )
      */
     private $sectorNr;
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Competition", inversedBy="teams")
-     * @ORM\JoinColumn(nullable=false, referencedColumnName="id" )
+     * @ORM\JoinColumn(nullable=false, referencedColumnName="id_competition" )
      */
     private $competition;
     /**
@@ -90,6 +90,7 @@ class Team
     public function setCompetition(?Competition $competition): self
     {
         $this->competition = $competition;
+        $competition->getTeams()->add($this);
         return $this;
     }
     public function getFirstTeamMember(): ?string
@@ -147,7 +148,6 @@ class Team
                 $result->setTeam(null);
             }
         }
-
         return $this;
     }
 }
