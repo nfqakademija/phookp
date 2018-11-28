@@ -8,11 +8,8 @@
 
 namespace App\Services;
 
-
 use App\Entity\Competition;
-use App\Entity\Hash;
 use App\Repository\CompetitionRepository;
-use Doctrine\ORM\EntityManagerInterface;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 use JMS\Serializer\SerializerBuilder;
@@ -30,52 +27,68 @@ final class CompetitionService
         'FINISHED' => 'finished'
     );
     /**
-     * @var CompetitionRepository - Competition entity repozitorija, injektinama automatiskai per konstruktoriaus parametrus
+     * @var CompetitionRepository
      */
     private $competitionRepository;
+    /**
+     * @var LoggerInterface
+     */
+    private $logger;
+    /**
+     * @var ValidatorInterface
+     */
+    private $validator;
+    /**
+     * @var HashService
+     */
 
-    private $entityManager;
-
+    private $hashService;
     /**
      * CompetitionService constructor.
      * @param CompetitionRepository $competitionRepository
      * @param ValidatorInterface $validator
      * @param LoggerInterface $logger
      */
-    public function __construct(CompetitionRepository $competitionRepository)
+    public function __construct(CompetitionRepository $competitionRepository, ValidatorInterface $validator, LoggerInterface $logger,HashService $hashService)
     {
+
         $this->competitionRepository = $competitionRepository;
+        $this->validator = $validator;
+        $this->hashService=$hashService;
+        $this->logger = $logger;
     }
 
-
+    /**
+     * @param Competition $competition
+     * @return Competition|null
+     */
     public function create(Competition $competition):?Competition
     {
         $this->competitionRepository->save($competition);
+        $this->hashService->create($competition);
         $this->competitionRepository->flush();
         return $competition;
     }
 
-    public function get(int $id): Competition
+    public function get(Competition $competition): ?Competition
     {
-        $competition = $this->competitionRepository->find($id);
+        $competition = $this->competitionRepository->find($competition);
         return $competition;
     }
 
+    /**
+     * @return array|null
+     */
+
     public function getFutureCompetitions():?array
     {
-        /*
-         * TODO imti tik busimus competitionus
-         * */
-
         $competitions = $this->competitionRepository->findAll();
         $array  = array();
         foreach($competitions as $competition){
             $serializer = SerializerBuilder::create()->build();
             $a = $serializer->toArray($competition);
             array_push($array, $a);
-
         }
         return $array;
     }
-
 }

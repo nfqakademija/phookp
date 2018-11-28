@@ -1,26 +1,15 @@
 require('bootstrap');
 require('./resultsForm');
-// var $ = require('jquery');
-// var template = $('#sections .section:first').clone();
-//
-// var sectionsCount = 1;
-//
-// $('body').on('click', '.addsection', function () {
-//     sectionsCount++;
-//     var section = template.clone().find('').each(function () {
-//
-//         //set id to store the updated section number
-//         var newId = this.id + sectionsCount;
-//
-//         //update for label
-//         $(this).prev().attr('for', newId);
-//
-//         //update id
-//         this.id = newId;
-//
-//     }).end()
-//
-//     //inject new section
-//         .appendTo('#sections');
-//     return false;
-// });
+const sendApiCall = (e) => {
+    const hash = document.querySelector('#_hash').value;
+    const idTeam = e.currentTarget.getAttribute('data-id');
+    fetch(`/organizer/${hash}/deleteTeam/${idTeam}`).then(res => window.location.reload());
+};
+
+document.querySelector('.deleteButton').addEventListener('click', sendApiCall);
+
+const deleteButtons = document.querySelectorAll('.deleteButton');
+console.log(deleteButtons);
+Array.from(deleteButtons).forEach(function(element) {
+    element.addEventListener('click', sendApiCall);
+});

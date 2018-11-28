@@ -30,7 +30,7 @@ class Weighing
     private $weighingNr;
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Competition", inversedBy="weighings")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=false,  referencedColumnName="id")
      */
     private $competition;
 

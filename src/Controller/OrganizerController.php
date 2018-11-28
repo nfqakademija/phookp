@@ -5,7 +5,6 @@
  * Date: 18.10.29
  * Time: 21.19
  */
-
 namespace App\Controller;
 
 use App\Entity\Result;
@@ -23,51 +22,113 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Translation\TranslatorInterface;
+
 
 class OrganizerController extends AbstractController implements IAuthorizedController
 {
     private $teamService;
     private $logger;
-    /**
-     * TODO
-     *  visas sitas kontroleris turetu turet middleware, kuris checkina
-     *  ar access hash teisingas
-     *  jei access hash neteisingas -> redirectina i main page...
-     * */
-    /**
-     * @param LoggerInterface $logger
-     * @param TeamService $service
-     */
+
     public function __construct(LoggerInterface $logger, TeamService $service)
     {
         $this->logger = $logger;
         $this->teamService = $service;
     }
 
-    /**
-     * @Route("/organizer/{hash}", name="organiserMain")
-     */
-    public function createTeamForm(Request $request, $hash, HashService $hashService)
-    {
 
-        $data = ['teams' => []];
-        $sectorsCount = 2;
-        for ($i = 0; $i < $sectorsCount; $i++) {
-            $team = new Team();
-            $data['teams'][] = $team;
+    /**
+     * @Route("/organizer/{hash}", name="organizerMain")
+     * @param Request $request
+     * @param string $hash
+     * @param HashService $hashService
+     * @param TeamService $teamService
+     * @param TranslatorInterface $translator
+     * @return Response
+     *
+     */
+    public function createTeam(
+        Request $request,
+        string $hash,
+        HashService $hashService,
+        TeamService $teamService,
+        TranslatorInterface $translator
+    ) {
+        $hash = $hashService->findByHash($hash);
+        if ($hash) {
+            $data = ['teams' => []];
+            $competition = $hash->getCompetition();
+            $teamsCount = $teamService->countTeams($competition);
+            for ($i = 0; $i < $teamsCount; $i++) {
+                $team = new Team();
+                $data['teams'][] = $team;
+            }
+            $form = $this->createForm(TeamsFormType::class, $data);
+            $form->add('save', SubmitType::class, array("label" => "form.team_registration.create_button"));
+            $form->handleRequest($request);
+
+            if ($form->isSubmitted() && $form->isValid()) {
+                $additionNotifications = $teamService->addTeams($form->getData()['teams'], $competition);
+                $notAddedNameMessage = $translator->trans("form.team_registration.notAddedName_message");
+
+                if ($additionNotifications["addedTeamsQuantity"] > 0) {
+                    if ($additionNotifications["notAddedName"] === true) {
+                        $this->addFlash("danger", $notAddedNameMessage);
+                    }
+                } else {
+                    $this->addFlash("danger", $notAddedNameMessage);
+                }
+                return $this->redirectToRoute("organizerMain", ['hash' => $hash->getHash()]);
+            }
+            $teamsArray = $competition->getTeams();
+
+            return $this->render("team/addTeam.html.twig", [
+                "form" => $form->createView(),
+                "teamsCount" => $teamsCount,
+                "teams" => $teamsArray,
+            ]);
         }
-        $form = $this->createForm(TeamsFormType::class, $data);
-        $form->add('save', SubmitType::class, array("label" => "form.team_registration.create_button"));
+
+        return $this->redirectToRoute("home");
+    }
+
+    /**
+     * @param $idTeam
+     * @param TeamService $teamService
+     * @Route("/organizer/{hash}/deleteTeam/{idTeam}")
+     */
+    public function deleteTeam($idTeam, TeamService $teamService)
+    {
+        $teamService->remove($idTeam);
+
+    }
+
+    /**
+     * @Route("/organizer/{hash}/teamsSectors", name="organizerMain.teamsSectors")
+     * @param Request $request
+     * @param string $hash
+     * @param HashService $hashService
+     * @param TeamService $teamService
+     * @return Response
+     */
+    public function addSectors(Request $request, string $hash, HashService $hashService, TeamService $teamService)
+    {
+        $hash = $hashService->findByHash($hash);
+        $competition = $hash->getCompetition();
+        $teams=$competition->getTeams();
+        $data = ['teams' => $competition->getTeams()->toArray()];
+        $form = $this->createForm(TeamsSectorsFormType::class, $data);
+        $form->add('save', SubmitType::class, array("label" => "form.team_registration_sectors.add_button"));
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-            $hash = $hashService->findByHash($hash);
-            $this->teamService->addTeams($form->getData()['teams'], $hash->getCompetition());
-            $this->addFlash('success', 'Komandos pridėtos');
-        }
-        return $this->render("team/addCommand.html.twig", array(
-            "form" => $form->createView(),
+            $teamService->addTeamsSectors($form->getData()['teams']);
+            $this->addFlash("success", "sektoriai sekmingai prideti");
 
-        ));
+        }
+        return $this->render("team/sectors.html.twig", [
+            "form" => $form->createView(),
+            "teams"=>$teams,
+        ]);
 
     }
 

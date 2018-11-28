@@ -52,7 +52,7 @@ class Hash
     public function setCompetition(?Competition $competition): self
     {
         $this->competition = $competition;
-
+        $competition->getCompetitionHashes()->add($this);
         return $this;
     }
 }

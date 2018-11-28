@@ -1,8 +1,8 @@
 <?php
 namespace App\Controller;
+use App\Event\CompetitionCreatedEvent;
 use App\Services\CompetitionService;
-use App\Services\HashService;
-use Psr\Log\LoggerInterface;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -10,66 +10,49 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use App\Form\CompetitionFormType;
 use App\Entity\Competition;
-use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
+use Symfony\Component\Translation\TranslatorInterface;
+
 class CompetitionController extends AbstractController
 {
-    private $competitionService;
-    private $logger;
-    /**
-     * CompetitionController constructor.
-     * @param LoggerInterface $logger
-     * @param CompetitionService $service
-     *
-     */
-    public function __construct(LoggerInterface $logger, CompetitionService $service)
-    {
-        $this->logger = $logger;
-        $this->logger->notice("controllerio pradzia");
-        $this->competitionService = $service;
-    }
-    /**
-     * @Route("/competition", name="competition")
-     */
-    /*
-    public function index()
-    {
-        return $this->render('competition/index.html.twig', [
-            'controller_name' => 'CompetitionController',
-        ]);
-    }
-    */
     /**
      * @param Request $request
+     * @param CompetitionService $competitionService
+     * @param TranslatorInterface $translator
+     * @param EventDispatcherInterface $dispatcher
      * @return Response
      * @Route("/competition/create", name="competitionCreate")
      */
-    public function create(Request $request, HashService $hashService)
+    public function createCompetition(Request $request,CompetitionService $competitionService, TranslatorInterface $translator, EventDispatcherInterface $dispatcher)
     {
         $competition = new Competition();
         $competition->setCompetitionDate(new \DateTime("tomorrow"));
         $form = $this->createForm(CompetitionFormType::class, $competition);
         $form->add('save', SubmitType::class, array("label" => "form.competition_registration.create_button"));
         $form->handleRequest($request);
+
         if($form->isSubmitted() && $form->isValid()){
-            $competition = $this->competitionService->create($form->getData());
-            $hash = $hashService->create($competition);
-            $accessLink = $this->generateUrl("organiserMain", array("hash" => $hash->getHash()), UrlGeneratorInterface::ABSOLUTE_URL);
-            $this->addFlash('success', "Renginys sėkmingai pridėtas! Jūsų renginio valdymo nuoroda: <a href='$accessLink'>$accessLink<a/>");
+            $competition = $competitionService->create($form->getData());
+            $event = new CompetitionCreatedEvent($competition);
+            $dispatcher->dispatch(CompetitionCreatedEvent::NAME,$event);
+            $message=$translator->trans("form.competition_registration.success_message");
+            $this->addFlash('success', $message);
+            return $this->redirectToRoute("home");
         }
+
         return $this->render("competition/competitionForm.html.twig", array(
             "form" => $form->createView(),
         ));
     }
+
     /**
-     * @param string $id
+     * @param Competition $competition
+     * @param CompetitionService $competitionService
      * @return Response
      * @Route("/competition/get/{id}", name="getCompetition", methods={"GET", "HEAD"})
      */
-    public function get($id)
+    public function getCompetition(Competition $competition,CompetitionService $competitionService)
     {
-        $this->logger->notice("get method called");
-        $competition = $this->competitionService->get($id);
-        $this->logger->notice("find ran...");
+        $competition = $competitionService->get($competition);
         return new Response(dump($competition));
     }
 }

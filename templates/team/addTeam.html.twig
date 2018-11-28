@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+{% block title %}Add command{{ parent() }}{% endblock %}
+{% form_theme form 'bootstrap_4_layout.html.twig' %}
+{% block body %}
+    {{ include ('navBar/navBarOrganizer.html.twig') }}
+    <div class="container container-index">
+        <div class="row justify-content-center">
+            {% for label, messages in app.flashes %}
+                {% for message in messages %}
+                    <div class="alert alert-{{ label }}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endfor %}
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-lg-10">
+                <div class="card mt-4 card-shadow">
+                    <div class="card-body">
+                        <h3 class="card-title">Komandų pridėjimas</h3>
+                        <p class="card-text">
+                            <input type="hidden" id="_hash" value="{{ app.request.attributes.get('hash') }}"/>
+                        {% for team in teams %}
+                        <div class="row justify-content-center">
+                        <div class="col">
+                        <h1>{{ team.teamName }}</h1>
+                            </div>
+                            <div class="col">
+                        <button type="button" class="btn btn-danger deleteButton"  data-id="{{ team.id }}">Ištrinti</button>
+                            </div>
+                        </div>
+                            {% endfor %}
+                        {% if teamsCount!=0 %}
+                            {{ form_start(form) }}
+                            {{ form_errors(form) }}
+                            {% for team in form.teams %}
+                                {{ form_row(team.teamName) }}
+                                {{ form_row(team.firstTeamMember) }}
+                                {{ form_row(team.secondTeamMember) }}
+                                {{ form_row(team.thirdTeamMember) }}
+                            {% endfor %}
+                            {{ form_end(form) }}
+                            {% else %}
+                            <br>
+                            {% endif %}
+                        </p>
+                    </div>
+                </div>
+            </div>d
+        </div>
+    </div>
+{% endblock %}
