@@ -30,11 +30,9 @@ class OrganizerController extends AbstractController implements IAuthorizedContr
 {
 
     private $teamService;
-    private $logger;
 
-    public function __construct(LoggerInterface $logger, TeamService $service)
+    public function __construct(TeamService $service)
     {
-        $this->logger = $logger;
         $this->teamService = $service;
     }
     /**
@@ -163,7 +161,7 @@ class OrganizerController extends AbstractController implements IAuthorizedContr
         }))
         {
             $this->addFlash("error", "Klaida: nurodyta komanda nedalyvauja varzybose!");
-            $this->redirectToRoute("organiserMain", array("hash" => $hash));
+            $this->redirectToRoute("organizerMain", array("hash" => $hash));
         }
 
         $team = $teamService->find($teamId);

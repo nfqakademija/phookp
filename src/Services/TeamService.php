@@ -88,19 +88,7 @@ class TeamService
      */
     public function find(int $id): ?Team
     {
-        return $this->teamRepository->findOneBy(['id' => $id]);
-    }
-
-    /**
-     * @param Team $team
-     * @return array|null
-     */
-    public function validate(Team $team): ?array
-    {
-        $errors = $this->validator->validate($team);
-        if (count($errors) > 0) {
-            return $errors;
-        } else return null;
+        return $this->teamRepository->findById($id);
     }
 
     /**
@@ -110,32 +98,6 @@ class TeamService
     public function countTeams(Competition $competition) :int
     {
         $competitionId=$competition->getId();
-        $totalTeams=$competition->getCompetitionTeamsCount();
-        $completeTeams = $this->teamRepository->countRows($competitionId);
-
-        return $sectors = $totalTeams - $completeTeams;
-        return $this->teamRepository->findOneBy(['id' => $id]);
-    }
-
-    /**
-     * @param Team $team
-     * @return array|null
-     */
-    public function validate(Team $team): ?array
-    {
-        $errors = $this->validator->validate($team);
-        if (count($errors) > 0) {
-            return $errors;
-        } else return null;
-    }
-
-    /**
-     * @param Competition $competition
-     * @return int|null
-     */
-    public function countTeams(Competition $competition) :int
-    {
-        $competitionId=$competition->getIdCompetition();
         $totalTeams=$competition->getCompetitionTeamsCount();
         $completeTeams = $this->teamRepository->countRows($competitionId);
 

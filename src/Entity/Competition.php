@@ -21,7 +21,7 @@ class Competition
      * @ORM\GeneratedValue()
      * @ORM\Column(type="integer")
      */
-    private $idCompetition;
+    private $id;
     /**
      * @ORM\Column(type="string", length=90)
      * @Assert\Type(type = "string",
@@ -134,7 +134,6 @@ class Competition
      *     message="Nurodyta nuoroda yra neteisinga",
      * )
      */
-
      private $competitionLink;
 
     /**
@@ -173,14 +172,14 @@ class Competition
     }
 
 
-    public function getIdCompetition(): ?int
+    public function getId(): ?int
     {
-        return $this->idCompetition;
+        return $this->id;
     }
 
-    public function setIdCompetition(int $idCompetition): self
+    public function setId(int $id): self
     {
-        $this->idCompetition = $idCompetition;
+        $this->id = $id;
 
         return $this;
     }
