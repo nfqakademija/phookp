@@ -28,6 +28,15 @@ use Symfony\Component\Translation\TranslatorInterface;
 
 class OrganizerController extends AbstractController implements IAuthorizedController
 {
+
+    private $teamService;
+    private $logger;
+
+    public function __construct(LoggerInterface $logger, TeamService $service)
+    {
+        $this->logger = $logger;
+        $this->teamService = $service;
+    }
     /**
      * @Route("/organizer/{hash}", name="organizerMain")
      * @param Request $request
@@ -124,31 +133,18 @@ class OrganizerController extends AbstractController implements IAuthorizedContr
     }
 
     /**
-     * @param string $hash
-     * @param int $teamId
-     * @param int $weighingNr
-     * @param Request $request
-     * @param HashService $hashService
-     * @param ResultService $resultService
-     * @param WeighingService $weighingService
-     * @param TeamService $teamService
-     * @return Response
      * @Route("/organizer/{hash}/results/{teamId}/{weighingNr}", name="organizerResults")
      */
-    public function results(
-        string $hash,
-        int $teamId,
-        int $weighingNr = 1,
-        Request $request,
-        HashService $hashService,
-        ResultService $resultService,
-        WeighingService $weighingService,
-        TeamService $teamService
-    ) {
+    public function results(string $hash, int $teamId, int $weighingNr = 1, Request $request,
+                            HashService $hashService, ResultService $resultService, WeighingService $weighingService,
+                            TeamService $teamService)
+    {
         $competition = $hashService->findByHash($hash)->getCompetition();
         $weighings = $competition->getWeighings();
         $teams = $competition->getTeams();
 
+        if($teamId === null)
+            $teamId = $teams[0]->getId();
 
         // Validation
 
@@ -159,22 +155,23 @@ class OrganizerController extends AbstractController implements IAuthorizedContr
 
         if (count($weighings) + 1 < $weighingNr) {
             $this->addFlash("error", "Klaida: negalite praleisti sverimu!");
-            $this->redirectToRoute("organizerResults", array("hash" => $hash, "teamId" => $teams[0]->getId()));
+            return $this->redirectToRoute("organizerResults", array("hash" => $hash, "teamId" => $teams[0]->getId(), "weighingNr" => count($weighings) + 1));
         }
 
-        if (!$teams->exists(function ($key, $element) use ($teamId) {
+        if(!$teams->exists(function($key, $element) use ($teamId){
             return $teamId === $element->getId();
-        })) {
+        }))
+        {
             $this->addFlash("error", "Klaida: nurodyta komanda nedalyvauja varzybose!");
-            $this->redirectToRoute("organizerMain", array("hash" => $hash));
+            $this->redirectToRoute("organiserMain", array("hash" => $hash));
         }
-        $em = $this->get('doctrine.orm.default_entity_manager');
-        $team = $em->findOneById($teamId);
 
-        if (count($weighings) === 0 || count($weighings) < $weighingNr) {
+        $team = $teamService->find($teamId);
+
+        if(count($weighings) === 0 || count($weighings) < $weighingNr){
             $weighing = new Weighing();
 
-            for ($i = 0; $i < 3; $i++) {
+            for ($i = 0; $i < 5; $i++) {
                 $result = new Result();
                 $weighing->addResult($result);
             }
@@ -182,20 +179,21 @@ class OrganizerController extends AbstractController implements IAuthorizedContr
             $weighing = $weighings[$weighingNr - 1];
             $results = $resultService->getTeamResults($teamId, $weighing->getId());
             $weighing->setResults($results);
-            for ($i = 0; $i < 3; $i++) {
+            do{
                 $result = new Result();
                 $weighing->addResult($result);
             }
+            while(count($weighing->getResults()) < 5);
+
         }
 
-        $form = $this->createForm(WeighingType::class, $weighing);
-        $form->add('submit', SubmitType::class);
 
+        $form = $this->createForm(WeighingType::class, $weighing);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $data = $form->getData();
             $data->setCompetition($competition);
-            $weighingService->create($data, $team, $resultService);
+            $weighingService->create($data, $team);
             $this->addFlash('success', "Rezultatai issaugoti...");
         }
 

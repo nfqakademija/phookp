@@ -1,5 +1,7 @@
 <?php
+
 namespace App\Controller;
+
 use App\Services\CompetitionService;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\RadioType;
@@ -12,7 +14,7 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\ChoiceList\Loader\CallbackChoiceLoader;
 class HomeController extends Controller
 {
-       /**
+    /**
      * @Route("/", name="home")
      */
     public function index(CompetitionService $competitionService)

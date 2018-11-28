@@ -47,6 +47,12 @@ class ResultRepository extends ServiceEntityRepository
 
        return new ArrayCollection($results);
     }
+
+    public function removeResult(Result $result): void
+    {
+        $this->entityManager->remove($result);
+//        $this->entityManager->flush();
+    }
     // /**
     //  * @return Result[] Returns an array of Result objects
     //  */
