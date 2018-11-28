@@ -20,7 +20,6 @@ class CompetitionController extends AbstractController
      * @param TranslatorInterface $translator
      * @param EventDispatcherInterface $dispatcher
      * @return Response
-     * @Route("/competition/create", name="competitionCreate")
      */
     public function createCompetition(Request $request,CompetitionService $competitionService, TranslatorInterface $translator, EventDispatcherInterface $dispatcher)
     {
@@ -48,7 +47,6 @@ class CompetitionController extends AbstractController
      * @param Competition $competition
      * @param CompetitionService $competitionService
      * @return Response
-     * @Route("/competition/get/{id}", name="getCompetition", methods={"GET", "HEAD"})
      */
     public function getCompetition(Competition $competition,CompetitionService $competitionService)
     {

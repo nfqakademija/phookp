@@ -22,14 +22,12 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Translation\TranslatorInterface;
 
 
 class OrganizerController extends AbstractController implements IAuthorizedController
 {
     /**
-     * @Route("/organizer/{hash}", name="organizerMain")
      * @param Request $request
      * @param string $hash
      * @param HashService $hashService
@@ -86,7 +84,6 @@ class OrganizerController extends AbstractController implements IAuthorizedContr
     /**
      * @param $idTeam
      * @param TeamService $teamService
-     * @Route("/organizer/{hash}/deleteTeam/{idTeam}")
      */
     public function deleteTeam($idTeam, TeamService $teamService)
     {
@@ -95,7 +92,6 @@ class OrganizerController extends AbstractController implements IAuthorizedContr
     }
 
     /**
-     * @Route("/organizer/{hash}/teamsSectors", name="organizerMain.teamsSectors")
      * @param Request $request
      * @param string $hash
      * @param HashService $hashService
@@ -134,7 +130,6 @@ class OrganizerController extends AbstractController implements IAuthorizedContr
     }
 
     /**
-     * @Route("/organizer/{hash}/results/{teamId}/{weighingNr}", name="organizerResults")
      * @param string $hash
      * @param int $teamId
      * @param int $weighingNr
@@ -143,7 +138,7 @@ class OrganizerController extends AbstractController implements IAuthorizedContr
      * @param ResultService $resultService
      * @param WeighingService $weighingService
      * @param TeamService $teamService
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
+     * @return Response
      */
     public function results(
         string $hash,
