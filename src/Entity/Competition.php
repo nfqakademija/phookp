@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\competitionRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\CompetitionRepository")
  */
 class Competition
 {
@@ -30,8 +30,8 @@ class Competition
      * @Assert\Length(
      *     min = 3,
      *     max = 90,
-     *     minMessage = "Renginio pavadinimas negali buti trumpesnis nei 3 simboliai!",
-     *     maxMessage = "Renginio pavadinimas negali buti ilgesnis nei 90 simboliai!"
+     *     minMessage = "Renginio pavadinimas negali būti trumpesnis nei 3 simboliai!",
+     *     maxMessage = "Renginio pavadinimas negali būti ilgesnis nei 90 simboliai!"
      * )
      */
     private $competitionName;
@@ -47,7 +47,7 @@ class Competition
      *     min="now",
      *     max="+2 years",
      *     minMessage="Neteisingai nurodyta renginio data!",
-     *     maxMessage="Negalima planuoti renginiu daugiau nei du metai i prieki!"
+     *     maxMessage="Negalima planuoti renginių daugiau nei du metai į priekį!"
      * )
      */
     private $competitionDate;
@@ -57,8 +57,8 @@ class Competition
      * @Assert\Range(
      *     min = 1,
      *     max = 10,
-     *     minMessage="Renginio trukme negali buti trumpesne nei viena diena!",
-     *     maxMessage="Renginio trukme negali virsyti 10 dienu!"
+     *     minMessage="Renginio trukmė negali būti trumpesnė nei viena diena!",
+     *     maxMessage="Renginio trukmė negali viršyti 10 dienų!"
      * )
      */
     private $competitionDuration = 1;
@@ -68,8 +68,8 @@ class Competition
      * @Assert\Length(
      *     min=3,
      *     max=90,
-     *     minMessage="Organizatoriaus vardo ar pavadinimo ilgis turi buti tarp 3 ir 90 simboliu!",
-     *     maxMessage="Organizatoriaus vardo ar pavadinimo ilgis turi buti tarp 3 ir 90 simboliu!"
+     *     minMessage="Organizatoriaus vardo ar pavadinimo ilgis turi būti tarp 3 ir 90 simbolių!",
+     *     maxMessage="Organizatoriaus vardo ar pavadinimo ilgis turi būti tarp 3 ir 90 simbolių!"
      * )
      */
     private $competitionOrganiser;
@@ -77,11 +77,11 @@ class Competition
     /**
      * @ORM\Column(type="string", length=90)
      * @Assert\Email(
-     *     message="El. pasto adresas ivestas neteisingai!"
+     *     message="El.pašto adresas įvestas neteisingai!"
      * )
      * @Assert\Length(
      *     max="90",
-     *     maxMessage="El. pasto adreso ilgis negali virsyti 90 simboliu!"
+     *     maxMessage="El.pašto adresas negali viršyti 90 simbolių!"
      * )
      */
     private $competitionOrganiserEmail;
@@ -90,7 +90,7 @@ class Competition
      * @ORM\Column(type="string", length=30)
      * @Assert\Choice(
      *     choices = {"total", "top5"},
-     *     message = "Nezinomas varzybu tipas!"
+     *     message = "Nežinomas varžybų tipas!"
      * )
      */
     private $competitionType;
@@ -110,37 +110,37 @@ class Competition
      * @Assert\Length(
      *     min="1",
      *     max="99",
-     *     minMessage="Varzybu sektoriu skaicius negali buti mazesnis nei 1!",
-     *     maxMessage="Varzybu sektoriu skaicius negali virsyti 99!"
+     *     minMessage="Varžybų komandų skaičius negali būti mažesnis nei 1!",
+     *     maxMessage="Varžybų komandų skaičius negali viršyti 99!"
      * )
      */
-    private $competitionSectorCount = 1;
+    private $competitionTeamsCount = 1;
 
     /**
      * @ORM\Column(type="integer")
      * @Assert\Length(
      *     min="1",
      *     max="20",
-     *     minMessage="Sverimu skaicius negali buti mazesnis nei 1!",
-     *     maxMessage="Sverimu skaicius negali virsyti 20!"
+     *     minMessage="Svėrimų skaičius negali būti mažesnis nei 1!",
+     *     maxMessage="Svėrimų skaičius negali viršyti 20!"
      * )
      */
     private $competitionWeighingsCount = 1;
 
 
     /**
-     * @ORM\Column(type="string")
-     * @Assert\Length(
-     *     max="200",
-     *     maxMessage="Facebook'o linkas i eventa per ilgas.")
+     * @ORM\Column(type="string", nullable=true)
+     * * @Assert\Url(
+     *     message="Nurodyta nuoroda yra neteisinga",
+     * )
      */
      private $competitionLink;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", nullable=true)
      * @Assert\Length(
-     *    max="2000",
-     *    maxMessage="Taisykliu sarasas negali virsyti 2000 simboliu"
+     *    max="4000",
+     *    maxMessage="Taisyklių sąrašas negali viršyti 4000 simbolių"
      * )
      */
     private $competitionRules;
@@ -160,9 +160,9 @@ class Competition
      *
      */
     private $teams;
+
     /**
      * Competition constructor.
-     * @param $competitionHashes
      */
     public function __construct()
     {
@@ -279,8 +279,9 @@ class Competition
 
         return $this;
     }
+
     /**
-     * @return mixed
+     * @return int
      */
     public function getCompetitionWeighingsCount(): int
     {
@@ -288,26 +289,30 @@ class Competition
     }
 
     /**
-     * @param mixed $competitionWeighingsCount
+     * @param int $competitionWeighingsCount
+     * @return Competition
      */
-    public function setCompetitionWeighingsCount(int $competitionWeighingsCount): void
+    public function setCompetitionWeighingsCount(int $competitionWeighingsCount): self
     {
         $this->competitionWeighingsCount = $competitionWeighingsCount;
+        return $this;
     }
     /**
      * @return mixed
      */
-    public function getCompetitionSectorCount(): int
+    public function getCompetitionTeamsCount(): int
     {
-        return $this->competitionSectorCount;
+        return $this->competitionTeamsCount;
     }
 
     /**
-     * @param mixed $competitionSectorCount
+     * @param int $competitionTeamsCount
+     * @return Competition
      */
-    public function setCompetitionSectorCount(int $competitionSectorCount): void
+    public function setCompetitionTeamsCount(int $competitionTeamsCount): self
     {
-        $this->competitionSectorCount = $competitionSectorCount;
+        $this->competitionTeamsCount = $competitionTeamsCount;
+        return $this;
     }
 
     /**
@@ -324,7 +329,6 @@ class Competition
             $this->competitionHashes[] = $competitionHash;
             $competitionHash->setCompetition($this);
         }
-
         return $this;
     }
 
@@ -364,6 +368,11 @@ class Competition
     {
         return $this->teams;
     }
+
+    /**
+     * @param Team $team
+     * @return Competition
+     */
     public function addTeam(Team $team): self
     {
         if (!$this->teams->contains($team)) {
@@ -372,6 +381,11 @@ class Competition
         }
         return $this;
     }
+
+    /**
+     * @param Team $team
+     * @return Competition
+     */
     public function removeTeam(Team $team): self
     {
         if ($this->teams->contains($team)) {
@@ -381,7 +395,6 @@ class Competition
                 $team->setCompetition(null);
             }
         }
-
         return $this;
     }
 
@@ -393,6 +406,10 @@ class Competition
         return $this->weighings;
     }
 
+    /**
+     * @param Weighing $weighing
+     * @return Competition
+     */
     public function addWeighing(Weighing $weighing): self
     {
         if (!$this->weighings->contains($weighing)) {
@@ -403,11 +420,14 @@ class Competition
         return $this;
     }
 
+    /**
+     * @param Weighing $weighing
+     * @return Competition
+     */
     public function removeWeighing(Weighing $weighing): self
     {
         if ($this->weighings->contains($weighing)) {
             $this->weighings->removeElement($weighing);
-            // set the owning side to null (unless already changed)
             if ($weighing->getCompetition() === $this) {
                 $weighing->setCompetition(null);
             }

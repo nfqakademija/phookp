@@ -4,15 +4,25 @@ form.competition_registration.duration: Renginio trukmė
 form.competition_registration.organiser: Organizatorius
 form.competition_registration.mail: Elektroninis paštas
 form.competition_registration.type: Renginio tipas
-form.competition_registration.sectorCount: Sektorių skaičius
-form.competition_registration.weighingCount: Svėrimų skaičius
+form.competition_registration.team_count: Maksimalus komandų kiekis
+form.competition_registration.weighing_count: Svėrimų skaičius
 form.competition_registration.facebook_link: Facebook renginio nuoroda
 form.competition_registration.rules: Renginio reglamentas
 form.competition_registration.create_button: Sukurti
+form.competition_registration.success_message: Renginys sėkmingai pridėtas! Nuorodą rasite savo el-pašte.
 form.team_registration.team_name: Komandos pavadinimas
 form.team_registration.team_member: Komandos narys
 form.team_registration.create_button: Pridėti komandas
-
+form.team_registration.error_message: Nepridėjote komandos. Privalote įvesti komandos pavadinimą bei vieną komandos narį
+form.team_registration.not_added_name_message: Norint pridėti komandą privalote įvesti komandos pavadinimą bei vieną komandos narį
+form.team_sectors_assignment.add_button: Pridėti sektorius
+form.team_sectors_assignment.success_message: Sektoriai sėkmingai pridėti
+form.results_entry.error_not_added_teams_message: Klaida, negalima pridėti rezultatų nepridėjus dalyvių komandų
+form.results_entry.error_skip_weighing_message: Klaida, negalite praleisti svėrimų!
+form.results_entry.error_not_found_team_message: Klaida, nurodyta komanda nedalyvauja varžybose!
+form.results_entry.special_fish_name: Amūras
+form.results_entry.success_message: Rezultatai išsaugoti!
+mail.subject_message: Renginio nuoroda
 
 
 

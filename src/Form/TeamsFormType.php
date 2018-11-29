@@ -8,7 +8,6 @@
 
 namespace App\Form;
 
-use App\Entity\Competition;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -21,10 +20,6 @@ class TeamsFormType extends AbstractType
         $builder
             ->add("teams", CollectionType::class, array("entry_type" => TeamFormType::class));
 
-    }
-
-    public function configureOptions(OptionsResolver $resolver)
-    {
     }
 
 }

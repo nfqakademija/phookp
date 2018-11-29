@@ -1,20 +1,17 @@
 <?php
 
 namespace App\Entity;
-use Doctrine\Common\Collections\Collection;
-use Symfony\Component\Validator\Constraints as Assert;
-use Doctrine\ORM\Mapping as ORM;
+
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
+use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
 /**
  * @ORM\Entity(repositoryClass="App\Repository\TeamRepository")
  */
 class Team
 {
-
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Results", inversedBy="teams")
-     */
-
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -27,10 +24,19 @@ class Team
      * * @Assert\Type(type = "string",
      *              message = "Neteisingas komandos pavadinimo formatas"
      * )
+     *   @Assert\Length(
+     *     min=2,
+     *     max=90,
+     *     minMessage="Komandos pavadinimo pavadinimo ilgis turi būti tarp 2 ir 90 simbolių!",
+     *     maxMessage="Komandos pavadinimo ilgis turi būti tarp 2 ir 90 simbolių!"
+     * )
      */
     private $teamName;
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * * @Assert\Type(type = "integer",
+     *              message = "Privalote įvesti skaičių"
+     * )
      */
     private $sectorNr;
     /**
@@ -40,14 +46,23 @@ class Team
     private $competition;
     /**
      * @ORM\Column(type="string", length=45, nullable=true)
+     * @Assert\Type(type = "string",
+     *              message = "Neteisingas vardo formatas"
+     * )
      */
     private $firstTeamMember;
     /**
      * @ORM\Column(type="string", length=45, nullable=true)
+     * @Assert\Type(type = "string",
+     *              message = "Neteisingas vardo formatas"
+     * )
      */
     private $thirdTeamMember;
     /**
      * @ORM\Column(type="string", length=45, nullable=true)
+     *  @Assert\Type(type = "string",
+     *              message = "Neteisingas vardo formatas"
+     * )
      */
     private $secondTeamMember;
 
@@ -60,6 +75,7 @@ class Team
     {
         $this->results = new ArrayCollection();
     }
+
     public function getId(): ?int
     {
         return $this->id;
@@ -69,51 +85,63 @@ class Team
     {
         return $this->teamName;
     }
+
     public function setTeamName(string $teamName): self
     {
         $this->teamName = $teamName;
         return $this;
     }
+
     public function getSectorNr(): ?int
     {
         return $this->sectorNr;
     }
+
     public function setSectorNr(?int $sectorNr): self
     {
         $this->sectorNr = $sectorNr;
         return $this;
     }
+
     public function getCompetition(): ?Competition
     {
         return $this->competition;
     }
+
     public function setCompetition(?Competition $competition): self
     {
         $this->competition = $competition;
+        $competition->getTeams()->add($this);
         return $this;
     }
+
     public function getFirstTeamMember(): ?string
     {
         return $this->firstTeamMember;
     }
+
     public function setFirstTeamMember(?string $firstTeamMember): self
     {
         $this->firstTeamMember = $firstTeamMember;
         return $this;
     }
+
     public function getThirdTeamMember(): ?string
     {
         return $this->thirdTeamMember;
     }
+
     public function setThirdTeamMember(?string $thirdTeamMember): self
     {
         $this->thirdTeamMember = $thirdTeamMember;
         return $this;
     }
+
     public function getSecondTeamMember(): ?string
     {
         return $this->secondTeamMember;
     }
+
     public function setSecondTeamMember(?string $secondTeamMember): self
     {
         $this->secondTeamMember = $secondTeamMember;
@@ -147,7 +175,6 @@ class Team
                 $result->setTeam(null);
             }
         }
-
         return $this;
     }
 }

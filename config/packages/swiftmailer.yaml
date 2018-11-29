@@ -1,0 +1,6 @@
+swiftmailer:
+    transport:  smtp
+    encryption: ssl
+    host:       smtp.gmail.com
+    username:   sportinekarpiuzukle
+    password:   sportinekz123

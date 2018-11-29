@@ -17,14 +17,25 @@ use Symfony\Bridge\Doctrine\RegistryInterface;
  */
 class ResultRepository extends ServiceEntityRepository
 {
+    /**
+     * @var EntityManagerInterface
+     */
     private $entityManager;
 
+    /**
+     * ResultRepository constructor.
+     * @param RegistryInterface $registry
+     * @param EntityManagerInterface $entityManager
+     */
     public function __construct(RegistryInterface $registry, EntityManagerInterface $entityManager)
     {
         $this->entityManager = $entityManager;
         parent::__construct($registry, Result::class);
     }
 
+    /**
+     * @param Result $result
+     */
     public function save(Result $result): void
     {
         $this->entityManager->persist($result);
@@ -35,6 +46,11 @@ class ResultRepository extends ServiceEntityRepository
         $this->entityManager->flush();
     }
 
+    /**
+     * @param int $teamId
+     * @param int $weighingId
+     * @return Collection
+     */
     public function findByTeamAndWeighing(int $teamId, int $weighingId): Collection
     {
        $results = $this->createQueryBuilder('r')
@@ -47,32 +63,13 @@ class ResultRepository extends ServiceEntityRepository
 
        return new ArrayCollection($results);
     }
-    // /**
-    //  * @return Result[] Returns an array of Result objects
-    //  */
-    /*
-    public function findByExampleField($value)
-    {
-        return $this->createQueryBuilder('r')
-            ->andWhere('r.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('r.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
 
-    /*
-    public function findOneBySomeField($value): ?Result
+    /**
+     * @param Result $result
+     */
+    public function removeResult(Result $result): void
     {
-        return $this->createQueryBuilder('r')
-            ->andWhere('r.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
+        $this->entityManager->remove($result);
     }
-    */
+
 }

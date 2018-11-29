@@ -2,23 +2,26 @@
 
 namespace App\Form;
 
+use App\Entity\Weighing;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class SectorFormType extends AbstractType
+class WeighingFormType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('field_name')
+            ->add('results', CollectionType::class, array("entry_type" => ResultFormType::class, 'allow_add' => true))
         ;
     }
 
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults([
-            // Configure your form options here
+            'data_class' => Weighing::class,
+            'allow_extra_fields' => true
         ]);
     }
 }

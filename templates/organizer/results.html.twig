@@ -1,16 +1,40 @@
 {% extends 'base.html.twig' %}
 {% block title %}Create event {{ parent() }}{% endblock %}
 {% block body %}
+    {% set hash = app.request.attributes.get('hash') %}
+    {% set teamId = app.request.attributes.get('teamId') %}
+    {% set weighing = app.request.attributes.get('weighingNr') %}
     <div class="container">
+        {#{{ dump(app.request.uri) }}#}
             <div class="card">
-                <div class="card-header text-center h5 bg-dark text-light">
-                    Sverimo nr. {{ app.request.attributes.get('weighingNr') }} rezultatai
+                <div class="card-header text-center h5 bg-dark text-light px-0">
+                    {% if weighing > 1 %}
+                    <a href="{{ path(app.request.attributes.get('_route'), {
+                        'hash': hash,
+                        'teamId': teamId ,
+                        'weighingNr': weighing-1}) }}">
+                        <button class="float-left btn btn-outline-primary mx-2 lh-1">
+                            <span class="fas fa-arrow-left text-light"></span>
+                        </button>
+                    </a>
+                    {% endif %}
+                        Sverimo nr. {{ app.request.attributes.get('weighingNr') }} rezultatai
+                    {% if weighing < competition.competitionWeighingsCount %}
+                    <a href="{{ path(app.request.attributes.get('_route'), {
+                        'hash': hash,
+                        'teamId':teamId ,
+                        'weighingNr': weighing+1}) }}">
+                        <button class="float-right btn btn-outline-primary mx-2 lh-1">
+                            <span class="fas fa-arrow-right text-light"></span>
+                        </button>
+                    </a>
+                    {% endif %}
                 </div>
                 <div class="card-body px-0">
                     {{ form_start(form) }}
                     <div class="row mx-0">
-                        <div class="col-4 col-sm-3 col-md-2 col-lg-1 border-dark p-0" >
-                            <div class="table-responsive" style="max-height: 75vh;">
+                        <div class="col-4 col-sm-3 col-md-2 col-lg-2 border-dark p-0" >
+                            <div class="table-responsive" style="max-height: 75vh;" >
                             {% for team in teams %}
                                 <a href="{{ path('organizerResults',
                                     {'hash': app.request.attributes.get('hash'),
@@ -28,14 +52,14 @@
                             </div>
                         </div>
 
-                        <div class="col-8 col-sm-9 col-md-10 col-lg-11 border-dark">
+                        <div class="col d-flex flex-wrap results-entry-container">
 
                             {% for result in form.results %}
-                                <div class="row m-0">{{ form_row(result.weigh, {'attr': {'placeholder': 'Žuvis (g.)', 'class': 'text-box text-box--results'}}) }} <div class="ml-1">{{ form_row(result.specialFish, {'attr': {'class': 'check-box'}}) }}</div> </div>
+                                <div class="m-0">{{ form_row(result.weigh, {'attr': {'placeholder': 'Žuvis (g.)', 'class': 'text-box text-box--results'}}) }} <div class="ml-1">{{ form_row(result.specialFish, {'attr': {'class': 'check-box'}}) }}</div> </div>
                             {% endfor %}
-<!--
-                            {{ form_row(form.submit, { 'label': 'Issaugoti'}) }}
--->
+                            <button type="button" class="btn btn-primary btn-icon--round text text-white p-2" id="addButton">
+                                <span class="fas fa-plus"></span>
+                            </button>
                         </div>
                     </div>
                     <div class="row mt-2 bg-light mx-0">

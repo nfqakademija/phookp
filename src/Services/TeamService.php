@@ -10,9 +10,9 @@ namespace App\Services;
 
 use App\Entity\Competition;
 use App\Entity\Team;
-use Symfony\Component\Validator\Validator\ValidatorInterface;
 use App\Repository\TeamRepository;
 use Psr\Log\LoggerInterface;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class TeamService
 {
@@ -33,21 +33,41 @@ class TeamService
      * TeamService constructor.
      * @param TeamRepository $teamRepository
      * @param LoggerInterface $logger
+     * @param ValidatorInterface $validator
      */
     public function __construct(TeamRepository $teamRepository, LoggerInterface $logger, ValidatorInterface $validator)
     {
         $this->teamRepository = $teamRepository;
         $this->validator = $validator;
         $this->logger = $logger;
-        $this->logger->notice(" ");
     }
 
-    public function addTeams(array $teams, Competition $competition)
+    /**
+     * @param array $teams
+     * @param Competition $competition
+     * @return array
+     */
+    public function addTeams(array $teams, Competition $competition): array
     {
+        $addedTeamsQuantity = 0;
+        $isAddedName = true;
+
         foreach ($teams as $team) {
-            $team->setCompetition($competition);
-            $this->create($team);
+            $teamName = $team->getTeamName();
+            $firstTeamMember = $team->getFirstTeamMember();
+            $secondTeamMember = $team->getSecondTeamMember();
+            $thirdTeamMember = $team->getThirdTeamMember();
+            if ($teamName != null && ($firstTeamMember != null || $secondTeamMember != null || $thirdTeamMember != null)) {
+                $team->setCompetition($competition);
+                $this->create($team);
+                $addedTeamsQuantity++;
+            } elseif (
+                ($teamName === null && ($firstTeamMember != null || $secondTeamMember != null || $thirdTeamMember != null)) ||
+                ($teamName != null && ($firstTeamMember === null && $secondTeamMember === null && $thirdTeamMember != null))) {
+                $isAddedName =false;
+            }
         }
+        return array('addedTeamsQuantity' => $addedTeamsQuantity, 'isAddedName' => $isAddedName);
     }
 
     /**
@@ -61,10 +81,58 @@ class TeamService
         return $team;
     }
 
+    /**
+     * @param int $id
+     * @return Team|null
+     */
     public function find(int $id): ?Team
     {
-        return $this->teamRepository->find($id);
+        return $this->teamRepository->findById($id);
     }
 
+    /**
+     * @param Competition $competition
+     * @return int|null
+     */
+    public function countTeams(Competition $competition): int
+    {
+        $competitionId = $competition->getId();
+        $totalTeams = $competition->getCompetitionTeamsCount();
+        $completeTeams = $this->teamRepository->countRows($competitionId);
+
+        return $sectors = $totalTeams - $completeTeams;
+    }
+
+    /**
+     * @param int $id
+     */
+    public function remove(int $id): void
+    {
+        $team = $this->teamRepository->findById($id);
+        $this->teamRepository->removeTeam($team);
+        $this->teamRepository->flush();
+    }
+
+    /**
+     * @param array $teams
+     * @return bool
+     */
+    public function addTeamsSectors(array $teams) : bool
+    {
+        $isAdded=true;
+        foreach ($teams as $team) {
+            $sectorNr = $team->getSectorNr();
+            if ($sectorNr != null) {
+                $team->setSectorNr($sectorNr);
+                $this->create($team);
+            }
+            else{
+                $isAdded=false;
+            }
+        }
+        return $isAdded;
+    }
 }
+
+
 

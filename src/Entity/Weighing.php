@@ -25,8 +25,12 @@ class Weighing
     private $weighingTime;
 
     /**
+     * @ORM\Column(type="integer")
+     */
+    private $weighingNr;
+    /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Competition", inversedBy="weighings")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=false,  referencedColumnName="id")
      */
     private $competition;
 
@@ -55,6 +59,22 @@ class Weighing
         $this->weighingTime = $weighingTime;
 
         return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getWeighingNr()
+    {
+        return $this->weighingNr;
+    }
+
+    /**
+     * @param mixed $weighingNr
+     */
+    public function setWeighingNr($weighingNr): void
+    {
+        $this->weighingNr = $weighingNr;
     }
 
     public function getCompetition(): ?Competition

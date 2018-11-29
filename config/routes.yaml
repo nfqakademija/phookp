@@ -1,3 +1,28 @@
-#index:
-#    path: /
-#    controller: App\Controller\DefaultController::index
+home:
+  path: /
+  controller: App\Controller\HomeController::index
+
+competitionCreate:
+  path: /competition/create
+  controller: App\Controller\CompetitionController::createCompetition
+
+competitionGet:
+  path: /competition/get/{id}
+  controller: App\Controller\CompetitionController::getCompetition
+  methods:    [GET, HEAD]
+
+organizerMain:
+  path: /organizer/{hash}
+  controller: App\Controller\OrganizerController::createTeam
+
+oranizerDeleteTeam:
+  path: /organizer/{hash}/deleteTeam/{idTeam}
+  controller: App\Controller\OrganizerController::deleteTeam
+
+organizerTeamsSectors:
+  path: /organizer/{hash}/teamsSectors
+  controller: App\Controller\OrganizerController::addSectors
+
+organizerResults:
+  path: /organizer/{hash}/results/{teamId}/{weighingNr}
+  controller: App\Controller\OrganizerController::results

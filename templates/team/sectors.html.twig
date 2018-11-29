@@ -1,30 +1,42 @@
 {% extends 'base.html.twig' %}
 {% block title %}Results{{ parent() }}{% endblock %}
+{% form_theme form 'bootstrap_4_layout.html.twig' %}
 {% block body %}
     <div class="container container-index">
         <div class="row justify-content-center">
+            {% for label, messages in app.flashes %}
+                {% for message in messages %}
+                    <div class="alert alert-{{ label }}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endfor %}
             <div class="col-md-9">
                 <div class="card mt-4 card-shadow">
                     <div class="card-body">
                         <h3 class="card-title justify-content-center">Sektorių pridėjimas</h3>
                         <div class="form">
                             <div class="row justify-content-center">
-                                <div class="col-4">
+                                <div class="col-6">
                                     <h5> Komanda</h5>
                                 </div>
-                                <div class="col-4">
+                                <div class="col-6">
                                     <h5>Sektorius</h5>
                                 </div>
                             </div>
-                            {% for value in event %}
-                                {{ form_start(form) }}
-                                {{ form_errors(form) }}
-                                <div class="row justify-content-center">
-                                    <div class="col-4">{{ value["commandName"] }}</div>
-                                    <div class="col-4">{{ form_row(form.sectorId[loop.index0]) }}</div>
+                            {{ form_start(form) }}
+                            {{ form_errors(form) }}
+                            {% for key,team in form.teams %}
+                                <div class="row">
+                                    <div class="col-6">
+                                        {{ teams[key].teamName }}
+                                    </div>
+                                    <div class="col-6">
+                                {{ form_row(team.sectorNr) }}
+                                    </div>
                                 </div>
                             {% endfor %}
-                            {{ form_widget(form.save) }}
+                            {{ form_row(form.save) }}
                             {{ form_end(form) }}
                         </div>
                     </div>
@@ -32,5 +44,6 @@
             </div>
         </div>
     </div>
-
 {% endblock %}
+
+

@@ -9,7 +9,7 @@ use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class ResultType extends AbstractType
+class ResultFormType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
