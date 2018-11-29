@@ -30,3 +30,4 @@ organizerTeamsSectors:
 organizerResults:
   path: /organizer/{hash}/results/{teamId}/{weighingNr}
   controller: App\Controller\OrganizerController::results
+  defaults: {weighingNr: 1}

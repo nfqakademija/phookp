@@ -5,7 +5,6 @@ const sendApiCall = (e) => {
 };
 
 const deleteButtons = document.querySelectorAll('.deleteButton');
-console.log(deleteButtons);
 Array.from(deleteButtons).forEach(function(element) {
     element.addEventListener('click', sendApiCall);
 });

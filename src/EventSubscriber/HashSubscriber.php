@@ -2,8 +2,7 @@
 
 namespace App\EventSubscriber;
 
-use App\Controller\HomeController;
-use App\Controller\IAuthorizedController;
+use App\Controller\AuthorizedControllerInterface;
 use App\Services\HashService;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
@@ -25,18 +24,13 @@ class HashSubscriber implements EventSubscriberInterface
     public function onKernelController(FilterControllerEvent $event)
     {
         $controller = $event->getController();
-        if(!is_array($controller))
+        if (!is_array($controller))
             return;
 
-        if($controller[0] instanceof IAuthorizedController)
-        {
+        if ($controller[0] instanceof AuthorizedControllerInterface) {
 
             $hash = $event->getRequest()->attributes->get('hash');
-            if(!$this->hashService->findByHash($hash))
-            {
-                /*$session = new Session();
-                $session->start();
-                $session->getFlashBag()->add('error', "Varzybos neegzistuoja, arba prieigos nuoroda buvo panaikinta administratoriaus.");*/
+            if (!$this->hashService->findByHash($hash)) {
                 throw new AccessDeniedHttpException("Varzybos neegzistuoja, arba prieigos nuoroda buvo panaikinta administratoriaus.");
             }
         }
@@ -46,7 +40,7 @@ class HashSubscriber implements EventSubscriberInterface
     public static function getSubscribedEvents()
     {
         return [
-           'kernel.controller' => 'onKernelController',
+            'kernel.controller' => 'onKernelController',
         ];
     }
 }
