@@ -74,7 +74,7 @@ class OrganizerController extends AbstractController implements IAuthorizedContr
                 } else {
                     $this->addFlash("danger", $errorMessage);
                 }
-                return $this->redirectToRoute("organizerMain", ['hash' => $hash->getHash()]);
+                return $this->redirectToRoute("organizerCreateTeams", ['hash' => $hash->getHash()]);
             }
             $teamsArray = $competition->getTeams();
 
