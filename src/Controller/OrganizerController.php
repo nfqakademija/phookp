@@ -5,9 +5,7 @@
  * Date: 18.10.29
  * Time: 21.19
  */
-
 namespace App\Controller;
-
 use App\Entity\Result;
 use App\Entity\Team;
 use App\Entity\Weighing;
@@ -27,6 +25,15 @@ use Symfony\Component\Translation\TranslatorInterface;
 
 class OrganizerController extends AbstractController implements IAuthorizedController
 {
+
+
+    public function index($hash){
+
+        return $this->render("organizerPanel/organizerPanel.html.twig", [
+          "hash"=>$hash,
+        ]);
+
+    }
     /**
      * @param Request $request
      * @param string $hash
@@ -67,7 +74,7 @@ class OrganizerController extends AbstractController implements IAuthorizedContr
                 } else {
                     $this->addFlash("danger", $errorMessage);
                 }
-                return $this->redirectToRoute("organizerMain", ['hash' => $hash->getHash()]);
+                return $this->redirectToRoute("organizerCreateTeams", ['hash' => $hash->getHash()]);
             }
             $teamsArray = $competition->getTeams();
 

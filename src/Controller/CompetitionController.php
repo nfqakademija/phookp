@@ -27,7 +27,7 @@ class CompetitionController extends AbstractController
         $competition = new Competition();
         $competition->setCompetitionDate(new \DateTime("tomorrow"));
         $form = $this->createForm(CompetitionFormType::class, $competition);
-        $form->add('save', SubmitType::class, array("label" => "form.competition_registration.create_button"));
+        $form->add('save', SubmitType::class, array("label" => "form.competition_registration.create_button", "attr"=>["class" => "button"]));
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()){

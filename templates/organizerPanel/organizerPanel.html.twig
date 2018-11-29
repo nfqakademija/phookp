@@ -1,0 +1,6 @@
+{% extends 'base.html.twig' %}
+{% block title %}Organizer panel{{ parent() }}{% endblock %}
+{% block body %}
+    <a href="/organizer/{{hash}}/createTeams" type="button" class="btn btn-danger">komandu prid</a>
+    <a href="/organizer/{{hash}}/teamsSectors" type="button" class="btn btn-danger">pradzia</a>
+{% endblock %}
