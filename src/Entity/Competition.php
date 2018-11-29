@@ -44,7 +44,6 @@ class Competition
      *     message= "Netinkamas renginio datos formatas!"
      * )
      * @Assert\Range(
-     *     min="now",
      *     max="+2 years",
      *     minMessage="Neteisingai nurodyta renginio data!",
      *     maxMessage="Negalima planuoti renginių daugiau nei du metai į priekį!"
@@ -139,8 +138,8 @@ class Competition
     /**
      * @ORM\Column(type="string", nullable=true)
      * @Assert\Length(
-     *    max="2000",
-     *    maxMessage="Taisyklių sąrašas negali viršyti 2000 simbolių"
+     *    max="4000",
+     *    maxMessage="Taisyklių sąrašas negali viršyti 4000 simbolių"
      * )
      */
     private $competitionRules;

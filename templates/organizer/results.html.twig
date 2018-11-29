@@ -4,6 +4,11 @@
     {% set hash = app.request.attributes.get('hash') %}
     {% set teamId = app.request.attributes.get('teamId') %}
     {% set weighing = app.request.attributes.get('weighingNr') %}
+    {#
+    TODO
+        sverimu juosta ir apatinis row su 'Kitas sektorius' ir 'Issaugoti' mygtukais turi but statinis (visada matomi)
+        sektoriai turi scrollintis atskirai nuo rezultatu input fieldu containerio
+    #}
     <div class="container">
         {#{{ dump(app.request.uri) }}#}
             <div class="card">
