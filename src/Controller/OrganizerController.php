@@ -5,9 +5,7 @@
  * Date: 18.10.29
  * Time: 21.19
  */
-
 namespace App\Controller;
-
 use App\Entity\Result;
 use App\Entity\Team;
 use App\Entity\Weighing;

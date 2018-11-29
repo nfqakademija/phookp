@@ -1,0 +1,30 @@
+
+.home-left-side {
+  .navbar {
+    background-color:transparent;
+  }
+}
+
+.navbar__link--black {
+  color: #000000;
+  &:hover{
+    color: $mainBlue;
+  }
+}
+
+.navbar {
+  background-color: $mainBlue;
+  color:black;
+}
+
+.nav-item {
+  color: #000;
+}
+
+.nav-link {
+  color: #000;
+}
+
+.navbar-brand {
+  color: #fff;
+}

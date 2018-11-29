@@ -1,6 +1,10 @@
 
 // the ~ allows you to reference things in node_modules
 @import "~bootstrap/scss/bootstrap";
+@import "./styles";
+
+
+
 
 .card-shadow{
   box-shadow: 10px 10px 5px grey;
