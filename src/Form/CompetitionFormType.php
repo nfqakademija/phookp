@@ -26,8 +26,8 @@ class CompetitionFormType extends AbstractType
             ->add("competitionType", ChoiceType::class, array("label" => "form.competition_registration.type",
                     "choices" => array(
                         "Top 5" => Competition::TYPE_TOP5,
-                        "Bendras svoris" => Competition::TYPE_TOTAL),
-                    'attr' => ['class' => 'form__select']
+                        "Bendras svoris" => Competition::TYPE_TOTAL)
+
             ))
             ->add('competitionSectorCount', NumberType::class, array("label" => "form.competition_registration.sectorCount", 'attr' => ['class' => 'form__input']))
             ->add('competitionWeighingsCount', NumberType::class, array("label" => "form.competition_registration.weighingCount", 'attr' => ['class' => 'form__input']))

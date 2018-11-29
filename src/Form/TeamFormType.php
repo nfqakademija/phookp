@@ -17,10 +17,10 @@ class TeamFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('teamName', TextType::class, array("label" => "form.team_registration.team_name"))
-            ->add('firstTeamMember', TextType::class, array("label" => "form.team_registration.team_member"))
-            ->add('secondTeamMember', TextType::class, array("label" => "form.team_registration.team_member"))
-            ->add('thirdTeamMember', TextType::class, array("label" => "form.team_registration.team_member")
+            ->add('teamName', TextType::class, array("label" => "form.team_registration.team_name",'attr' => ['class' => 'form__input']))
+            ->add('firstTeamMember', TextType::class, array("label" => "form.team_registration.team_member",'attr' => ['class' => 'form__input']))
+            ->add('secondTeamMember', TextType::class, array("label" => "form.team_registration.team_member",'attr' => ['class' => 'form__input']))
+            ->add('thirdTeamMember', TextType::class, array("label" => "form.team_registration.team_member",'attr' => ['class' => 'form__input'])
             );
     }
     public function configureOptions(OptionsResolver $resolver)

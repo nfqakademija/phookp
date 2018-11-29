@@ -1,5 +1,18 @@
 html, body {
   box-sizing: border-box;
+  padding-top: 0 !important;
+}
+
+.fa{
+  font-weight: 600;
+}
+
+.fa-map-marker-alt{
+  color: $mainBlue;
+}
+
+.fa-calendar-alt{
+  color: $mainBlue;
 }
 
 .home-start {
@@ -82,15 +95,16 @@ html, body {
   height: 50px;
   border-radius: 50px;
   font-size: 16px;
-  color: $mainBlue;
+  color: #fff;
+  background-color: $mainBlue;
 }
 
 .button__blue-transparent {
-  background-color: transparent;
+  background-color: $mainBlue;
   border: 1px solid $mainBlue;
 
   &:hover {
-    background-color: $mainBlue;
+    background-color: darken($mainBlue, 10%);
     color: #fff;
   }
 }
@@ -106,6 +120,33 @@ html, body {
 #About-us {
   padding-top: 20px;
   padding-bottom: 20px;
+  min-height: 65vh;
+  color:white;
+  background:
+ // linear-gradient(rgba(0, 163, 255, 0.7), #2d733d), url("./about-us_bg.jpeg") no-repeat fixed center;
+linear-gradient(rgba(76, 86, 93, 0.7), #7a867d), url("./about-us_bg.jpeg") no-repeat fixed center;
+  -webkit-background-size: cover;
+  background-size: cover;
+  .heading {
+    color: #fff;
+  }
+  .bg-red {
+    height: 350px;
+    width: 100%;
+    background-color: #3c3540;
+  }
+}
+
+#previous-events {
+  div.d-flex{
+    border: 1px solid $mainGrey;
+  }
+}
+
+#akimirkos-is-renginiu {
+  background: url("./competition_bg.png") no-repeat fixed center;
+  -webkit-background-size: cover;
+  background-size: cover;
 }
 
 .moments-container {
@@ -115,5 +156,10 @@ html, body {
     height: 350px;
     border: 1px solid black;
   }
+}
+
+.navbar {
+  background-color: $mainBlue;
+  color:white;
 }
 

@@ -54,7 +54,7 @@ class OrganizerController extends AbstractController implements IAuthorizedContr
             $data['teams'][] = $team;
         }
         $form = $this->createForm(TeamsFormType::class, $data);
-        $form->add('save', SubmitType::class, array("label" => "form.team_registration.create_button"));
+        $form->add('save', SubmitType::class, array("label" => "form.team_registration.create_button",'attr' => ['class' => 'button btn'] ));
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $hash=$hashService->findByHash($hash);
