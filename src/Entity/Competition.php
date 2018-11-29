@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\competitionRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\CompetitionRepository")
  */
 class Competition
 {
@@ -81,7 +81,7 @@ class Competition
      * )
      * @Assert\Length(
      *     max="90",
-     *     maxMessage="El. .pašto adreso ilgis negali virsyti 90 simboliu!"
+     *     maxMessage="El.pašto adresas negali viršyti 90 simbolių!"
      * )
      */
     private $competitionOrganiserEmail;
@@ -139,8 +139,8 @@ class Competition
     /**
      * @ORM\Column(type="string", nullable=true)
      * @Assert\Length(
-     *    max="2000",
-     *    maxMessage="Taisyklių sąrašas negali viršyti 2000 simbolių"
+     *    max="4000",
+     *    maxMessage="Taisyklių sąrašas negali viršyti 4000 simbolių"
      * )
      */
     private $competitionRules;
@@ -428,7 +428,6 @@ class Competition
     {
         if ($this->weighings->contains($weighing)) {
             $this->weighings->removeElement($weighing);
-            // set the owning side to null (unless already changed)
             if ($weighing->getCompetition() === $this) {
                 $weighing->setCompetition(null);
             }

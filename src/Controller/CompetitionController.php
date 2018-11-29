@@ -1,5 +1,7 @@
 <?php
+
 namespace App\Controller;
+
 use App\Event\CompetitionCreatedEvent;
 use App\Services\CompetitionService;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;

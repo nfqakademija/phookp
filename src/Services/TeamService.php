@@ -33,6 +33,7 @@ class TeamService
      * TeamService constructor.
      * @param TeamRepository $teamRepository
      * @param LoggerInterface $logger
+     * @param ValidatorInterface $validator
      */
     public function __construct(TeamRepository $teamRepository, LoggerInterface $logger, ValidatorInterface $validator)
     {
@@ -116,7 +117,7 @@ class TeamService
      * @param array $teams
      * @return bool
      */
-    public function addTeamsSectors(array $teams)
+    public function addTeamsSectors(array $teams) : bool
     {
         $isAdded=true;
         foreach ($teams as $team) {
