@@ -13,6 +13,10 @@ competitionGet:
 
 organizerMain:
   path: /organizer/{hash}
+  controller: App\Controller\OrganizerController::index
+
+organizerCreateTeams:
+  path: /organizer/{hash}/createTeams
   controller: App\Controller\OrganizerController::createTeam
 
 oranizerDeleteTeam:

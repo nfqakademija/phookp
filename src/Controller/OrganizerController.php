@@ -27,6 +27,15 @@ use Symfony\Component\Translation\TranslatorInterface;
 
 class OrganizerController extends AbstractController implements IAuthorizedController
 {
+
+
+    public function index($hash){
+
+        return $this->render("organizerPanel/organizerPanel.html.twig", [
+          "hash"=>$hash,
+        ]);
+
+    }
     /**
      * @param Request $request
      * @param string $hash
