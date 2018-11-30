@@ -30,3 +30,7 @@ organizerTeamsSectors:
 organizerResults:
   path: /organizer/{hash}/results/{teamId}/{weighingNr}
   controller: App\Controller\OrganizerController::results
+
+organizerFinishedCompetition:
+  path: /organizer/{hash}/finish
+  controller: App\Controller\OrganizerController::finish

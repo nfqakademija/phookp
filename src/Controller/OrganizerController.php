@@ -5,12 +5,16 @@
  * Date: 18.10.29
  * Time: 21.19
  */
+
 namespace App\Controller;
+
 use App\Entity\Competition;
 use App\Entity\Result;
 use App\Entity\Team;
 use App\Entity\Weighing;
 use App\Event\CompetitionConfirmedEvent;
+use App\Event\CompetitionFinishedEvent;
+use App\Event\CompetitionStartedEvent;
 use App\Form\TeamsFormType;
 use App\Form\TeamsSectorsFormType;
 use App\Form\WeighingFormType;
@@ -30,18 +34,28 @@ use Symfony\Component\Translation\TranslatorInterface;
 class OrganizerController extends AbstractController implements IAuthorizedController
 {
 
-
-    public function index($hash, HashService $hashService, CompetitionService $competitionService, EventDispatcherInterface $dispatcher){
-        $hashObject=$hashService->findByHash($hash);
-        $competition=$hashObject->getCompetition();
-        $status="confirmed";
-        $isConfirmed=$competitionService->competitionStatus($competition, $status);
-        if($isConfirmed===false) {
+    /**
+     * @param $hash
+     * @param HashService $hashService
+     * @param CompetitionService $competitionService
+     * @param EventDispatcherInterface $dispatcher
+     * @return Response
+     */
+    public function index(
+        $hash,
+        HashService $hashService,
+        CompetitionService $competitionService,
+        EventDispatcherInterface $dispatcher
+    ) {
+        $hashObject = $hashService->findByHash($hash);
+        $competition = $hashObject->getCompetition();
+        $isConfirmed = $competitionService->competitionStatus($competition, Competition::STATUS_CONFIRMED);
+        if ($isConfirmed === false) {
             $event = new CompetitionConfirmedEvent($competition);
             $dispatcher->dispatch(CompetitionConfirmedEvent::NAME, $event);
         }
         return $this->render("organizerPanel/organizerPanel.html.twig", [
-          "hash"=>$hash,
+            "hash" => $hash,
         ]);
     }
 
@@ -52,7 +66,6 @@ class OrganizerController extends AbstractController implements IAuthorizedContr
      * @param TeamService $teamService
      * @param TranslatorInterface $translator
      * @return Response
-     *
      */
     public function createTeam(
         Request $request,
@@ -61,10 +74,10 @@ class OrganizerController extends AbstractController implements IAuthorizedContr
         TeamService $teamService,
         TranslatorInterface $translator
     ) {
-        $hash = $hashService->findByHash($hash);
-        if ($hash) {
+        $hashObject = $hashService->findByHash($hash);
+        if ($hashObject) {
             $data = ['teams' => []];
-            $competition = $hash->getCompetition();
+            $competition = $hashObject->getCompetition();
             $teamsCount = $teamService->countTeams($competition);
             for ($i = 0; $i < $teamsCount; $i++) {
                 $team = new Team();
@@ -85,7 +98,7 @@ class OrganizerController extends AbstractController implements IAuthorizedContr
                 } else {
                     $this->addFlash("danger", $errorMessage);
                 }
-                return $this->redirectToRoute("organizerCreateTeams", ['hash' => $hash->getHash()]);
+                return $this->redirectToRoute("organizerCreateTeams", ['hash' => $hashObject->getHash()]);
             }
             $teamsArray = $competition->getTeams();
 
@@ -93,6 +106,7 @@ class OrganizerController extends AbstractController implements IAuthorizedContr
                 "form" => $form->createView(),
                 "teamsCount" => $teamsCount,
                 "teams" => $teamsArray,
+                "hash" => $hash
             ]);
         }
 
@@ -115,6 +129,8 @@ class OrganizerController extends AbstractController implements IAuthorizedContr
      * @param HashService $hashService
      * @param TeamService $teamService
      * @param TranslatorInterface $translator
+     * @param EventDispatcherInterface $dispatcher
+     * @param CompetitionService $competitionService
      * @return Response
      */
     public function addSectors(
@@ -122,11 +138,19 @@ class OrganizerController extends AbstractController implements IAuthorizedContr
         string $hash,
         HashService $hashService,
         TeamService $teamService,
-        TranslatorInterface $translator
+        TranslatorInterface $translator,
+        EventDispatcherInterface $dispatcher,
+        CompetitionService $competitionService
     ) {
-        $hash = $hashService->findByHash($hash);
-        $competition = $hash->getCompetition();
+        $hashObject = $hashService->findByHash($hash);
+        $competition = $hashObject->getCompetition();
+        $isStarted = $competitionService->competitionStatus($competition, Competition::STATUS_STARTED);
+        if ($isStarted === false) {
+            $event = new CompetitionStartedEvent($competition);
+            $dispatcher->dispatch(CompetitionStartedEvent::NAME, $event);
+        }
         $teams = $competition->getTeams();
+        $teamId = $competition->getTeams()->first()->getId();
         $data = ['teams' => $competition->getTeams()->toArray()];
         $form = $this->createForm(TeamsSectorsFormType::class, $data);
         $form->add('save', SubmitType::class, array("label" => "form.team_sectors_assignment.add_button"));
@@ -137,11 +161,15 @@ class OrganizerController extends AbstractController implements IAuthorizedContr
 
             if ($isAdded === true) {
                 $this->addFlash("success", $translator->trans("form.team_sectors_assignment.success_message"));
+                return $this->redirectToRoute("organizerResults",
+                    ['hash' => $hashObject->getHash(), 'teamId' => $teamId, "weighingNr" => 1]);
             }
         }
         return $this->render("team/sectors.html.twig", [
             "form" => $form->createView(),
             "teams" => $teams,
+            "hash" => $hash,
+            "teamsId" => $teamId,
         ]);
 
     }
@@ -230,8 +258,30 @@ class OrganizerController extends AbstractController implements IAuthorizedContr
             "teams" => $teams,
             "form" => $form->createView(),
             "competition" => $competition,
-            "weighings" => $weighings
+            "weighings" => $weighings,
+            "hash" => $hash,
+            "teamId" => $teamId,
+            "weighingNr" => $weighingNr,
         ));
     }
 
+    public function finish(
+        $hash,
+        HashService $hashService,
+        CompetitionService $competitionService,
+        EventDispatcherInterface $dispatcher,
+        TranslatorInterface $translator
+    ) {
+        $hashObject = $hashService->findByHash($hash);
+        $competition = $hashObject->getCompetition();
+        $isFinished = $competitionService->competitionStatus($competition, Competition::STATUS_FINISHED);
+
+        if ($isFinished === false) {
+            $event = new CompetitionFinishedEvent($competition);
+            $dispatcher->dispatch(CompetitionFinishedEvent::NAME, $event);
+        }
+
+        $this->addFlash("success", $translator->trans("competition.finished_message"));
+        return $this->redirectToRoute("home");
+    }
 }

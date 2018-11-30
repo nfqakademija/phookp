@@ -4,9 +4,16 @@
     {% set hash = app.request.attributes.get('hash') %}
     {% set teamId = app.request.attributes.get('teamId') %}
     {% set weighing = app.request.attributes.get('weighingNr') %}
+    <div class="col-lg-2">
+        <div class="list-group">
+            <a href="/organizer/{{hash}}/results/{{teamId}}/{{weighingNr}}" class="list-group-item">Rezultatai</a>
+            <a href=" " class="list-group-item ">Komandos</a>
+            <a href="/organizer/{{hash}}/finish" class="list-group-item">Varzybu uzbaigimas</a>
+        </div>
+    </div>
     <div class="container">
         {#{{ dump(app.request.uri) }}#}
-            <div class="card">
+            <div class="card col-lg-10">
                 <div class="card-header text-center h5 bg-dark text-light px-0">
                     {% if weighing > 1 %}
                     <a href="{{ path(app.request.attributes.get('_route'), {

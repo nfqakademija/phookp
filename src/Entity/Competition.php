@@ -15,6 +15,10 @@ class Competition
 
     public const TYPE_TOP5 = "top5";
     public const TYPE_TOTAL = "total";
+    public const STATUS_UNCONFIRMED = "unconfirmed";
+    public const STATUS_CONFIRMED = "confirmed";
+    public const STATUS_STARTED = "started";
+    public const STATUS_FINISHED = "finished";
 
     /**
      * @ORM\Id()
@@ -103,7 +107,7 @@ class Competition
     /**
      * @ORM\Column(type="string", length=30)
      */
-    private $competitionStatus = "unconfirmed";
+    private $competitionStatus=Competition::STATUS_UNCONFIRMED;
 
     /**
      * @ORM\Column(type="integer")
@@ -134,7 +138,7 @@ class Competition
      *     message="Nurodyta nuoroda yra neteisinga",
      * )
      */
-     private $competitionLink;
+    private $competitionLink;
 
     /**
      * @ORM\Column(type="string", nullable=true)
@@ -297,6 +301,7 @@ class Competition
         $this->competitionWeighingsCount = $competitionWeighingsCount;
         return $this;
     }
+
     /**
      * @return mixed
      */
@@ -343,24 +348,29 @@ class Competition
         }
         return $this;
     }
+
     public function getCompetitionLink(): ?string
     {
         return $this->competitionLink;
     }
+
     public function setCompetitionLink(?string $competitionLink): self
     {
         $this->competitionLink = $competitionLink;
         return $this;
     }
+
     public function getCompetitionRules(): ?string
     {
         return $this->competitionRules;
     }
+
     public function setCompetitionRules(?string $competitionRules): self
     {
         $this->competitionRules = $competitionRules;
         return $this;
     }
+
     /**
      * @return Collection|Team[]
      */
