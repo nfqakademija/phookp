@@ -6,17 +6,21 @@
  * Time: 21.19
  */
 namespace App\Controller;
+use App\Entity\Competition;
 use App\Entity\Result;
 use App\Entity\Team;
 use App\Entity\Weighing;
+use App\Event\CompetitionConfirmedEvent;
 use App\Form\TeamsFormType;
 use App\Form\TeamsSectorsFormType;
 use App\Form\WeighingFormType;
+use App\Services\CompetitionService;
 use App\Services\HashService;
 use App\Services\ResultService;
 use App\Services\TeamService;
 use App\Services\WeighingService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -27,13 +31,20 @@ class OrganizerController extends AbstractController implements IAuthorizedContr
 {
 
 
-    public function index($hash){
-
+    public function index($hash, HashService $hashService, CompetitionService $competitionService, EventDispatcherInterface $dispatcher){
+        $hashObject=$hashService->findByHash($hash);
+        $competition=$hashObject->getCompetition();
+        $status="confirmed";
+        $isConfirmed=$competitionService->competitionStatus($competition, $status);
+        if($isConfirmed===false) {
+            $event = new CompetitionConfirmedEvent($competition);
+            $dispatcher->dispatch(CompetitionConfirmedEvent::NAME, $event);
+        }
         return $this->render("organizerPanel/organizerPanel.html.twig", [
           "hash"=>$hash,
         ]);
-
     }
+
     /**
      * @param Request $request
      * @param string $hash

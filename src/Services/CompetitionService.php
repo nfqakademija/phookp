@@ -91,4 +91,18 @@ final class CompetitionService
         }
         return $array;
     }
+
+    public function competitionStatus($competition, $status){
+        $competitionStatus=$competition->getCompetitionStatus();
+        if ($competitionStatus===$status){
+           return true;
+        }
+        return false;
+    }
+
+    public function changeStatus(string $status,Competition $competition){
+        $competition->setCompetitionStatus($status);
+        $this->competitionRepository->save($competition);
+        $this->competitionRepository->flush();
+    }
 }
