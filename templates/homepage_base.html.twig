@@ -13,9 +13,9 @@
     {% block canonical_meta %}{% endblock %}
 </head>
 <body>
-        {% include "navBar/navBar.html.twig" %}
-        {% include "flashMessages.html.twig" %}
-        {% block body %}{% endblock %}
+{#Removed navBar#}
+{% include "flashMessages.html.twig" %}
+{% block body %}{% endblock %}
 <footer class="py-5">
     <div class="container">
         <p class="m-0 text-center text-white">Copyright &copy; PHookP 2018</p>

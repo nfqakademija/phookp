@@ -13,7 +13,7 @@ use App\Entity\Team;
 use App\Entity\Weighing;
 use App\Form\TeamsFormType;
 use App\Form\TeamsSectorsFormType;
-use App\Form\WeighingType;
+use App\Form\WeighingFormType;
 use App\Services\HashService;
 use App\Services\ResultService;
 use App\Services\TeamService;
@@ -26,7 +26,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Translation\TranslatorInterface;
 
 
-class OrganizerController extends AbstractController implements IAuthorizedController
+class OrganizerController extends AbstractController implements AuthorizedControllerInterface
 {
 
     private $teamService;
@@ -35,6 +35,7 @@ class OrganizerController extends AbstractController implements IAuthorizedContr
     {
         $this->teamService = $service;
     }
+
     /**
      * @Route("/organizer/{hash}", name="organizerMain")
      * @param Request $request
@@ -51,7 +52,8 @@ class OrganizerController extends AbstractController implements IAuthorizedContr
         HashService $hashService,
         TeamService $teamService,
         TranslatorInterface $translator
-    ) {
+    )
+    {
         $hash = $hashService->findByHash($hash);
         if ($hash) {
             $data = ['teams' => []];
@@ -113,7 +115,7 @@ class OrganizerController extends AbstractController implements IAuthorizedContr
     {
         $hash = $hashService->findByHash($hash);
         $competition = $hash->getCompetition();
-        $teams=$competition->getTeams();
+        $teams = $competition->getTeams();
         $data = ['teams' => $competition->getTeams()->toArray()];
         $form = $this->createForm(TeamsSectorsFormType::class, $data);
         $form->add('save', SubmitType::class, array("label" => "form.team_registration_sectors.add_button"));
@@ -125,7 +127,7 @@ class OrganizerController extends AbstractController implements IAuthorizedContr
         }
         return $this->render("team/sectors.html.twig", [
             "form" => $form->createView(),
-            "teams"=>$teams,
+            "teams" => $teams,
         ]);
 
     }
@@ -141,7 +143,7 @@ class OrganizerController extends AbstractController implements IAuthorizedContr
         $weighings = $competition->getWeighings();
         $teams = $competition->getTeams();
 
-        if($teamId === null)
+        if ($teamId === null)
             $teamId = $teams[0]->getId();
 
         // Validation
@@ -156,17 +158,16 @@ class OrganizerController extends AbstractController implements IAuthorizedContr
             return $this->redirectToRoute("organizerResults", array("hash" => $hash, "teamId" => $teams[0]->getId(), "weighingNr" => count($weighings) + 1));
         }
 
-        if(!$teams->exists(function($key, $element) use ($teamId){
+        if (!$teams->exists(function ($key, $element) use ($teamId) {
             return $teamId === $element->getId();
-        }))
-        {
+        })) {
             $this->addFlash("error", "Klaida: nurodyta komanda nedalyvauja varzybose!");
             $this->redirectToRoute("organizerMain", array("hash" => $hash));
         }
 
         $team = $teamService->find($teamId);
 
-        if(count($weighings) === 0 || count($weighings) < $weighingNr){
+        if (count($weighings) === 0 || count($weighings) < $weighingNr) {
             $weighing = new Weighing();
 
             for ($i = 0; $i < 5; $i++) {
@@ -177,16 +178,15 @@ class OrganizerController extends AbstractController implements IAuthorizedContr
             $weighing = $weighings[$weighingNr - 1];
             $results = $resultService->getTeamResults($teamId, $weighing->getId());
             $weighing->setResults($results);
-            do{
+            do {
                 $result = new Result();
                 $weighing->addResult($result);
-            }
-            while(count($weighing->getResults()) < 5);
+            } while (count($weighing->getResults()) < 5);
 
         }
 
 
-        $form = $this->createForm(WeighingType::class, $weighing);
+        $form = $this->createForm(WeighingFormType::class, $weighing);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $data = $form->getData();

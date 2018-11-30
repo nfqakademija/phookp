@@ -1,12 +1,13 @@
 <?php
+
 namespace App\Controller;
+
 use App\Event\CompetitionCreatedEvent;
 use App\Services\CompetitionService;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use App\Form\CompetitionFormType;
 use App\Entity\Competition;
@@ -20,14 +21,13 @@ class CompetitionController extends AbstractController
      * @param TranslatorInterface $translator
      * @param EventDispatcherInterface $dispatcher
      * @return Response
-     * @Route("/competition/create", name="competitionCreate")
      */
     public function createCompetition(Request $request,CompetitionService $competitionService, TranslatorInterface $translator, EventDispatcherInterface $dispatcher)
     {
         $competition = new Competition();
         $competition->setCompetitionDate(new \DateTime("tomorrow"));
         $form = $this->createForm(CompetitionFormType::class, $competition);
-        $form->add('save', SubmitType::class, array("label" => "form.competition_registration.create_button"));
+        $form->add('save', SubmitType::class, array("label" => "form.competition_registration.create_button", "attr"=>["class" => "button"]));
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()){
@@ -48,7 +48,6 @@ class CompetitionController extends AbstractController
      * @param Competition $competition
      * @param CompetitionService $competitionService
      * @return Response
-     * @Route("/competition/get/{id}", name="getCompetition", methods={"GET", "HEAD"})
      */
     public function getCompetition(Competition $competition,CompetitionService $competitionService)
     {

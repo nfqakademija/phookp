@@ -8,12 +8,12 @@ use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class WeighingType extends AbstractType
+class WeighingFormType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('results', CollectionType::class, array("entry_type" => ResultType::class, 'allow_add' => true))
+            ->add('results', CollectionType::class, array("entry_type" => ResultFormType::class, 'allow_add' => true))
         ;
     }
 

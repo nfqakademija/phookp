@@ -34,3 +34,10 @@ const createNewInput = () => {
 };
 
 document.querySelector("#addButton").addEventListener("click", createNewInput);
+
+document.addEventListener('keydown', (e) => {
+    if(e.key === "Enter"){
+        createNewInput();
+        e.preventDefault();
+    }
+});
