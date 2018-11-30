@@ -18,7 +18,7 @@ class CompetitionFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('competitionOrganiser', TextType::class, array("label" => "form.competition_registration.organiser", 'attr' => ['class' => 'form__input']))
+            ->add('competitionOrganiser', TextType::class, array("label" => "form.competition_registration.organiser",'label_attr' => ['class' => 'mdl-textfield__label'], 'attr' => ['class' => 'textfield__input']))
             ->add('competitionOrganiserEmail', EmailType::class, array("label" => "form.competition_registration.mail",'attr' => ['class' => 'form__input']))
             ->add('competitionName', TextType::class, array("label" => "form.competition_registration.name", 'attr' => ['class' => 'form__input']))
             ->add('competitionDate', DateType::class, array("label" => "form.competition_registration.start_date",'attr' => ['class' => 'form__select']))
