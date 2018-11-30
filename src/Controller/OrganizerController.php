@@ -13,7 +13,7 @@ use App\Entity\Team;
 use App\Entity\Weighing;
 use App\Form\TeamsFormType;
 use App\Form\TeamsSectorsFormType;
-use App\Form\WeighingType;
+use App\Form\WeighingFormType;
 use App\Services\HashService;
 use App\Services\ResultService;
 use App\Services\TeamService;
@@ -186,7 +186,7 @@ class OrganizerController extends AbstractController implements AuthorizedContro
         }
 
 
-        $form = $this->createForm(WeighingType::class, $weighing);
+        $form = $this->createForm(WeighingFormType::class, $weighing);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $data = $form->getData();
