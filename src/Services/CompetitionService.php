@@ -17,15 +17,7 @@ use JMS\Serializer\SerializerBuilder;
 
 final class CompetitionService
 {
-    /**
-     * Array for competition status: event name -> state value in database
-     */
-    private const STATUS = array(
-        'CREATED' => 'unconfirmed',
-        'CONFIRMED' => 'confirmed',
-        'STARTED' => 'started',
-        'FINISHED' => 'finished'
-    );
+
     /**
      * @var CompetitionRepository
      */
@@ -90,5 +82,30 @@ final class CompetitionService
             array_push($array, $a);
         }
         return $array;
+    }
+
+    /**
+     * @param $competition
+     * @param $status
+     * @return bool
+     */
+    public function competitionStatus(Competition $competition,string $status): bool
+    {
+        $competitionStatus=$competition->getCompetitionStatus();
+        if ($competitionStatus===$status){
+           return true;
+        }
+        return false;
+    }
+
+    /**
+     * @param string $status
+     * @param Competition $competition
+     */
+    public function changeStatus(string $status,Competition $competition)
+    {
+        $competition->setCompetitionStatus($status);
+        $this->competitionRepository->save($competition);
+        $this->competitionRepository->flush();
     }
 }

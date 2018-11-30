@@ -38,4 +38,8 @@ class CompetitionRepository extends ServiceEntityRepository
     {
         $this->entityManager->flush();
     }
+    public function findByCompetition($competition)
+    {
+        return $this->findBy($competition);
+    }
 }
