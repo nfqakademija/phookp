@@ -40,8 +40,8 @@ html, body {
 }
 
 .image--small {
-  width: 150px;
-  height: 100px;
+  width: 180px;
+  margin-right: 10px;
 }
 
 .heading {
@@ -191,6 +191,6 @@ html, body {
 
 .event__line-container {
   margin: 40px;
-  padding-bottom: 40px;
+  padding: 0 10px 40px 30px;
   border-bottom: 1px solid $mainBlue;
 }
