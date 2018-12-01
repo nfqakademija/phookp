@@ -235,6 +235,24 @@
             </div>
         </div>
     </section>
+    <section id="upcoming-events" class="mb-3">
+        <div class="container-fluid">
+            <div class="container">
+                <h2 class="heading heading--blue-border heading--center">Būsimi renginiai</h2>
+                <div class="card my-4 card-shadow">
+                    <div class="card-body">
+                        <h4 class="card-title text-truncate">Šiuo metu vyksta: </h4>
+                        {% for competition in competitions %}
+                            <h5 class="card-subtitle mb-2 text-muted">{{ competition["competition_name"] }}</h5>
+                            <small class="text-muted">Data: {{ competition["competition_date"] }}</small>
+                            <hr>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </section>
 
     <section id="kontaktai" class=" u-pb-5">
         <div class="container">

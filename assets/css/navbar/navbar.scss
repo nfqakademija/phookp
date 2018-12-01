@@ -34,6 +34,11 @@ ul.navbar-nav {
 }
 
 .navbar-default {
-  background-color: #f8f8f8;
-  border-bottom: 1px solid #cac8c8;
+  background-color: #fff;
+  border-bottom: 1px solid $mainBlue;
+}
+
+.nav-transparent {
+  background: transparent;
+  border: none;
 }

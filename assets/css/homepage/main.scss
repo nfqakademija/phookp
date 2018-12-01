@@ -198,6 +198,21 @@
   }
 }
 
+#upcoming-events {
+  padding: 20px;
+  .heading {
+    color: #fff;
+  }
+  min-height: 40vh;
+  background:
+          linear-gradient(rgba(0, 0, 0, 0.40), rgba(0, 0, 0, 0.40)), url("./about-us_bg.jpeg") no-repeat fixed center;
+  -webkit-background-size: cover;
+  background-size: cover;
+  .card {
+    box-shadow: none;
+  }
+}
+
 /*Kontaktų sekcija*/
 
 .contact-card {

@@ -8,7 +8,9 @@ body, html {
 }
 
 footer {
-  color: #000;
+  color: black;
+  border-top: 1px solid $mainBlue;
+  background: #fff;
 }
 
 h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
