@@ -177,6 +177,26 @@
   }
 }
 
+/*About us*/
+.about-us-container {
+  img {
+    width: 100%;
+  }
+  h2 {
+    border-bottom: 1px solid $mainBlue;
+    font-size: 50px;
+  }
+  .about-us-text-container {
+    padding: 60px;
+  }
+}
+
+#about-us {
+  padding: 0;
+  .container-fluid {
+    padding: 0;
+  }
+}
 
 /*Kontaktų sekcija*/
 
