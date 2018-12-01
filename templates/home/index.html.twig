@@ -1,4 +1,4 @@
-{% extends 'homepage_base.html.twig' %}
+{% extends 'base.html.twig' %}
 
 {% block title %}Sportinė karpių žuklė{{ parent() }}{% endblock %}
 
@@ -8,7 +8,7 @@
 
         <div class="row">
             <div class="home-left-side col-lg-6 col-sm-12">
-                {% include "navBar/navBar.html.twig" %}
+                {#{% include "navBar/navBar.html.twig" %}#}
                 <div class="start-right-side-wrapper d-flex flex-column ">
                     <h1 class="heading heading--blue-border ">Sportinė karpių žuklė</h1>
 
@@ -71,13 +71,13 @@
         <div class="container">
             <h2 class="heading heading--blue-border heading--center">Praeiti renginiai</h2>
             <div class="ml-auto mr-auto row d-flex flex-row flex-wrap justify-content-center">
-                <div class="col-lg-6 col-sm-12">
+                <div class="col-lg-12 col-sm-12">
                     <div class="event mt-5 mb-5">
                         <div class="row">
-                            <div class="col-lg-4 col-sm-12">
+                            <div class="col-lg-3 col-sm-12">
                                 <img class="image--small" src="./images/fishing_example.jpeg" alt="">
                             </div>
-                            <div class="col-lg-8 col-sm-12">
+                            <div class="col-lg-6 col-sm-12">
                                 <h2 class="event__name">Pikts Karpis - TOP5, Punia 2018</h2>
                                 <div class="event__place">
                                     <i class="fa  fa-map-marker-alt"></i> <span class="ml-2">Punia, Alytus</span>
@@ -85,10 +85,13 @@
                                 <div class="event__date"><i class="fa fa-calendar-alt"></i> <span class="ml-2"> 2018-02-12 - 2018-02-15</span>
                                 </div>
                             </div>
+                            <div class="col-lg-3 col-sm-12">
+                                <a href="#" class="button">Rezultatai</a>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-6 col-sm-12">
+                <div class="col-lg-12 col-sm-12">
                     <div class="event mt-5 mb-5">
                         <div class="row">
                             <div class="col-lg-4 col-sm-12">
@@ -106,77 +109,8 @@
 
                     </div>
                 </div>
-                <div class="col-lg-6 col-sm-12">
-                    <div class="event mt-5 mb-5">
-                        <div class="row">
-                            <div class="col-lg-4 col-sm-12">
-                                <img class="image--small" src="./images/fishing_example.jpeg" alt="">
-                            </div>
-                            <div class="col-lg-8 col-sm-12">
-                                <h2 class="event__name">Pikts Karpis, Punios taurė 2018 </h2>
-                                <div class="event__place">
-                                    <i class="fa  fa-map-marker-alt"></i> <span class="ml-2">Punia, Alytus</span>
-                                </div>
-                                <div class="event__date"><i class="fa fa-calendar-alt"></i> <span class="ml-2"> 2018-02-12 - 2018-02-15</span>
-                                </div>
-                            </div>
-                        </div>
 
-                    </div>
-                </div>
-                <div class="col-lg-6 col-sm-12">
-                    <div class="event mt-5 mb-5">
-                        <div class="row">
-                            <div class="col-lg-4 col-sm-12">
-                                <img class="image--small" src="./images/fishing_example.jpeg" alt="">
-                            </div>
-                            <div class="col-lg-8 col-sm-12">
-                                <h2 class="event__name">Pikts Karpis - TOP5, Punia 2018</h2>
-                                <div class="event__place">
-                                    <i class="fa  fa-map-marker-alt"></i> <span class="ml-2">Punia, Alytus</span>
-                                </div>
-                                <div class="event__date"><i class="fa fa-calendar-alt"></i> <span class="ml-2"> 2018-02-12 - 2018-02-15</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-6 col-sm-12">
-                    <div class="event mt-5 mb-5">
-                        <div class="row">
-                            <div class="col-lg-4 col-sm-12">
-                                <img class="image--small" src="./images/fishing_example.jpeg" alt="">
-                            </div>
-                            <div class="col-lg-8 col-sm-12">
-                                <h2 class="event__name">Pikts Karpis - Pykaičių taurė 2018</h2>
-                                <div class="event__place">
-                                    <i class="fa  fa-map-marker-alt"></i> <span class="ml-2">Pikaiciai, Alytus</span>
-                                </div>
-                                <div class="event__date"><i class="fa fa-calendar-alt"></i> <span class="ml-2"> 2018-02-12 - 2018-02-15</span>
-                                </div>
-                            </div>
-                        </div>
 
-                    </div>
-                </div>
-                <div class="col-lg-6 col-sm-12">
-                    <div class="event mt-5 mb-5">
-                        <div class="row">
-                            <div class="col-lg-4 col-sm-12">
-                                <img class="image--small" src="./images/fishing_example.jpeg" alt="">
-                            </div>
-                            <div class="col-lg-8 col-sm-12">
-                                <h2 class="event__name">Pikts Karpis, Punios taurė 2018 </h2>
-                                <div class="event__place">
-                                    <i class="fa  fa-map-marker-alt"></i> <span class="ml-2">Punia, Alytus</span>
-                                </div>
-                                <div class="event__date"><i class="fa fa-calendar-alt"></i> <span class="ml-2"> 2018-02-12 - 2018-02-15</span>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
 
             </div>
         </div>

@@ -17,8 +17,9 @@ html, body {
 
 .home-start {
   height: 100vh;
+  margin-top: -20px;
   .heading {
-    margin-top: 10rem;
+    margin-top: 13rem;
   }
 }
 
@@ -124,7 +125,7 @@ html, body {
   color:white;
   background:
  // linear-gradient(rgba(0, 163, 255, 0.7), #2d733d), url("./about-us_bg.jpeg") no-repeat fixed center;
-linear-gradient(rgba(76, 86, 93, 0.7), #7a867d), url("./about-us_bg.jpeg") no-repeat fixed center;
+linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("./about-us_bg.jpeg") no-repeat fixed center;
   -webkit-background-size: cover;
   background-size: cover;
   .heading {
@@ -158,8 +159,7 @@ linear-gradient(rgba(76, 86, 93, 0.7), #7a867d), url("./about-us_bg.jpeg") no-re
   }
 }
 
-.navbar {
-  background-color: $mainBlue;
-  color:white;
+#akimirkos-is-renginiu {
+  background-color: rgba(0,0,0,0.8);
 }
 
