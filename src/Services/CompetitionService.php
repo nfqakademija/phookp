@@ -9,11 +9,9 @@
 namespace App\Services;
 
 use App\Entity\Competition;
-use App\Entity\Hash;
 use App\Repository\CompetitionRepository;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
-use JMS\Serializer\SerializerBuilder;
 
 final class CompetitionService
 {
@@ -35,18 +33,24 @@ final class CompetitionService
      */
 
     private $hashService;
+
     /**
      * CompetitionService constructor.
      * @param CompetitionRepository $competitionRepository
      * @param ValidatorInterface $validator
      * @param LoggerInterface $logger
+     * @param HashService $hashService
      */
-    public function __construct(CompetitionRepository $competitionRepository, ValidatorInterface $validator, LoggerInterface $logger,HashService $hashService)
-    {
+    public function __construct(
+        CompetitionRepository $competitionRepository,
+        ValidatorInterface $validator,
+        LoggerInterface $logger,
+        HashService $hashService
+    ) {
 
         $this->competitionRepository = $competitionRepository;
         $this->validator = $validator;
-        $this->hashService=$hashService;
+        $this->hashService = $hashService;
         $this->logger = $logger;
     }
 
@@ -54,7 +58,7 @@ final class CompetitionService
      * @param Competition $competition
      * @return Competition|null
      */
-    public function create(Competition $competition):?Competition
+    public function create(Competition $competition): ?Competition
     {
         $this->competitionRepository->save($competition);
         $this->hashService->create($competition);
@@ -72,16 +76,72 @@ final class CompetitionService
         return $competition;
     }
 
-    public function getFutureCompetitions():?array
+    /**
+     * @return array
+     */
+    public function getFutureCompetitions(): ?array
     {
-        $competitions = $this->competitionRepository->findAll();
-        $array  = array();
-        foreach($competitions as $competition){
-            $serializer = SerializerBuilder::create()->build();
-            $a = $serializer->toArray($competition);
-            array_push($array, $a);
+        $futureCompetitions = $this->competitionRepository->findFutureCompetitions();
+        $competitions = [];
+        foreach ($futureCompetitions as $competition) {
+            $data = $this->getParameters($competition);
+            array_push($competitions, $data);
         }
-        return $array;
+        return $competitions;
+    }
+
+    /**
+     * @return array
+     */
+    public function getGoingCompetitions() :?array
+    {
+        $goingCompetitions = $this->competitionRepository->findGoingCompetitions();
+        $competitions = [];
+        foreach ($goingCompetitions as $competition) {
+            $data = $this->getParameters($competition);
+            array_push($competitions, $data);
+        }
+        return $competitions;
+    }
+
+    /**
+     * @return array|null
+     */
+    public function getExpiredCompetitions(): ?array
+    {
+        $expiredCompetitions = $this->competitionRepository->findExpiredCompetitions();
+        $competitions = [];
+        foreach ($expiredCompetitions as $competition) {
+            $data = $this->getParameters($competition);
+            array_push($competitions, $data);
+        }
+        return $competitions;
+    }
+
+    /**
+     * @param $competition
+     * @return array
+     */
+    public function getParameters(Competition $competition): array
+    {
+        $id = $competition->getId();
+        $name = $competition->getCompetitionName();
+        $startDate = $competition->getCompetitionDate()->format("Y-m-d");
+        $duration = $competition->getCompetitionDuration();
+        $finishDate = $this->getDurationDate($startDate, $duration);
+        $competition = ["id" => $id, "name" => $name, "startDate" => $startDate, "finishDate" => $finishDate];
+        return $competition;
+    }
+
+    /**
+     * @param string $startDate
+     * @param string $duration
+     * @return string
+     */
+    public function getDurationDate(string $startDate, string $duration): string
+    {
+        $addDuration = strtotime($startDate . "+ $duration days");
+        return date("Y-m-d", $addDuration);
     }
 
     /**
@@ -89,11 +149,11 @@ final class CompetitionService
      * @param $status
      * @return bool
      */
-    public function competitionStatus(Competition $competition,string $status): bool
+    public function competitionStatus(Competition $competition, string $status): bool
     {
-        $competitionStatus=$competition->getCompetitionStatus();
-        if ($competitionStatus===$status){
-           return true;
+        $competitionStatus = $competition->getCompetitionStatus();
+        if ($competitionStatus === $status) {
+            return true;
         }
         return false;
     }
@@ -102,7 +162,7 @@ final class CompetitionService
      * @param string $status
      * @param Competition $competition
      */
-    public function changeStatus(string $status,Competition $competition)
+    public function changeStatus(string $status, Competition $competition)
     {
         $competition->setCompetitionStatus($status);
         $this->competitionRepository->save($competition);
