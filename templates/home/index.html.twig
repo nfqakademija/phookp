@@ -72,18 +72,19 @@
             </section>
         </div>
     </div>
-    <section id="akimirkos-is-renginiu " class="mt-4 mb-4 section bg-light">
+    <section id="akimirkos-is-renginiu" class="mb-4 section pb-4 bg-light">
 
         <div class="container">
             <h2 class="heading heading--blue-border heading--center">Akimirkos iš renginių</h2>
             <div class="row">
-                <div class="moments-container d-flex flex-row flex-wrap justify-content-center pt-3">
-                    <div class="bg-red"></div>
-                    <div class="bg-red"></div>
-                    <div class="bg-red"></div>
-                    <div class="bg-red"></div>
-                    <div class="bg-red"></div>
-                    <div class="bg-red"></div>
+                <div class="moments-container mt-3">
+                    <img src="./images/event_bg.jpeg" alt="">
+                    <img src="./images/event_bg2.jpeg" alt="">
+                    <img src="./images/fishing.jpg" alt="">
+                    <img src="./images/upcoming-events_bg.jpeg" alt="">
+                    <img src="./images/about-us_bg.jpeg" alt="">
+                    <img src="./images/sektoriai.jpg" alt="">
+
                 </div>
             </div>
         </div>
@@ -241,12 +242,16 @@
                 <h2 class="heading heading--blue-border heading--center">Būsimi renginiai</h2>
                 <div class="card my-4 card-shadow">
                     <div class="card-body">
-                        <h4 class="card-title text-truncate">Šiuo metu vyksta: </h4>
-                        {% for competition in competitions %}
-                            <h5 class="card-subtitle mb-2 text-muted">{{ competition["competition_name"] }}</h5>
-                            <small class="text-muted">Data: {{ competition["competition_date"] }}</small>
-                            <hr>
-                        {% endfor %}
+                        {% if competitions is not empty %}
+                            <h4 class="card-title text-truncate">Šiuo metu vyksta: </h4>
+                            {% for competition in competitions %}
+                                <h5 class="card-subtitle mb-2 text-muted">{{ competition["competition_name"] }}</h5>
+                                <small class="text-muted">Data: {{ competition["competition_date"] }}</small>
+                                <hr>
+                            {% endfor %}
+                         {% else %}
+                             <h5 class="card-subtitle text-center mb-2 text-muted">Apgailiastaujame šiuo metu nevyksta jokie renginiai</h5>
+                        {% endif %}
                     </div>
                 </div>
             </div>

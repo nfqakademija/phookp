@@ -133,10 +133,17 @@
 
 
 .moments-container {
-  div {
-    width: 350px;
-    height: 350px;
-    border: 1px solid black;
+  //div {
+  //  width: 350px;
+  //  height: 350px;
+  //  border: 1px solid black;
+  //}
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  img{
+      flex-basis: 40%;
+      height: 250px;
   }
 }
 
@@ -205,7 +212,7 @@
   }
   min-height: 40vh;
   background:
-          linear-gradient(rgba(0, 0, 0, 0.40), rgba(0, 0, 0, 0.40)), url("./about-us_bg.jpeg") no-repeat fixed center;
+          linear-gradient(rgba(0, 0, 0, 0.40), rgba(0, 0, 0, 0.40)), url("./upcoming-events_bg.jpeg") no-repeat fixed center;
   -webkit-background-size: cover;
   background-size: cover;
   .card {
