@@ -1,10 +1,5 @@
-html, body {
-  box-sizing: border-box;
-  padding-top: 0 !important;
-}
-
 .fa{
-  font-weight: 600;
+  font-weight: 100;
 }
 
 .fa-map-marker-alt{
@@ -88,6 +83,7 @@ html, body {
 
 .event__name {
   font-size: 23px;
+  font-weight: 100;
 }
 
 .button {
@@ -156,6 +152,9 @@ html, body {
   .card-button-container {
     width: 100%;
   }
+  .card-title {
+    font-weight: 100;
+  }
   .card {
     flex-basis: 30%;
     min-width: 30%;
@@ -177,6 +176,27 @@ html, body {
     }
   }
 }
+
+
+/*Kontaktų sekcija*/
+
+.contact-card {
+  flex-basis: 30%;
+  max-width: 30%;
+  background-color: $darkBlue;
+  border-radius: 0;
+  box-shadow: none;
+  border: none;
+  color: #fff;
+  font-weight: 500;
+  transition: 0.5s;
+  &:hover {
+    -webkit-box-shadow: 0 0 24px 0 rgba(0,0,0,0.75);
+    -moz-box-shadow: 0 0 24px 0 rgba(0,0,0,0.75);
+    box-shadow: 0 0 24px 0 rgba(0,0,0,0.75);
+  }
+}
+
 
 /** JEI NEREIKES ISTRINTI */
 
