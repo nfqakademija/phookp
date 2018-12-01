@@ -67,18 +67,18 @@ html, body {
 }
 
 .event__date {
-  font-size: 24px;
+  font-size: 21px;
 
   i {
-    font-size: 30px;
+    font-size: 27px;
   }
 }
 
 .event__place {
-  font-size: 24px;
+  font-size: 21px;
 
   i {
-    font-size: 30px;
+    font-size: 27px;
   }
 }
 
@@ -87,7 +87,7 @@ html, body {
 }
 
 .event__name {
-  font-size: 28px;
+  font-size: 23px;
 }
 
 .button {
@@ -110,13 +110,11 @@ html, body {
   }
 }
 
-
 .home-right-side {
   height: 100vh;
   background-size: cover;
   background-image: url("./images/main_background.png");
 }
-
 
 #About-us {
   padding-top: 20px;
@@ -124,8 +122,7 @@ html, body {
   min-height: 65vh;
   color:white;
   background:
- // linear-gradient(rgba(0, 163, 255, 0.7), #2d733d), url("./about-us_bg.jpeg") no-repeat fixed center;
-linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("./about-us_bg.jpeg") no-repeat fixed center;
+  linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.55)), url("./about-us_bg.jpeg") no-repeat fixed center;
   -webkit-background-size: cover;
   background-size: cover;
   .heading {
@@ -138,20 +135,8 @@ linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("./about-us_bg.jpeg
   }
 }
 
-#previous-events {
-  div.d-flex{
-    border: 1px solid $mainGrey;
-  }
-}
-
-#akimirkos-is-renginiu {
-
-  -webkit-background-size: cover;
-  background-size: cover;
-}
 
 .moments-container {
-
   div {
     width: 350px;
     height: 350px;
@@ -163,3 +148,49 @@ linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url("./about-us_bg.jpeg
   background-color: rgba(0,0,0,0.8);
 }
 
+.event-card-container {
+  margin-top: 25px;
+  img {
+    min-height: 230px;
+  }
+  .card-button-container {
+    width: 100%;
+  }
+  .card {
+    flex-basis: 30%;
+    min-width: 30%;
+    margin-left: 1%;
+    box-shadow: 0 2px 2px 0 rgba(0,0,0,.14), 0 3px 1px -2px rgba(0,0,0,.2), 0 1px 5px 0 rgba(0,0,0,.12);
+    border-radius: 2px;
+    transition: 0.5s;
+    &:hover {
+      border: 1px solid $mainBlue;
+      margin-top: -10px;
+      box-shadow: none;
+      border-radius: 0;
+    }
+    .card-text {
+      margin-bottom: 10px;
+    }
+    .button {
+      height: auto;
+    }
+  }
+}
+
+/** JEI NEREIKES ISTRINTI */
+
+.event-container {
+  margin-top: 40px;
+  padding: 40px;
+  border: 1px solid $mainGrey;
+  .button {
+    height: auto;
+  }
+}
+
+.event__line-container {
+  margin: 40px;
+  padding-bottom: 40px;
+  border-bottom: 1px solid $mainBlue;
+}
