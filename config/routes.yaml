@@ -10,6 +10,10 @@ homeAboutUs:
   path: /home/about/us
   controller: App\Controller\HomeController::aboutUs
 
+homeContacts:
+  path: /home/contacts
+  controller: App\Controller\HomeController::contacts
+
 competitionCreate:
   path: /competition/create
   controller: App\Controller\CompetitionController::createCompetition

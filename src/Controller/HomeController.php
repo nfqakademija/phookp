@@ -48,4 +48,15 @@ class HomeController extends Controller
             ]);
     }
 
+    /**
+     * @return Response
+     */
+    public function contacts(){
+        return $this->render("home/contacts.html.twig",
+            [
+
+            ]
+        );
+    }
+
 }
