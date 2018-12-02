@@ -15,9 +15,12 @@ class HomeController extends Controller
     public function index(CompetitionService $competitionService)
     {
         $goingCompetitions = $competitionService->getGoingCompetitions();
+        $futureCompetitions = $competitionService->getFutureCompetitions();
+
         return $this->render("home/index.html.twig",
             [
                 "goingCompetitions" => $goingCompetitions,
+                "futureCompetitions" => $futureCompetitions
             ]);
 
     }
@@ -46,17 +49,6 @@ class HomeController extends Controller
             [
 
             ]);
-    }
-
-    /**
-     * @return Response
-     */
-    public function contacts(){
-        return $this->render("home/contacts.html.twig",
-            [
-
-            ]
-        );
     }
 
 }

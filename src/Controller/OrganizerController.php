@@ -74,9 +74,6 @@ class OrganizerController extends AbstractController implements IAuthorizedContr
             "hash" => $hash,
         ]);
     }
-    public function confirm(){
-
-    }
 
     /**
      * @param Request $request

@@ -82,11 +82,7 @@ final class CompetitionService
     public function getFutureCompetitions(): ?array
     {
         $futureCompetitions = $this->competitionRepository->findFutureCompetitions();
-        $competitions = [];
-        foreach ($futureCompetitions as $competition) {
-            $data = $this->getParameters($competition);
-            array_push($competitions, $data);
-        }
+        $competitions =$this->getFormattedCompetitions($futureCompetitions);
         return $competitions;
     }
 
@@ -96,11 +92,7 @@ final class CompetitionService
     public function getGoingCompetitions() :?array
     {
         $goingCompetitions = $this->competitionRepository->findGoingCompetitions();
-        $competitions = [];
-        foreach ($goingCompetitions as $competition) {
-            $data = $this->getParameters($competition);
-            array_push($competitions, $data);
-        }
+        $competitions = $this->getFormattedCompetitions($goingCompetitions);
         return $competitions;
     }
 
@@ -110,27 +102,29 @@ final class CompetitionService
     public function getExpiredCompetitions(): ?array
     {
         $expiredCompetitions = $this->competitionRepository->findExpiredCompetitions();
-        $competitions = [];
-        foreach ($expiredCompetitions as $competition) {
-            $data = $this->getParameters($competition);
-            array_push($competitions, $data);
-        }
+        $competitions = $this->getFormattedCompetitions($expiredCompetitions);
         return $competitions;
     }
 
     /**
-     * @param $competition
+     * @param array $competitions
      * @return array
      */
-    public function getParameters(Competition $competition): array
+    private function getFormattedCompetitions(array $competitions): array
     {
-        $id = $competition->getId();
-        $name = $competition->getCompetitionName();
-        $startDate = $competition->getCompetitionDate()->format("Y-m-d");
-        $duration = $competition->getCompetitionDuration();
-        $finishDate = $this->getDurationDate($startDate, $duration);
-        $competition = ["id" => $id, "name" => $name, "startDate" => $startDate, "finishDate" => $finishDate];
-        return $competition;
+        $formattedCompetitions=[];
+        foreach ($competitions as $competition) {
+            $id = $competition->getId();
+            $name = $competition->getCompetitionName();
+            $startDate = $competition->getCompetitionDate()->format("Y-m-d");
+            $duration = $competition->getCompetitionDuration();
+            $finishDate = $this->getFinishDate($startDate, $duration);
+            $link=$competition->getCompetitionLink();
+            $rules=$competition->getCompetitionRules();
+            $competition = ["id" => $id, "name" => $name, "startDate" => $startDate, "finishDate" => $finishDate, "link"=>$link, "rules" =>$rules];
+            array_push($formattedCompetitions, $competition);
+        }
+        return $formattedCompetitions;
     }
 
     /**
@@ -138,7 +132,7 @@ final class CompetitionService
      * @param string $duration
      * @return string
      */
-    public function getDurationDate(string $startDate, string $duration): string
+    public function getFinishDate(string $startDate, string $duration): string
     {
         $addDuration = strtotime($startDate . "+ $duration days");
         return date("Y-m-d", $addDuration);
