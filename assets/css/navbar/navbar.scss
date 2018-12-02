@@ -5,6 +5,10 @@
   }
 }
 
+ul.navbar-nav {
+  margin-left: 45px;
+}
+
 .navbar__link--black {
   color: #000000;
   &:hover{
@@ -13,7 +17,7 @@
 }
 
 .navbar {
-  background-color: $mainBlue;
+
   color:black;
 }
 
@@ -27,4 +31,18 @@
 
 .navbar-brand {
   color: #fff;
+}
+
+.navbar-default {
+  background-color: #fff;
+  border-bottom: 1px solid $mainBlue;
+  -webkit-box-shadow: 0 8px 6px -6px #999;
+  -moz-box-shadow: 0 8px 6px -6px #999;
+  box-shadow: 0 8px 6px -6px #999;
+}
+
+.nav-transparent {
+  background: transparent;
+  border: none;
+  box-shadow: none;
 }

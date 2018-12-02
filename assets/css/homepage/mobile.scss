@@ -75,4 +75,12 @@ and (max-device-width : 1024px)
       color: #fff;
     }
   }
+
+//: TODO padaryt, kad tablete rodytu po du
+  .event-card-container {
+    .card {
+      flex-basis: 100%;
+    }
+  }
 }
+
