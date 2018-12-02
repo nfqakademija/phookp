@@ -6,6 +6,10 @@ homeCompetitions:
   path: /home/competitions
   controller: App\Controller\HomeController::competitions
 
+homeAboutUs:
+  path: /home/about/us
+  controller: App\Controller\HomeController::aboutUs
+
 competitionCreate:
   path: /competition/create
   controller: App\Controller\CompetitionController::createCompetition
