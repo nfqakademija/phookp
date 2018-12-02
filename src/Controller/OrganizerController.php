@@ -26,6 +26,7 @@ use App\Services\WeighingService;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Translation\TranslatorInterface;
@@ -50,13 +51,31 @@ class OrganizerController extends AbstractController implements IAuthorizedContr
         $hashObject = $hashService->findByHash($hash);
         $competition = $hashObject->getCompetition();
         $isConfirmed = $competitionService->competitionStatus($competition, Competition::STATUS_CONFIRMED);
-        if ($isConfirmed === false) {
+        $isStarted = $competitionService->competitionStatus($competition, Competition::STATUS_STARTED);
+        $isFinished = $competitionService->competitionStatus($competition, Competition::STATUS_FINISHED);
+        if ($isConfirmed === false && $isStarted === false && $isFinished === false) {
             $event = new CompetitionConfirmedEvent($competition);
             $dispatcher->dispatch(CompetitionConfirmedEvent::NAME, $event);
+        } else {
+            if ($isStarted) {
+                return $this->redirectToRoute("organizerResults", [
+                    'hash' => $hashObject->getHash(),
+                    'teamId' => $competition->getTeams()->first()->getId(),
+                    'weighingNr' => 1
+                ]);
+            } else {
+                if ($isFinished) {
+                    $this->addFlash("success", "varzybos baigtos");
+                    return $this->redirectToRoute("home");
+                }
+            }
         }
         return $this->render("organizerPanel/organizerPanel.html.twig", [
             "hash" => $hash,
         ]);
+    }
+    public function confirm(){
+
     }
 
     /**
@@ -265,6 +284,14 @@ class OrganizerController extends AbstractController implements IAuthorizedContr
         ));
     }
 
+    /**
+     * @param $hash
+     * @param HashService $hashService
+     * @param CompetitionService $competitionService
+     * @param EventDispatcherInterface $dispatcher
+     * @param TranslatorInterface $translator
+     * @return RedirectResponse
+     */
     public function finish(
         $hash,
         HashService $hashService,

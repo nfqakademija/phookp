@@ -38,8 +38,28 @@ class CompetitionRepository extends ServiceEntityRepository
     {
         $this->entityManager->flush();
     }
-    public function findByCompetition($competition)
+
+    /**
+     * @return array|null
+     */
+    public function findGoingCompetitions(): ?array
     {
-        return $this->findBy($competition);
+        return $this->findBy(['competitionStatus' => Competition::STATUS_STARTED, 'competitionApproved' => true]);
+    }
+
+    /**
+     * @return array|null
+     */
+    public function findFutureCompetitions(): ?array
+    {
+        return $this->findBy(['competitionStatus' => Competition::STATUS_CONFIRMED, 'competitionApproved' => true]);
+    }
+
+    /**
+     * @return array|null
+     */
+    public function findExpiredCompetitions(): ?array
+    {
+        return $this->findBy(['competitionStatus' => Competition::STATUS_FINISHED, 'competitionApproved' => true]);
     }
 }
