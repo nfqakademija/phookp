@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Sportinė karpių žūklės varžybos {{ parent() }}{% endblock %}
+
+{% block body %}
+    praeje
+    {%for competition in expiredCompetitions %}
+    pavadinimas: {{ competition['name'] }}
+        <br>
+    vyksta {{ competition['startDate'] }} - {{ competition ['finishDate'] }}
+        <br>
+    {% endfor %}
+
+    busimi
+    {% for competition in futureCompetitions %}
+
+    pavadinimas: {{ competition['name'] }}
+        <br>
+    vyksta {{ competition['startDate'] }} - {{ competition['finishDate'] }}
+        <br>
+    {% endfor %}
+{% endblock %}

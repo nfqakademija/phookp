@@ -2,6 +2,10 @@ home:
   path: /
   controller: App\Controller\HomeController::index
 
+homeCompetitions:
+  path: /home/competitions
+  controller: App\Controller\HomeController::competitions
+
 competitionCreate:
   path: /competition/create
   controller: App\Controller\CompetitionController::createCompetition

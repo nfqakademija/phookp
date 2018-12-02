@@ -242,16 +242,11 @@
                 <h2 class="heading heading--blue-border heading--center">Būsimi renginiai</h2>
                 <div class="card my-4 card-shadow">
                     <div class="card-body">
-                        {% if competitions is not empty %}
                             <h4 class="card-title text-truncate">Šiuo metu vyksta: </h4>
-                            {% for competition in competitions %}
-                                <h5 class="card-subtitle mb-2 text-muted">{{ competition["competition_name"] }}</h5>
-                                <small class="text-muted">Data: {{ competition["competition_date"] }}</small>
+                                <h5 class="card-subtitle mb-2 text-muted"></h5>
+                                <small class="text-muted">Data: </small>
                                 <hr>
-                            {% endfor %}
-                         {% else %}
                              <h5 class="card-subtitle text-center mb-2 text-muted">Šiuo metu nėra užregistruota jokių būsimų renginių</h5>
-                        {% endif %}
                     </div>
                 </div>
             </div>
