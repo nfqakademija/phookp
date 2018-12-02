@@ -16,3 +16,20 @@ footer {
 h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
   font-weight: 300;
 }
+
+.page-name-container {
+  margin-top: 50px;
+  margin-bottom: 20px;
+  background: linear-gradient(rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.35)), url("../../images/header_hq.png")  center;
+  -webkit-background-size: cover;
+  background-size: cover;
+  min-height: 260px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  h2 {
+    font-size: 3rem;
+    text-align: center;
+  }
+}

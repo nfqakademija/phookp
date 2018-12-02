@@ -1,0 +1,132 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Renginiai {{ parent() }}{% endblock %}
+
+{% block body %}
+    <div class="page-name-container">
+        <h2>Renginiai</h2>
+    </div>
+    {#praeje#}
+    {#{%for competition in expiredCompetitions %}#}
+    {#pavadinimas: {{ competition['name'] }}#}
+        {#<br>#}
+    {#vyksta {{ competition['startDate'] }} - {{ competition ['finishDate'] }}#}
+        {#<br>#}
+    {#{% endfor %}#}
+
+    {#busimi#}
+    {#{% for competition in futureCompetitions %}#}
+
+    {#pavadinimas: {{ competition['name'] }}#}
+        {#<br>#}
+    {#vyksta {{ competition['startDate'] }} - {{ competition['finishDate'] }}#}
+        {#<br>#}
+    {#{% endfor %}#}
+    <section id="previous-events" class=" u-pb-5">
+        <div class="container">
+            <h2 class="heading heading--blue-border heading--center">Būsimi renginiai</h2>
+            <div class="row">
+                <div class="event-card-container d-flex justify-content-center flex-wrap">
+                    <div class="card">
+                        <img class="card-img-top" src=" {{ asset('images/fishing_example.jpeg') }}" alt="Card image" style="width:100%">
+                        <div class="card-body">
+                            <h4 class="card-title">Pikts Karpis - TOP5, Punia 2018</h4>
+                            <p class="card-text"><i class="fa fa-calendar-alt"></i> 2018-02-12 - 2018-02-15</p>
+                            <p class="card-text"><i class="fa fa-map-marker-alt"></i> Pikaiciai, Alytus</p>
+                            <div class="card-button-container d-flex justify-content-center">
+                                <a href="#" class="btn button btn-primary">Rezultatai</a>
+                            </div>                        </div>
+                    </div>
+                    <div class="card">
+                        <img class="card-img-top" src="{{ asset('images/event_bg.jpeg') }}" alt="Card image" style="width:100%">
+                        <div class="card-body">
+                            <h4 class="card-title">Pikts Karpis - Pykaičių taurė 2018</h4>
+                            <p class="card-text"><i class="fa fa-calendar-alt"></i> 2018-02-12 - 2018-02-15</p>
+                            <p class="card-text"><i class="fa fa-map-marker-alt"></i> Pikaiciai, Alytus</p>
+                            <div class="card-button-container d-flex justify-content-center">
+                                <a href="#" class="btn button btn-primary">Rezultatai</a>
+                            </div>                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="previous-events" class=" u-pb-5">
+        <div class="container">
+            <h2 class="heading heading--blue-border heading--center">Praėję renginiai</h2>
+            <div class="row">
+                <div class="event-card-container d-flex justify-content-center flex-wrap">
+                    <div class="card">
+                        <img class="card-img-top" src=" {{ asset('images/fishing_example.jpeg') }}" alt="Card image" style="width:100%">
+                        <div class="card-body">
+                            <h4 class="card-title">Pikts Karpis - TOP5, Punia 2018</h4>
+                            <p class="card-text"><i class="fa fa-calendar-alt"></i> 2018-02-12 - 2018-02-15</p>
+                            <p class="card-text"><i class="fa fa-map-marker-alt"></i> Pikaiciai, Alytus</p>
+                            <div class="card-button-container d-flex justify-content-center">
+                                <a href="#" class="btn button btn-primary">Rezultatai</a>
+                            </div>                        </div>
+                    </div>
+                    <div class="card">
+                        <img class="card-img-top" src="{{ asset('images/event_bg.jpeg') }}" alt="Card image" style="width:100%">
+                        <div class="card-body">
+                            <h4 class="card-title">Pikts Karpis - Pykaičių taurė 2018</h4>
+                            <p class="card-text"><i class="fa fa-calendar-alt"></i> 2018-02-12 - 2018-02-15</p>
+                            <p class="card-text"><i class="fa fa-map-marker-alt"></i> Pikaiciai, Alytus</p>
+                            <div class="card-button-container d-flex justify-content-center">
+                                <a href="#" class="btn button btn-primary">Rezultatai</a>
+                            </div>                        </div>
+                    </div>
+                    <div class="card">
+                        <img class="card-img-top" src="{{ asset('images/event_bg2.jpeg') }}" alt="Card image" style="width:100%">
+                        <div class="card-body">
+                            <h4 class="card-title">Pikts Karpis - TOP5, Punia 2018</h4>
+                            <p class="card-text"><i class="fa fa-calendar-alt"></i> 2018-02-12 - 2018-02-15</p>
+                            <p class="card-text"><i class="fa fa-map-marker-alt"></i> Pikaiciai, Alytus</p>
+                            <div class="card-button-container d-flex justify-content-center">
+                                <a href="#" class="btn button btn-primary">Rezultatai</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <img class="card-img-top" src="{{ asset('images/fishing_example.jpeg') }}" alt="Card image" style="width:100%">
+                        <div class="card-body">
+                            <h4 class="card-title">Pikts Karpis - TOP5, Punia 2018</h4>
+                            <p class="card-text"><i class="fa fa-calendar-alt"></i> 2018-02-12 - 2018-02-15</p>
+                            <p class="card-text"><i class="fa fa-map-marker-alt"></i> Pikaiciai, Alytus</p>
+                            <div class="card-button-container d-flex justify-content-center">
+                                <a href="#" class="btn button btn-primary">Rezultatai</a>
+                            </div>                        </div>
+                    </div>
+                    <div class="card">
+                        <img class="card-img-top" src="{{ asset('images/event_bg.jpeg') }}" alt="Card image" style="width:100%">
+                        <div class="card-body">
+                            <h4 class="card-title">Pikts Karpis - Pykaičių taurė 2018</h4>
+                            <p class="card-text"><i class="fa fa-calendar-alt"></i> 2018-02-12 - 2018-02-15</p>
+                            <p class="card-text"><i class="fa fa-map-marker-alt"></i> Pikaiciai, Alytus</p>
+                            <div class="card-button-container d-flex justify-content-center">
+                                <a href="#" class="btn button btn-primary">Rezultatai</a>
+                            </div>                        </div>
+                    </div>
+                    <div class="card">
+                        <img class="card-img-top" src="{{ asset('images/event_bg2.jpeg') }}" alt="Card image" style="width:100%">
+                        <div class="card-body">
+                            <h4 class="card-title">Pikts Karpis - TOP5, Punia 2018</h4>
+                            <p class="card-text"><i class="fa fa-calendar-alt"></i> 2018-02-12 - 2018-02-15</p>
+                            <p class="card-text"><i class="fa fa-map-marker-alt"></i> Pikaiciai, Alytus</p>
+                            <div class="card-button-container d-flex justify-content-center">
+                                <a href="#" class="btn button btn-primary">Rezultatai</a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+
+
+
+{% endblock %}

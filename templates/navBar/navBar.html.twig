@@ -10,17 +10,21 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav">
                 <li class="nav-item">
+                    <a class=" nav-link" href="/">Pradžia
+                    </a>
+                </li>
+                <li class="nav-item">
                     <a class=" nav-link" href="{{ path("competitionCreate") }}#">Organizuoti varžybas
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link " href="#previousCompetition">Renginiai</a>
+                    <a class="nav-link " href="{{path("homeCompetitions") }}">Renginiai</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link " href="#About-us">Apie mus</a>
+                    <a class="nav-link " href="{{ path("homeAboutUs") }}">Apie mus</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link " href="#About-us">Kontaktai</a>
+                    <a class="nav-link " href="{{ path('homeContacts') }}">Kontaktai</a>
                 </li>
             </ul>
         </div>

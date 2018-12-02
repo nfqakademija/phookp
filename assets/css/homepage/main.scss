@@ -11,21 +11,21 @@
 }
 
 .home-start {
-  height: 100vh;
+  min-height: 100vh;
   margin-top: -20px;
+  .main-header-container {
+    margin-bottom: 3rem;
+  }
   .heading {
-    margin-top: 13rem;
+    margin-top: 11rem;
   }
 }
 
-.start-right-side-wrapper {
+.start-left-side-wrapper {
   height: 100%;
-  max-height: 100vh;
+  //max-height: 100vh;
   margin-left: 5rem;
 
-  .heading {
-
-  }
 }
 
 .image {
@@ -62,7 +62,7 @@
 }
 
 .event__date {
-  font-size: 21px;
+  font-size: 17px;
 
   i {
     font-size: 27px;
@@ -70,7 +70,7 @@
 }
 
 .event__place {
-  font-size: 21px;
+  font-size: 17px;
 
   i {
     font-size: 27px;
@@ -78,7 +78,9 @@
 }
 
 .event__heading {
-  font-size: 23px;
+  font-size: 26px;
+  border-bottom: 1px solid #cccccc;
+  padding-bottom: 10px;
 }
 
 .event__name {
@@ -94,6 +96,12 @@
   font-size: 16px;
   color: #fff;
   background-color: $mainBlue;
+  transition: 0.5s;
+  &:hover {
+    background-color: darken($mainBlue, 8%);
+    box-shadow: 0 2px 2px 0 rgba(0,0,0,.14), 0 3px 1px -2px rgba(0,0,0,.2), 0 1px 5px 0 rgba(0,0,0,.12);
+
+  }
 }
 
 .button__blue-transparent {
@@ -107,7 +115,7 @@
 }
 
 .home-right-side {
-  height: 100vh;
+  min-height: 100vh;
   background-size: cover;
   background-image: url("./images/main_background.png");
 }
@@ -133,11 +141,6 @@
 
 
 .moments-container {
-  //div {
-  //  width: 350px;
-  //  height: 350px;
-  //  border: 1px solid black;
-  //}
   display: flex;
   flex-wrap: wrap;
   justify-content: center;

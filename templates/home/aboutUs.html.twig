@@ -1,0 +1,70 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Apie mus {{ parent() }}{% endblock %}
+
+{% block body %}
+    <div class="page-name-container">
+        <h2>Apie mus</h2>
+    </div>
+
+    <div id="about-us" class="container-fluid">
+        <div class="container-fluid bg-light">
+            <section id="" class="">
+                <div class="row about-us-container">
+                    <div class="col-lg-6 col-sm-12 about-us-text-container">
+                        <h2 class="text-center pb-2">Apie Mus</h2>
+                        <p class="mt-3">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facere harum laborum libero maxime
+                            qui. Ad aperiam asperiores, atque cumque deserunt dolorem dolores enim, esse ex exercitationem
+                            impedit odit placeat quod sed sit totam unde veritatis, voluptatem. Ad alias animi aperiam autem
+                            commodi eligendi esse fuga hic iusto, labore libero natus nulla obcaecati omnis quam quis
+                            repellendus saepe tenetur ut vero! Beatae corporis cum debitis possimus saepe sequi soluta!
+                            Accusamus aliquid consectetur debitis dignissimos earum eius ex illo, illum incidunt iure modi
+                            nulla omnis placeat qui reiciendis rerum vel veniam vero!</p>
+                        <div class="row">
+                            <div class="contact container d-flex justify-content-sm-around mt-3">
+                                <div class="card contact-card">
+                                    <div class="card-body d-flex flex-column justify-content-center">
+                                        <h4 class="card-title text-center"><i class="fa fa-map-marked"></i></h4>
+                                        <p class="card-text text-center">Punios km., Punios sen., Alytaus Raj.</p>
+                                    </div>
+                                </div>
+                                <div class="card contact-card">
+                                    <div class="card-body d-flex flex-column justify-content-center">
+                                        <h4 class="card-title text-center"><i class="fa fa-phone-volume"></i></h4>
+                                        <p class="card-text text-center">+3704455621</p>
+                                    </div>
+                                </div>
+                                <div class="card contact-card">
+                                    <div class="card-body d-flex flex-column justify-content-center">
+                                        <h4 class="card-title text-center"><i class="fa fa-envelope" ></i></h4>
+                                        <p class="card-text text-center">JohnDoe@gmail.com</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-sm-12">
+                        <img src="{{ asset('images/about-us_bg.jpeg') }}" alt="">
+                    </div>
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <section id="akimirkos-is-renginiu" class="mt-2 mb-4 section pb-4 bg-light">
+
+        <div class="container">
+            <h2 class="heading heading--blue-border heading--center">Akimirkos iš renginių</h2>
+            <div class="row">
+                <div class="moments-container mt-3">
+                    <img src="{{ asset('images/event_bg.jpeg') }}" alt="">
+                    <img src="{{ asset('images/event_bg2.jpeg') }}" alt="">
+                    <img src="{{ asset('images/fishing.jpg') }}" alt="">
+                    <img src="{{ asset('images/upcoming-events_bg.jpeg') }}" alt="">
+                    <img src="{{ asset('images/about-us_bg.jpeg') }}" alt="">
+                    <img src="{{ asset('images/sektoriai.jpg') }}" alt="">
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

@@ -2,7 +2,6 @@
 
 namespace App\Controller;
 
-use App\Repository\CompetitionRepository;
 use App\Services\CompetitionService;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
@@ -15,16 +14,49 @@ class HomeController extends Controller
      */
     public function index(CompetitionService $competitionService)
     {
-        $futureCompetitions = $competitionService->getFutureCompetitions();
-        $goingCompetitions=$competitionService->getGoingCompetitions();
-        $expiredCompetitions=$competitionService->getExpiredCompetitions();
+        $goingCompetitions = $competitionService->getGoingCompetitions();
         return $this->render("home/index.html.twig",
-            array(
-                "futureCompetitions" => $futureCompetitions,
+            [
                 "goingCompetitions" => $goingCompetitions,
-                "expiredCompetitions" => $expiredCompetitions
-            ));
+            ]);
 
+    }
+
+    /**
+     * @param CompetitionService $competitionService
+     * @return Response
+     */
+    public function competitions(CompetitionService $competitionService)
+    {
+        $futureCompetitions = $competitionService->getFutureCompetitions();
+        $expiredCompetitions = $competitionService->getExpiredCompetitions();
+        return $this->render("home/competitions.html.twig",
+            [
+                "futureCompetitions" => $futureCompetitions,
+                "expiredCompetitions" => $expiredCompetitions
+            ]);
+    }
+
+    /**
+     * @return Response
+     */
+    public function aboutUs()
+    {
+        return $this->render("home/aboutUs.html.twig",
+            [
+
+            ]);
+    }
+
+    /**
+     * @return Response
+     */
+    public function contacts(){
+        return $this->render("home/contacts.html.twig",
+            [
+
+            ]
+        );
     }
 
 }
