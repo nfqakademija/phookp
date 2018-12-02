@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "1811ac9b3796d6c57e0afb511ce75c19",
+    "content-hash": "958f63cf91f525cacb664d24250393eb",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -3194,16 +3194,16 @@
         },
         {
             "name": "symfony/intl",
-            "version": "v4.1.7",
+            "version": "v4.1.8",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/intl.git",
-                "reference": "61f4a460d12ef20abfd6a8d80f3b19b6997fdf28"
+                "reference": "699087dc23552e74a6b82c28849f660d9ec4cfab"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/intl/zipball/61f4a460d12ef20abfd6a8d80f3b19b6997fdf28",
-                "reference": "61f4a460d12ef20abfd6a8d80f3b19b6997fdf28",
+                "url": "https://api.github.com/repos/symfony/intl/zipball/699087dc23552e74a6b82c28849f660d9ec4cfab",
+                "reference": "699087dc23552e74a6b82c28849f660d9ec4cfab",
                 "shasum": ""
             },
             "require": {
@@ -3265,7 +3265,7 @@
                 "l10n",
                 "localization"
             ],
-            "time": "2018-10-31T09:30:44+00:00"
+            "time": "2018-11-11T19:51:29+00:00"
         },
         {
             "name": "symfony/monolog-bridge",
