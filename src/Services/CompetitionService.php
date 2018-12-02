@@ -11,6 +11,7 @@ namespace App\Services;
 use App\Entity\Competition;
 use App\Repository\CompetitionRepository;
 use Psr\Log\LoggerInterface;
+use Symfony\Component\Translation\TranslatorInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 final class CompetitionService
@@ -35,23 +36,31 @@ final class CompetitionService
     private $hashService;
 
     /**
+     * @var TranslatorInterface
+     */
+    private $translator;
+
+    /**
      * CompetitionService constructor.
      * @param CompetitionRepository $competitionRepository
      * @param ValidatorInterface $validator
      * @param LoggerInterface $logger
      * @param HashService $hashService
+     * @param TranslatorInterface $translator
      */
     public function __construct(
         CompetitionRepository $competitionRepository,
         ValidatorInterface $validator,
         LoggerInterface $logger,
-        HashService $hashService
+        HashService $hashService,
+        TranslatorInterface $translator
     ) {
 
         $this->competitionRepository = $competitionRepository;
         $this->validator = $validator;
         $this->hashService = $hashService;
         $this->logger = $logger;
+        $this->translator = $translator;
     }
 
     /**
@@ -82,14 +91,14 @@ final class CompetitionService
     public function getFutureCompetitions(): ?array
     {
         $futureCompetitions = $this->competitionRepository->findFutureCompetitions();
-        $competitions =$this->getFormattedCompetitions($futureCompetitions);
+        $competitions = $this->getFormattedCompetitions($futureCompetitions);
         return $competitions;
     }
 
     /**
      * @return array
      */
-    public function getGoingCompetitions() :?array
+    public function getGoingCompetitions(): ?array
     {
         $goingCompetitions = $this->competitionRepository->findGoingCompetitions();
         $competitions = $this->getFormattedCompetitions($goingCompetitions);
@@ -112,30 +121,52 @@ final class CompetitionService
      */
     private function getFormattedCompetitions(array $competitions): array
     {
-        $formattedCompetitions=[];
+        $formattedCompetitions = [];
         foreach ($competitions as $competition) {
             $id = $competition->getId();
             $name = $competition->getCompetitionName();
-            $startDate = $competition->getCompetitionDate()->format("Y-m-d");
+            $startDate = $this->getStartDate($competition->getCompetitionDate());
             $duration = $competition->getCompetitionDuration();
-            $finishDate = $this->getFinishDate($startDate, $duration);
-            $link=$competition->getCompetitionLink();
-            $rules=$competition->getCompetitionRules();
-            $competition = ["id" => $id, "name" => $name, "startDate" => $startDate, "finishDate" => $finishDate, "link"=>$link, "rules" =>$rules];
+            $finishDate = $this->getFinishDate($competition->getCompetitionDate(), $duration);
+            $link = $competition->getCompetitionLink();
+            $rules = $competition->getCompetitionRules();
+            $competition = [
+                "id" => $id,
+                "name" => $name,
+                "startDate" => $startDate,
+                "finishDate" => $finishDate,
+                "link" => $link,
+                "rules" => $rules
+            ];
             array_push($formattedCompetitions, $competition);
         }
         return $formattedCompetitions;
     }
 
     /**
-     * @param string $startDate
+     * @param \DateTime $startDate
      * @param string $duration
      * @return string
      */
-    public function getFinishDate(string $startDate, string $duration): string
+    private function getFinishDate(\DateTime $startDate, string $duration): string
     {
-        $addDuration = strtotime($startDate . "+ $duration days");
-        return date("Y-m-d", $addDuration);
+        $addDuration = strtotime($startDate->format("Y-m-d") . "+ $duration days");
+        return date("j", $addDuration);
+
+    }
+
+    /**
+     * @param \DateTime $startDate
+     * @return string
+     */
+    private function getStartDate(\DateTime $startDate): string
+    {
+        $date = explode(" ", $startDate->format("Y n j"));
+        $year = $date[0];
+        $month = $this->translator->trans($date[1]);
+        $day = $date[2];
+        $startDate = "$year $month $day";
+        return $startDate;
     }
 
     /**

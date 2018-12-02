@@ -24,5 +24,19 @@ form.results_entry.special_fish_name: Amūras
 form.results_entry.success_message: Rezultatai išsaugoti!
 mail.subject_message: Renginio nuoroda
 competition.finished_message: Varžybos baigtos!
+1: sausio
+2: vasario
+3: kovo
+4: balandžio
+5: gegužės
+6: birželio
+7: liepos
+8: rugpjūčio
+9: rugsėjo
+10: spalio
+11: lapkričio
+12: gruodžio
+
+
 
 

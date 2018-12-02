@@ -17,6 +17,7 @@ class HomeController extends Controller
         $goingCompetitions = $competitionService->getGoingCompetitions();
         $futureCompetitions = $competitionService->getFutureCompetitions();
 
+
         return $this->render("home/index.html.twig",
             [
                 "goingCompetitions" => $goingCompetitions,
