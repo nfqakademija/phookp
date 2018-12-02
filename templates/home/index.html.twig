@@ -8,23 +8,64 @@
 
         <div class="row">
             <div class="home-left-side col-lg-6 col-sm-12">
-                {#{% include "navBar/navBar.html.twig" %}#}
                 <div class="start-right-side-wrapper d-flex flex-column ">
                     <h1 class="heading heading--blue-border ">Sportinė karpių žuklė</h1>
 
-                    <div class="event mt-5 mb-5">
+                    <div class="event mt-5">
                         <h3 class="event__heading heading--grey">Šiuo metu vyksta:</h3>
-                        {% for competition in goingCompetitions %}
-                        <h2 class="event__name">{{ competition["name"] }}</h2>
-                        <div class="event__place">
-                            <i class="fa  fa-map-marker-alt"></i> <span class="ml-2">Kauno Marios</span>
-                        </div>
-                        <div class="event__date"><i class="fa fa-calendar-alt"></i> <span
-                                    class="ml-2">{{ competition["startDate"] }} {{ competition['finishDate'] }}</span>
+                        <div class="row">
+                            <div class="col-lg-5">
+                                <h2 class="event__name">Renginio pavadinimas</h2>
+                                <div class="event__place">
+                                    <i class="fa  fa-map-marker-alt"></i> <span class="ml-2">Kauno Marios</span>
+                                </div>
+                                <div class="event__date"><i class="fa fa-calendar-alt"></i> <span class="ml-2"> 2018-02-12 - 2018-02-15</span>
+                                </div>
+                            </div>
+                            <div class="col-lg-5">
+                                <h2 class="event__name">Renginio pavadinimas</h2>
+                                <div class="event__place">
+                                    <i class="fa  fa-map-marker-alt"></i> <span class="ml-2">Kauno Marios</span>
+                                </div>
+                                <div class="event__date"><i class="fa fa-calendar-alt"></i> <span class="ml-2"> 2018-02-12 - 2018-02-15</span>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <button class="button button__blue-transparent">Varžybų rezultatai</button>
-                    {% endfor %}
+
+                    <div class="event mt-5">
+                        <h3 class="event__heading heading--grey">Praėję renginiai:</h3>
+                        <div class="row">
+                            <div class="col-lg-5">
+                                <h2 class="event__name">Renginio pavadinimas</h2>
+                                <div class="event__place">
+                                    <i class="fa  fa-map-marker-alt"></i> <span class="ml-2">Kauno Marios</span>
+                                </div>
+                                <div class="event__date"><i class="fa fa-calendar-alt"></i> <span class="ml-2"> 2018-02-12 - 2018-02-15</span>
+                                </div>
+                            </div>
+                            <div class="col-lg-5">
+                                <h2 class="event__name">Renginio pavadinimas</h2>
+                                <div class="event__place">
+                                    <i class="fa  fa-map-marker-alt"></i> <span class="ml-2">Kauno Marios</span>
+                                </div>
+                                <div class="event__date"><i class="fa fa-calendar-alt"></i> <span class="ml-2"> 2018-02-12 - 2018-02-15</span>
+                                </div>
+                            </div>
+                            <div class="col-lg-2 d-flex justify-content-center align-items-center">
+                                <button class="button button__blue-transparent">Daugiau</button>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-12 mt-3">
+                                <h2 class="event__name">Mūsų partneriai</h2>
+                                <img src="{{ asset('images/partneriai/alex_baits.png ') }}" alt="">
+                                <img src="{{ asset('images/partneriai/siprakfishing.png ') }}" alt="">
+                                <img src="{{ asset('images/partneriai/zvejokliai.lt.png') }}" alt="">
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
             <div class="home-right-side col-lg-6 col-sm-12 .d-sm-none .d-md-block">
@@ -32,293 +73,47 @@
             </div>
         </div>
     </div>
-    <div id="About-us" class="container-fluid pt-3 pb-3">
-        <div class="container">
-            <section id="" class="">
-                <h2 class="heading heading--blue-border heading--center">Apie Mus</h2>
-                <div class="row mt-3">
-                    <div class="col-lg-6 col-sm-12 about-us-text mt-3">
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facere harum laborum libero maxime
-                        qui. Ad aperiam asperiores, atque cumque deserunt dolorem dolores enim, esse ex exercitationem
-                        impedit odit placeat quod sed sit totam unde veritatis, voluptatem. Ad alias animi aperiam autem
-                        commodi eligendi esse fuga hic iusto, labore libero natus nulla obcaecati omnis quam quis
-                        repellendus saepe tenetur ut vero! Beatae corporis cum debitis possimus saepe sequi soluta!
-                        Accusamus aliquid consectetur debitis dignissimos earum eius ex illo, illum incidunt iure modi
-                        nulla omnis placeat qui reiciendis rerum vel veniam vero!
-                    </div>
-                    <div class="col-lg-6 col-sm-12">
-                        <img class="image " src="" alt="">
-                        <div class="bg-red"></div>
-                    </div>
-                </div>
-            </section>
-        </div>
-    </div>
-    <div id="about-us" class="container-fluid">
-        <div class="container-fluid bg-light">
-            <section id="" class="">
-                <div class="row about-us-container">
-                    <div class="col-lg-6 col-sm-12 about-us-text-container">
-                        <h2 class="text-center pb-2">Apie Mus</h2>
-                        <p class="mt-3">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facere harum laborum libero maxime
-                            qui. Ad aperiam asperiores, atque cumque deserunt dolorem dolores enim, esse ex exercitationem
-                            impedit odit placeat quod sed sit totam unde veritatis, voluptatem. Ad alias animi aperiam autem
-                            commodi eligendi esse fuga hic iusto, labore libero natus nulla obcaecati omnis quam quis
-                            repellendus saepe tenetur ut vero! Beatae corporis cum debitis possimus saepe sequi soluta!
-                            Accusamus aliquid consectetur debitis dignissimos earum eius ex illo, illum incidunt iure modi
-                            nulla omnis placeat qui reiciendis rerum vel veniam vero!</p>
-                    </div>
-                    <div class="col-lg-6 col-sm-12">
-                        <img src="./images/about-us_bg.jpeg" alt="">
-                    </div>
-                </div>
-            </section>
-        </div>
-    </div>
-    <section id="akimirkos-is-renginiu" class="mb-4 section pb-4 bg-light">
 
-        <div class="container">
-            <h2 class="heading heading--blue-border heading--center">Akimirkos iš renginių</h2>
-            <div class="row">
-                <div class="moments-container mt-3">
-                    <img src="./images/event_bg.jpeg" alt="">
-                    <img src="./images/event_bg2.jpeg" alt="">
-                    <img src="./images/fishing.jpg" alt="">
-                    <img src="./images/upcoming-events_bg.jpeg" alt="">
-                    <img src="./images/about-us_bg.jpeg" alt="">
-                    <img src="./images/sektoriai.jpg" alt="">
-                </div>
-            </div>
-        </div>
-    </section>
-    <section id="previous-events" class="u-pb-5">
-        <div class="container">
-            <h2 class="heading heading--blue-border heading--center">Praeiti renginiai</h2>
-            <div class="event-container">
-                <div class="event__line-container">
-                    <div class="row">
-                        <div class="col-lg-6">
-                            <div class="row">
-                                <div class="col-lg-4 d-flex align-items-center justify-content-center">
-                                    <img class="image--small" src="./images/fishing_example.jpeg" alt="">
-                                </div>
-                                <div class="col-lg-8">
-                                    <h2 class="event__name">Pikts Karpis - TOP5, Punia 2018</h2>
-                                    <div class="event__place">
-                                        <i class="fa  fa-map-marker-alt"></i> <span class="ml-2 u-text-grey">Punia, Alytus</span>
-                                    </div>
-                                    <div class="event__date"><i class="fa fa-calendar-alt"></i> <span class="ml-2 u-text-grey"> 2018-02-12 - 2018-02-15</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-6 d-flex justify-content-center align-items-center">
-                            <a href="#" class="btn button btn-primary">Rezultatai</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="event__line-container">
-                    <div class="row">
-                        <div class="col-lg-6">
-                            <div class="row">
-                                <div class="col-lg-4 d-flex align-items-center justify-content-center">
-                                    <img class="image--small" src="./images/fishing_example.jpeg" alt="">
-                                </div>
-                                <div class="col-lg-8">
-                                    <h2 class="event__name">Pikts Karpis - TOP5, Punia 2018</h2>
-                                    <div class="event__place">
-                                        <i class="fa  fa-map-marker-alt"></i> <span class="ml-2 u-text-grey">Punia, Alytus</span>
-                                    </div>
-                                    <div class="event__date"><i class="fa fa-calendar-alt"></i> <span class="ml-2 u-text-grey"> 2018-02-12 - 2018-02-15</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-6 d-flex justify-content-center align-items-center">
-                            <a href="#" class="btn button btn-primary">Rezultatai</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="event__line-container">
-                    <div class="row">
-                        <div class="col-lg-6">
-                            <div class="row">
-                                <div class="col-lg-4 d-flex align-items-center justify-content-center">
-                                    <img class="image--small" src="./images/fishing_example.jpeg" alt="">
-                                </div>
-                                <div class="col-lg-8">
-                                    <h2 class="event__name">Pikts Karpis - TOP5, Punia 2018</h2>
-                                    <div class="event__place">
-                                        <i class="fa  fa-map-marker-alt"></i> <span class="ml-2 u-text-grey">Punia, Alytus</span>
-                                    </div>
-                                    <div class="event__date"><i class="fa fa-calendar-alt"></i> <span class="ml-2 u-text-grey"> 2018-02-12 - 2018-02-15</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-6 d-flex justify-content-center align-items-center">
-                            <a href="#" class="btn button btn-primary">Rezultatai</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <section id="previous-events" class=" u-pb-5">
-        <div class="container">
-            <h2 class="heading heading--blue-border heading--center">Praeiti renginiai</h2>
-            <div class="row">
-                <div class="event-card-container d-flex justify-content-center flex-wrap">
-                    <div class="card">
-                        <img class="card-img-top" src="./images/fishing_example.jpeg" alt="Card image" style="width:100%">
-                        <div class="card-body">
-                            <h4 class="card-title">Pikts Karpis - TOP5, Punia 2018</h4>
-                            <p class="card-text"><i class="fa fa-calendar-alt"></i> 2018-02-12 - 2018-02-15</p>
-                            <p class="card-text"><i class="fa fa-map-marker-alt"></i> Pikaiciai, Alytus</p>
-                            <div class="card-button-container d-flex justify-content-center">
-                                <a href="#" class="btn button btn-primary">Rezultatai</a>
-                            </div>                        </div>
-                    </div>
-                    <div class="card">
-                        <img class="card-img-top" src="./images/event_bg.jpeg" alt="Card image" style="width:100%">
-                        <div class="card-body">
-                            <h4 class="card-title">Pikts Karpis - Pykaičių taurė 2018</h4>
-                            <p class="card-text"><i class="fa fa-calendar-alt"></i> 2018-02-12 - 2018-02-15</p>
-                            <p class="card-text"><i class="fa fa-map-marker-alt"></i> Pikaiciai, Alytus</p>
-                            <div class="card-button-container d-flex justify-content-center">
-                                <a href="#" class="btn button btn-primary">Rezultatai</a>
-                            </div>                        </div>
-                    </div>
-                    <div class="card">
-                        <img class="card-img-top" src="./images/event_bg2.jpeg" alt="Card image" style="width:100%">
-                        <div class="card-body">
-                            <h4 class="card-title">Pikts Karpis - TOP5, Punia 2018</h4>
-                            <p class="card-text"><i class="fa fa-calendar-alt"></i> 2018-02-12 - 2018-02-15</p>
-                            <p class="card-text"><i class="fa fa-map-marker-alt"></i> Pikaiciai, Alytus</p>
-                            <div class="card-button-container d-flex justify-content-center">
-                                <a href="#" class="btn button btn-primary">Rezultatai</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card">
-                        <img class="card-img-top" src="./images/fishing_example.jpeg" alt="Card image" style="width:100%">
-                        <div class="card-body">
-                            <h4 class="card-title">Pikts Karpis - TOP5, Punia 2018</h4>
-                            <p class="card-text"><i class="fa fa-calendar-alt"></i> 2018-02-12 - 2018-02-15</p>
-                            <p class="card-text"><i class="fa fa-map-marker-alt"></i> Pikaiciai, Alytus</p>
-                            <div class="card-button-container d-flex justify-content-center">
-                                <a href="#" class="btn button btn-primary">Rezultatai</a>
-                            </div>                        </div>
-                    </div>
-                    <div class="card">
-                        <img class="card-img-top" src="./images/event_bg.jpeg" alt="Card image" style="width:100%">
-                        <div class="card-body">
-                            <h4 class="card-title">Pikts Karpis - Pykaičių taurė 2018</h4>
-                            <p class="card-text"><i class="fa fa-calendar-alt"></i> 2018-02-12 - 2018-02-15</p>
-                            <p class="card-text"><i class="fa fa-map-marker-alt"></i> Pikaiciai, Alytus</p>
-                            <div class="card-button-container d-flex justify-content-center">
-                                <a href="#" class="btn button btn-primary">Rezultatai</a>
-                            </div>                        </div>
-                    </div>
-                    <div class="card">
-                        <img class="card-img-top" src="./images/event_bg2.jpeg" alt="Card image" style="width:100%">
-                        <div class="card-body">
-                            <h4 class="card-title">Pikts Karpis - TOP5, Punia 2018</h4>
-                            <p class="card-text"><i class="fa fa-calendar-alt"></i> 2018-02-12 - 2018-02-15</p>
-                            <p class="card-text"><i class="fa fa-map-marker-alt"></i> Pikaiciai, Alytus</p>
-                            <div class="card-button-container d-flex justify-content-center">
-                                <a href="#" class="btn button btn-primary">Rezultatai</a>
-                            </div>
-                        </div>
-                    </div>
 
-                </div>
-            </div>
-        </div>
-    </section>
-    <section id="upcoming-events" class="mb-3">
-        <div class="container-fluid">
-            <div class="container">
-                <h2 class="heading heading--blue-border heading--center">Būsimi renginiai</h2>
-                <div class="card my-4 card-shadow">
-                    <div class="card-body">
-                            <h4 class="card-title text-truncate">Šiuo metu vyksta: </h4>
-                                <h5 class="card-subtitle mb-2 text-muted"></h5>
-                                <small class="text-muted">Data: </small>
-                                <hr>
-                             <h5 class="card-subtitle text-center mb-2 text-muted">Šiuo metu nėra užregistruota jokių būsimų renginių</h5>
-                    </div>
-                </div>
-            </div>
-        </div>
 
-    </section>
-
-    <section id="kontaktai" class=" u-pb-5">
-        <div class="container">
-            <h2 class="heading heading--blue-border heading--center">Susisiekite su mumis</h2>
-            <div class="row">
-                <div class="contact container d-flex justify-content-sm-around mt-3">
-                    <div class="card contact-card">
-                        <div class="card-body d-flex flex-column justify-content-center">
-                            <h4 class="card-title text-center"><i class="fa fa-map-marked"></i></h4>
-                            <p class="card-text text-center">Punios km., Punios sen., Alytaus Raj.</p>
-                        </div>
-                    </div>
-                    <div class="card contact-card">
-                        <div class="card-body d-flex flex-column justify-content-center">
-                            <h4 class="card-title text-center"><i class="fa fa-phone-volume"></i></h4>
-                            <p class="card-text text-center">+3704455621</p>
-                        </div>
-                    </div>
-                    <div class="card contact-card">
-                        <div class="card-body d-flex flex-column justify-content-center">
-                            <h4 class="card-title text-center"><i class="fa fa-envelope" ></i></h4>
-                            <p class="card-text text-center">JohnDoe@gmail.com</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
     {#<div class="row justify-content-center">#}
-        {#<div class="col-lg-10 align-content-lg-center">#}
+    {#<div class="col-lg-10 align-content-lg-center">#}
 
-            {#<div class="card my-4 card-shadow">#}
-                {#<div class="card-body">#}
-                    {#<h4 class="card-title text-truncate">Vykstantys renginiai:</h4>#}
-                    {#{% for competition in competitions %}#}
-                        {#<h5 class="card-subtitle mb-2 text-muted">{{ competition["competition_name"] }}</h5>#}
-                        {#<a href="/home/competition/{{ competition["id_competition"] }}"#}
-                           {#class="card-link">Rezultatai</a>#}
-                        {#<br>#}
-                        {#<small class="text-muted">Data: {{ competition["competition_date"] }}</small>#}
-                        {#<hr>#}
-                    {#{% endfor %}#}
-                {#</div>#}
-            {#</div>#}
-            {#<div class="card my-4 card-shadow">#}
-                {#<div class="card-body">#}
-                    {#<h4 class="card-title text-truncate">Būsimi renginiai: </h4>#}
-                    {#{% for competition in competitions %}#}
-                        {#<h5 class="card-subtitle mb-2 text-muted">{{ competition["competition_name"] }}</h5>#}
-                        {#<small class="text-muted">Data: {{ competition["competition_date"] }}</small>#}
-                        {#<hr>#}
-                    {#{% endfor %}#}
-                {#</div>#}
-            {#</div>#}
-            {#<div class="card my-4 card-shadow">#}
-                {#<div class="card-body">#}
-                    {#<h4 class="card-title text-truncate">Pasibaigę renginiai: </h4>#}
-                    {#{% for competition in competitions %}#}
-                        {#<h5 class="card-subtitle mb-2 text-muted">{{ competition["competition_name"] }}</h5>#}
-                        {#<a href="/home/competition/{{ competition["id_competition"] }}" class="text-secondary">Rezultatai</a>#}
-                        {#<br>#}
-                        {#<small class="text-muted">Data: {{ competition["competition_date"] }}</small>#}
-                        {#<hr>#}
-                    {#{% endfor %}#}
-                {#</div>#}
-            {#</div>#}
-        {#</div>#}
+    {#<div class="card my-4 card-shadow">#}
+    {#<div class="card-body">#}
+    {#<h4 class="card-title text-truncate">Vykstantys renginiai:</h4>#}
+    {#{% for competition in competitions %}#}
+    {#<h5 class="card-subtitle mb-2 text-muted">{{ competition["competition_name"] }}</h5>#}
+    {#<a href="/home/competition/{{ competition["id_competition"] }}"#}
+    {#class="card-link">Rezultatai</a>#}
+    {#<br>#}
+    {#<small class="text-muted">Data: {{ competition["competition_date"] }}</small>#}
+    {#<hr>#}
+    {#{% endfor %}#}
+    {#</div>#}
+    {#</div>#}
+    {#<div class="card my-4 card-shadow">#}
+    {#<div class="card-body">#}
+    {#<h4 class="card-title text-truncate">Būsimi renginiai: </h4>#}
+    {#{% for competition in competitions %}#}
+    {#<h5 class="card-subtitle mb-2 text-muted">{{ competition["competition_name"] }}</h5>#}
+    {#<small class="text-muted">Data: {{ competition["competition_date"] }}</small>#}
+    {#<hr>#}
+    {#{% endfor %}#}
+    {#</div>#}
+    {#</div>#}
+    {#<div class="card my-4 card-shadow">#}
+    {#<div class="card-body">#}
+    {#<h4 class="card-title text-truncate">Pasibaigę renginiai: </h4>#}
+    {#{% for competition in competitions %}#}
+    {#<h5 class="card-subtitle mb-2 text-muted">{{ competition["competition_name"] }}</h5>#}
+    {#<a href="/home/competition/{{ competition["id_competition"] }}" class="text-secondary">Rezultatai</a>#}
+    {#<br>#}
+    {#<small class="text-muted">Data: {{ competition["competition_date"] }}</small>#}
+    {#<hr>#}
+    {#{% endfor %}#}
+    {#</div>#}
+    {#</div>#}
+    {#</div>#}
     {#</div>#}
 {% endblock %}
