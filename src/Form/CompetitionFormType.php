@@ -31,8 +31,8 @@ class CompetitionFormType extends AbstractType
             ))
             ->add('competitionTeamsCount', NumberType::class, array("label" => "form.competition_registration.sector_count", 'attr' => ['class' => 'form__input']))
             ->add('competitionWeighingsCount', NumberType::class, array("label" => "form.competition_registration.weighing_count", 'attr' => ['class' => 'form__input']))
-            ->add('competitionLink', TextType::class, array("label" => "form.competition_registration.facebook_link", 'attr' => ['class' => 'form__input']))
-            ->add('competitionRules', TextareaType::class, array("label" => "form.competition_registration.rules"))
+            ->add('competitionLink', TextType::class, array("required"=>false,"label" => "form.competition_registration.facebook_link", 'attr' => ['class' => 'form__input']))
+            ->add('competitionRules', TextareaType::class, array("required"=>false,"label" => "form.competition_registration.rules"))
         ;
     }
 

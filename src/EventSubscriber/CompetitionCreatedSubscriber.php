@@ -6,8 +6,11 @@
  * Time: 11.45
  */
 
-namespace App\Event;
+namespace App\EventSubscriber;
 
+use App\Entity\Competition;
+use App\Event\CompetitionCreatedEvent;
+use App\Services\CompetitionService;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Translation\TranslatorInterface;
@@ -34,23 +37,28 @@ class CompetitionCreatedSubscriber implements EventSubscriberInterface
      */
     private $environment;
 
+
+    private $competitionService;
     /**
      * CompetitionCreatedSubscriber constructor.
      * @param \Swift_Mailer $mailer
      * @param UrlGeneratorInterface $urlGenerator
      * @param TranslatorInterface $translator
      * @param Environment $environment
+     * @param CompetitionService $competitionService
      */
     public function __construct(
         \Swift_Mailer $mailer,
         UrlGeneratorInterface $urlGenerator,
         TranslatorInterface $translator,
-        Environment $environment
+        Environment $environment,
+        CompetitionService $competitionService
     ) {
         $this->mailer = $mailer;
         $this->urlGenerator = $urlGenerator;
         $this->translator = $translator;
         $this->environment = $environment;
+        $this->competitionService=$competitionService;
     }
 
     /**
@@ -78,14 +86,14 @@ class CompetitionCreatedSubscriber implements EventSubscriberInterface
             UrlGeneratorInterface::ABSOLUTE_URL);
         $subjectMessage = $this->translator->trans("mail.subject_message");
 
-            $message = (new \Swift_Message($subjectMessage))
-                ->setFrom('sportinekarpiuzukle@gmail.com')
-                ->setTo($email)
-                ->setBody($this->environment->render("email/email.html.twig", array(
-                    "accessLink" => $accessLink
-                )),
-                    'text/html');
-            $this->mailer->send($message);
+        $message = (new \Swift_Message($subjectMessage))
+            ->setFrom('sportinekarpiuzukle@gmail.com')
+            ->setTo($email)
+            ->setBody($this->environment->render("email/email.html.twig", array(
+                "accessLink" => $accessLink
+            )),
+                'text/html');
+        $this->mailer->send($message);
 
     }
 }

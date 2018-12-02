@@ -31,3 +31,7 @@ organizerResults:
   path: /organizer/{hash}/results/{teamId}/{weighingNr}
   controller: App\Controller\OrganizerController::results
   defaults: {weighingNr: 1}
+
+organizerFinishedCompetition:
+  path: /organizer/{hash}/finish
+  controller: App\Controller\OrganizerController::finish

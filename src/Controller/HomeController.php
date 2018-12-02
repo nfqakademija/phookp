@@ -2,12 +2,10 @@
 
 namespace App\Controller;
 
-use App\Entity\Competition;
+use App\Repository\CompetitionRepository;
 use App\Services\CompetitionService;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
-
-use Symfony\Component\Routing\Annotation\Route;
 
 class HomeController extends Controller
 {
@@ -17,10 +15,16 @@ class HomeController extends Controller
      */
     public function index(CompetitionService $competitionService)
     {
-        //$competitions = $competitionService->getFutureCompetitions();
+        $futureCompetitions = $competitionService->getFutureCompetitions();
+        $goingCompetitions=$competitionService->getGoingCompetitions();
+        $expiredCompetitions=$competitionService->getExpiredCompetitions();
         return $this->render("home/index.html.twig",
             array(
-                "competitions" => new Competition(),
+                "futureCompetitions" => $futureCompetitions,
+                "goingCompetitions" => $goingCompetitions,
+                "expiredCompetitions" => $expiredCompetitions
             ));
+
     }
+
 }
