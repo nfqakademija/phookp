@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 {% block title %}Create event {{ parent() }}{% endblock %}
-{#{% form_theme form 'custom_form_layout.html.twig' %}#}
+{% form_theme form 'bootstrap_4_layout.html.twig' %}
 {% block body %}
     <div class="page-name-container">
         <h2>Organizuoti varžybas</h2>
@@ -17,7 +17,7 @@
         </div>
         <div class="row justify-content-center">
             <div class="col-lg-10">
-                <div class="card mt-4 card-shadow">
+                <div class="card mt-4 form__card bg-light">
                     <div class="card-body">
                         <h3 class="card-title">Renginio sukūrimas </h3>
                         <p class="card-text">
