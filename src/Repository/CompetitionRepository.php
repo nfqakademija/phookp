@@ -40,26 +40,19 @@ class CompetitionRepository extends ServiceEntityRepository
     }
 
     /**
+     * @param string $status
      * @return array|null
      */
-    public function findGoingCompetitions(): ?array
+    public function findCompetitions(string $status): ?array
     {
-        return $this->findBy(['competitionStatus' => Competition::STATUS_STARTED, 'competitionApproved' => true]);
-    }
-
-    /**
-     * @return array|null
-     */
-    public function findFutureCompetitions(): ?array
-    {
-        return $this->findBy(['competitionStatus' => Competition::STATUS_CONFIRMED, 'competitionApproved' => true]);
-    }
-
-    /**
-     * @return array|null
-     */
-    public function findExpiredCompetitions(): ?array
-    {
-        return $this->findBy(['competitionStatus' => Competition::STATUS_FINISHED, 'competitionApproved' => true]);
+        $approved = true;
+        return $competitions = $this->createQueryBuilder('r')
+            ->where('r.competitionStatus = :competitionStatus')
+            ->andWhere('r.competitionApproved = :competitionApproved')
+            ->orderBy('r.competitionDate', 'ASC')
+            ->setParameter('competitionStatus', $status)
+            ->setParameter('competitionApproved', $approved)
+            ->getQuery()
+            ->getResult();
     }
 }

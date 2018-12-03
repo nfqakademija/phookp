@@ -1,10 +1,25 @@
 
 // the ~ allows you to reference things in node_modules
 @import "~bootstrap/scss/bootstrap";
+@import "~material-design-lite/src/data-table/data-table";
 @import "./styles";
 
 
+.alert.alert-success {
+  position: fixed;
+  text-align: center;
+  width: 100%;
+  padding-top: 50px;
+  z-index: 1031;
+}
 
+.alert.alert-danger {
+  position: fixed;
+  text-align: center;
+  width: 100%;
+  padding-top: 50px;
+  z-index: 1031;
+}
 
 .card-shadow{
   box-shadow: 10px 10px 5px grey;
@@ -20,25 +35,33 @@
   margin: 0 15px;
 }
 
+.sector-number-container{
+
+}
+
 .sector-button {
   min-height: 40px;
-  min-width: 80px;
-  background: #DDDDDD;
+  min-width: 40px;
   color: #3E8AEC;
-  border-right: 1px solid #3E8AEC;
+  padding: 5px;
+  border-right: 1px solid #e0e0e0;
 }
 
-.sector-button:hover{
+.sector__link {
   text-decoration: none;
-  color: #3E8AEC;
-  border-color: #000;
+  font-size: 18px;
+  &:hover {
+    text-decoration: none;
+
+      -webkit-box-shadow: 0 0 24px 0 rgba(0,0,0,0.75);
+      -moz-box-shadow: 0 0 24px 0 rgba(0,0,0,0.75);
+      box-shadow: 0 0 24px 0 rgba(0,0,0,0.75);
+
+  }
 }
-
-
 .sector-button--active{
   background: #FFF;
-  border: 1px solid #3E8AEC;
-  border-right-color: transparent;
+  border-right:2px solid $mainBlue ;
 }
 
 .text-box{
@@ -49,13 +72,10 @@
   max-width: 90px;
   line-height: 0;
   margin: 10px;
+  background: transparent;
 }
 
-.results-entry-container{
-  border-width: 1px 1px 1px 0;
-  border-color: #3E8AEC;
-  border-style: solid;
-}
+
 
 .lh-1{
   line-height: 1;
@@ -64,8 +84,10 @@
 .btn-icon--round{
   border-radius: 50%;
   line-height: 0;
-  height: 32px;
-  width: 32px;
+  height: 38px;
+  width: 38px;
+  font-size: 20px;
+  border: none;
 }
 @media (min-width: 992px) {
 

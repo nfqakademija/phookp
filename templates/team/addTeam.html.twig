@@ -1,9 +1,9 @@
-{% extends 'base.html.twig' %}
+{% extends 'organizerPanel/organizerPanel.html.twig' %}
 {% block title %}Add command{{ parent() }}{% endblock %}
 {% form_theme form 'bootstrap_4_layout.html.twig' %}
-{% block body %}
-    {{ include ('navBar/navBarOrganizer.html.twig') }}
-    <div class="container container-index">
+    {% block panelName %}Komandų pridėjimas{% endblock %}
+{% block panelContent %}
+
         <div class="row justify-content-center">
             {% for label, messages in app.flashes %}
                 {% for message in messages %}
@@ -13,17 +13,8 @@
                 {% endfor %}
             {% endfor %}
         </div>
-        <div class="row justify-content-center">
-            <div class="col-lg-2">
-                <div class="list-group">
-                    <a href="/organizer/{{hash}}" class="list-group-item">Pradinis</a>
-                    <a href="/organizer/{{hash}}/createTeams" class="list-group-item ">Komandu pridejimas</a>
-                    <a href="/organizer/{{hash}}/teamsSectors" class="list-group-item">Pradeti varzybas</a>
-                </div>
-            </div>
-            <div class="col-lg-10">
-
-                <div class="card mt-4 card-shadow">
+            <div class="col-lg-8 u-mt-minus">
+                <div class="card mt-4">
                     <div class="card-body">
                         <h3 class="card-title">Komandų pridėjimas</h3>
                         <p class="card-text">
@@ -33,8 +24,8 @@
                         <div class="col">
                         <h1>{{ team.teamName }}</h1>
                             </div>
-                            <div class="col">
-                        <button type="button" class="btn btn-danger deleteButton"  data-id="{{ team.id }}">Ištrinti</button>
+                            <div class="col d-flex align-items-center justify-content-start">
+                        <button type="button" class="btn btn-danger deleteButton button button--danger"  data-id="{{ team.id }}"><i class="fa fa-trash-alt"></i> Ištrinti</button>
                             </div>
                         </div>
                             {% endfor %}
@@ -51,11 +42,8 @@
                             {% else %}
                             <br>
                             {% endif %}
-                        </p>
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
     <script src="{{ asset('build/js/deleteTeam.js') }}"></script>
 {% endblock %}

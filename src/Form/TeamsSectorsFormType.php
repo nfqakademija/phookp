@@ -19,7 +19,12 @@ class TeamsSectorsFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add("teams", CollectionType::class, array("entry_type" => TeamSectorFormType::class));
+            ->add("teams", CollectionType::class, array(
+                "entry_type" => TeamSectorFormType::class,
+                'entry_options' => array(
+                    'attr' => array('class' => 'form__input'),
+                )
+            ));
 
     }
 }

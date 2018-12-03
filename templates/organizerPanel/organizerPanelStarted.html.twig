@@ -11,8 +11,8 @@
                 {% endfor %}
             {% endfor %}
         </div>
-        <div class="page-name-container organizer-name-container u-no-mt ">
-           <h2> {% block panelName %}Organizatoriaus panelė{% endblock %} </h2>
+        <div class="page-name-container organizer-name-container u-no-mt">
+            <h2> {% block panelName %}Organizatoriaus panelė{% endblock %} </h2>
         </div>
         <div class="row justify-content-center panel-container">
             <div class="side-bar">
@@ -20,13 +20,14 @@
 
                 </div>
                 <div class="list-group">
-                    <a href="/organizer/{{hash}}" class="sidebar__link">Pradinis</a>
-                    <a href="/organizer/{{hash}}/createTeams" class="sidebar__link">Komandų pridėjimas</a>
-                    <a href="/organizer/{{hash}}/teamsSectors" class="sidebar__link">Pradėti varžybas</a>
+                    <a href="/organizer/{{hash}}/results/{{teamId}}/{{weighingNr}}" class="sidebar__link">Įvesti rezultatus</a>
+                    <a href="#" class="sidebar__link">Komandos</a>
+                    <a href="#" class="sidebar__link">Rezultatai</a>
+                    <a href="/organizer/{{hash}}/finish" class="sidebar__link">Užbaigti varžybas</a>
                 </div>
             </div>
             <div class="col-lg-10 panel__content d-flex justify-content-center">
-                        {% block panelContent %}{% endblock %}
+                {% block panelContent %}{% endblock %}
 
             </div>
         </div>
