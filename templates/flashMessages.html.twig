@@ -1,5 +1,5 @@
 {% if app.session.flashbag.has('success') %}
-<div class="alert alert-success my-2">
+<div class="alert alert-success">
     <ul>
         {% for message in app.flashes('success') %}
             <li>
@@ -10,7 +10,7 @@
 </div>
 {% endif %}
 {% if app.session.flashbag.has('error') %}
-    <div class="alert alert-danger my-2">
+    <div class="alert alert-danger">
         <ul>
             {% for message in app.flashes('error') %}
                 <li>
