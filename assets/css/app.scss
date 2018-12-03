@@ -5,11 +5,20 @@
 @import "./styles";
 
 
-.alert.alert-success.my-2 {
+.alert.alert-success {
   position: fixed;
+  text-align: center;
   width: 100%;
-  left: 15%;
-  margin-top: 3.5rem;
+  padding-top: 50px;
+  z-index: 1031;
+}
+
+.alert.alert-danger {
+  position: fixed;
+  text-align: center;
+  width: 100%;
+  padding-top: 50px;
+  z-index: 1031;
 }
 
 .card-shadow{

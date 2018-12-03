@@ -1,0 +1,26 @@
+.table-container {
+  display: flex;
+  justify-content: center;
+}
+.table-head {
+  background-color: $mainBlue;
+}
+
+.tr--border-bottom--white {
+  border-bottom: 1px solid #fff;
+}
+
+.weighin-th {
+  text-align: center;
+}
+
+.th--border--white{
+  border: 1px solid #fff;
+}
+.thead-primary {
+    background-color: $mainBlue;
+  th{
+    color: #fff;
+
+  }
+}
