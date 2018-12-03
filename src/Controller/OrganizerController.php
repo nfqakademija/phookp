@@ -45,7 +45,10 @@ class OrganizerController extends AbstractController implements AuthorizedContro
     ){
         $competition = $hashRepository->findOneByHash($hash)->getCompetition();
 
-        return new Response("Organizatoriaus main...");
+        return $this->render("organizerPanel/organizerPanel.html.twig",
+            [
+                "hash" => $hash
+            ]);
     }
 
     /**
