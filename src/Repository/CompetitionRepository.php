@@ -46,7 +46,7 @@ class CompetitionRepository extends ServiceEntityRepository
     public function findCompetitions(string $status): ?array
     {
         $approved = true;
-        return $competition = $this->createQueryBuilder('r')
+        return $competitions = $this->createQueryBuilder('r')
             ->where('r.competitionStatus = :competitionStatus')
             ->andWhere('r.competitionApproved = :competitionApproved')
             ->orderBy('r.competitionDate', 'ASC')
