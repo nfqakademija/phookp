@@ -32,48 +32,9 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Translation\TranslatorInterface;
 
 
-class OrganizerController extends AbstractController implements IAuthorizedController
+class OrganizerController extends AbstractController implements AuthorizedControllerInterface
 {
 
-    /**
-     * @param $hash
-     * @param HashService $hashService
-     * @param CompetitionService $competitionService
-     * @param EventDispatcherInterface $dispatcher
-     * @return Response
-     */
-    public function index(
-        $hash,
-        HashService $hashService,
-        CompetitionService $competitionService,
-        EventDispatcherInterface $dispatcher
-    ) {
-        $hashObject = $hashService->findByHash($hash);
-        $competition = $hashObject->getCompetition();
-        $isConfirmed = $competitionService->competitionStatus($competition, Competition::STATUS_CONFIRMED);
-        $isStarted = $competitionService->competitionStatus($competition, Competition::STATUS_STARTED);
-        $isFinished = $competitionService->competitionStatus($competition, Competition::STATUS_FINISHED);
-        if ($isConfirmed === false && $isStarted === false && $isFinished === false) {
-            $event = new CompetitionConfirmedEvent($competition);
-            $dispatcher->dispatch(CompetitionConfirmedEvent::NAME, $event);
-        } else {
-            if ($isStarted) {
-                return $this->redirectToRoute("organizerResults", [
-                    'hash' => $hashObject->getHash(),
-                    'teamId' => $competition->getTeams()->first()->getId(),
-                    'weighingNr' => 1
-                ]);
-            } else {
-                if ($isFinished) {
-                    $this->addFlash("success", "varzybos baigtos");
-                    return $this->redirectToRoute("home");
-                }
-            }
-        }
-        return $this->render("organizerPanel/organizerPanel.html.twig", [
-            "hash" => $hash,
-        ]);
-    }
 
     /**
      * @param Request $request

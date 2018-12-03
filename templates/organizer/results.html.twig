@@ -11,6 +11,11 @@
             <a href="/organizer/{{hash}}/finish" class="list-group-item">Varzybu uzbaigimas</a>
         </div>
     </div>
+    {#
+    TODO
+        sverimu juosta ir apatinis row su 'Kitas sektorius' ir 'Issaugoti' mygtukais turi but statinis (visada matomi)
+        sektoriai turi scrollintis atskirai nuo rezultatu input fieldu containerio
+    #}
     <div class="container">
         {#{{ dump(app.request.uri) }}#}
             <div class="card col-lg-10">
@@ -76,6 +81,6 @@
                     {{ form_end(form) }}
                 </div>
             </div>
-
     </div>
+    <script src="{{ asset('build/js/resultsForm.js') }}"></script>
 {% endblock %}
