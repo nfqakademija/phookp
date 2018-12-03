@@ -90,7 +90,7 @@ final class CompetitionService
      */
     public function getFutureCompetitions(): ?array
     {
-        $futureCompetitions = $this->competitionRepository->findFutureCompetitions();
+        $futureCompetitions = $this->competitionRepository->findCompetitions(Competition::STATUS_CONFIRMED);
         $competitions = $this->getFormattedCompetitions($futureCompetitions);
         return $competitions;
     }
@@ -100,7 +100,7 @@ final class CompetitionService
      */
     public function getGoingCompetitions(): ?array
     {
-        $goingCompetitions = $this->competitionRepository->findGoingCompetitions();
+        $goingCompetitions = $this->competitionRepository->findCompetitions(Competition::STATUS_STARTED);
         $competitions = $this->getFormattedCompetitions($goingCompetitions);
         return $competitions;
     }
@@ -110,7 +110,7 @@ final class CompetitionService
      */
     public function getExpiredCompetitions(): ?array
     {
-        $expiredCompetitions = $this->competitionRepository->findExpiredCompetitions();
+        $expiredCompetitions = $this->competitionRepository->findCompetitions(Competition::STATUS_FINISHED);
         $competitions = $this->getFormattedCompetitions($expiredCompetitions);
         return $competitions;
     }
