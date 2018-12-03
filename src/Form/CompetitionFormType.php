@@ -3,6 +3,7 @@
 namespace App\Form;
 
 use App\Entity\Competition;
+use Doctrine\DBAL\Exception\TableExistsException;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
@@ -23,6 +24,7 @@ class CompetitionFormType extends AbstractType
             ->add('competitionName', TextType::class, array("label" => "form.competition_registration.name", 'attr' => ['class' => 'form__input']))
             ->add('competitionDate', DateType::class, array("label" => "form.competition_registration.start_date",'attr' => ['class' => 'form__select']))
             ->add('competitionDuration', NumberType::class, array("label" => "form.competition_registration.duration",'attr' => ['class' => 'form__input']))
+            ->add('competitionLocation', TextType::class, array("label" => "form.competition_registration.location",'attr' => ['class' => 'form__input']))
             ->add("competitionType", ChoiceType::class, array("label" => "form.competition_registration.type",
                     "choices" => array(
                         "Top 5" => Competition::TYPE_TOP5,

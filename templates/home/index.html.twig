@@ -13,22 +13,66 @@
                         <h1 class="heading heading--blue-border ">Sportinė karpių žuklė</h1>
                     </div>
                     <div class="event">
-                        <h3 class="event__heading">Šiuo metu vyksta:</h3>
-                        {% for competition in competitions %}
-                        <div class="row">
-                            <div class="col-lg-6 col-m-6 col-sm-6 mobile-event">
-                                <h2 class="event__name">{{ competition['name'] }}</h2>
-                                <div class="event__place">
-                                    <i class="fa  fa-map-marker-alt"></i> <span class="ml-2">Kauno Marios</span>
+                        {% if goingCompetitions %}
+                            <h3 class="event__heading">Šiuo metu vyksta:</h3>
+                            {% for competition in goingCompetitions %}
+                                <div class="row">
+                                    <div class="col-lg-6 col-m-6 col-sm-6 mobile-event">
+                                        <h2 class="event__name">{{ competition['name'] }}</h2>
+                                        <div class="event__place">
+                                            <i class="fa  fa-map-marker-alt"></i> <span class="ml-2">Kauno Marios</span>
+                                        </div>
+                                        <div class="event__date"><i class="fa fa-calendar-alt"></i> <span
+                                                    class="ml-2">{{ competition['startDate'] }}
+                                                - {{ competition['finishDate'] }}</span>
+                                        </div>
+                                        <a href="/results/{{ competition['id'] }}">Rezultatai</a>
+                                        <br>
+                                        {% if competition['link'] %}
+                                            <a href="{{ competition['link'] }}">Facebook nuoroda čia!</a>
+                                        {% endif %}
+                                    </div>
                                 </div>
-                                <div class="event__date"><i class="fa fa-calendar-alt"></i> <span class="ml-2">{{ competition['startDate'] }} - {{ competition['finishDate'] }}</span>
+                            {% endfor %}
+                            {% elseif futureCompetition %}
+                                <h3 class="event__heading">Artimiausiu metu vyks:</h3>
+                                    <div class="row">
+                                        <div class="col-lg-6 col-m-6 col-sm-6 mobile-event">
+                                            <h2 class="event__name">{{ futureCompetition['name'] }}</h2>
+                                            <div class="event__place">
+                                                <i class="fa  fa-map-marker-alt"></i> <span
+                                                        class="ml-2">Kauno Marios</span>
+                                            </div>
+                                            <div class="event__date"><i class="fa fa-calendar-alt"></i> <span
+                                                        class="ml-2">{{ futureCompetition['startDate'] }}
+                                                    - {{ futureCompetition['finishDate'] }}</span>
+                                            </div>
+                                            {% if futureCompetition['link'] %}
+                                                <a href="{{ futureCompetition['link'] }}">Facebook nuoroda čia!</a>
+                                            {% endif %}
+                                        </div>
                                 </div>
-                                <a href="">Daugiau</a>
-                            </div>
-                        </div>
-                        {% endfor %}
+                            {% else %}
+                                <h3 class="event__heading">Paskutinės varžybos: </h3>
+                                <div class="row">
+                                        <div class="col-lg-6 col-m-6 col-sm-6 mobile-event">
+                                            <h2 class="event__name">{{ expiredCompetition['name'] }}</h2>
+                                            <div class="event__place">
+                                                <i class="fa  fa-map-marker-alt"></i> <span
+                                                        class="ml-2">Kauno Marios</span>
+                                            </div>
+                                            <div class="event__date"><i class="fa fa-calendar-alt"></i> <span
+                                                        class="ml-2">{{ expiredCompetition['startDate'] }}
+                                                    - {{ expiredCompetition['finishDate'] }}</span>
+                                            </div>
+                                            <a href="/results/{{ expiredCompetition['id'] }}">Rezultatai</a>
+                                            {% if competition['link'] %}
+                                                <a href="{{ expiredCompetition['link'] }}">Facebook nuoroda čia!</a>
+                                            {% endif %}
+                                        </div>
+                                </div>
+                        {% endif %}
                     </div>
-
                     <div class="event mt-3">
                         <div class="row">
                             <div class="col-lg-12 mt-4 pb-2">

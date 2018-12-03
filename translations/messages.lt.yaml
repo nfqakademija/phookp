@@ -4,6 +4,7 @@ form.competition_registration.duration: Renginio trukmė
 form.competition_registration.organiser: Organizatorius
 form.competition_registration.mail: Elektroninis paštas
 form.competition_registration.type: Renginio tipas
+form.competition_registration.location: Renginio vieta
 form.competition_registration.team_count: Maksimalus komandų kiekis
 form.competition_registration.weighing_count: Svėrimų skaičius
 form.competition_registration.facebook_link: Facebook renginio nuoroda
