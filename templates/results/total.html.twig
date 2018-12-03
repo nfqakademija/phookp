@@ -12,6 +12,14 @@
             <table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp">
                 <thead class="thead-primary">
                 <tr>
+                    <th colspan="3"></th>
+                    {% for w in 0..competition.CompetitionWeighingsCount-1 %}
+                        <th colspan="2" scope="col" class="mdl-data-table__cell--non-numeric">
+                            Svėrimas #{{ w+1 }}
+                        </th>
+                    {% endfor %}
+                </tr>
+                <tr>
                     <th scope="col"  class="mdl-data-table__cell--non-numeric">
                         Vieta
                     </th>
@@ -23,10 +31,10 @@
                     </th>
                     {% for w in 0..competition.CompetitionWeighingsCount-1 %}
                         <th scope="col" class="mdl-data-table__cell--non-numeric">
-                            Svėrimas #{{ w+1 }}
+                           Svoris kg
                         </th>
                         <th scope="col">
-                            Žuvų skaičius
+                            Vnt
                         </th>
                     {% endfor %}
                     <th scope="col" class="mdl-data-table__cell--non-numeric">
@@ -52,20 +60,20 @@
                             {% for w in 0..competition.CompetitionWeighingsCount-1 %}
                                 <td>
                                     {% if result['weighings'][w] is defined %}
-                                        {{ result['weighings'][w]['totalWeigh']/1000}}kg
+                                        {{ result['weighings'][w]['totalWeigh']/1000}}
                                     {% endif %}
                                 </td>
                                 <td>
                                     {% if result['weighings'][w] is defined %}
-                                        {{ result['weighings'][w]['fishCount'] }}vnt
+                                        {{ result['weighings'][w]['fishCount'] }}
                                     {% endif %}
                                 </td>
                             {% endfor %}
                             <td>
-                                {{ result['totalWeigh']/1000 }}kg
+                                {{ result['totalWeigh']/1000 }}
                             </td>
                             <td>
-                                {{ result['totalCount'] }}vnt
+                                {{ result['totalCount'] }}
                             </td>
                         </tr>
                     {% endfor %}
