@@ -19,9 +19,14 @@ competitionGet:
   controller: App\Controller\CompetitionController::getCompetition
   methods:    [GET, HEAD]
 
+competitionResults:
+  path: /results/{id}
+  controller: App\Controller\CompetitionController::results
+  methods:    [GET, HEAD]
+
 organizerMain:
   path: /organizer/{hash}
-  controller: App\Controller\OrganizerController::index
+  controller: App\Controller\OrganizerController::main
 
 organizerCreateTeams:
   path: /organizer/{hash}/createTeams
@@ -38,6 +43,7 @@ organizerTeamsSectors:
 organizerResults:
   path: /organizer/{hash}/results/{teamId}/{weighingNr}
   controller: App\Controller\OrganizerController::results
+  defaults: {weighingNr: 1}
 
 organizerFinishedCompetition:
   path: /organizer/{hash}/finish

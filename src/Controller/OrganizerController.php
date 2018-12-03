@@ -5,7 +5,6 @@
  * Date: 18.10.29
  * Time: 21.19
  */
-
 namespace App\Controller;
 
 use App\Entity\Competition;
@@ -18,8 +17,11 @@ use App\Event\CompetitionStartedEvent;
 use App\Form\TeamsFormType;
 use App\Form\TeamsSectorsFormType;
 use App\Form\WeighingFormType;
+use App\Repository\CompetitionRepository;
+use App\Repository\HashRepository;
 use App\Services\CompetitionService;
 use App\Services\HashService;
+use App\Services\ResultsCalculationService;
 use App\Services\ResultService;
 use App\Services\TeamService;
 use App\Services\WeighingService;
@@ -29,50 +31,24 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Translation\TranslatorInterface;
 
 
-class OrganizerController extends AbstractController implements IAuthorizedController
+class OrganizerController extends AbstractController implements AuthorizedControllerInterface
 {
 
-    /**
-     * @param $hash
-     * @param HashService $hashService
-     * @param CompetitionService $competitionService
-     * @param EventDispatcherInterface $dispatcher
-     * @return Response
-     */
-    public function index(
-        $hash,
-        HashService $hashService,
-        CompetitionService $competitionService,
-        EventDispatcherInterface $dispatcher
-    ) {
-        $hashObject = $hashService->findByHash($hash);
-        $competition = $hashObject->getCompetition();
-        $isConfirmed = $competitionService->competitionStatus($competition, Competition::STATUS_CONFIRMED);
-        $isStarted = $competitionService->competitionStatus($competition, Competition::STATUS_STARTED);
-        $isFinished = $competitionService->competitionStatus($competition, Competition::STATUS_FINISHED);
-        if ($isConfirmed === false && $isStarted === false && $isFinished === false) {
-            $event = new CompetitionConfirmedEvent($competition);
-            $dispatcher->dispatch(CompetitionConfirmedEvent::NAME, $event);
-        } else {
-            if ($isStarted) {
-                return $this->redirectToRoute("organizerResults", [
-                    'hash' => $hashObject->getHash(),
-                    'teamId' => $competition->getTeams()->first()->getId(),
-                    'weighingNr' => 1
-                ]);
-            } else {
-                if ($isFinished) {
-                    $this->addFlash("success", "varzybos baigtos");
-                    return $this->redirectToRoute("home");
-                }
-            }
-        }
-        return $this->render("organizerPanel/organizerPanel.html.twig", [
-            "hash" => $hash,
-        ]);
+
+    public function main(
+        string $hash,
+        HashRepository $hashRepository
+    ){
+        $competition = $hashRepository->findOneByHash($hash)->getCompetition();
+
+        return $this->render("organizerPanel/organizerPanel.html.twig",
+            [
+                "hash" => $hash
+            ]);
     }
 
     /**
@@ -82,6 +58,7 @@ class OrganizerController extends AbstractController implements IAuthorizedContr
      * @param TeamService $teamService
      * @param TranslatorInterface $translator
      * @return Response
+     *
      */
     public function createTeam(
         Request $request,
@@ -100,7 +77,7 @@ class OrganizerController extends AbstractController implements IAuthorizedContr
                 $data['teams'][] = $team;
             }
             $form = $this->createForm(TeamsFormType::class, $data);
-            $form->add('save', SubmitType::class, array("label" => "form.team_registration.create_button"));
+            $form->add('save', SubmitType::class, array("label" => "form.team_registration.create_button","attr"=>["class" => "button"]));
             $form->handleRequest($request);
 
             if ($form->isSubmitted() && $form->isValid()) {
@@ -137,6 +114,8 @@ class OrganizerController extends AbstractController implements IAuthorizedContr
     {
         $teamService->remove($idTeam);
 
+        return new Response();
+
     }
 
     /**
@@ -169,7 +148,7 @@ class OrganizerController extends AbstractController implements IAuthorizedContr
         $teamId = $competition->getTeams()->first()->getId();
         $data = ['teams' => $competition->getTeams()->toArray()];
         $form = $this->createForm(TeamsSectorsFormType::class, $data);
-        $form->add('save', SubmitType::class, array("label" => "form.team_sectors_assignment.add_button"));
+        $form->add('save', SubmitType::class, array("label" => "form.team_sectors_assignment.add_button",  "attr"=>["class" => "button"]));
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -221,7 +200,6 @@ class OrganizerController extends AbstractController implements IAuthorizedContr
             $teamId = $teams[0]->getId();
         }
 
-
         if (count($teams) < 1) {
             $this->addFlash("error", $translator->trans("form.results_entry.error_not_added_teams_message"));
             $this->redirectToRoute("organizerMain", array("hash" => $hash));
@@ -237,7 +215,8 @@ class OrganizerController extends AbstractController implements IAuthorizedContr
             return $teamId === $element->getId();
         })) {
             $this->addFlash("error", $translator->trans("form.results_entry.error_not_found_team_message"));
-            $this->redirectToRoute("organizerMain", array("hash" => $hash));
+            return $this->redirectToRoute("organizerMain",
+                array("hash" => $hash, "teamId" => $teams[0]->getId(), "weighingNr" => 1));
         }
 
         $team = $teamService->find($teamId);

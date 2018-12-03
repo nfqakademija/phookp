@@ -48,7 +48,6 @@ class Competition
      *     message= "Netinkamas renginio datos formatas!"
      * )
      * @Assert\Range(
-     *     min="now",
      *     max="+2 years",
      *     minMessage="Neteisingai nurodyta renginio data!",
      *     maxMessage="Negalima planuoti renginių daugiau nei du metai į priekį!"

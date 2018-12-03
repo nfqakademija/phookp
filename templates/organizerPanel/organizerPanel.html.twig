@@ -1,8 +1,8 @@
-{% extends 'base.html.twig' %}
+{% extends 'no_nav_base.html.twig' %}
 {% block title %}Add command{{ parent() }}{% endblock %}
 {% block body %}
     {{ include ('navBar/navBarOrganizer.html.twig') }}
-    <div class="container container-index">
+    <div class="container-fluid container-index u-no-padding">
         <div class="row justify-content-center">
             {% for label, messages in app.flashes %}
                 {% for message in messages %}
@@ -12,21 +12,23 @@
                 {% endfor %}
             {% endfor %}
         </div>
-        <div class="row justify-content-center">
-            <div class="col-lg-2">
+        <div class="page-name-container organizer-name-container">
+           <h2> {% block panelName %}Organizatoriaus panelė{% endblock %} </h2>
+        </div>
+        <div class="row justify-content-center panel-container">
+            <div class="side-bar">
+                <div class="sidebar-header">
+
+                </div>
                 <div class="list-group">
-                    <a href="/organizer/{{hash}}" class="list-group-item">Pradinis</a>
-                    <a href="/organizer/{{hash}}/createTeams" class="list-group-item ">Komandu pridejimas</a>
-                    <a href="/organizer/{{hash}}/teamsSectors" class="list-group-item">Pradeti varzybas</a>
+                    <a href="/organizer/{{hash}}" class="sidebar__link">Pradinis</a>
+                    <a href="/organizer/{{hash}}/createTeams" class="sidebar__link">Komandu pridejimas</a>
+                    <a href="/organizer/{{hash}}/teamsSectors" class="sidebar__link">Pradeti varzybas</a>
                 </div>
             </div>
-            <div class="col-lg-10">
-                <div class="card mt-4 card-shadow">
-                    <div class="card-body">
-                        <h3 class="card-title">Panele</h3>
+            <div class="col-lg-10 panel__content d-flex justify-content-center">
+                        {% block panelContent %}{% endblock %}
 
-                    </div>
-                </div>
             </div>
         </div>
     </div>

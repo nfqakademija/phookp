@@ -49,7 +49,7 @@ class TeamRepository extends ServiceEntityRepository
      * @param int $id
      * @return Team
      */
-    public function findById(int $id) : Team
+    public function findById(int $id) : ?Team
     {
         return $this->findOneBy(["id" => $id]);
     }

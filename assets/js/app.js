@@ -1,5 +1,5 @@
 require('bootstrap');
 require('./deleteTeam');
-//require('./resultsForm');
+require('./resultsForm');
 require('./navBar');
 

@@ -1,0 +1,99 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Rezultatai {{ parent() }}{% endblock %}
+
+{% block body %}
+    <div class="page-name-container">
+        <h2>Renginio {{ competition.CompetitionName}} rezultatai</h2>
+    </div>
+    <div class="container mt-5">
+        <div class="row">
+            <div class="teble-responsive">
+            <table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp">
+                <thead class="thead-primary">
+                <tr>
+                    <th scope="col"  class="mdl-data-table__cell--non-numeric">
+                        Vieta
+                    </th>
+                    <th scope="col" class="mdl-data-table__cell--non-numeric">
+                        Sektorius
+                    </th>
+                    <th scope="col" class="mdl-data-table__cell--non-numeric">
+                        Komanda
+                    </th>
+                    {% for w in 0..competition.CompetitionWeighingsCount-1 %}
+                        <th scope="col" class="mdl-data-table__cell--non-numeric">
+                            Svėrimas #{{ w+1 }}
+                        </th>
+                        <th scope="col">
+                            Žuvų skaičius
+                        </th>
+                    {% endfor %}
+                    <th scope="col" class="mdl-data-table__cell--non-numeric">
+                        Bendras svoris
+                    </th>
+                    <th scope="col" class="mdl-data-table__cell--non-numeric">
+                        Iš viso žuvų
+                    </th>
+                </tr>
+                </thead>
+                <tbody>
+                    {% for result in results['teamResults'] %}
+                        <tr>
+                            <td>
+                                {{ loop.index }}
+                            </td>
+                            <td>
+                                {{ result['team'].sectorNr }}
+                            </td>
+                            <td>
+                                {{ result['team'].teamName }}
+                            </td>
+                            {% for w in 0..competition.CompetitionWeighingsCount-1 %}
+                                <td>
+                                    {% if result['weighings'][w] is defined %}
+                                        {{ result['weighings'][w]['totalWeigh']/1000}}kg
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    {% if result['weighings'][w] is defined %}
+                                        {{ result['weighings'][w]['fishCount'] }}vnt
+                                    {% endif %}
+                                </td>
+                            {% endfor %}
+                            <td>
+                                {{ result['totalWeigh']/1000 }}kg
+                            </td>
+                            <td>
+                                {{ result['totalCount'] }}vnt
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            </div>
+        </div>
+        <div class="row justify-content-start">
+            <table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp">
+                <tbody>
+                    <tr>
+                        <td class="bg-dark text-light">Didžiausia žuvis</td>
+                        <td> {{ results['bigFish']['weigh']/1000 }}kg</td>
+                    </tr>
+                    <tr>
+                        <td class="bg-dark text-light">Didžiausią žuvį pagavo</td>
+                        <td>{{ results['bigFish']['team'] }}</td>
+                    </tr>
+                    <tr>
+                        <td class="bg-dark text-light">Bendras žuvų svoris</td>
+                        <td> {{ results['totalWeigh']/1000 }}kg </td>
+                    </tr>
+                    <tr>
+                        <td class="bg-dark text-light">Bendras žuvų skaičius</td>
+                        <td> {{ results['totalCount'] }}vnt </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}

@@ -13,7 +13,16 @@ class WeighingFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('results', CollectionType::class, array("entry_type" => ResultFormType::class, 'allow_add' => true))
+            ->add('results', CollectionType::class, array(
+                "entry_type" => ResultFormType::class,
+                    'allow_add' => true,
+                    'entry_options' => array(
+                        'attr' => array('class' => 'form__input'),
+                    )
+                )
+
+
+            )
         ;
     }
 

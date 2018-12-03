@@ -3,6 +3,8 @@
 namespace App\Repository;
 
 use App\Entity\Result;
+use App\Entity\Team;
+use App\Entity\Weighing;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -41,7 +43,7 @@ class ResultRepository extends ServiceEntityRepository
         $this->entityManager->persist($result);
     }
 
-    public function  flush(): void
+    public function flush(): void
     {
         $this->entityManager->flush();
     }
@@ -53,7 +55,7 @@ class ResultRepository extends ServiceEntityRepository
      */
     public function findByTeamAndWeighing(int $teamId, int $weighingId): Collection
     {
-       $results = $this->createQueryBuilder('r')
+        $results = $this->createQueryBuilder('r')
             ->where('r.team = :teamid')
             ->andWhere('r.weighing = :weighingid')
             ->setParameter('teamid', $teamId)
@@ -61,7 +63,7 @@ class ResultRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
 
-       return new ArrayCollection($results);
+        return new ArrayCollection($results);
     }
 
     /**
@@ -70,6 +72,19 @@ class ResultRepository extends ServiceEntityRepository
     public function removeResult(Result $result): void
     {
         $this->entityManager->remove($result);
+    }
+
+    public function findTeamTopFishes(int $teamId, int $limit = 5): Collection
+    {
+        $results = $this->createQueryBuilder('r')
+            ->where('r.team = :teamid')
+            ->orderBy('weigh', 'DESC')
+            ->setParameter('teamid', $teamId)
+            ->setMaxResults($limit)
+            ->getQuery()
+            ->getResult();
+
+        return new ArrayCollection($results);
     }
 
 }
