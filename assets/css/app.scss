@@ -4,7 +4,12 @@
 @import "./styles";
 
 
-
+.alert.alert-success.my-2 {
+  position: fixed;
+  width: 100%;
+  left: 15%;
+  margin-top: 3.5rem;
+}
 
 .card-shadow{
   box-shadow: 10px 10px 5px grey;
