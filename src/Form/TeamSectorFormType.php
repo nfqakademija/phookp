@@ -20,7 +20,7 @@ class TeamSectorFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('sectorNr', NumberType::class, array('required'=> true,"label" => " ")
+            ->add('sectorNr', NumberType::class, array('required'=> true,"label" => " ", "attr" => ["class" => "form__input form__input--full"])
             );
     }
     public function configureOptions(OptionsResolver $resolver)

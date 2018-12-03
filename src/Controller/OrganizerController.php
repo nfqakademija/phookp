@@ -103,7 +103,7 @@ class OrganizerController extends AbstractController implements IAuthorizedContr
                 $data['teams'][] = $team;
             }
             $form = $this->createForm(TeamsFormType::class, $data);
-            $form->add('save', SubmitType::class, array("label" => "form.team_registration.create_button"));
+            $form->add('save', SubmitType::class, array("label" => "form.team_registration.create_button","attr"=>["class" => "button"]));
             $form->handleRequest($request);
 
             if ($form->isSubmitted() && $form->isValid()) {
@@ -172,7 +172,7 @@ class OrganizerController extends AbstractController implements IAuthorizedContr
         $teamId = $competition->getTeams()->first()->getId();
         $data = ['teams' => $competition->getTeams()->toArray()];
         $form = $this->createForm(TeamsSectorsFormType::class, $data);
-        $form->add('save', SubmitType::class, array("label" => "form.team_sectors_assignment.add_button"));
+        $form->add('save', SubmitType::class, array("label" => "form.team_sectors_assignment.add_button",  "attr"=>["class" => "button"]));
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

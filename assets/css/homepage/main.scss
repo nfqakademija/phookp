@@ -103,6 +103,15 @@
 
   }
 }
+.button--danger {
+  background-color: #dc3545;
+  width: 150px;
+}
+
+.button--square {
+  border-radius: 0;
+  height: auto;
+}
 
 .button__blue-transparent {
   background-color: $mainBlue;

@@ -53,6 +53,10 @@
   }
 }
 
+.form__input--full {
+  width: 100%;
+}
+
 .form__input--blue {
   border: none;
   border-bottom: 2px solid $mainBlue;
@@ -86,3 +90,5 @@ textarea.form-control {
     border-radius: 0;
     border: 1px solid $mainBlue;
   }
+
+
