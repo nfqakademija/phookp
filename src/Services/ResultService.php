@@ -10,6 +10,8 @@ namespace App\Services;
 
 
 use App\Entity\Result;
+use App\Entity\Team;
+use App\Entity\Weighing;
 use App\Repository\ResultRepository;
 use Doctrine\Common\Collections\Collection;
 

@@ -3,6 +3,8 @@
 namespace App\Repository;
 
 use App\Entity\Result;
+use App\Entity\Team;
+use App\Entity\Weighing;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;

@@ -177,4 +177,26 @@ class Team
         }
         return $this;
     }
+
+    public function totalWeigh(): int
+    {
+        $total = 0;
+        foreach ($this->getResults() as $result)
+        {
+            $total += $result->getWeigh();
+        }
+
+        return $total;
+    }
+
+    public function findBigFish(): int
+    {
+        $biggestFish = 0;
+        foreach ($this->getResults() as $result)
+        {
+            if($result->getWeigh() > $biggestFish)
+                $biggestFish = $result->getWeigh();
+        }
+        return $biggestFish;
+    }
 }

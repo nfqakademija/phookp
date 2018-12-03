@@ -17,8 +17,11 @@ use App\Event\CompetitionStartedEvent;
 use App\Form\TeamsFormType;
 use App\Form\TeamsSectorsFormType;
 use App\Form\WeighingFormType;
+use App\Repository\CompetitionRepository;
+use App\Repository\HashRepository;
 use App\Services\CompetitionService;
 use App\Services\HashService;
+use App\Services\ResultsCalculationService;
 use App\Services\ResultService;
 use App\Services\TeamService;
 use App\Services\WeighingService;
@@ -35,6 +38,19 @@ use Symfony\Component\Translation\TranslatorInterface;
 class OrganizerController extends AbstractController implements AuthorizedControllerInterface
 {
 
+
+    public function main(
+        string $hash,
+        ResultsCalculationService $calculationService,
+        HashRepository $hashRepository
+    ){
+        $competition = $hashRepository->findOneByHash($hash)->getCompetition();
+
+        $resultsArray = $calculationService->competitionTotalResults($competition);
+
+
+        return new Response("Organizerio main page...");
+    }
 
     /**
      * @param Request $request
@@ -183,7 +199,6 @@ class OrganizerController extends AbstractController implements AuthorizedContro
             $teamId = $teams[0]->getId();
         }
 
-
         if (count($teams) < 1) {
             $this->addFlash("error", $translator->trans("form.results_entry.error_not_added_teams_message"));
             $this->redirectToRoute("organizerMain", array("hash" => $hash));
@@ -199,7 +214,8 @@ class OrganizerController extends AbstractController implements AuthorizedContro
             return $teamId === $element->getId();
         })) {
             $this->addFlash("error", $translator->trans("form.results_entry.error_not_found_team_message"));
-            $this->redirectToRoute("organizerMain", array("hash" => $hash));
+            return $this->redirectToRoute("organizerMain",
+                array("hash" => $hash, "teamId" => $teams[0]->getId(), "weighingNr" => 1));
         }
 
         $team = $teamService->find($teamId);

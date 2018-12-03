@@ -21,7 +21,7 @@ competitionGet:
 
 organizerMain:
   path: /organizer/{hash}
-  controller: App\Controller\OrganizerController::index
+  controller: App\Controller\OrganizerController::main
 
 organizerCreateTeams:
   path: /organizer/{hash}/createTeams
