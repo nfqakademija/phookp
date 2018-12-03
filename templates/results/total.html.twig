@@ -3,12 +3,75 @@
 {% block title %}Rezultatai {{ parent() }}{% endblock %}
 
 {% block body %}
-    {{ include ('home/navBar.html.twig') }}
-    <div class="container">
-        <div class="row">
-            <h1> Renginio: {{ id }}</h1>
-            <h1>Rezultatų  nėra</h1>
+    <div class="container mt-5">
+        <div class="row text-center">
+            <h1> Renginio {{ competition.CompetitionName}} rezultatai</h1>
         </div>
-    </div>
+        <div class="row">
+            <div class="teble-responsive">
+            <table class="table table-striped">
+                <thead class="thead-primary">
+                <tr>
+                    <th scope="col">
+                        Vieta
+                    </th>
+                    <th scope="col">
+                        Sektorius
+                    </th>
+                    <th scope="col">
+                        Komanda
+                    </th>
+                    {% for w in 0..competition.CompetitionWeighingsCount-1 %}
+                        <th scope="col">
+                            Svėrimas #{{ w+1 }}
+                        </th>
+                        <th scope="col">
+                            Žuvų skaičius
+                        </th>
+                    {% endfor %}
+                    <th scope="col">
+                        Bendras svoris
+                    </th>
+                    <th scope="col">
+                        Iš viso žuvų
+                    </th>
+                </tr>
+                </thead>
+                <tbody>
+                    {% for result in results['teamResults'] %}
+                        <tr>
+                            <td>
+                                {{ loop.index }}
+                            </td>
+                            <td>
+                                {{ result['team'].sectorNr }}
+                            </td>
+                            <td>
+                                {{ result['team'].teamName }}
+                            </td>
+                            {% for w in 0..competition.CompetitionWeighingsCount-1 %}
+                                <td>
+                                    {% if result['weighings'][w] is defined %}
+                                        {{ result['weighings'][w]['totalWeigh']/1000}}kg
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    {% if result['weighings'][w] is defined %}
+                                        {{ result['weighings'][w]['fishCount'] }}vnt
+                                    {% endif %}
+                                </td>
+                            {% endfor %}
+                            <td>
+                                {{ result['totalWeigh']/1000 }}kg
+                            </td>
+                            <td>
+                                {{ result['totalCount'] }}vnt
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            </div>
+        </div>
     </div>
 {% endblock %}

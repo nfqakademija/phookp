@@ -48,8 +48,10 @@ class OrganizerController extends AbstractController implements AuthorizedContro
 
         $resultsArray = $calculationService->competitionTotalResults($competition);
 
-
-        return new Response("Organizerio main page...");
+        return $this->render("results/total.html.twig", [
+            "competition" => $competition,
+            "results" => $resultsArray
+        ]);
     }
 
     /**

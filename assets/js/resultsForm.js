@@ -7,17 +7,17 @@ const generateResultsFormHtml = () => {
     const id = resultFieldsCount();
     return `<div>
                 <input type="text" 
-                    id="weighing_results_${id}_weigh" 
-                    name="weighing[results][${id}][weigh]" 
+                    id="weighing_form_results_${id}_weigh" 
+                    name="weighing_form[results][${id}][weigh]" 
                     placeholder="Žuvis (g.)" 
                     class="text-box text-box--results">
             </div> 
             <div class="ml-1">
                 <div>
-                    <label for="weighing_results_${id}_specialFish">Amuras</label>
+                    <label for="weighing_form_results_${id}_specialFish">Amuras</label>
                     <input type="checkbox" 
-                        id="weighing_results_${id}_specialFish" 
-                        name="weighing[results][${id}][specialFish]" 
+                        id="weighing_form_results_${id}_specialFish" 
+                        name="weighing_form[results][${id}][specialFish]" 
                         class="check-box" value="1">
                 </div>
             </div>`;
