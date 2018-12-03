@@ -73,5 +73,27 @@
             </table>
             </div>
         </div>
+        <div class="row justify-content-start">
+            <table class="table table-bordered col-lg-4 col-md-6 col-sm-8 col-12">
+                <tbody>
+                    <tr>
+                        <td class="bg-dark text-light">Didžiausia žuvis</td>
+                        <td> {{ results['bigFish']['weigh']/1000 }}kg</td>
+                    </tr>
+                    <tr>
+                        <td class="bg-dark text-light">Didžiausią žuvį pagavo</td>
+                        <td>{{ results['bigFish']['team'] }}</td>
+                    </tr>
+                    <tr>
+                        <td class="bg-dark text-light">Bendras žuvų svoris</td>
+                        <td> {{ results['totalWeigh']/1000 }}kg </td>
+                    </tr>
+                    <tr>
+                        <td class="bg-dark text-light">Bendras žuvų skaičius</td>
+                        <td> {{ results['totalCount'] }}vnt </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 {% endblock %}

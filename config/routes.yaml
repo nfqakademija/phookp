@@ -19,6 +19,11 @@ competitionGet:
   controller: App\Controller\CompetitionController::getCompetition
   methods:    [GET, HEAD]
 
+competitionResults:
+  path: /results/{id}
+  controller: App\Controller\CompetitionController::results
+  methods:    [GET, HEAD]
+
 organizerMain:
   path: /organizer/{hash}
   controller: App\Controller\OrganizerController::main

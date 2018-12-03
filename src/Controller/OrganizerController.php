@@ -41,17 +41,11 @@ class OrganizerController extends AbstractController implements AuthorizedContro
 
     public function main(
         string $hash,
-        ResultsCalculationService $calculationService,
         HashRepository $hashRepository
     ){
         $competition = $hashRepository->findOneByHash($hash)->getCompetition();
 
-        $resultsArray = $calculationService->competitionTotalResults($competition);
-
-        return $this->render("results/total.html.twig", [
-            "competition" => $competition,
-            "results" => $resultsArray
-        ]);
+        return new Response("Organizatoriaus main...");
     }
 
     /**
@@ -116,6 +110,8 @@ class OrganizerController extends AbstractController implements AuthorizedContro
     public function deleteTeam($idTeam, TeamService $teamService)
     {
         $teamService->remove($idTeam);
+
+        return new Response();
 
     }
 

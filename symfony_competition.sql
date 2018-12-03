@@ -9,11 +9,7 @@ ALTER TABLE hash AUTO_INCREMENT = 1;
 ALTER TABLE weighing AUTO_INCREMENT = 1;
 ALTER TABLE team AUTO_INCREMENT = 1;
 ALTER TABLE result AUTO_INCREMENT = 1;
-INSERT INTO symfony.competition (id, competition_name, competition_date, competition_duration, competition_organiser, competition_organiser_email, competition_type, competition_approved, competition_status, competition_teams_count, competition_weighings_count, competition_link, competition_rules) VALUES (1, 'Gaudom karpius ziema 9999', '2018-11-20 00:00:00', 1, 'Antanas Karpis', 'antanas@karpis.lt', 'top5', 0, 'unconfirmed', 1, 3, 'http://facebook.com', 'hggk');
-INSERT INTO symfony.competition (id, competition_name, competition_date, competition_duration, competition_organiser, competition_organiser_email, competition_type, competition_approved, competition_status, competition_teams_count, competition_weighings_count, competition_link, competition_rules) VALUES (2, 'Gaudom karpius ziema 9999', '2018-11-20 00:00:00', 1, 'Antanas Karpis', 'antanas@karpis.lt', 'top5', 0, 'unconfirmed', 1, 3, 'http://facebook.com', 'hggk');
-INSERT INTO symfony.competition (id, competition_name, competition_date, competition_duration, competition_organiser, competition_organiser_email, competition_type, competition_approved, competition_status, competition_teams_count, competition_weighings_count, competition_link, competition_rules) VALUES (3, 'Karpiu medziokle 666', '2018-11-27 00:00:00', 5, 'NFA', 'antanas@karpis.lt', 'top5', 0, 'unconfirmed', 5, 3, 'http://facebook.com', 'lkhjgifytfifiytytft');
-INSERT INTO symfony.competition (id, competition_name, competition_date, competition_duration, competition_organiser, competition_organiser_email, competition_type, competition_approved, competition_status, competition_teams_count, competition_weighings_count, competition_link, competition_rules) VALUES (4, 'Gaudom karpius ziema 9999', '2018-12-18 00:00:00', 3, 'Mantas M', 'mantas@carpro.lt', 'top5', 0, 'unconfirmed', 3, 6, null, null);
-INSERT INTO symfony.competition (id, competition_name, competition_date, competition_duration, competition_organiser, competition_organiser_email, competition_type, competition_approved, competition_status, competition_teams_count, competition_weighings_count, competition_link, competition_rules) VALUES (5, 'Karpiu medziokle 666', '2018-12-16 00:00:00', 3, 'Mantas M', 'mantas@carpro.lt', 'top5', 0, 'unconfirmed', 5, 3, null, null);
+
 INSERT INTO symfony.competition (id, competition_name, competition_date, competition_duration, competition_organiser, competition_organiser_email, competition_type, competition_approved, competition_status, competition_teams_count, competition_weighings_count, competition_link, competition_rules) VALUES (6, 'Punios taurė 2018', '2018-05-04 00:00:00', 2, 'Pikts Karpis', 'mantas@carpro.lt', 'total', 0, 'finished', 12, 1, 'https://www.facebook.com/events/2023564937932326/', 'Dalyvių atvažiavimas į varžymas: gegužės 4 d. iki 13.00 val.
 Varžybų atidarymas ir burtų traukimas: gegužės 4 d. 13.00 val. 
 Dalyviai vyksta į sektorius, pasiruošimas varžyboms: gegužės 4 d. 13.15 - 15.00 val.
@@ -23,19 +19,9 @@ INSERT INTO symfony.competition (id, competition_name, competition_date, competi
 Varžybų atidarymas ir burtų traukimas: rugsėjo 13 d. 11.00 val. 
 Dalyviai vyksta į sektorius, pasiruošimas varžyboms: rugsėjo 13 d. 11.20 - 13.00 val.
 Varžybų startas: rugsėjo 13 d. 13.00 v');
-INSERT INTO symfony.hash (id, competition_id, hash) VALUES (1, 2, '9a26712c222f3d67401d68b37ba9b3bb');
-INSERT INTO symfony.hash (id, competition_id, hash) VALUES (2, 3, '40374f81705115fd28cf351eaa746622');
-INSERT INTO symfony.hash (id, competition_id, hash) VALUES (3, 4, '11c85ec80ce3692c7ef94521923fa5fe');
-INSERT INTO symfony.hash (id, competition_id, hash) VALUES (4, 5, '41921e4dadf89de34f4475603503f65d');
 INSERT INTO symfony.hash (id, competition_id, hash) VALUES (5, 6, '70578a0eb174eb912d2b2bb0c3103a12');
 INSERT INTO symfony.hash (id, competition_id, hash) VALUES (6, 7, '219632ee70ff60361e803f06959e9877');
-INSERT INTO symfony.team (id, competition_id, team_name, sector_nr, first_team_member, third_team_member, second_team_member) VALUES (1, 2, 'Komanda #1', 1, 'Petras', null, 'Kazys');
-INSERT INTO symfony.team (id, competition_id, team_name, sector_nr, first_team_member, third_team_member, second_team_member) VALUES (2, 2, 'Komanda #2', 2, 'Jonas', null, 'Linas');
-INSERT INTO symfony.team (id, competition_id, team_name, sector_nr, first_team_member, third_team_member, second_team_member) VALUES (3, 3, 'Komanda #1', null, 'sdgfdgdsfg fdsg dsf g', 'sdfgdsfg sdfgsdfg', 'dsfgdsfg sdfgdsfg');
-INSERT INTO symfony.team (id, competition_id, team_name, sector_nr, first_team_member, third_team_member, second_team_member) VALUES (4, 3, 'Komanda #2', null, 'dfasfsadf sadfsadfsa', 'asdfsadfsdf', 'fsdfasdfasd sadfasdf');
-INSERT INTO symfony.team (id, competition_id, team_name, sector_nr, first_team_member, third_team_member, second_team_member) VALUES (5, 4, 'komanda #1', null, 'Petras', null, 'Kazys');
-INSERT INTO symfony.team (id, competition_id, team_name, sector_nr, first_team_member, third_team_member, second_team_member) VALUES (6, 4, 'Komanda #2', null, 'Bronius', null, 'Martynas');
-INSERT INTO symfony.team (id, competition_id, team_name, sector_nr, first_team_member, third_team_member, second_team_member) VALUES (7, 4, 'Komanda #3', null, 'Kasparas', null, 'Liudas');
+
 INSERT INTO symfony.team (id, competition_id, team_name, sector_nr, first_team_member, third_team_member, second_team_member) VALUES (8, 6, 'Mindaugas Mikniunas', 1, 'Mindaugas Mikniunas', null, null);
 INSERT INTO symfony.team (id, competition_id, team_name, sector_nr, first_team_member, third_team_member, second_team_member) VALUES (9, 6, 'Vitalijus Grizas', 2, 'Vitalijus Grizas', null, null);
 INSERT INTO symfony.team (id, competition_id, team_name, sector_nr, first_team_member, third_team_member, second_team_member) VALUES (10, 6, 'Saulius Jezukevicius', 3, 'Saulius Jezukevicius', null, null);
@@ -50,29 +36,11 @@ INSERT INTO symfony.team (id, competition_id, team_name, sector_nr, first_team_m
 INSERT INTO symfony.team (id, competition_id, team_name, sector_nr, first_team_member, third_team_member, second_team_member) VALUES (19, 7, '20+', 5, '20+', null, null);
 INSERT INTO symfony.team (id, competition_id, team_name, sector_nr, first_team_member, third_team_member, second_team_member) VALUES (20, 7, 'EME Carp Brothers', 6, 'EME Carp Brothers', null, null);
 INSERT INTO symfony.team (id, competition_id, team_name, sector_nr, first_team_member, third_team_member, second_team_member) VALUES (21, 7, 'Tinko Broliai', 7, 'Tinko Broliai', null, null);
-INSERT INTO symfony.weighing (id, competition_id, weighing_time, weighing_nr) VALUES (5, 2, '2018-11-28 01:52:57', 2);
-INSERT INTO symfony.weighing (id, competition_id, weighing_time, weighing_nr) VALUES (6, 4, '2018-11-28 02:26:24', 2);
 INSERT INTO symfony.weighing (id, competition_id, weighing_time, weighing_nr) VALUES (7, 6, '2018-11-29 00:46:34', 2);
 INSERT INTO symfony.weighing (id, competition_id, weighing_time, weighing_nr) VALUES (8, 7, '2018-11-29 01:07:02', 2);
 INSERT INTO symfony.weighing (id, competition_id, weighing_time, weighing_nr) VALUES (9, 7, '2018-11-29 01:10:00', 3);
 INSERT INTO symfony.weighing (id, competition_id, weighing_time, weighing_nr) VALUES (10, 7, '2018-11-29 01:12:05', 4);
-INSERT INTO symfony.result (id, weighing_id, weigh, special_fish, team_id) VALUES (56, 5, 4355, 0, 1);
-INSERT INTO symfony.result (id, weighing_id, weigh, special_fish, team_id) VALUES (57, 5, 6666, 0, 1);
-INSERT INTO symfony.result (id, weighing_id, weigh, special_fish, team_id) VALUES (59, 5, 3455, 0, 1);
-INSERT INTO symfony.result (id, weighing_id, weigh, special_fish, team_id) VALUES (60, 5, 9999, 0, 1);
-INSERT INTO symfony.result (id, weighing_id, weigh, special_fish, team_id) VALUES (61, 5, 3455, 0, 1);
-INSERT INTO symfony.result (id, weighing_id, weigh, special_fish, team_id) VALUES (62, 5, 7645, 0, 2);
-INSERT INTO symfony.result (id, weighing_id, weigh, special_fish, team_id) VALUES (63, 6, 2344, 0, 5);
-INSERT INTO symfony.result (id, weighing_id, weigh, special_fish, team_id) VALUES (64, 6, 5345, 0, 5);
-INSERT INTO symfony.result (id, weighing_id, weigh, special_fish, team_id) VALUES (65, 6, 6634, 0, 5);
-INSERT INTO symfony.result (id, weighing_id, weigh, special_fish, team_id) VALUES (66, 6, 445, 0, 6);
-INSERT INTO symfony.result (id, weighing_id, weigh, special_fish, team_id) VALUES (67, 6, 65464, 0, 6);
-INSERT INTO symfony.result (id, weighing_id, weigh, special_fish, team_id) VALUES (68, 6, 6665, 0, 6);
-INSERT INTO symfony.result (id, weighing_id, weigh, special_fish, team_id) VALUES (69, 6, 6645, 0, 6);
-INSERT INTO symfony.result (id, weighing_id, weigh, special_fish, team_id) VALUES (70, 6, 6466, 0, 6);
-INSERT INTO symfony.result (id, weighing_id, weigh, special_fish, team_id) VALUES (71, 6, 64566, 0, 6);
-INSERT INTO symfony.result (id, weighing_id, weigh, special_fish, team_id) VALUES (72, 6, 5555, 0, 6);
-INSERT INTO symfony.result (id, weighing_id, weigh, special_fish, team_id) VALUES (73, 6, 7777, 0, 6);
+
 INSERT INTO symfony.result (id, weighing_id, weigh, special_fish, team_id) VALUES (74, 7, 5376, 1, 9);
 INSERT INTO symfony.result (id, weighing_id, weigh, special_fish, team_id) VALUES (75, 7, 5550, 1, 9);
 INSERT INTO symfony.result (id, weighing_id, weigh, special_fish, team_id) VALUES (76, 7, 6775, 1, 9);
