@@ -1,24 +1,106 @@
-DELETE FROM result WHERE 1;
-DELETE FROM team WHERE 1;
-DELETE FROM weighing WHERE 1;
-DELETE FROM hash WHERE 1;
-DELETE FROM competition WHERE 1;
+drop table if exists `competition`;
+create table competition
+(
+  id                          int auto_increment
+    primary key,
+  competition_name            varchar(90)  not null,
+  competition_date            datetime     not null,
+  competition_duration        int          not null,
+  competition_organiser       varchar(90)  not null,
+  competition_organiser_email varchar(90)  not null,
+  competition_type            varchar(30)  not null,
+  competition_approved        tinyint(1)   not null,
+  competition_status          varchar(30)  not null,
+  competition_teams_count     int          not null,
+  competition_weighings_count int          not null,
+  competition_link            varchar(255) null,
+  competition_rules           varchar(255) null,
+  competition_location        varchar(255) null
+)
+  collate = utf8mb4_unicode_ci;
 
-ALTER TABLE competition AUTO_INCREMENT = 1;
-ALTER TABLE hash AUTO_INCREMENT = 1;
-ALTER TABLE weighing AUTO_INCREMENT = 1;
-ALTER TABLE team AUTO_INCREMENT = 1;
-ALTER TABLE result AUTO_INCREMENT = 1;
+drop table if exists `hash`;
+create table hash
+(
+  id             int auto_increment
+    primary key,
+  competition_id int         not null,
+  hash           varchar(40) not null,
+  constraint FK_D1B862B87B39D312
+    foreign key (competition_id) references competition (id)
+)
+  collate = utf8mb4_unicode_ci;
 
-INSERT INTO symfony.competition (id, competition_name, competition_date, competition_duration, competition_organiser, competition_organiser_email, competition_type, competition_approved, competition_status, competition_teams_count, competition_weighings_count, competition_link, competition_rules, competition_location) VALUES (6, 'Punios taurė 2018', '2018-05-04 00:00:00', 2, 'Pikts Karpis', 'mantas@carpro.lt', 'total', 0, 'finished', 12, 1, 'https://www.facebook.com/events/2023564937932326/', 'Dalyvių atvažiavimas į varžymas: gegužės 4 d. iki 13.00 val.
-Varžybų atidarymas ir burtų traukimas: gegužės 4 d. 13.00 val. 
-Dalyviai vyksta į sektorius, pasiruošimas varžyboms: gegužės 4 d. 13.15 - 15.00 val.
-Varžybų startas: gegužės 4 d. 15.00 val.
+create index IDX_D1B862B87B39D312
+on hash (competition_id);
+
+drop table if exists `team`;
+create table team
+(
+  id                 int auto_increment
+    primary key,
+  competition_id     int         not null,
+  team_name          varchar(45) not null,
+  sector_nr          int         null,
+  first_team_member  varchar(45) null,
+  third_team_member  varchar(45) null,
+  second_team_member varchar(45) null,
+  constraint FK_C4E0A61F7B39D312
+    foreign key (competition_id) references competition (id)
+)
+  collate = utf8mb4_unicode_ci;
+
+create index IDX_C4E0A61F7B39D312
+on team (competition_id);
+
+drop table if exists `weighing`;
+create table weighing
+(
+  id             int auto_increment
+    primary key,
+  competition_id int      not null,
+  weighing_time  datetime null,
+  weighing_nr    int      not null,
+  constraint FK_8FEC4CFC7B39D312
+    foreign key (competition_id) references competition (id)
+)
+  collate = utf8mb4_unicode_ci;
+
+drop table if exists `result`;
+create table result
+(
+  id           int auto_increment
+    primary key,
+  weighing_id  int        not null,
+  weigh        int        not null,
+  special_fish tinyint(1) not null,
+  team_id      int        not null,
+  constraint FK_136AC113296CD8AE
+    foreign key (team_id) references team (id),
+  constraint FK_136AC1132FEFE151
+    foreign key (weighing_id) references weighing (id)
+)
+  collate = utf8mb4_unicode_ci;
+
+create index IDX_136AC113296CD8AE
+on result (team_id);
+
+create index IDX_136AC1132FEFE151
+on result (weighing_id);
+
+create index IDX_8FEC4CFC7B39D312
+on weighing (competition_id);
+
+
+INSERT INTO symfony.competition (id, competition_name, competition_date, competition_duration, competition_organiser, competition_organiser_email, competition_type, competition_approved, competition_status, competition_teams_count, competition_weighings_count, competition_link, competition_rules, competition_location) VALUES (6, 'Punios taur 2018', '2018-05-04 00:00:00', 2, 'Pikts Karpis', 'mantas@carpro.lt', 'total', 1, 'finished', 12, 1, 'https://www.facebook.com/events/2023564937932326/', 'Dalyvis atva~iavimas / var~ymas: gegu~s 4 d. iki 13.00 val.
+Var~ybs atidarymas ir burts traukimas: gegu~s 4 d. 13.00 val. 
+Dalyviai vyksta / sektorius, pasiruoaimas var~yboms: gegu~s 4 d. 13.15 - 15.00 val.
+Var~ybs startas: gegu~s 4 d. 15.00 val.
 ', 'DidelesZuvys.lt - Margirio g. 12, LT-64057 Punia, Lithuania');
-INSERT INTO symfony.competition (id, competition_name, competition_date, competition_duration, competition_organiser, competition_organiser_email, competition_type, competition_approved, competition_status, competition_teams_count, competition_weighings_count, competition_link, competition_rules, competition_location) VALUES (7, 'TOP5 Punia 2018', '2018-09-13 00:00:00', 3, 'Pikts Karpis', 'mantas@carpro.lt', 'top5', 0, 'finished', 7, 3, 'https://www.facebook.com/events/240567726665093/', 'Dalyvių atvažiavimas į varžymas: rugsėjo 13 d. iki 11.00 val.
-Varžybų atidarymas ir burtų traukimas: rugsėjo 13 d. 11.00 val. 
-Dalyviai vyksta į sektorius, pasiruošimas varžyboms: rugsėjo 13 d. 11.20 - 13.00 val.
-Varžybų startas: rugsėjo 13 d. 13.00 ', 'Margirio g. 12, LT-64057 Punia, Lithuania');
+INSERT INTO symfony.competition (id, competition_name, competition_date, competition_duration, competition_organiser, competition_organiser_email, competition_type, competition_approved, competition_status, competition_teams_count, competition_weighings_count, competition_link, competition_rules, competition_location) VALUES (7, 'TOP5 Punia 2018', '2018-09-13 00:00:00', 3, 'Pikts Karpis', 'mantas@carpro.lt', 'top5', 1, 'finished', 7, 3, 'https://www.facebook.com/events/240567726665093/', 'Dalyvis atva~iavimas / var~ymas: rugsjo 13 d. iki 11.00 val.
+Var~ybs atidarymas ir burts traukimas: rugsjo 13 d. 11.00 val. 
+Dalyviai vyksta / sektorius, pasiruoaimas var~yboms: rugsjo 13 d. 11.20 - 13.00 val.
+Var~ybs startas: rugsjo 13 d. 13.00 ', 'DidelesZuvys.lt - Margirio g. 12, LT-64057 Punia, Lithuania');
 INSERT INTO symfony.hash (id, competition_id, hash) VALUES (5, 6, '70578a0eb174eb912d2b2bb0c3103a12');
 INSERT INTO symfony.hash (id, competition_id, hash) VALUES (6, 7, '219632ee70ff60361e803f06959e9877');
 
@@ -129,3 +211,5 @@ INSERT INTO symfony.result (id, weighing_id, weigh, special_fish, team_id) VALUE
 INSERT INTO symfony.result (id, weighing_id, weigh, special_fish, team_id) VALUES (160, 10, 6350, 0, 19);
 INSERT INTO symfony.result (id, weighing_id, weigh, special_fish, team_id) VALUES (161, 10, 14000, 0, 20);
 INSERT INTO symfony.result (id, weighing_id, weigh, special_fish, team_id) VALUES (162, 10, 12225, 0, 21);
+
+   

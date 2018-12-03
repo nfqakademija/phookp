@@ -106,7 +106,7 @@ class Competition
     /**
      * @ORM\Column(type="string", length=30)
      */
-    private $competitionStatus=Competition::STATUS_UNCONFIRMED;
+    private $competitionStatus = Competition::STATUS_UNCONFIRMED;
 
     /**
      * @ORM\Column(type="integer")
@@ -130,6 +130,15 @@ class Competition
      */
     private $competitionWeighingsCount = 1;
 
+
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     * * @Assert\Length(
+     *     max="90",
+     *     maxMessage="Vieta negali viršyti 90 simboliu!",
+     * )
+     */
+    private $competitionLocation;
 
     /**
      * @ORM\Column(type="string", nullable=true)
@@ -347,6 +356,23 @@ class Competition
         }
         return $this;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getCompetitionLocation()
+    {
+        return $this->competitionLocation;
+    }
+
+    /**
+     * @param mixed $competitionLocation
+     */
+    public function setCompetitionLocation($competitionLocation): void
+    {
+        $this->competitionLocation = $competitionLocation;
+    }
+
 
     public function getCompetitionLink(): ?string
     {
