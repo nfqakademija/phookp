@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Event\CompetitionCreatedEvent;
 use App\Services\CompetitionService;
 use App\Services\ResultsCalculationService;
+use App\Services\ResultService;
 use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\HttpFoundation\Response;
@@ -58,9 +59,8 @@ class CompetitionController extends AbstractController
 
     public function results(Competition $competition, ResultsCalculationService $calculationService)
     {
-        $resultsArray = $calculationService->competitionTotalResults($competition);
-
-        return $this->render("results/total.html.twig", [
+        $resultsArray = $calculationService->getResults($competition);
+        return $this->render("results/".$competition->getCompetitionType().".html.twig", [
             "competition" => $competition,
             "results" => $resultsArray
         ]);

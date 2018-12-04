@@ -7,30 +7,9 @@
         <h2>Renginio {{ competition.CompetitionName}} rezultatai</h2>
     </div>
     <div class="container mt-5 ">
-        <div class="row justify-content-start mb-3 mt-3 d-flex justify-content-center">
-            <table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp">
-                <tbody>
-                <tr>
-                    <td class="u-bg-main u-text-white">Didžiausia žuvis</td>
-                    <td class="u-text-bold"> {{ results['bigFish']['weigh']/1000 }}kg</td>
-                </tr>
-                <tr>
-                    <td class="u-bg-main u-text-white">Didžiausią žuvį pagavo</td>
-                    <td class="u-text-bold">{{ results['bigFish']['team'] }}</td>
-                </tr>
-                <tr>
-                    <td class="u-bg-main u-text-white">Bendras žuvų svoris</td>
-                    <td class="u-text-bold"> {{ results['totalWeigh']/1000 }}kg </td>
-                </tr>
-                <tr>
-                    <td class="u-bg-main u-text-white">Bendras žuvų skaičius</td>
-                    <td class="u-text-bold"> {{ results['totalCount'] }}vnt. </td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
+        {% include "results/overview_table.html.twig" %}
         <div class="row table-container mb-5">
-            <div class="teble-responsive table-container">
+            <div class="table-responsive table-container">
             <table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp">
                 <thead class="thead-primary">
                 <tr class="tr--border-bottom--white ">

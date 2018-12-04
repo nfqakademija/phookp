@@ -1,0 +1,71 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Rezultatai {{ parent() }}{% endblock %}
+
+{% block body %}
+    <div class="page-name-container">
+        <h2>Renginio {{ competition.CompetitionName}} rezultatai</h2>
+    </div>
+    <div class="container mt-5 ">
+        {% include "results/overview_table.html.twig" %}
+        <div class="row table-container mb-5">
+            <div class="table-responsive table-container">
+                <table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp">
+                    <thead class="thead-primary">
+                    <tr class="table-head">
+                        <th scope="col"  class="mdl-data-table__cell--non-numeric">
+                            Vieta
+                        </th>
+                        <th scope="col" class="mdl-data-table__cell--non-numeric">
+                            Sektorius
+                        </th>
+                        <th scope="col" class="mdl-data-table__cell--non-numeric">
+                            Komanda
+                        </th>
+                        {% for w in 0..4 %}
+                            <th scope="col" class="mdl-data-table__cell--non-numeric">
+                                TOP {{ loop.index }}
+                            </th>
+                        {% endfor %}
+                        <th scope="col" class="mdl-data-table__cell--non-numeric">
+                            Bendras svoris
+                        </th>
+                        {#<th scope="col" class="mdl-data-table__cell--non-numeric">
+                            Iš viso žuvų
+                        </th>#}
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for result in results['teamResults'] %}
+                        <tr>
+                            <td>
+                                {{ loop.index }}
+                            </td>
+                            <td>
+                                {{ result['team'].sectorNr }}
+                            </td>
+                            <td>
+                                {{ result['team'].teamName }}
+                            </td>
+                            {% for w in 0..4 %}
+                                <td>
+                                    {% if result['top5'][w] is defined %}
+                                        {{ result['top5'][w].Weigh/1000}}
+                                    {% endif %}
+                                </td>
+                            {% endfor %}
+                            <td class="u-text-bold">
+                                {{ result['totalWeigh']/1000 }}
+                            </td>
+                            {#<td class="u-text-bold">
+                                {{ result['totalCount'] }}
+                            </td>#}
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+{% endblock %}

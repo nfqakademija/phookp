@@ -78,7 +78,7 @@ class ResultRepository extends ServiceEntityRepository
     {
         $results = $this->createQueryBuilder('r')
             ->where('r.team = :teamid')
-            ->orderBy('weigh', 'DESC')
+            ->orderBy('r.weigh', 'DESC')
             ->setParameter('teamid', $teamId)
             ->setMaxResults($limit)
             ->getQuery()
