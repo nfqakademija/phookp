@@ -11,7 +11,7 @@ namespace App\Services\ResultCalculation;
 
 use Doctrine\Common\Collections\Collection;
 
-abstract class AbstractResultsCalculatorService
+abstract class AbstractResultsCalculatorService implements ResultCalculationInterface
 {
     abstract protected function getTeamsResults(Collection $teams);
 

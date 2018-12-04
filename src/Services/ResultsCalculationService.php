@@ -25,7 +25,7 @@ class ResultsCalculationService implements ServiceSubscriberInterface
         $this->container = $container;
     }
 
-    public function getResults(Competition $competition): ?array
+    public function getResults(Competition $competition): array
     {
         /**
          * TODO
