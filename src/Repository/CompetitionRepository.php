@@ -43,13 +43,13 @@ class CompetitionRepository extends ServiceEntityRepository
      * @param string $status
      * @return array|null
      */
-    public function findCompetitions(string $status): ?array
+    public function findCompetitions(string $status, string $orderBy): ?array
     {
         $approved = true;
         return $competitions = $this->createQueryBuilder('r')
             ->where('r.competitionStatus = :competitionStatus')
             ->andWhere('r.competitionApproved = :competitionApproved')
-            ->orderBy('r.competitionDate', 'ASC')
+            ->orderBy('r.competitionDate', $orderBy)
             ->setParameter('competitionStatus', $status)
             ->setParameter('competitionApproved', $approved)
             ->getQuery()

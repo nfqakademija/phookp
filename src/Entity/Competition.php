@@ -150,15 +150,6 @@ class Competition
 
     /**
      * @ORM\Column(type="string", nullable=true)
-     * * @Assert\Length(
-     *     max="90",
-     *     maxMessage="Vieta negali viršyti 90 simboliu!",
-     * )
-     */
-    private $competitionLocation;
-
-    /**
-     * @ORM\Column(type="string", nullable=true)
      * * @Assert\Url(
      *     message="Nurodyta nuoroda yra neteisinga",
      * )
@@ -225,16 +216,6 @@ class Competition
         return $this;
     }
 
-    public function getCompetitionLocation(): ?string
-    {
-        return $this->competitionLocation;
-    }
-
-    public function setCompetitionLocation(string $competitionLocation): self
-    {
-        $this->competitionLocation = $competitionLocation;
-        return $this;
-    }
 
     public function getCompetitionDate(): ?\DateTimeInterface
     {
