@@ -32,7 +32,7 @@
       color: white;
       text-decoration: none;
       &:hover {
-        background-color: $mainBlue;
+        background-color: $mainGreen;
       }
     }
     .sidebar__link--active {
@@ -42,7 +42,7 @@
       height: 50px;
       color: white;
       text-decoration: none;
-      background-color: $mainBlue;
+      background-color: $mainGreen;
     }
     .sidebar-header {
       box-sizing: border-box;
