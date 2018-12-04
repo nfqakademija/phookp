@@ -2,6 +2,11 @@
 .home-left-side {
   .navbar {
     background-color:transparent;
+     a{
+       &:hover {
+         color: $mainBlue;
+       }
+     }
   }
 }
 
