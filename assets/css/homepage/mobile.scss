@@ -4,11 +4,7 @@
 @media only screen
 and (max-device-width : 1024px)
 {
-  .page-name-container {
-    h2 {
-      margin-top: 20px;
-    }
-  }
+
 
   i.fa-bars{
     width: 50px;
@@ -111,6 +107,13 @@ and (max-device-width : 1024px)
 }
 @media only screen
 and (max-device-width : 550px) {
+  .page-name-container {
+    h2 {
+      margin-top: 20px;
+      font-size: 2rem;
+    }
+  }
+
  .event {
    .event__heading {
      font-size: 38px;
