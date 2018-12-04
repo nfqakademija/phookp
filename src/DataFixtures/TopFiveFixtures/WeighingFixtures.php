@@ -1,6 +1,12 @@
 <?php
+/**
+ * Created by PhpStorm.
+ * User: sigita
+ * Date: 18.12.5
+ * Time: 00.04
+ */
 
-namespace App\DataFixtures;
+namespace App\DataFixtures\TopFiveFixtures;
 
 use App\Entity\Weighing;
 use Doctrine\Bundle\FixturesBundle\Fixture;
@@ -16,21 +22,28 @@ class WeighingFixtures extends Fixture implements DependentFixtureInterface
         $weighing = new Weighing();
         $weighing->setCompetition($competition);
         $weighing->setWeighingNr(1);
-        $weighing->setWeighingTime(new \DateTime("2015-08-14"));
+        $weighing->setWeighingTime(new \DateTime("2018-09-13"));
         $manager->persist($weighing);
         $this->setReference("weighing_".$weighing->getWeighingNr(), $weighing);
 
         $weighing = new Weighing();
         $weighing->setCompetition($competition);
         $weighing->setWeighingNr(2);
-        $weighing->setWeighingTime(new \DateTime("2015-08-15"));
+        $weighing->setWeighingTime(new \DateTime("2018-09-14"));
         $manager->persist($weighing);
         $this->setReference("weighing_".$weighing->getWeighingNr(), $weighing);
 
         $weighing = new Weighing();
         $weighing->setCompetition($competition);
         $weighing->setWeighingNr(3);
-        $weighing->setWeighingTime(new \DateTime("2015-08-16"));
+        $weighing->setWeighingTime(new \DateTime("2018-09-14"));
+        $manager->persist($weighing);
+        $this->setReference("weighing_".$weighing->getWeighingNr(), $weighing);
+
+        $weighing = new Weighing();
+        $weighing->setCompetition($competition);
+        $weighing->setWeighingNr(4);
+        $weighing->setWeighingTime(new \DateTime("2018-09-15"));
         $manager->persist($weighing);
         $this->setReference("weighing_".$weighing->getWeighingNr(), $weighing);
 

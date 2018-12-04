@@ -1,6 +1,6 @@
 <?php
 
-namespace App\DataFixtures;
+namespace App\DataFixtures\TotalFixtures;
 
 use App\Entity\Result;
 use Doctrine\Bundle\FixturesBundle\Fixture;
@@ -14,26 +14,24 @@ class ResultFixtures extends Fixture implements DependentFixtureInterface
     {
         $competition = $this->getReference(CompetitionFixtures::COMPETITION_REFERENCE);
 
-        foreach($competition->getWeighings() as $weighing)
-        {
+        foreach ($competition->getWeighings() as $weighing) {
 
-            foreach ($competition->getTeams() as $team)
+            foreach ($competition->getTeams() as $team) {
+                $r_count = mt_rand(2, 12);
 
-            $r_count = mt_rand(2,12);
+                for ($i = 0; $i < $r_count; $i++) {
 
-            for($i = 0; $i< $r_count; $i++){
-
-                $result = new Result();
-                $result->setTeam($team);
-                $result->setWeighing($weighing);
-                $result->setWeigh(mt_rand(3000,29999));
-                $result->setSpecialFish(mt_rand(0,1));
-                $manager->persist($result);
+                    $result = new Result();
+                    $result->setTeam($team);
+                    $result->setWeighing($weighing);
+                    $result->setWeigh(mt_rand(2000, 20000));
+                    $result->setSpecialFish(mt_rand(0, 1));
+                    $manager->persist($result);
+                }
             }
-
         }
-
         $manager->flush();
+
     }
 
     public function getDependencies()
