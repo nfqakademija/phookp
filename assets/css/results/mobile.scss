@@ -1,0 +1,8 @@
+@media only screen
+and (max-device-width : 1024px) {
+  .event-info-container{
+    .info-card {
+      flex-basis: 100%;
+    }
+  }
+}
