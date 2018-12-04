@@ -17,13 +17,13 @@ class HomeController extends Controller
         $goingCompetitions = $competitionService->getGoingCompetitions();
         $futureCompetitions = $competitionService->getFutureCompetitions();
         $expiredCompetitions = $competitionService->getExpiredCompetitions();
-        $expiredCompetition = array_shift($expiredCompetitions);
+        $expiredCompetitions = array_slice($expiredCompetitions, 0,4);
         $futureCompetition = array_shift($futureCompetitions);
         return $this->render("home/index.html.twig",
             [
                 "goingCompetitions" => $goingCompetitions,
                 "futureCompetition" => $futureCompetition,
-                "expiredCompetition" => $expiredCompetition,
+                "expiredCompetitions" => $expiredCompetitions,
             ]);
 
     }

@@ -56,30 +56,30 @@
                                             {% endif %}
                                         </div>
                                 </div>
-                            {% else %}
+                                {% endif %}
                                 <h3 class="event__heading">Paskutinės varžybos: </h3>
                                 <div class="row">
+                                    {% for competition in expiredCompetitions %}
                                         <div class="col-lg-6 col-m-6 col-sm-6 mobile-event">
-                                            <h2 class="event__name">{{ expiredCompetition['name'] }}</h2>
-                                            {% if expiredCompetition['location'] != null %}
+                                            <h2 class="event__name">{{ competition['name'] }}</h2>
+                                            {% if competition['location'] != null %}
                                             <div class="event__place">
                                                 <i class="fa  fa-map-marker-alt"></i> <span
-                                                        class="ml-2">{{ expiredCompetition['location'] }}</span>
+                                                        class="ml-2">{{ competition['location'] }}</span>
                                             </div>
                                             {% endif %}
                                             <div class="event__date"><i class="fa fa-calendar-alt"></i> <span
-                                                        class="ml-2">{{ expiredCompetition['startDate'] }}
-                                                    - {{ expiredCompetition['finishDate'] }}</span>
+                                                        class="ml-2">{{ competition['startDate'] }}
+                                                    - {{ competition['finishDate'] }}</span>
                                             </div>
-                                            <a href="/results/{{ expiredCompetition['id'] }}">Rezultatai</a>
+                                            <a href="/results/{{ competition['id'] }}">Rezultatai</a>
                                             <br>
-                                            {% if expiredCompetition['link'] %}
-                                                <a href="{{ expiredCompetition['link'] }}">Facebook nuoroda čia!</a>
+                                            {% if competition['link'] %}
+                                                <a href="{{ competition['link'] }}">Facebook nuoroda čia!</a>
                                             {% endif %}
                                         </div>
-                                </div>
-                        {% endif %}
-                    </div>
+                                    {% endfor %}
+                                </div></div>
                     {#<div class="event mt-3">#}
                         {#<div class="row">#}
                             {#<div class="col-lg-12 mt-4 pb-2">#}
