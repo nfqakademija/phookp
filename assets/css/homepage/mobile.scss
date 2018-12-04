@@ -98,12 +98,6 @@ and (max-device-width : 1024px)
     flex-basis: 100%;
     min-width: 250px;
   }
-  .table-container {
-
-    display: flex;
-    justify-content: flex-start;
-
-  }
 }
 @media only screen
 and (max-device-width : 550px) {
