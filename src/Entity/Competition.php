@@ -221,9 +221,10 @@ class Competition
         return $this->competitionLocation;
     }
 
-    public function setCompetitionLocation($competitionLocation): self
+    public function setCompetitionLocation(string $competitionLocation): self
     {
         $this->competitionLocation = $competitionLocation;
+        return $this;
     }
 
     public function getCompetitionDate(): ?\DateTimeInterface

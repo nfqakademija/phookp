@@ -130,13 +130,15 @@ final class CompetitionService
             $finishDate = $this->getFinishDate($competition->getCompetitionDate(), $duration);
             $link = $competition->getCompetitionLink();
             $rules = $competition->getCompetitionRules();
+            $location=$competition->getCompetitionLocation();
             $competition = [
                 "id" => $id,
                 "name" => $name,
                 "startDate" => $startDate,
                 "finishDate" => $finishDate,
                 "link" => $link,
-                "rules" => $rules
+                "rules" => $rules,
+                "location"=>$location
             ];
             array_push($formattedCompetitions, $competition);
         }

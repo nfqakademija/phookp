@@ -19,9 +19,11 @@
                                 <div class="row">
                                     <div class="col-lg-6 col-m-6 col-sm-6 mobile-event">
                                         <h2 class="event__name">{{ competition['name'] }}</h2>
+                                        {% if competition['location']!= null %}
                                         <div class="event__place">
-                                            <i class="fa  fa-map-marker-alt"></i> <span class="ml-2">Kauno Marios</span>
+                                            <i class="fa  fa-map-marker-alt"></i> <span class="ml-2">{{ competition['location'] }}</span>
                                         </div>
+                                        {% endif %}
                                         <div class="event__date"><i class="fa fa-calendar-alt"></i> <span
                                                     class="ml-2">{{ competition['startDate'] }}
                                                 - {{ competition['finishDate'] }}</span>
@@ -39,10 +41,12 @@
                                     <div class="row">
                                         <div class="col-lg-6 col-m-6 col-sm-6 mobile-event">
                                             <h2 class="event__name">{{ futureCompetition['name'] }}</h2>
+                                            {% if futureCompetition['location']!=null %}
                                             <div class="event__place">
                                                 <i class="fa  fa-map-marker-alt"></i> <span
                                                         class="ml-2">Kauno Marios</span>
                                             </div>
+                                            {% endif %}
                                             <div class="event__date"><i class="fa fa-calendar-alt"></i> <span
                                                         class="ml-2">{{ futureCompetition['startDate'] }}
                                                     - {{ futureCompetition['finishDate'] }}</span>
@@ -57,10 +61,12 @@
                                 <div class="row">
                                         <div class="col-lg-6 col-m-6 col-sm-6 mobile-event">
                                             <h2 class="event__name">{{ expiredCompetition['name'] }}</h2>
+                                            {% if expiredCompetition['location'] != null %}
                                             <div class="event__place">
                                                 <i class="fa  fa-map-marker-alt"></i> <span
                                                         class="ml-2">Kauno Marios</span>
                                             </div>
+                                            {% endif %}
                                             <div class="event__date"><i class="fa fa-calendar-alt"></i> <span
                                                         class="ml-2">{{ expiredCompetition['startDate'] }}
                                                     - {{ expiredCompetition['finishDate'] }}</span>
@@ -79,7 +85,7 @@
                                 <h2 class="event__name">Mūsų partneriai</h2>
                                 <img src="{{ asset('images/partneriai/alex_baits.png ') }}" alt="">
                                 <img src="{{ asset('images/partneriai/siprakfishing.png ') }}" alt="">
-                                <img src="{{ asset('images/partneriai/zvejokliai.lt.png') }}" alt="">
+                                <img src="{{ asset('imag es/partneriai/zvejokliai.lt.png') }}" alt="">
                             </div>
                         </div>
                     </div>

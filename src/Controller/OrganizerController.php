@@ -68,6 +68,9 @@ class OrganizerController extends AbstractController implements AuthorizedContro
         }
         return $this->render("organizerPanel/organizerPanel.html.twig", [
             "hash" => $hash,
+            "isTeam"=>$competition->getTeams()->first(),
+            "isCreateTeam"=>true,
+
         ]);
     }
 
@@ -120,7 +123,9 @@ class OrganizerController extends AbstractController implements AuthorizedContro
                 "form" => $form->createView(),
                 "teamsCount" => $teamsCount,
                 "teams" => $teamsArray,
-                "hash" => $hash
+                "hash" => $hash,
+                "isTeam"=>$teamsArray->first(),
+                "isCreateTeam"=>true,
             ]);
         }
 
@@ -188,7 +193,10 @@ class OrganizerController extends AbstractController implements AuthorizedContro
             "teams" => $teams,
             "hash" => $hash,
             "teamId" => $teamId,
+            "isTeam"=>$competition->getTeams()->first(),
             "weighingNr" => 1,
+            "isCreateTeam"=>false,
+
         ]);
 
     }
