@@ -53,6 +53,7 @@ class Competition
      *     maxMessage="Negalima planuoti renginių daugiau nei du metai į priekį!"
      * )
      */
+
     private $competitionDate;
 
     /**
@@ -87,7 +88,23 @@ class Competition
      *     maxMessage="El.pašto adresas negali viršyti 90 simbolių!"
      * )
      */
+
     private $competitionOrganiserEmail;
+
+    /**
+     * @ORM\Column(type="string", length=30, nullable=true)
+     * @Assert\Type(type = "string",
+     *              message = "Neteisingas vietos pavadinimo formatas"
+     * )
+     * @Assert\Length(
+     *     min = 3,
+     *     max = 90,
+     *     minMessage = "Renginio vietos pavadinimas negali būti trumpesnis nei 3 simboliai!",
+     *     maxMessage = "Renginio vetos pavadinimas negali būti ilgesnis nei 90 simboliai!"
+     * )
+     *
+     */
+    private $competitionLocation;
 
     /**
      * @ORM\Column(type="string", length=30)
@@ -205,6 +222,17 @@ class Competition
     {
         $this->competitionName = $competitionName;
 
+        return $this;
+    }
+
+    public function getCompetitionLocation(): ?string
+    {
+        return $this->competitionLocation;
+    }
+
+    public function setCompetitionLocation(string $competitionLocation): self
+    {
+        $this->competitionLocation = $competitionLocation;
         return $this;
     }
 

@@ -16,9 +16,16 @@
             <div class="col-lg-8 u-mt-minus">
                 <div class="card mt-4">
                     <div class="card-body">
-                        <h3 class="card-title">Komandų pridėjimas</h3>
+                        <h3 class="card-title"></h3>
                         <p class="card-text">
                             <input type="hidden" id="_hash" value="{{ app.request.attributes.get('hash') }}"/>
+                            {% if teams.count != null %}
+                        <div class="row justify-content-center">
+                        <div class="col">
+                            <h1>Pridėtos komandos</h1>
+                        </div>
+                        </div>
+                            {% endif %}
                         {% for team in teams %}
                         <div class="row justify-content-center">
                         <div class="col">

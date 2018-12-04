@@ -27,26 +27,22 @@
             <h2 class="heading heading--blue-border heading--center">Būsimi renginiai</h2>
             <div class="row">
                 <div class="event-card-container d-flex justify-content-center flex-wrap">
+                    {% if futureCompetitions != null %}
+                    {% for competition in futureCompetitions %}
                     <div class="card">
                         <img class="card-img-top" src=" {{ asset('images/fishing_example.jpeg') }}" alt="Card image" style="width:100%">
                         <div class="card-body">
-                            <h4 class="card-title">Pikts Karpis - TOP5, Punia 2018</h4>
-                            <p class="card-text"><i class="fa fa-calendar-alt"></i> 2018-02-12 - 2018-02-15</p>
+                            <h4 class="card-title">{{ competition['name'] }}</h4>
+                            <p class="card-text"><i class="fa fa-calendar-alt"></i> {{ competition['startDate'] }}</p>
                             <p class="card-text"><i class="fa fa-map-marker-alt"></i> Pikaiciai, Alytus</p>
                             <div class="card-button-container d-flex justify-content-center">
                                 <a href="#" class="btn button btn-primary">Rezultatai</a>
                             </div>                        </div>
                     </div>
-                    <div class="card">
-                        <img class="card-img-top" src="{{ asset('images/event_bg.jpeg') }}" alt="Card image" style="width:100%">
-                        <div class="card-body">
-                            <h4 class="card-title">Pikts Karpis - Pykaičių taurė 2018</h4>
-                            <p class="card-text"><i class="fa fa-calendar-alt"></i> 2018-02-12 - 2018-02-15</p>
-                            <p class="card-text"><i class="fa fa-map-marker-alt"></i> Pikaiciai, Alytus</p>
-                            <div class="card-button-container d-flex justify-content-center">
-                                <a href="#" class="btn button btn-primary">Rezultatai</a>
-                            </div>                        </div>
-                    </div>
+                    {% endfor %}
+                    {% else %}
+                        Šiuo metu būsimų renginių nėra
+                    {% endif %}
                 </div>
             </div>
         </div>
@@ -57,70 +53,25 @@
             <h2 class="heading heading--blue-border heading--center">Praėję renginiai</h2>
             <div class="row">
                 <div class="event-card-container d-flex justify-content-center flex-wrap">
+                    {% for competition in expiredCompetitions %}
                     <div class="card">
                         <img class="card-img-top" src=" {{ asset('images/fishing_example.jpeg') }}" alt="Card image" style="width:100%">
                         <div class="card-body">
-                            <h4 class="card-title">Pikts Karpis - TOP5, Punia 2018</h4>
-                            <p class="card-text"><i class="fa fa-calendar-alt"></i> 2018-02-12 - 2018-02-15</p>
-                            <p class="card-text"><i class="fa fa-map-marker-alt"></i> Pikaiciai, Alytus</p>
+                            <h4 class="card-title">{{ competition['name'] }}</h4>
+                            <p class="card-text"><i class="fa fa-calendar-alt"></i>{{ competition['startDate'] }} - {{ competition['finishDate'] }}</p>
+                            {% if competition['location']!=null %}
+                            <p class="card-text"><i class="fa fa-map-marker-alt"></i>{{ competition['location'] }}</p>
+                            {% endif %}
                             <div class="card-button-container d-flex justify-content-center">
-                                <a href="#" class="btn button btn-primary">Rezultatai</a>
+                                <a href="/results/{{ competition['id'] }}" class="btn button btn-primary">Rezultatai</a>
+                                <br>
+                                {% if competition['link']!= null %}
+                                <a href="{{ competition['link'] }}" class="btn button btn-primary">Facebook nuoroda čia!</a>
+                                {% endif %}
                             </div>                        </div>
-                    </div>
-                    <div class="card">
-                        <img class="card-img-top" src="{{ asset('images/event_bg.jpeg') }}" alt="Card image" style="width:100%">
-                        <div class="card-body">
-                            <h4 class="card-title">Pikts Karpis - Pykaičių taurė 2018</h4>
-                            <p class="card-text"><i class="fa fa-calendar-alt"></i> 2018-02-12 - 2018-02-15</p>
-                            <p class="card-text"><i class="fa fa-map-marker-alt"></i> Pikaiciai, Alytus</p>
-                            <div class="card-button-container d-flex justify-content-center">
-                                <a href="#" class="btn button btn-primary">Rezultatai</a>
-                            </div>                        </div>
-                    </div>
-                    <div class="card">
-                        <img class="card-img-top" src="{{ asset('images/event_bg2.jpeg') }}" alt="Card image" style="width:100%">
-                        <div class="card-body">
-                            <h4 class="card-title">Pikts Karpis - TOP5, Punia 2018</h4>
-                            <p class="card-text"><i class="fa fa-calendar-alt"></i> 2018-02-12 - 2018-02-15</p>
-                            <p class="card-text"><i class="fa fa-map-marker-alt"></i> Pikaiciai, Alytus</p>
-                            <div class="card-button-container d-flex justify-content-center">
-                                <a href="#" class="btn button btn-primary">Rezultatai</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card">
-                        <img class="card-img-top" src="{{ asset('images/fishing_example.jpeg') }}" alt="Card image" style="width:100%">
-                        <div class="card-body">
-                            <h4 class="card-title">Pikts Karpis - TOP5, Punia 2018</h4>
-                            <p class="card-text"><i class="fa fa-calendar-alt"></i> 2018-02-12 - 2018-02-15</p>
-                            <p class="card-text"><i class="fa fa-map-marker-alt"></i> Pikaiciai, Alytus</p>
-                            <div class="card-button-container d-flex justify-content-center">
-                                <a href="#" class="btn button btn-primary">Rezultatai</a>
-                            </div>                        </div>
-                    </div>
-                    <div class="card">
-                        <img class="card-img-top" src="{{ asset('images/event_bg.jpeg') }}" alt="Card image" style="width:100%">
-                        <div class="card-body">
-                            <h4 class="card-title">Pikts Karpis - Pykaičių taurė 2018</h4>
-                            <p class="card-text"><i class="fa fa-calendar-alt"></i> 2018-02-12 - 2018-02-15</p>
-                            <p class="card-text"><i class="fa fa-map-marker-alt"></i> Pikaiciai, Alytus</p>
-                            <div class="card-button-container d-flex justify-content-center">
-                                <a href="#" class="btn button btn-primary">Rezultatai</a>
-                            </div>                        </div>
-                    </div>
-                    <div class="card">
-                        <img class="card-img-top" src="{{ asset('images/event_bg2.jpeg') }}" alt="Card image" style="width:100%">
-                        <div class="card-body">
-                            <h4 class="card-title">Pikts Karpis - TOP5, Punia 2018</h4>
-                            <p class="card-text"><i class="fa fa-calendar-alt"></i> 2018-02-12 - 2018-02-15</p>
-                            <p class="card-text"><i class="fa fa-map-marker-alt"></i> Pikaiciai, Alytus</p>
-                            <div class="card-button-container d-flex justify-content-center">
-                                <a href="#" class="btn button btn-primary">Rezultatai</a>
-                            </div>
-                        </div>
-                    </div>
 
                 </div>
+                    {% endfor %}
             </div>
         </div>
     </section>

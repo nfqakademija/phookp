@@ -1,5 +1,5 @@
 {% extends 'no_nav_base.html.twig' %}
-{% block title %}Add command{{ parent() }}{% endblock %}
+{% block title %}Organizatorius{{ parent() }}{% endblock %}
 {% block body %}
     <div class="container-fluid container-index u-no-padding">
         <div class="row justify-content-center">
@@ -20,9 +20,19 @@
 
                 </div>
                 <div class="list-group">
-                    <a href="/organizer/{{hash}}" class="sidebar__link">Pradinis</a>
-                    <a href="/organizer/{{hash}}/createTeams" class="sidebar__link">Komandų pridėjimas</a>
-                    <a href="/organizer/{{hash}}/teamsSectors" class="sidebar__link">Pradėti varžybas</a>
+                    {% if isCreateTeam %}
+                    <a href="/organizer/{{hash}}/createTeams" class="sidebar__link{{ app.request.get('_route') == 'organizerCreateTeams'? '--active' }}">1.Komandos</a>
+                    {% else %}
+                    <a class="sidebar__link">1.Komandos</a>
+                    {% endif %}
+                    {% if isTeam %}
+                    <a href="/organizer/{{hash}}/teamsSectors" class="sidebar__link{{ app.request.get('_route') == 'organizerTeamsSectors'? '--active' }}">2.Sektorių pasiskirstymas</a>
+                    {% else %}
+                    <a class="sidebar__link">2.Sektorių pasiskirstymas</a>
+                    {% endif %}
+                    <a  class="sidebar__link">3.Rezultatai</a>
+                    <a  class="sidebar__link">4.Užbaigti varžybas</a>
+
                 </div>
             </div>
             <div class="col-lg-10 panel__content d-flex justify-content-center">

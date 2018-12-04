@@ -1,11 +1,13 @@
 .organizer-nav {
   margin-left: 15%;
-  box-shadow:  0 2px 2px 0 rgba(0,0,0,.14), 0 3px 1px -2px rgba(0,0,0,.2), 0 1px 5px 0 rgba(0,0,0,.12);
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, .14), 0 3px 1px -2px rgba(0, 0, 0, .2), 0 1px 5px 0 rgba(0, 0, 0, .12);
   background-color: #fff;
 }
-.organizer-name-container{
+
+.organizer-name-container {
   margin-left: 15%;
 }
+
 .panel-container {
   min-height: 90vh;
   height: 100%;
@@ -24,7 +26,7 @@
     border-right: 1px solid rgba(0, 0, 0, 0.125);
     .sidebar__link {
       display: flex;
-      justify-content: center;
+      justify-content: flex-start;
       align-items: center;
       height: 50px;
       color: white;
@@ -32,6 +34,15 @@
       &:hover {
         background-color: $mainBlue;
       }
+    }
+    .sidebar__link--active {
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      height: 50px;
+      color: white;
+      text-decoration: none;
+      background-color: $mainBlue;
     }
     .sidebar-header {
       box-sizing: border-box;
@@ -58,5 +69,5 @@
 }
 
 .list-group-item {
-  border:none;
+  border: none;
 }
