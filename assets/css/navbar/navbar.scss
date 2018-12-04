@@ -2,6 +2,11 @@
 .home-left-side {
   .navbar {
     background-color:transparent;
+     a{
+       &:hover {
+         color: $mainGreen;
+       }
+     }
   }
 }
 
@@ -12,7 +17,7 @@ ul.navbar-nav {
 .navbar__link--black {
   color: #000000;
   &:hover{
-    color: $mainBlue;
+    color: $mainGreen;
   }
 }
 
