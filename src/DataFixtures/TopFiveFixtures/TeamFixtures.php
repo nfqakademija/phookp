@@ -1,6 +1,13 @@
 <?php
+/**
+ * Created by PhpStorm.
+ * User: sigita
+ * Date: 18.12.5
+ * Time: 00.04
+ */
 
-namespace App\DataFixtures;
+namespace App\DataFixtures\TopFiveFixtures;
+
 
 use App\Entity\Team;
 use Doctrine\Bundle\FixturesBundle\Fixture;
@@ -16,67 +23,64 @@ class TeamFixtures extends Fixture implements DependentFixtureInterface
 
         $team = new Team();
         $team->setCompetition($competition);
-        $team->setTeamName("Autsideriai");
+        $team->setTeamName("3 1/4 Team");
         $team->setSectorNr(1);
-        $team->setFirstTeamMember("Mantas Arbačiauskas"	);
-        $team->setSecondTeamMember("Nerijus Stulginskis");
+        $team->setFirstTeamMember("Darius Pėža");
+        $team->setSecondTeamMember(" Rokas Vaitkevičius");
         $manager->persist($team);
         $this->setReference($team->getTeamName(), $team);
 
         $team = new Team();
         $team->setCompetition($competition);
-        $team->setTeamName("Šoklyderiai");
-        $team->setSectorNr(2);
-        $team->setFirstTeamMember("Edgaras Degutis"	);
-        $team->setSecondTeamMember("Vytautas Degutis");
-        $manager->persist($team);
-        $this->setReference($team->getTeamName(), $team);
-
-        $team = new Team();
-        $team->setCompetition($competition);
-        $team->setTeamName("Siprak");
+        $team->setTeamName("Justeam");
         $team->setSectorNr(3);
-        $team->setFirstTeamMember("Raimundas Liudvinavičius"	);
-        $team->setSecondTeamMember("Giedrius Jasulaitis");
+        $team->setFirstTeamMember("Justas Barakauskas"	);
+        $team->setSecondTeamMember("Justė Knatauskaitė");
+        $manager->persist($team);
+        $this->setReference($team->getTeamName(), $team);
+
+        $team = new Team();
+        $team->setCompetition($competition);
+        $team->setTeamName("20+");
+        $team->setSectorNr(5);
+        $team->setFirstTeamMember("Mažvydas Aliukonis"	);
+        $team->setSecondTeamMember("Karolis Veličko");
         $manager->persist($team);
         $this->setReference($team->getTeamName(), $team);
 
         $team = new Team();
         $team->setCompetition($competition);
         $team->setTeamName("Judex");
+        $team->setSectorNr(2);
+        $team->setSecondTeamMember("Rimantas Kicas");
+        $manager->persist($team);
+        $this->setReference($team->getTeamName(), $team);
+
+        $team = new Team();
+        $team->setCompetition($competition);
+        $team->setTeamName("Cyprinus Carpio Club");
         $team->setSectorNr(4);
+        $team->setFirstTeamMember("Danas Brazauskas"	);
+        $team->setSecondTeamMember(" Nerijus Rink");
+        $manager->persist($team);
+        $this->setReference($team->getTeamName(), $team);
+
+        $team = new Team();
+        $team->setCompetition($competition);
+        $team->setTeamName("Tinko Broliai");
+        $team->setSectorNr(8);
         $team->setFirstTeamMember("Gintaras Puzinauskas"	);
-        $team->setSecondTeamMember("Rimantas Kičas");
+        $team->setSecondTeamMember("Tomas Grigaravicius");
+        $team->setThirdTeamMember("Gintas Grigaravicius");
         $manager->persist($team);
-        $this->setReference($team->getTeamName(), $team);
 
         $team = new Team();
         $team->setCompetition($competition);
-        $team->setTeamName("Žvejokliai");
-        $team->setSectorNr(5);
-        $team->setFirstTeamMember("Vaidas Galkauskas"	);
-        $team->setSecondTeamMember("Artūras Murauskas");
+        $team->setTeamName("EME Carp Brothers ");
+        $team->setSectorNr(8);
+        $team->setFirstTeamMember("Edgaras Ramuckas"	);
+        $team->setSecondTeamMember("Mindaugas Tocionis");
         $manager->persist($team);
-        $this->setReference($team->getTeamName(), $team);
-
-        $team = new Team();
-        $team->setCompetition($competition);
-        $team->setTeamName("Pop up");
-        $team->setSectorNr(6);
-        $team->setFirstTeamMember("Mindaugas Jenuševičius"	);
-        $team->setSecondTeamMember("Aldas Stepanauskas	");
-        $manager->persist($team);
-        $this->setReference($team->getTeamName(), $team);
-
-        $team = new Team();
-        $team->setCompetition($competition);
-        $team->setTeamName("Rerija");
-        $team->setSectorNr(7);
-        $team->setFirstTeamMember("Tomas Šiugždinis	"	);
-        $team->setSecondTeamMember("Linas Vichrovas");
-        $manager->persist($team);
-
-
         $manager->flush();
         $this->setReference($team->getTeamName(), $team);
 
