@@ -127,7 +127,7 @@
 .home-right-side {
   min-height: 100vh;
   background-size: cover;
-  background-image: url("./images/main_background.png");
+  background-image: url("/images/main_background.png");
 }
 
 #About-us {
@@ -135,7 +135,7 @@
   padding-bottom: 20px;
   min-height: 65vh;
   color: white;
-  background: linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.55)), url("./about-us_bg.jpeg") no-repeat fixed center;
+  background: linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.55)), url("/images/about-us_bg.jpeg") no-repeat fixed center;
   -webkit-background-size: cover;
   background-size: cover;
   .heading {
@@ -227,7 +227,7 @@
     color: #fff;
   }
   min-height: 40vh;
-  background: linear-gradient(rgba(0, 0, 0, 0.40), rgba(0, 0, 0, 0.40)), url("./upcoming-events_bg.jpeg") no-repeat fixed center;
+  background: linear-gradient(rgba(0, 0, 0, 0.40), rgba(0, 0, 0, 0.40)), url("/images/upcoming-events_bg.jpeg") no-repeat fixed center;
   -webkit-background-size: cover;
   background-size: cover;
   .card {

@@ -15,14 +15,14 @@ modal.addFooterBtn('Uzdaryti', 'tingle-btn tingle-btn--primary', function() {
 });
 
 const modalHeader = (team) => {
-    return `<div class="bg-primary text-white h5 mb-2 results-modal__header">
+    return `<div class="text-white h5 mb-2 results-modal__header">
             ${team} tarpiniai rezultatai</div>`;
 };
 
 const top5ResultsTemplate = (number, weigh) => {
     return `<tr>
                 <td class="u-bg-main u-text-white">TOP ${number}</td>
-                <td class="u-text-bold"> ${weigh}kg</td>
+                <td class="u-text-bold"> ${weigh} kg</td>
             </tr>
     `;
 };
@@ -42,9 +42,9 @@ const buildTop5Table = (results) =>{
 };
 
 const buildTotalHeader = () => {
-    return `<table><tr class="row mx-0 bg-primary text-white u-text-bold">
+    return `<table><tr class="row mx-0 u-bg-main text-white u-text-bold">
                 <th class="col-4">Svėrimo nr.</th>
-                <th class="col-4">Svoris</th>
+                <th class="col-4">Svoris (kg)</th>
                 <th class="col-4">Žuvų skaičius</th>
             </tr></table>`;
 };
@@ -52,7 +52,7 @@ const buildTotalHeader = () => {
 const totalResultsTemplate = (number, weigh, count) => {
     return `<tr class="row mx-0">
                 <td class="col-4 u-bg-main u-text-white">${number}</td>
-                <td class="col-4 u-text-bold"> ${weigh}kg</td>
+                <td class="col-4 u-text-bold"> ${weigh}</td>
                 <td class="col-4 u-text-bold"> ${count}</td>
             </tr>
     `;
@@ -62,8 +62,9 @@ const buildTotalTable = (weighings) => {
     const container = document.createElement('div');
     container.className = 'table-responsive h-75';
     const table = document.createElement('table');
+    table.className = "w-100";
     for(let i = 0; i < weighings.length; i++){
-        table.innerHTML+=totalResultsTemplate(parseInt(i)+1, weighings[i][1], weighings[i][2]);
+        table.innerHTML+=totalResultsTemplate(parseInt(i)+1, weighings[i]['totalWeigh'], weighings[i]['fishCount']);
     }
     container.appendChild(table);
     return buildTotalHeader()+container.outerHTML;
@@ -77,7 +78,8 @@ const openResultsModal = (e) => {
             modalContent = buildTop5Table(JSON.parse(e.currentTarget.getAttribute('data-results-top5')));
         }
         else if(e.currentTarget.hasAttribute('data-results-total')){
-            modalContent = buildTotalTable(JSON.parse(e.currentTarget.getAttribute('data-results-total')));
+            const results = JSON.parse(e.currentTarget.getAttribute('data-results-total'));
+            modalContent = buildTotalTable(results);
         }else
             return;
 
@@ -89,7 +91,6 @@ const openResultsModal = (e) => {
 
 
 const resultRows = document.querySelectorAll('.results-accessor');
-console.log(resultRows);
 Array.from(resultRows).forEach(function(element) {
     element.addEventListener('click', openResultsModal);
 });

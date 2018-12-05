@@ -14,11 +14,11 @@ INSERT INTO symfony.competition (id, competition_name, competition_date, competi
 Varžybų atidarymas ir burtų traukimas: gegužės 4 d. 13.00 val. 
 Dalyviai vyksta į sektorius, pasiruošimas varžyboms: gegužės 4 d. 13.15 - 15.00 val.
 Varžybų startas: gegužės 4 d. 15.00 val.
-', 'DidelesZuvys.lt - Margirio g. 12, LT-64057 Punia, Lithuania');
+', 'DidelesZuvys.lt ');
 INSERT INTO symfony.competition (id, competition_name, competition_date, competition_duration, competition_organiser, competition_organiser_email, competition_type, competition_approved, competition_status, competition_teams_count, competition_weighings_count, competition_link, competition_rules, competition_location) VALUES (7, 'TOP5 Punia 2018', '2018-09-13 00:00:00', 3, 'Pikts Karpis', 'mantas@carpro.lt', 'top5', 0, 'finished', 7, 3, 'https://www.facebook.com/events/240567726665093/', 'Dalyvių atvažiavimas į varžymas: rugsėjo 13 d. iki 11.00 val.
 Varžybų atidarymas ir burtų traukimas: rugsėjo 13 d. 11.00 val. 
 Dalyviai vyksta į sektorius, pasiruošimas varžyboms: rugsėjo 13 d. 11.20 - 13.00 val.
-Varžybų startas: rugsėjo 13 d. 13.00 ', 'Margirio g. 12, LT-64057 Punia, Lithuania');
+Varžybų startas: rugsėjo 13 d. 13.00 ', 'DidelesZuvys.lt');
 INSERT INTO symfony.hash (id, competition_id, hash) VALUES (5, 6, '70578a0eb174eb912d2b2bb0c3103a12');
 INSERT INTO symfony.hash (id, competition_id, hash) VALUES (6, 7, '219632ee70ff60361e803f06959e9877');
 
