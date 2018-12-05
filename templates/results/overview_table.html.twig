@@ -1,7 +1,7 @@
 {% include "results/modals/results_mobile.html.twig" %}
 <div class="container">
-    <div class="row">
-        <div class="col-md-6  border border-warning">
+    <div class="row d-flex flex-md-row justify-content-center">
+
             <table class="mdl-data-table">
                 <tbody>
                 <tr>
@@ -22,26 +22,25 @@
                 </tr>
                 </tbody>
             </table>
-        </div>
-        <div class="col-md-6 border border-warning">
-            <table class="mdl-data-table table-borderless table-striped">
-                <thead class="thead-primary">
-                <tr class="table-head">
-                    <th scope="col"  class="mdl-data-table__cell--non-numeric">
+
+            <table class="table table-striped u-max-width-40">
+                <thead class="bg-primary text-white u-font-13 u-text-bold">
+                <tr class="">
+                    <th scope="col"  class="">
                         Vieta
                     </th>
-                    <th scope="col" class="mdl-data-table__cell--non-numeric">
+                    <th scope="col" class="">
                         Sektorius
                     </th>
-                    <th scope="col" class="mdl-data-table__cell--non-numeric">
+                    <th scope="col" class="">
                         Komanda
                     </th>
-                    <th scope="col" class="mdl-data-table__cell--non-numeric">
+                    <th scope="col" class="">
                         Bendras svoris
                     </th>
                 </tr>
                 </thead>
-                <tbody>
+                <tbody class="u-font-13">
                 {% for result in results['teamResults']|slice(0,3) %}
                     <tr>
                         <td>
@@ -60,6 +59,6 @@
                 {% endfor %}
                 </tbody>
             </table>
-        </div>
+
     </div>
 </div>

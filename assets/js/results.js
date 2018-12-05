@@ -5,7 +5,7 @@ var modal = new tingle.modal({
     footer: true,
     stickyFooter: false,
     closeMethods: ['overlay', 'button', 'escape'],
-    closeLabel: "Close",
+    closeLabel: "Uzdaryti",
     cssClass: ['custom-class-1', 'custom-class-2'],
 });
 
@@ -33,7 +33,7 @@ const totalResultsTemplate = (number, weigh, count) => {
 
 const buildTop5Table = () =>{
     const newTable = document.createElement('table');
-    newTable.classList.add('mdl-data-table');
+    newTable.className = 'table table-bordered';
     return newTable;
 };
 
@@ -49,8 +49,14 @@ const buildTotalHeader = () => {
 
 };
 
+const modalHeader = (team) => {
+  return `<div class="bg-primary text-white h5 mb-2 results-modal__header">
+            ${team} tarpiniai rezultatai</div>`;
+};
+
 const openResultsModal = (e) => {
     if(window.screen.availWidth <= 768){
+        const team = e.currentTarget.getAttribute('data-team-name');
         let results = null;
         if(e.currentTarget.hasAttribute('data-results-top5')){
             results = JSON.parse(e.currentTarget.getAttribute('data-results-top5'));
@@ -64,11 +70,15 @@ const openResultsModal = (e) => {
 
         const resultTable = buildTop5Table();
 
-        for (var key in results){
-            resultTable.innerHTML += top5ResultsTemplate(parseInt(key)+1, results[key]);
+        for (var i = 0; i< 5; i++){
+            var res = 0;
+            if(typeof results[i] !== 'undefined')
+                res = results[i];
+
+            resultTable.innerHTML += top5ResultsTemplate(parseInt(i)+1, res);
         }
 
-        modal.setContent(resultTable);
+        modal.setContent(modalHeader(team)+resultTable.outerHTML);
         modal.open();
     }
 };
