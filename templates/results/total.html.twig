@@ -50,7 +50,7 @@
                 </thead>
                 <tbody>
                     {% for result in results['teamResults'] %}
-                        <tr>
+                        <tr data-results="{{ result['weighings']|json_encode }}">
                             <td>
                                 {{ loop.index }}
                             </td>
@@ -86,4 +86,5 @@
         </div>
 
     </div>
+    <script src="{{ asset('build/js/results.js') }}"></script>
 {% endblock %}

@@ -44,10 +44,18 @@ class Top5CalculatorService extends AbstractResultsCalculatorService
 
         return array(
             'team' => $team,
-            'top5' => $top5,
+            'top5' => $this->serializeWeigh($top5),
             'totalWeigh' => $this->totalWeigh($top5),
             'totalCount' => count($team->getResults())
         );
+    }
+
+    private function serializeWeigh(Collection $results): array
+    {
+        $resultsArray = array();
+        foreach($results as $result)
+            $resultsArray[] = $result->getWeigh();
+        return $resultsArray;
     }
 
     private function totalWeigh(Collection $results): int
