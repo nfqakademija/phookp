@@ -36,7 +36,7 @@
                                     </div>
                                 </div>
                             {% endfor %}
-                            {% elseif futureCompetition %}
+                            {% elseif futureCompetition is not empty %}
                                 <h3 class="event__heading">Artimiausiu metu vyks:</h3>
                                     <div class="row">
                                         <div class="col-lg-6 col-m-6 col-sm-6 mobile-event">
@@ -56,7 +56,7 @@
                                             {% endif %}
                                         </div>
                                 </div>
-                                {% endif %}
+                            {% elseif expiredCompetition is not empty%}
                                 <h3 class="event__heading">Paskutinės varžybos: </h3>
                                 <div class="row">
                                     {% for competition in expiredCompetitions %}

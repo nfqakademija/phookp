@@ -36,8 +36,8 @@
 
         {% include "results/overview_table.html.twig" %}
         <div class="row table-container mb-5">
-            <div class="table-responsive table-container">
-                <table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp">
+            <div class="table-responsive-md">
+                <table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp mx-auto">
                     <thead class="thead-primary">
                     <tr class="table-head">
                         <th scope="col"  class="mdl-data-table__cell--non-numeric">
@@ -50,7 +50,7 @@
                             Komanda
                         </th>
                         {% for w in 0..4 %}
-                            <th scope="col" class="mdl-data-table__cell--non-numeric">
+                            <th scope="col" class="mdl-data-table__cell--non-numeric d-none d-md-table-cell">
                                 TOP {{ loop.index }}
                             </th>
                         {% endfor %}
@@ -64,25 +64,25 @@
                     </thead>
                     <tbody>
                     {% for result in results['teamResults'] %}
-                        <tr>
+                        <tr data-results-top5="{{ result['top5']|json_encode }}" data-team-name="{{ result['team'].teamName }}" class="results-accessor">
                             <td>
                                 {{ loop.index }}
                             </td>
                             <td>
                                 {{ result['team'].sectorNr }}
                             </td>
-                            <td>
+                            <td class="text-left">
                                 {{ result['team'].teamName }}
                             </td>
                             {% for w in 0..4 %}
-                                <td>
+                                <td class="d-none d-md-table-cell">
                                     {% if result['top5'][w] is defined %}
-                                        {{ result['top5'][w].Weigh/1000}}
+                                        {{ result['top5'][w]}}kg
                                     {% endif %}
                                 </td>
                             {% endfor %}
                             <td class="u-text-bold">
-                                {{ result['totalWeigh']/1000 }}
+                                {{ result['totalWeigh'] }}kg
                             </td>
                             {#<td class="u-text-bold">
                                 {{ result['totalCount'] }}
@@ -95,4 +95,5 @@
         </div>
 
     </div>
+    <script src="{{ asset('build/js/results.js') }}"></script>
 {% endblock %}

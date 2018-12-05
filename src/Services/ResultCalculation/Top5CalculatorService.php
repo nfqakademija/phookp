@@ -13,7 +13,7 @@ use App\Entity\Team;
 use App\Repository\ResultRepository;
 use Doctrine\Common\Collections\Collection;
 
-class Top5CalculatorService extends AbstractResultsCalculatorService implements ResultCalculationInterface
+class Top5CalculatorService extends AbstractResultsCalculatorService
 {
 
     private $resultRepository;
@@ -38,16 +38,24 @@ class Top5CalculatorService extends AbstractResultsCalculatorService implements 
         return $this->sortTeamsByTotalWeigh($teamsArray);
     }
 
-    private function teamResults(Team $team): ?array
+    private function teamResults(Team $team): array
     {
         $top5 = $this->resultRepository->findTeamTopFishes($team->getId());
 
         return array(
             'team' => $team,
-            'top5' => $top5,
-            'totalWeigh' => $this->totalWeigh($top5),
+            'top5' => $this->serializeWeigh($top5),
+            'totalWeigh' => $this->roundUpWeigh($this->totalWeigh($top5)),
             'totalCount' => count($team->getResults())
         );
+    }
+
+    private function serializeWeigh(Collection $results): array
+    {
+        $resultsArray = array();
+        foreach($results as $result)
+            $resultsArray[] = $this->roundUpWeigh($result->getWeigh());
+        return $resultsArray;
     }
 
     private function totalWeigh(Collection $results): int
