@@ -9,21 +9,21 @@
     <div class="container mt-5 ">
 
         <div class="row d-flex flex-md-row justify-content-center">
-            <div class="card info-card p-3">
+            <div class="card info-card p-3 overview-table">
                 <div class="card-body">
                     <h4 class="card-title">Big fish <i class="fa fa-fish"></i></h4>
                     <p class="card-text">
                         Didžiausia žuvis:<i
-                                class="u-text-bold"> {{ results['bigFish']['weigh'] }}kg</i>
+                                class="u-text-bold"> {{ results['bigFish']['weigh'] }} kg</i>
                     <p class="card-text"> Didžiausią žuvį pagavo: <i
                                 class="u-text-bold">{{ results['bigFish']['team'] }}</i></p>
                     <p class="card-text"> Bendras žuvų svoris: <i
-                                class="u-text-bold">{{ results['totalWeigh'] }}kg</i></p>
+                                class="u-text-bold">{{ results['totalWeigh'] }} kg</i></p>
                     <p class="card-text"> Bendras žuvų skaičius: <i
-                                class="u-text-bold">{{ results['totalCount'] }}vnt.</i></p>
+                                class="u-text-bold">{{ results['totalCount'] }} vnt.</i></p>
                 </div>
             </div>
-            <div class="card info-card p-3">
+            <div class="card info-card p-3 overview-table">
                 <div class="card-body">
                     <h4 class="card-title">Top 3</h4>
                     <div class="row">
@@ -92,7 +92,7 @@
                     </th>
                     {% for w in 0..competition.CompetitionWeighingsCount-1 %}
                         <th scope="col" class="mdl-data-table__cell--non-numeric d-none d-md-table-cell">
-                           Svoris kg
+                           Svoris
                         </th>
                         <th scope="col" class="d-none d-md-table-cell">
                             Vnt.
@@ -121,7 +121,7 @@
                             {% for w in 0..competition.CompetitionWeighingsCount-1 %}
                                 <td class="d-none d-md-table-cell">
                                     {% if result['weighings'][w] is defined %}
-                                        {{ result['weighings'][w]['totalWeigh']}}kg
+                                        {{ result['weighings'][w]['totalWeigh']}} kg
                                     {% endif %}
                                 </td>
                                 <td class="d-none d-md-table-cell">
@@ -131,7 +131,7 @@
                                 </td>
                             {% endfor %}
                             <td class="u-text-bold">
-                                {{ result['totalWeigh'] }}kg
+                                {{ result['totalWeigh'] }} kg
                             </td>
                             <td class="u-text-bold">
                                 {{ result['totalCount'] }}

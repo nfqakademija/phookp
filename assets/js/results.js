@@ -22,7 +22,7 @@ const modalHeader = (team) => {
 const top5ResultsTemplate = (number, weigh) => {
     return `<tr>
                 <td class="u-bg-main u-text-white">TOP ${number}</td>
-                <td class="u-text-bold"> ${weigh}kg</td>
+                <td class="u-text-bold"> ${weigh} kg</td>
             </tr>
     `;
 };
@@ -52,7 +52,7 @@ const buildTotalHeader = () => {
 const totalResultsTemplate = (number, weigh, count) => {
     return `<tr class="row mx-0">
                 <td class="col-4 u-bg-main u-text-white">${number}</td>
-                <td class="col-4 u-text-bold"> ${weigh}kg</td>
+                <td class="col-4 u-text-bold"> ${weigh} kg</td>
                 <td class="col-4 u-text-bold"> ${count}</td>
             </tr>
     `;
