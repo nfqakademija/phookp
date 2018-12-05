@@ -44,7 +44,7 @@ const buildTop5Table = (results) =>{
 const buildTotalHeader = () => {
     return `<table><tr class="row mx-0 u-bg-main text-white u-text-bold">
                 <th class="col-4">Svėrimo nr.</th>
-                <th class="col-4">Svoris</th>
+                <th class="col-4">Svoris (kg)</th>
                 <th class="col-4">Žuvų skaičius</th>
             </tr></table>`;
 };
@@ -79,7 +79,6 @@ const openResultsModal = (e) => {
         }
         else if(e.currentTarget.hasAttribute('data-results-total')){
             const results = JSON.parse(e.currentTarget.getAttribute('data-results-total'));
-            console.log(results);
             modalContent = buildTotalTable(results);
         }else
             return;
@@ -92,7 +91,6 @@ const openResultsModal = (e) => {
 
 
 const resultRows = document.querySelectorAll('.results-accessor');
-console.log(resultRows);
 Array.from(resultRows).forEach(function(element) {
     element.addEventListener('click', openResultsModal);
 });
