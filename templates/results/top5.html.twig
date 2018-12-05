@@ -11,33 +11,64 @@
         <div class="event-info-container u-mt-minus  d-flex justify-content-between flex-wrap">
             <div class="card info-card">
                 <div class="card-body">
-                    <h4 class="card-title"></h4>
-                    <p class="card-text">  </p>
-                    <p class="card-text"></p>
-                    <div class="card-button-container d-flex justify-content-center">
-                        {#<a href="">Facebook nuoroda čia!</a>#}
-                    </div>
+                    <h4 class="card-title">Big fish <i class="fa fa-fish"></i></h4>
+                    <p class="card-text">
+                     Didžiausia žuvis:<i
+                                class="u-text-bold"> {{ results['bigFish']['weigh'] }}kg</i>
+                    <p class="card-text"> Didžiausią žuvį pagavo: <i
+                                class="u-text-bold">{{ results['bigFish']['team'] }}</i></p>
+                    <p class="card-text"> Bendras žuvų svoris: <i
+                                class="u-text-bold">{{ results['totalWeigh'] }}kg</i></p>
+                    <p class="card-text"> Bendras žuvų skaičius: <i
+                                class="u-text-bold">{{ results['totalCount'] }}vnt.</i></p>
                 </div>
-            </div>
+                </div>
             <div class="card info-card">
                 <div class="card-body">
-                    <h4 class="card-title"></h4>
-                    <p class="card-text">  </p>
-                    <p class="card-text"></p>
-                    <div class="card-button-container d-flex justify-content-center">
-                        {#<a href="">Facebook nuoroda čia!</a>#}
+                    <h4 class="card-title">Top 3</h4>
+                    <div class="row">
+                        <div class="col">
+                            <p class="card-text">Vieta</p>
+                        </div>
+                        <div class="col">
+                            <p class="card-text">
+                                Komanda
+                            </p>
+                        </div>
+                        <div class="col">
+                            <p class="card-text">
+                                Svoris kg
+                            </p>
+
+                        </div>
                     </div>
+                    {% for result in results['teamResults']|slice(0,3) %}
+                        <div class="row">
+                            <div class="col">
+                                <p class="card-text">{{ loop.index }}</p>
+                            </div>
+                            <div class="col">
+                                <p class="card-text">
+                                    {{ result['team'].teamName }}
+                                </p>
+                            </div>
+                            <div class="col">
+                                <p class="card-text">
+                                    {{ result['totalWeigh'] }}
+                                </p>
+
+                            </div>
+                        </div>
+                    {% endfor %}
+
                 </div>
             </div>
 
         </div>
 
-
-
-        {% include "results/overview_table.html.twig" %}
         <div class="row table-container mb-5">
-            <div class="table-responsive table-container">
-                <table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp">
+            <div class="table-responsive-md">
+                <table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp mx-auto">
                     <thead class="thead-primary">
                     <tr class="table-head">
                         <th scope="col"  class="mdl-data-table__cell--non-numeric">
@@ -50,12 +81,12 @@
                             Komanda
                         </th>
                         {% for w in 0..4 %}
-                            <th scope="col" class="mdl-data-table__cell--non-numeric">
+                            <th scope="col" class="mdl-data-table__cell--non-numeric d-none d-md-table-cell">
                                 TOP {{ loop.index }}
                             </th>
                         {% endfor %}
                         <th scope="col" class="mdl-data-table__cell--non-numeric">
-                            Bendras svoris
+                            Bendras svoris kg
                         </th>
                         {#<th scope="col" class="mdl-data-table__cell--non-numeric">
                             Iš viso žuvų
@@ -64,25 +95,25 @@
                     </thead>
                     <tbody>
                     {% for result in results['teamResults'] %}
-                        <tr>
+                        <tr data-results-top5="{{ result['top5']|json_encode }}" data-team-name="{{ result['team'].teamName }}" class="results-accessor">
                             <td>
                                 {{ loop.index }}
                             </td>
                             <td>
                                 {{ result['team'].sectorNr }}
                             </td>
-                            <td>
+                            <td class="text-left">
                                 {{ result['team'].teamName }}
                             </td>
                             {% for w in 0..4 %}
-                                <td>
+                                <td class="d-none d-md-table-cell">
                                     {% if result['top5'][w] is defined %}
-                                        {{ result['top5'][w].Weigh/1000}}
+                                        {{ result['top5'][w]}}
                                     {% endif %}
                                 </td>
                             {% endfor %}
                             <td class="u-text-bold">
-                                {{ result['totalWeigh']/1000 }}
+                                {{ result['totalWeigh'] }}
                             </td>
                             {#<td class="u-text-bold">
                                 {{ result['totalCount'] }}
@@ -95,4 +126,5 @@
         </div>
 
     </div>
+    <script src="{{ asset('build/js/results.js') }}"></script>
 {% endblock %}

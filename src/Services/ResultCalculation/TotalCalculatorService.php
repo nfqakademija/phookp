@@ -14,7 +14,7 @@ use App\Repository\ResultRepository;
 use Doctrine\Common\Collections\Collection;
 
 
-class TotalCalculatorService extends AbstractResultsCalculatorService implements ResultCalculationInterface
+class TotalCalculatorService extends AbstractResultsCalculatorService
 {
 
 
@@ -30,7 +30,7 @@ class TotalCalculatorService extends AbstractResultsCalculatorService implements
     }
 
 
-    protected function getTeamsResults(Collection $teams): ?array
+    protected function getTeamsResults(Collection $teams): array
     {
         $teamsArray = array();
 
@@ -42,14 +42,14 @@ class TotalCalculatorService extends AbstractResultsCalculatorService implements
         return $this->sortTeamsByTotalWeigh($teamsArray);
     }
 
-    private function teamResults(Team $team): ?array
+    private function teamResults(Team $team): array
     {
         $resultsArray = array(
             'team' => $team,
             'weighings' => array(
 
             ),
-            'totalWeigh' => $team->totalWeigh(),
+            'totalWeigh' => $this->roundUpWeigh($team->totalWeigh()),
             'totalCount' => count($team->getResults())
         );
 
@@ -63,13 +63,13 @@ class TotalCalculatorService extends AbstractResultsCalculatorService implements
         return $resultsArray;
     }
 
-    private function formatWeighingResult(Weighing $weighing, Team $team):?array
+    private function formatWeighingResult(Weighing $weighing, Team $team):array
     {
         $results  = $this->resultRepository->findByTeamAndWeighing($team->getId(), $weighing->getId());
 
         return array(
             'weighing' => $weighing,
-            'totalWeigh' => $this->calculateWeighingTotalWeigh($results),
+            'totalWeigh' => $this->roundUpWeigh($this->calculateWeighingTotalWeigh($results)),
             'fishCount' => count($results)
         );
     }

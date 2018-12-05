@@ -1,69 +1,64 @@
-<div class="row justify-content-md-center justify-content-start mb-3 mt-3 d-flex justify-content-center">
-   <div>
-       <div
+{% include "results/modals/results_mobile.html.twig" %}
+<div class="container">
+    <div class="row d-flex flex-md-row justify-content-center">
 
+    <table class="mdl-data-table">
+        <tbody>
+        <tr>
+            <td class="u-bg-main u-text-white">Didžiausia žuvis</td>
+            <td class="u-text-bold"> {{ results['bigFish']['weigh'] }}kg</td>
+        </tr>
+        <tr>
+            <td class="u-bg-main u-text-white">Didžiausią žuvį pagavo</td>
+            <td class="u-text-bold">{{ results['bigFish']['team'] }}</td>
+        </tr>
+        <tr>
+            <td class="u-bg-main u-text-white">Bendras žuvų svoris</td>
+            <td class="u-text-bold"> {{ results['totalWeigh'] }}kg</td>
+        </tr>
+        <tr>
+            <td class="u-bg-main u-text-white">Bendras žuvų skaičius</td>
+            <td class="u-text-bold"> {{ results['totalCount'] }}vnt.</td>
+        </tr>
+        </tbody>
+    </table>
 
-   </div>
+    <table class="mdl-data-table">
+        <thead class="bg-primary text-white u-font-13 u-text-bold">
+        <tr class="">
+            <th scope="col" class="">
+                Vieta
+            </th>
+            <th scope="col" class="">
+                Sektorius
+            </th>
+            <th scope="col" class="">
+                Komanda
+            </th>
+            <th scope="col" class="">
+                Bendras svoris
+            </th>
+        </tr>
+        </thead>
+        <tbody class="u-font-13">
+        {% for result in results['teamResults']|slice(0,3) %}
+            <tr>
+                <td>
+                    {{ loop.index }}
+                </td>
+                <td>
+                    {{ result['team'].sectorNr }}
+                </td>
+                <td>
+                    {{ result['team'].teamName }}
+                </td>
+                <td class="u-text-bold">
+                    {{ result['totalWeigh'] }}kg
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
 
-
-    <div class="col-md-5">
-        <table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp">
-            <tbody>
-            <tr>
-                <td class="u-bg-main u-text-white">Didžiausia žuvis</td>
-                <td class="u-text-bold"> {{ results['bigFish']['weigh']/1000 }}kg</td>
-            </tr>
-            <tr>
-                <td class="u-bg-main u-text-white">Didžiausią žuvį pagavo</td>
-                <td class="u-text-bold">{{ results['bigFish']['team'] }}</td>
-            </tr>
-            <tr>
-                <td class="u-bg-main u-text-white">Bendras žuvų svoris</td>
-                <td class="u-text-bold"> {{ results['totalWeigh']/1000 }}kg </td>
-            </tr>
-            <tr>
-                <td class="u-bg-main u-text-white">Bendras žuvų skaičius</td>
-                <td class="u-text-bold"> {{ results['totalCount'] }}vnt. </td>
-            </tr>
-            </tbody>
-        </table>
-    </div>
-    <div class="col-md-7">
-        <table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp">
-            <thead class="thead-primary">
-            <tr class="table-head">
-                <th scope="col"  class="mdl-data-table__cell--non-numeric">
-                    Vieta
-                </th>
-                <th scope="col" class="mdl-data-table__cell--non-numeric">
-                    Sektorius
-                </th>
-                <th scope="col" class="mdl-data-table__cell--non-numeric">
-                    Komanda
-                </th>
-                <th scope="col" class="mdl-data-table__cell--non-numeric">
-                    Bendras svoris
-                </th>
-            </tr>
-            </thead>
-            <tbody>
-            {% for result in results['teamResults']|slice(0,3) %}
-                <tr>
-                    <td>
-                        {{ loop.index }}
-                    </td>
-                    <td>
-                        {{ result['team'].sectorNr }}
-                    </td>
-                    <td>
-                        {{ result['team'].teamName }}
-                    </td>
-                    <td class="u-text-bold">
-                        {{ result['totalWeigh']/1000 }}
-                    </td>
-                </tr>
-            {% endfor %}
-            </tbody>
-        </table>
-    </div>
+</div>
 </div>
