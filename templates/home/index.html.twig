@@ -37,6 +37,7 @@
                                 </div>
                             {% endfor %}
                             {% elseif futureCompetition is not empty %}
+                                {{ dump(futureCompetition)}}
                                 <h3 class="event__heading">Artimiausiu metu vyks:</h3>
                                     <div class="row">
                                         <div class="col-lg-6 col-m-6 col-sm-6 mobile-event">
@@ -56,7 +57,7 @@
                                             {% endif %}
                                         </div>
                                 </div>
-                            {% elseif expiredCompetitions is not empty%}
+                                {% endif %}
                                 <h3 class="event__heading">Paskutinės varžybos: </h3>
                                 <div class="row">
                                     {% for competition in expiredCompetitions %}
@@ -72,25 +73,16 @@
                                                         class="ml-2">{{ competition['startDate'] }}
                                                     - {{ competition['finishDate'] }}</span>
                                             </div>
-                                            <a href="/results/{{ competition['id'] }}">Rezultatai</a>
+                                            <a href="/results/{{competition['id'] }}">Rezultatai</a>
                                             <br>
                                             {% if competition['link'] %}
                                                 <a href="{{ competition['link'] }}">Facebook nuoroda čia!</a>
                                             {% endif %}
                                         </div>
                                     {% endfor %}
-                                </div></div>
-                    {% endif %}
-                    {#<div class="event mt-3">#}
-                        {#<div class="row">#}
-                            {#<div class="col-lg-12 mt-4 pb-2">#}
-                                {#<h2 class="event__name">Mūsų partneriai</h2>#}
-                                {#<img src="{{ asset('images/partneriai/alex_baits.png ') }}" alt="">#}
-                                {#<img src="{{ asset('images/partneriai/siprakfishing.png ') }}" alt="">#}
-                                {#<img src="{{ asset('imag es/partneriai/zvejokliai.lt.png') }}" alt="">#}
-                            {#</div>#}
-                        {#</div>#}
-                    {#</div>#}
+                                </div>
+                    </div>
+
 
                 </div>
             </div>

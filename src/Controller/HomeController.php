@@ -17,7 +17,7 @@ class HomeController extends Controller
         $goingCompetitions = $competitionService->getGoingCompetitions();
         $futureCompetitions = $competitionService->getFutureCompetitions();
         $expiredCompetitions = $competitionService->getExpiredCompetitions();
-        $expiredCompetitions = array_slice($expiredCompetitions, 0,4);
+        $expiredCompetitions = array_slice($expiredCompetitions, 0,2);
         $futureCompetition = array_shift($futureCompetitions);
         return $this->render("home/index.html.twig",
             [
