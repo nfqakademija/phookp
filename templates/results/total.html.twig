@@ -40,6 +40,7 @@
             <div class="table-responsive-md">
             <table class="mdl-data-table mx-auto">
                 <thead class="thead-primary">
+                {% if competition.CompetitionWeighingsCount > 1 %}
                 <tr class="tr--border-bottom--white d-none d-md-table-row">
                     <th colspan="3"></th>
                     {% for w in 0..competition.CompetitionWeighingsCount-1 %}
@@ -50,6 +51,7 @@
                     <th></th>
                     <th></th>
                 </tr>
+                {% endif %}
                 <tr class="table-head">
                     <th scope="col"  class="mdl-data-table__cell--non-numeric">
                         Vieta
@@ -60,14 +62,16 @@
                     <th scope="col" class="mdl-data-table__cell--non-numeric">
                         Komanda
                     </th>
-                    {% for w in 0..competition.CompetitionWeighingsCount-1 %}
-                        <th scope="col" class="mdl-data-table__cell--non-numeric d-none d-md-table-cell">
-                           Svoris kg
-                        </th>
-                        <th scope="col" class="d-none d-md-table-cell">
-                            Vnt.
-                        </th>
-                    {% endfor %}
+                    {% if competition.CompetitionWeighingsCount > 1 %}
+                        {% for w in 0..competition.CompetitionWeighingsCount-1 %}
+                            <th scope="col" class="mdl-data-table__cell--non-numeric d-none d-md-table-cell">
+                               Svoris kg
+                            </th>
+                            <th scope="col" class="d-none d-md-table-cell">
+                                Vnt.
+                            </th>
+                        {% endfor %}
+                    {% endif %}
                     <th scope="col" class="mdl-data-table__cell--non-numeric">
                         Bendras svoris
                     </th>
@@ -88,18 +92,20 @@
                             <td>
                                 {{ result['team'].teamName }}
                             </td>
-                            {% for w in 0..competition.CompetitionWeighingsCount-1 %}
-                                <td class="d-none d-md-table-cell">
-                                    {% if result['weighings'][w] is defined %}
-                                        {{ result['weighings'][w]['totalWeigh']}}kg
-                                    {% endif %}
-                                </td>
-                                <td class="d-none d-md-table-cell">
-                                    {% if result['weighings'][w] is defined %}
-                                        {{ result['weighings'][w]['fishCount'] }}
-                                    {% endif %}
-                                </td>
-                            {% endfor %}
+                            {% if competition.CompetitionWeighingsCount > 1 %}
+                                {% for w in 0..competition.CompetitionWeighingsCount-1 %}
+                                    <td class="d-none d-md-table-cell">
+                                        {% if result['weighings'][w] is defined %}
+                                            {{ result['weighings'][w]['totalWeigh']}}kg
+                                        {% endif %}
+                                    </td>
+                                    <td class="d-none d-md-table-cell">
+                                        {% if result['weighings'][w] is defined %}
+                                            {{ result['weighings'][w]['fishCount'] }}
+                                        {% endif %}
+                                    </td>
+                                {% endfor %}
+                            {% endif %}
                             <td class="u-text-bold">
                                 {{ result['totalWeigh'] }}kg
                             </td>

@@ -77,7 +77,9 @@ const openResultsModal = (e) => {
             modalContent = buildTop5Table(JSON.parse(e.currentTarget.getAttribute('data-results-top5')));
         }
         else if(e.currentTarget.hasAttribute('data-results-total')){
-            modalContent = buildTotalTable(JSON.parse(e.currentTarget.getAttribute('data-results-total')));
+            const results = JSON.parse(e.currentTarget.getAttribute('data-results-total'));
+            console.log(results);
+            modalContent = buildTotalTable(results);
         }else
             return;
 
