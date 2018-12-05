@@ -59,11 +59,14 @@ const totalResultsTemplate = (number, weigh, count) => {
 };
 
 const buildTotalTable = (weighings) => {
+    const container = document.createElement('div');
+    container.className = 'table-responsive h-75';
     const table = document.createElement('table');
     for(let i = 0; i < weighings.length; i++){
         table.innerHTML+=totalResultsTemplate(parseInt(i)+1, weighings[i][1], weighings[i][2]);
     }
-    return buildTotalHeader()+table.outerHTML;
+    container.appendChild(table);
+    return buildTotalHeader()+container.outerHTML;
 };
 
 const openResultsModal = (e) => {
