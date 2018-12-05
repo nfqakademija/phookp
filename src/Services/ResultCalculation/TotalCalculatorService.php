@@ -49,7 +49,7 @@ class TotalCalculatorService extends AbstractResultsCalculatorService
             'weighings' => array(
 
             ),
-            'totalWeigh' => $team->totalWeigh(),
+            'totalWeigh' => $this->roundUpWeigh($team->totalWeigh()),
             'totalCount' => count($team->getResults())
         );
 
@@ -69,7 +69,7 @@ class TotalCalculatorService extends AbstractResultsCalculatorService
 
         return array(
             'weighing' => $weighing,
-            'totalWeigh' => $this->calculateWeighingTotalWeigh($results),
+            'totalWeigh' => $this->roundUpWeigh($this->calculateWeighingTotalWeigh($results)),
             'fishCount' => count($results)
         );
     }

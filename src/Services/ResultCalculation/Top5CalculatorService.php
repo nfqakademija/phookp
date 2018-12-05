@@ -45,7 +45,7 @@ class Top5CalculatorService extends AbstractResultsCalculatorService
         return array(
             'team' => $team,
             'top5' => $this->serializeWeigh($top5),
-            'totalWeigh' => $this->totalWeigh($top5),
+            'totalWeigh' => $this->roundUpWeigh($this->totalWeigh($top5)),
             'totalCount' => count($team->getResults())
         );
     }
@@ -54,7 +54,7 @@ class Top5CalculatorService extends AbstractResultsCalculatorService
     {
         $resultsArray = array();
         foreach($results as $result)
-            $resultsArray[] = $result->getWeigh();
+            $resultsArray[] = $this->roundUpWeigh($result->getWeigh());
         return $resultsArray;
     }
 

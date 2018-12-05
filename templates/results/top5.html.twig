@@ -50,12 +50,12 @@
                             {% for w in 0..4 %}
                                 <td class="d-none d-md-table-cell">
                                     {% if result['top5'][w] is defined %}
-                                        {{ result['top5'][w]/1000}}
+                                        {{ result['top5'][w]}}kg
                                     {% endif %}
                                 </td>
                             {% endfor %}
                             <td class="u-text-bold">
-                                {{ result['totalWeigh']/1000 }}
+                                {{ result['totalWeigh'] }}kg
                             </td>
                             {#<td class="u-text-bold">
                                 {{ result['totalCount'] }}

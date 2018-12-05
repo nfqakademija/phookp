@@ -6,7 +6,7 @@
                 <tbody>
                 <tr>
                     <td class="u-bg-main u-text-white">Didžiausia žuvis</td>
-                    <td class="u-text-bold"> {{ results['bigFish']['weigh']/1000 }}kg</td>
+                    <td class="u-text-bold"> {{ results['bigFish']['weigh'] }}kg</td>
                 </tr>
                 <tr>
                     <td class="u-bg-main u-text-white">Didžiausią žuvį pagavo</td>
@@ -14,7 +14,7 @@
                 </tr>
                 <tr>
                     <td class="u-bg-main u-text-white">Bendras žuvų svoris</td>
-                    <td class="u-text-bold"> {{ results['totalWeigh']/1000 }}kg </td>
+                    <td class="u-text-bold"> {{ results['totalWeigh'] }}kg </td>
                 </tr>
                 <tr>
                     <td class="u-bg-main u-text-white">Bendras žuvų skaičius</td>
@@ -53,7 +53,7 @@
                             {{ result['team'].teamName }}
                         </td>
                         <td class="u-text-bold">
-                            {{ result['totalWeigh']/1000 }}
+                            {{ result['totalWeigh'] }}kg
                         </td>
                     </tr>
                 {% endfor %}

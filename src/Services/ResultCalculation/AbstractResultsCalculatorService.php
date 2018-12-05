@@ -21,7 +21,7 @@ abstract class AbstractResultsCalculatorService implements ResultCalculationInte
         $results = array(
             'teamResults' => $this->getTeamsResults($teams),
             'bigFish' => $this->competitionBigFish($teams),
-            'totalWeigh' => $this->calculateCompetitionTotalWeigh($teams),
+            'totalWeigh' => $this->roundUpWeigh($this->calculateCompetitionTotalWeigh($teams)),
             'totalCount' => $this->calculateCompetitionTotalCount($teams)
         );
 
@@ -43,6 +43,7 @@ abstract class AbstractResultsCalculatorService implements ResultCalculationInte
             }
         }
 
+        $bigFish['weigh'] = $this->roundUpWeigh($bigFish['weigh']);
         return $bigFish;
     }
 
@@ -53,6 +54,11 @@ abstract class AbstractResultsCalculatorService implements ResultCalculationInte
             $total += $team->totalWeigh();
         }
         return $total;
+    }
+
+    protected function roundUpWeigh(int $weigh): string
+    {
+        return number_format((float)($weigh/1000), 3, '.', '');
     }
 
     protected function calculateCompetitionTotalCount(Collection $teams): int
@@ -69,7 +75,7 @@ abstract class AbstractResultsCalculatorService implements ResultCalculationInte
     {
         for($i = 0; $i < count($teamResults); $i++){
             for($j = $i+1; $j< count($teamResults); $j++){
-                if($teamResults[$i]['totalWeigh'] < $teamResults[$j]['totalWeigh']){
+                if(floatval($teamResults[$i]['totalWeigh']) < floatval($teamResults[$j]['totalWeigh'])){
                     $temp = $teamResults[$i];
                     $teamResults[$i] = $teamResults[$j];
                     $teamResults[$j] = $temp;
