@@ -45,12 +45,11 @@ class TeamService
     /**
      * @param array $teams
      * @param Competition $competition
-     * @return array
+     * @return bool
      */
-    public function addTeams(array $teams, Competition $competition): array
+    public function addTeams(array $teams, Competition $competition): bool
     {
-        $addedTeamsQuantity = 0;
-        $isAddedName = true;
+        $isAdded = true;
 
         foreach ($teams as $team) {
             $teamName = $team->getTeamName();
@@ -60,14 +59,11 @@ class TeamService
             if ($teamName != null && ($firstTeamMember != null || $secondTeamMember != null || $thirdTeamMember != null)) {
                 $team->setCompetition($competition);
                 $this->create($team);
-                $addedTeamsQuantity++;
-            } elseif (
-                ($teamName === null && ($firstTeamMember != null || $secondTeamMember != null || $thirdTeamMember != null)) ||
-                ($teamName != null && ($firstTeamMember === null && $secondTeamMember === null && $thirdTeamMember != null))) {
-                $isAddedName =false;
+            } else {
+                $isAdded = false;
             }
         }
-        return array('addedTeamsQuantity' => $addedTeamsQuantity, 'isAddedName' => $isAddedName);
+        return $isAdded;
     }
 
     /**
@@ -115,20 +111,23 @@ class TeamService
 
     /**
      * @param array $teams
+     * @param Competition $competition
      * @return bool
      */
-    public function addTeamsSectors(array $teams) : bool
+    public function addTeamsSectors(array $teams, Competition $competition): bool
     {
-        $isAdded=true;
+        $sectorsCount=$competition->getCompetitionTeamsCount();
+        $isAdded = true;
         foreach ($teams as $team) {
             $sectorNr = $team->getSectorNr();
-            if ($sectorNr != null) {
+            if ($sectorNr <= $sectorsCount) {
                 $team->setSectorNr($sectorNr);
                 $this->create($team);
+            } else {
+                $isAdded = false;
+
             }
-            else{
-                $isAdded=false;
-            }
+
         }
         return $isAdded;
     }

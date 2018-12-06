@@ -1,0 +1,30 @@
+{% macro printMenu(createTeam, isTeam, hash, teamId, weighingNr) %}
+    {% if createTeam %}
+        <a href="/organizer/{{ hash }}/createTeams"
+           class="sidebar__link{{ app.request.get('_route') == 'organizerCreateTeams'? '--active' }}">1.Komandos</a>
+    {% elseif createTeam == false %}
+        <a class="sidebar__link">1.Komandos</a>
+    {% elseif createTeam is empty %}
+        <a class="sidebar__link">1.Komandos</a>
+    {% endif %}
+    {% if isTeam %}
+        <a href="/organizer/{{ hash }}/teamsSectors"
+           class="sidebar__link{{ app.request.get('_route') == 'organizerTeamsSectors'? '--active' }}">2.Sektorių
+            pasiskirstymas</a>
+    {% elseif isTeam ==false %}
+        <a class="sidebar__link">2.Sektorių pasiskirstymas</a>
+    {% elseif isTeam is empty %}
+        <a class="sidebar__link">2.Sektorių pasiskirstymas</a>
+    {% endif %}
+    {% if weighingNr ==null %}
+        <a class="sidebar__link">3.Rezultatai</a>
+    {% else %}
+        <a href="/organizer/{{ hash }}/results/{{ teamId }}/{{ weighingNr }}"
+           class="sidebar__link{{ app.request.get('_route') == 'organizerResults'? '--active' }}">3.Rezultatai</a>
+    {% endif %}
+    {% if weighingNr ==null %}
+        <a class="sidebar__link">4.Užbaigti varžybas</a>
+    {% else %}
+        <a href="/organizer/{{ hash }}/finish" class="sidebar__link">4.Užbaigti varžybas</a>
+    {% endif %}
+{% endmacro %}

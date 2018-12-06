@@ -37,6 +37,10 @@ class Team
      * * @Assert\Type(type = "integer",
      *              message = "Privalote įvesti skaičių"
      * )
+     * @Assert\Length(
+     *     max=2,
+     *     maxMessage="sektorius gali būti tik dviženklis skaičius!"
+     * )
      */
     private $sectorNr;
     /**

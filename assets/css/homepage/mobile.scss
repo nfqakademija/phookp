@@ -111,7 +111,7 @@ and (max-device-width : 550px) {
  .event {
    .event__heading {
      font-size: 38px;
-     padding: 10px;
+     padding: 20px;
    }
    .row {
      display: flex;
@@ -123,9 +123,8 @@ and (max-device-width : 550px) {
    .mobile-event {
      padding: 10px;
      margin-bottom: 12px;
-     width: auto;
      border: 1px solid #eee;
-
+     width: 300px;
    }
  }
 
