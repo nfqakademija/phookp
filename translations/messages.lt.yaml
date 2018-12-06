@@ -18,6 +18,7 @@ form.team_registration.error_message: Nepridėjote komandos. Privalote įvesti k
 form.team_registration.not_added_name_message: Norint pridėti komandą privalote įvesti komandos pavadinimą bei vieną komandos narį
 form.team_sectors_assignment.add_button: Pridėti sektorius
 form.team_sectors_assignment.success_message: Sektoriai sėkmingai pridėti
+form.team_sectors_assignment.error_message: Sektorius nerastas
 form.results_entry.error_not_added_teams_message: Klaida, negalima pridėti rezultatų nepridėjus dalyvių komandų
 form.results_entry.error_skip_weighing_message: Klaida, negalite praleisti svėrimų!
 form.results_entry.error_not_found_team_message: Klaida, nurodyta komanda nedalyvauja varžybose!

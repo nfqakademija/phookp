@@ -35,43 +35,47 @@ use Symfony\Component\Translation\TranslatorInterface;
 class OrganizerController extends AbstractController implements AuthorizedControllerInterface
 {
 
-
+    /**
+     * @param $hash
+     * @param HashService $hashService
+     * @param EventDispatcherInterface $dispatcher
+     * @param TranslatorInterface $translator
+     * @return Response
+     */
     public function main(
         $hash,
         HashService $hashService,
-        CompetitionService $competitionService,
         EventDispatcherInterface $dispatcher,
         TranslatorInterface $translator
     ) {
-        $hashObject = $hashService->findByHash($hash);
-        $competition = $hashObject->getCompetition();
-        $isUnconfirmed = $competitionService->competitionStatus($competition, Competition::STATUS_UNCONFIRMED);
-        $isStarted = $competitionService->competitionStatus($competition, Competition::STATUS_STARTED);
-        $isFinished = $competitionService->competitionStatus($competition, Competition::STATUS_FINISHED);
-        if ($isUnconfirmed) {
-            $event = new CompetitionConfirmedEvent($competition);
-            $dispatcher->dispatch(CompetitionConfirmedEvent::NAME, $event);
-        } else {
-            if ($isStarted) {
+        $competition = $hashService->findByHash($hash)->getCompetition();
+        switch ($competition->getCompetitionStatus()) {
+            case Competition::STATUS_UNCONFIRMED:
+                $event = new CompetitionConfirmedEvent($competition);
+                $dispatcher->dispatch(CompetitionConfirmedEvent::NAME, $event);
+                return $this->render("organizerPanel/organizerPanel.html.twig", [
+                    "hash" => $hash,
+                    "isTeam" => $competition->getTeams()->first(),
+                    "createTeam" => true,
+                ]);
+            case Competition::STATUS_CONFIRMED:
+                return $this->render("organizerPanel/organizerPanel.html.twig", [
+                    "hash" => $hash,
+                    "isTeam" => $competition->getTeams()->first(),
+                    "createTeam" => true,
 
+                ]);
+            case Competition::STATUS_STARTED:
                 return $this->redirectToRoute("organizerResults", [
-                    'hash' => $hashObject->getHash(),
+                    'hash' => $hash,
                     'teamId' => $competition->getTeams()->first()->getId(),
                     'weighingNr' => 1
                 ]);
-            } else {
-                if ($isFinished) {
-                    $this->addFlash("success", $translator->trans("competition.finished_message"));
-                    return $this->redirectToRoute("home");
-                }
-            }
-        }
-        return $this->render("organizerPanel/organizerPanel.html.twig", [
-            "hash" => $hash,
-            "isTeam"=>$competition->getTeams()->first(),
-            "isCreateTeam"=>true,
+            default:
+                $this->addFlash("success", $translator->trans("competition.finished_message"));
+                return $this->redirectToRoute("home");
 
-        ]);
+        }
     }
 
     /**
@@ -90,46 +94,33 @@ class OrganizerController extends AbstractController implements AuthorizedContro
         TeamService $teamService,
         TranslatorInterface $translator
     ) {
-        $hashObject = $hashService->findByHash($hash);
-        if ($hashObject) {
-            $data = ['teams' => []];
-            $competition = $hashObject->getCompetition();
-            $teamsCount = $teamService->countTeams($competition);
-            for ($i = 0; $i < $teamsCount; $i++) {
-                $team = new Team();
-                $data['teams'][] = $team;
-            }
-            $form = $this->createForm(TeamsFormType::class, $data);
-            $form->add('save', SubmitType::class,
-                array("label" => "form.team_registration.create_button", "attr" => ["class" => "button"]));
-            $form->handleRequest($request);
-
-            if ($form->isSubmitted() && $form->isValid()) {
-                $additionNotifications = $teamService->addTeams($form->getData()['teams'], $competition);
-                $errorMessage = $translator->trans("form.team_registration.not_added_name_message");
-
-                if ($additionNotifications["addedTeamsQuantity"] > 0) {
-                    if ($additionNotifications["isAddedName"] === false) {
-                        $this->addFlash("danger", $errorMessage);
-                    }
-                } else {
-                    $this->addFlash("danger", $errorMessage);
-                }
-                return $this->redirectToRoute("organizerCreateTeams", ['hash' => $hashObject->getHash()]);
-            }
-            $teamsArray = $competition->getTeams();
-
-            return $this->render("team/addTeam.html.twig", [
-                "form" => $form->createView(),
-                "teamsCount" => $teamsCount,
-                "teams" => $teamsArray,
-                "hash" => $hash,
-                "isTeam"=>$teamsArray->first(),
-                "isCreateTeam"=>true,
-            ]);
+        $competition = $hashService->findByHash($hash)->getCompetition();
+        $data = ['teams' => []];
+        $teamsCount = $teamService->countTeams($competition);
+        for ($i = 0; $i < $teamsCount; $i++) {
+            $team = new Team();
+            $data['teams'][] = $team;
         }
+        $form = $this->createForm(TeamsFormType::class, $data);
+        $form->add('save', SubmitType::class,
+            array("label" => "form.team_registration.create_button", "attr" => ["class" => "button"]));
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $isAdded = $teamService->addTeams($form->getData()['teams'], $competition);
+            if (!$isAdded) {
+                $this->addFlash("danger", $translator->trans("form.team_registration.not_added_name_message"));
+            }
+            return $this->redirectToRoute("organizerCreateTeams", ['hash' => $hash]);
+        }
+        return $this->render("team/addTeam.html.twig", [
+            "form" => $form->createView(),
+            "teamsCount" => $teamsCount,
+            "teams" => $competition->getTeams(),
+            "hash" => $hash,
+            "isTeam" => $competition->getTeams()->first(),
+            "createTeam" => true,
+        ]);
 
-        return $this->redirectToRoute("home");
     }
 
     /**
@@ -164,14 +155,12 @@ class OrganizerController extends AbstractController implements AuthorizedContro
         EventDispatcherInterface $dispatcher,
         CompetitionService $competitionService
     ) {
-        $hashObject = $hashService->findByHash($hash);
-        $competition = $hashObject->getCompetition();
-        $isStarted = $competitionService->competitionStatus($competition, Competition::STATUS_STARTED);
-        if ($isStarted === false) {
+        $competition = $hashService->findByHash($hash)->getCompetition();
+
+        if (!$competitionService->competitionStatus($competition, Competition::STATUS_STARTED)) {
             $event = new CompetitionStartedEvent($competition);
             $dispatcher->dispatch(CompetitionStartedEvent::NAME, $event);
         }
-        $teams = $competition->getTeams();
         $teamId = $competition->getTeams()->first()->getId();
         $data = ['teams' => $competition->getTeams()->toArray()];
         $form = $this->createForm(TeamsSectorsFormType::class, $data);
@@ -180,22 +169,23 @@ class OrganizerController extends AbstractController implements AuthorizedContro
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $isAdded = $teamService->addTeamsSectors($form->getData()['teams']);
-
-            if ($isAdded === true) {
+            $isAdded = $teamService->addTeamsSectors($form->getData()['teams'], $competition);
+            if ($isAdded) {
                 $this->addFlash("success", $translator->trans("form.team_sectors_assignment.success_message"));
                 return $this->redirectToRoute("organizerResults",
-                    ['hash' => $hashObject->getHash(), 'teamId' => $teamId, "weighingNr" => 1]);
+                    ['hash' => $hash, 'teamId' => $teamId, "weighingNr" => 1]);
+            } else {
+                $this->addFlash("danger", $translator->trans("form.team_sectors_assignment.error_message"));
             }
         }
         return $this->render("team/sectors.html.twig", [
             "form" => $form->createView(),
-            "teams" => $teams,
+            "teams" => $competition->getTeams(),
             "hash" => $hash,
             "teamId" => $teamId,
-            "isTeam"=>$competition->getTeams()->first(),
+            "isTeam" => $competition->getTeams()->first(),
             "weighingNr" => 1,
-            "isCreateTeam"=>false,
+            "createTeam" => false,
 
         ]);
 
@@ -307,15 +297,12 @@ class OrganizerController extends AbstractController implements AuthorizedContro
         EventDispatcherInterface $dispatcher,
         TranslatorInterface $translator
     ) {
-        $hashObject = $hashService->findByHash($hash);
-        $competition = $hashObject->getCompetition();
+        $competition = $hashService->findByHash($hash)->getCompetition();
         $isFinished = $competitionService->competitionStatus($competition, Competition::STATUS_FINISHED);
-
         if ($isFinished === false) {
             $event = new CompetitionFinishedEvent($competition);
             $dispatcher->dispatch(CompetitionFinishedEvent::NAME, $event);
         }
-
         $this->addFlash("success", $translator->trans("competition.finished_message"));
         return $this->redirectToRoute("home");
     }

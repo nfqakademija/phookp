@@ -41,6 +41,7 @@ class CompetitionRepository extends ServiceEntityRepository
 
     /**
      * @param string $status
+     * @param string $orderBy
      * @return array|null
      */
     public function findCompetitions(string $status, string $orderBy): ?array

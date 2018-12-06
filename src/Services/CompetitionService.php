@@ -91,8 +91,7 @@ final class CompetitionService
     public function getFutureCompetitions(): ?array
     {
         $futureCompetitions = $this->competitionRepository->findCompetitions(Competition::STATUS_CONFIRMED, "ASC");
-        $competitions = $this->getFormattedCompetitions($futureCompetitions);
-        return $competitions;
+        return $this->getFormattedCompetitions($futureCompetitions);
     }
 
     /**
@@ -101,8 +100,7 @@ final class CompetitionService
     public function getGoingCompetitions(): ?array
     {
         $goingCompetitions = $this->competitionRepository->findCompetitions(Competition::STATUS_STARTED,"ASC");
-        $competitions = $this->getFormattedCompetitions($goingCompetitions);
-        return $competitions;
+        return $this->getFormattedCompetitions($goingCompetitions);
     }
 
     /**
@@ -111,8 +109,7 @@ final class CompetitionService
     public function getExpiredCompetitions(): ?array
     {
         $expiredCompetitions = $this->competitionRepository->findCompetitions(Competition::STATUS_FINISHED,"DESC");
-        $competitions = $this->getFormattedCompetitions($expiredCompetitions);
-        return $competitions;
+        return $this->getFormattedCompetitions($expiredCompetitions);
     }
 
     /**
