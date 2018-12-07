@@ -58,7 +58,7 @@ and (max-device-width : 1024px)
     }
   }
     .event {
-      text-align: center;
+      width: 100%;
     }
 
   }
@@ -112,6 +112,7 @@ and (max-device-width : 550px) {
    .event__heading {
      font-size: 38px;
      padding: 20px;
+     text-align: left;
    }
    .row {
      display: flex;
@@ -121,10 +122,11 @@ and (max-device-width : 550px) {
    }
 
    .mobile-event {
-     padding: 10px;
-     margin-bottom: 12px;
      border: 1px solid #eee;
-     width: 300px;
+     width: 100%;
+     flex: 1 1 auto;
+     padding: 30px;
+     margin-bottom: 10px;
    }
  }
 

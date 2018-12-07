@@ -1,23 +1,26 @@
 {% macro printCompetitions(competitions) %}
-{% for competition in competitions %}
     <div class="row">
-        <div class="col-lg-6 col-m-6 col-sm-6 mobile-event">
-            <h2 class="event__name">{{ competition['name'] }}</h2>
-            {% if competition['location']!= null %}
-                <div class="event__place">
-                    <i class="fa  fa-map-marker-alt"></i> <span class="ml-2">{{ competition['location'] }}</span>
+        {% for competition in competitions %}
+            <div class="col-lg-6 col-m-6 col-sm-6 mobile-event">
+                <h2 class="event__name">{{ competition['name'] }}</h2>
+                {% if competition['location']!= null %}
+                    <div class="event__place">
+                        <i class="fa  fa-map-marker-alt"></i> <span class="ml-2">{{ competition['location'] }}</span>
+                    </div>
+                {% endif %}
+                <div class="event__date"><i class="fa fa-calendar-alt"></i> <span
+                            class="ml-2">{{ competition['startDate'] }}
+                        - {{ competition['finishDate'] }}</span>
                 </div>
-            {% endif %}
-            <div class="event__date"><i class="fa fa-calendar-alt"></i> <span
-                        class="ml-2">{{ competition['startDate'] }}
-                    - {{ competition['finishDate'] }}</span>
+                <div class="event__text">
+                    <a  href="/results/{{ competition['id'] }}">Rezultatai</a>
+                </div>
+                {% if competition['link'] %}
+                    <div class="event__text">
+                    <a class="event__place" href="{{ competition['link'] }}">Facebook nuoroda čia!</a>
+                    </div>
+                {% endif %}
             </div>
-            <a href="/results/{{ competition['id'] }}">Rezultatai</a>
-            <br>
-            {% if competition['link'] %}
-                <a href="{{ competition['link'] }}">Facebook nuoroda čia!</a>
-            {% endif %}
-        </div>
+        {% endfor %}
     </div>
-{% endfor %}
 {% endmacro %}
