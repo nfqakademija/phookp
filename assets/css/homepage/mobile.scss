@@ -6,6 +6,32 @@ and (max-device-width : 1024px)
 {
 
 
+  .event {
+    margin-bottom: 8px;
+    padding: 8px;
+    .event__data {
+      border: none;
+    }
+    .event__date {
+      font-size: 20px;
+      line-height: 30px;
+      span{
+        display: inline;
+        text-align: left;
+        &.year {
+          font-size: 20px;
+        }
+        &.days {
+          font-size: 20px;
+        }
+      }
+    }
+    .event__line{
+      padding-top: 15px;
+      border-bottom: 1px solid #ccc;
+    }
+  }
+
   i.fa-bars{
     width: 50px;
     height: 50px;

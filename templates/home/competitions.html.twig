@@ -32,7 +32,7 @@
                     <div class="card">
                         <div class="card-body">
                             <h4 class="card-title">{{ competition['name'] }}</h4>
-                            <p class="card-text"> <i class="fa fa-calendar-alt"> </i> {{ competition['startDate'] }}</p>
+                            <p class="card-text"> <i class="fa fa-calendar-alt"> </i>{{ competition['year'] }} {{ competition['month']}} {{ competition['days'] }}</p>
                             <p class="card-text"> <i class="fa fa-map-marker-alt"> </i> {{ competition['location'] }}</p>
                             <div class="card-button-container d-flex justify-content-center">
                                 <a href="{{ competition['link'] }}">Facebook nuoroda čia!</a>
@@ -58,7 +58,7 @@
                     <div class="card">
                         <div class="card-body d-flex flex-column">
                             <h4 class="card-title">{{ competition['name'] }}</h4>
-                            <p class="card-text"> <i class="fa fa-calendar-alt"> </i> {{ competition['startDate'] }} - {{ competition['finishDate'] }}</p>
+                            <p class="card-text"> <i class="fa fa-calendar-alt"> </i>{{ competition['year'] }} {{ competition['month'] }} {{ competition ['days'] }}</p>
                             {% if competition['location']!=null %}
                             <p class="card-text"> <i class="fa fa-map-marker-alt"> </i> {{ competition['location'] }}</p>
                             {% endif %}

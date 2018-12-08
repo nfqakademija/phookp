@@ -15,6 +15,7 @@ class HomeController extends Controller
     public function index(CompetitionService $competitionService)
     {
         $goingCompetitions = $competitionService->getGoingCompetitions();
+        $goingCompetitions=[];
         $expiredCompetitions = $competitionService->getExpiredCompetitions();
         $expiredCompetitions = array_slice($expiredCompetitions, 0, 2);
         return $this->render("home/index.html.twig",

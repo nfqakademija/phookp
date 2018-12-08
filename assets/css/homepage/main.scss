@@ -61,43 +61,64 @@
   font-size: 18px;
 
 }
-
-.event__date {
-  font-size: 20px;
-  text-align: left;
-
-  i {
-    font-size: 27px;
+.event {
+  margin-bottom: 20px;
+  .event__data {
+    border-left: 1px solid #ccc;
   }
-}
-.event__text{
-  font-size: 20px;
-  text-align: left;
-}
 
-.event__place {
-  font-size: 17px;
-  text-align: left;
-
-  i {
-    font-size: 27px;
+  .event__text{
+    font-size: 20px;
+    text-align: left;
   }
-}
+
+  .event__place {
+    font-size: 17px;
+    text-align: left;
+
+    i {
+      font-size: 27px;
+    }
+  }
 
 
-.event__heading {
-  font-size: 26px;
-  border-bottom: 1px solid #cccccc;
-  padding-bottom: 10px;
-  text-align:left;
-}
+  .event__heading {
+    font-size: 26px;
+    border-bottom: 1px solid #cccccc;
+    padding-bottom: 10px;
+    text-align:left;
+  }
 
-.event__name {
-  font-size: 23px;
-  font-weight: 100;
-  text-align:left ;
-  flex-grow: 1;
-  flex-basis: 0;
+  .event__name {
+    font-size: 23px;
+    font-weight: 100;
+    text-align:left ;
+    flex-grow: 1;
+    flex-basis: 0;
+    text-overflow: ellipsis;
+  }
+
+  .event__date {
+    font-size: 20px;
+    line-height: 30px;
+    span{
+      display: block;
+      text-align: center;
+      &.year {
+        font-size: 28px;
+      }
+      &.days {
+        font-size: 24px;
+      }
+      &.month{
+        font-size: 21px;
+      }
+    }
+
+    i {
+      font-size: 27px;
+    }
+  }
 }
 
 .button {
@@ -287,4 +308,13 @@
   margin: 40px;
   padding: 0 10px 40px 30px;
   border-bottom: 1px solid $mainGreen;
+}
+.year{
+
+}
+.month{
+
+}
+.days{
+
 }
