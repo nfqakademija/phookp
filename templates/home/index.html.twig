@@ -12,18 +12,21 @@
                         <h1 class="heading heading--blue-border ">Sportinė karpių žuklė</h1>
                     </div>
                     <div class="event">
-                        {% if goingCompetitions is not empty %}
+                        {% if goingCompetitions is defined %}
                         <h3 class="event__heading">Šiuo metu vyksta:</h3>
                         {{ myMacros.printCompetitions(
                             goingCompetitions
                         )
                         }}
                         {% endif %}
+                        {% if expiredCompetitions is defined %}
                             <h3 class="event__heading">Pasibaigusios:</h3>
                             {{ myMacros.printCompetitions(
                                 expiredCompetitions
                             )
                             }}
+                        {% endif %}
+
                     </div>
                 </div>
             </div>

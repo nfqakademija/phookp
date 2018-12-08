@@ -198,9 +198,7 @@
 .event-card-container {
   width: 100%;
   margin-top: 25px;
-  img {
-    min-height: 230px;
-  }
+
   .card-button-container {
     width: 100%;
     display: flex;
@@ -219,12 +217,6 @@
     border-radius: 2px;
     transition: 0.5s;
     text-align: left;
-    &:hover {
-      border: 1px solid $mainGreen;
-      margin-top: -10px;
-      box-shadow: none;
-      border-radius: 0;
-    }
     .card-text {
       margin-bottom: 10px;
       text-align: left;
