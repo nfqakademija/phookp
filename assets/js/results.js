@@ -90,7 +90,7 @@ const openResultsModal = (e) => {
 
 
 
-const resultRows = document.querySelectorAll('.results-accessor');
+const resultRows = document.querySelectorAll('.js-results-accessor');
 Array.from(resultRows).forEach(function(element) {
     element.addEventListener('click', openResultsModal);
 });
