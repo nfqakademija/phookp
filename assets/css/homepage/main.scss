@@ -105,13 +105,13 @@
       display: block;
       text-align: center;
       &.year {
-        font-size: 28px;
-      }
-      &.days {
         font-size: 24px;
       }
+      &.days {
+        font-size: 28px;
+      }
       &.month{
-        font-size: 21px;
+        font-size: 26px;
       }
     }
 
