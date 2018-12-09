@@ -61,13 +61,13 @@
   font-size: 18px;
 
 }
+
 .event {
-  margin-bottom: 20px;
   .event__data {
     border-left: 1px solid #ccc;
   }
 
-  .event__text{
+  .event__text {
     font-size: 20px;
     text-align: left;
   }
@@ -75,33 +75,38 @@
   .event__place {
     font-size: 17px;
     text-align: left;
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 
     i {
       font-size: 27px;
     }
   }
 
-
   .event__heading {
     font-size: 26px;
     border-bottom: 1px solid #cccccc;
     padding-bottom: 10px;
-    text-align:left;
+    text-align: left;
   }
 
   .event__name {
     font-size: 23px;
     font-weight: 100;
-    text-align:left ;
+    text-align: left;
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
     flex-grow: 1;
     flex-basis: 0;
     text-overflow: ellipsis;
   }
-
   .event__date {
     font-size: 20px;
     line-height: 30px;
-    span{
+    span {
       display: block;
       text-align: center;
       &.year {
@@ -110,13 +115,26 @@
       &.days {
         font-size: 28px;
       }
-      &.month{
+      &.month {
         font-size: 26px;
       }
     }
 
     i {
       font-size: 27px;
+    }
+  }
+  .event-button-container {
+    width: 100%;
+    display: flex;
+    .button {
+      height: auto;
+      width: auto;
+      margin-top: 5px;
+    }
+    i{
+      font-size: 29px;
+      padding-top: 10px;
     }
   }
 }
@@ -227,7 +245,7 @@
   }
 }
 
-.white{
+.white {
   background-color: white;
 }
 
@@ -300,13 +318,4 @@
   margin: 40px;
   padding: 0 10px 40px 30px;
   border-bottom: 1px solid $mainGreen;
-}
-.year{
-
-}
-.month{
-
-}
-.days{
-
 }

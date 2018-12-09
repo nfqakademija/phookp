@@ -6,22 +6,6 @@
     <div class="page-name-container">
         <h2>Varžybos</h2>
     </div>
-    {#praeje#}
-    {#{%for competition in expiredCompetitions %}#}
-    {#pavadinimas: {{ competition['name'] }}#}
-        {#<br>#}
-    {#vyksta {{ competition['startDate'] }} - {{ competition ['finishDate'] }}#}
-        {#<br>#}
-    {#{% endfor %}#}
-
-    {#busimi#}
-    {#{% for competition in futureCompetitions %}#}
-
-    {#pavadinimas: {{ competition['name'] }}#}
-        {#<br>#}
-    {#vyksta {{ competition['startDate'] }} - {{ competition['finishDate'] }}#}
-        {#<br>#}
-    {#{% endfor %}#}
     <section id="previous-events" class=" u-pb-5">
         <div class="container">
             <h2 class="heading heading--blue-border heading--center">Būsimos varžybos</h2>
