@@ -221,15 +221,6 @@
   width: 100%;
   margin-top: 25px;
 
-  .card-button-container {
-    width: 100%;
-    display: flex;
-    justify-content: space-around;
-  }
-  .card-title {
-    font-weight: 100;
-    text-align: left;
-  }
   .card {
 
     flex-basis: 30%;
@@ -239,12 +230,34 @@
     border-radius: 2px;
     transition: 0.5s;
     text-align: left;
+    .card-title {
+      font-weight: 100;
+      text-align: left;
+      width: 100%;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
     .card-text {
       margin-bottom: 10px;
       text-align: left;
+      width: 100%;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
-    .button {
-      height: auto;
+    .card-button-container {
+      width: 100%;
+      display: flex;
+      .button {
+        height: auto;
+        width: auto;
+        margin-top: 5px;
+      }
+      i {
+        font-size: 29px;
+        padding-top: 10px;
+      }
     }
   }
 }
