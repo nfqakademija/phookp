@@ -45,6 +45,7 @@ class HomeController extends Controller
     public function competitions(CompetitionService $competitionService)
     {
         $futureCompetitions = $competitionService->getFutureCompetitions();
+        $expiredCompetitionsByYear=$competitionService->getExpiredCompetitionsByYear();
         $expiredCompetitions = $competitionService->getExpiredCompetitions();
         return $this->render("home/competitions.html.twig",
             [

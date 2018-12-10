@@ -99,7 +99,7 @@ final class CompetitionService
      */
     public function getGoingCompetitions(): ?array
     {
-        $goingCompetitions = $this->competitionRepository->findCompetitions(Competition::STATUS_STARTED,"ASC");
+        $goingCompetitions = $this->competitionRepository->findCompetitions(Competition::STATUS_STARTED, "ASC");
         return $this->getFormattedCompetitions($goingCompetitions);
     }
 
@@ -108,7 +108,7 @@ final class CompetitionService
      */
     public function getExpiredCompetitions(): ?array
     {
-        $expiredCompetitions = $this->competitionRepository->findCompetitions(Competition::STATUS_FINISHED,"DESC");
+        $expiredCompetitions = $this->competitionRepository->findCompetitions(Competition::STATUS_FINISHED, "DESC");
         return $this->getFormattedCompetitions($expiredCompetitions);
     }
 
@@ -127,20 +127,31 @@ final class CompetitionService
             $finishDate = $this->getFinishDate($competition->getCompetitionDate(), $duration);
             $link = $competition->getCompetitionLink();
             $rules = $competition->getCompetitionRules();
-            $location=$competition->getCompetitionLocation();
+            $location = $competition->getCompetitionLocation();
             $competition = [
                 "id" => $id,
                 "name" => $name,
                 "year" => $startDate["year"],
-                "month"=>$startDate["month"],
-                "days"=>$startDate["day"]."-".$finishDate,
+                "month" => $startDate["month"],
+                "days" => $startDate["day"] . "-" . $finishDate,
                 "link" => $link,
                 "rules" => $rules,
-                "location"=>$location
+                "location" => $location
             ];
             array_push($formattedCompetitions, $competition);
         }
         return $formattedCompetitions;
+    }
+
+
+    public function getExpiredCompetitionsByYear()
+    {
+        $expiredCompetitions = $this->getExpiredCompetitions();
+        $expiredCompetitionsByYear = [];
+        foreach ($expiredCompetitions as $expiredCompetition) {
+            $expiredCompetitionsByYear[$expiredCompetition['year']][] = $expiredCompetition;
+        }
+        return $expiredCompetitionsByYear;
     }
 
     /**
@@ -165,7 +176,7 @@ final class CompetitionService
         $year = $date[0];
         $month = $this->translator->trans($date[1]);
         $day = $date[2];
-        return ["year"=>$year, "month"=>$month,"day"=>$day];
+        return ["year" => $year, "month" => $month, "day" => $day];
     }
 
     /**

@@ -56,4 +56,5 @@ class CompetitionRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
     }
+
 }
