@@ -47,6 +47,13 @@
         <div class="container">
             <h2 class="heading heading--blue-border heading--center">Praėjusios varžybos</h2>
             <div class="row">
+                <div class="col-lg-3">
+                    <h1 class="my-4">Metai</h1>
+                    <div class="list-group">
+                        <a href="#" class="list-group-item active">njn</a>
+                    </div>
+                </div>
+                <div class="col-lg-9">
                 <div class="event-card-container d-flex justify-content-center flex-wrap">
                     {% for competition in expiredCompetitions %}
                         <div class="card">
@@ -76,6 +83,7 @@
                         </div>
                     {% endfor %}
                 </div>
+            </div>
             </div>
     </section>
 

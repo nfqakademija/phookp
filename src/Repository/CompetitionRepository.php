@@ -57,4 +57,17 @@ class CompetitionRepository extends ServiceEntityRepository
             ->getResult();
     }
 
+    public function getExpiredCompetitionsYears(){
+
+        return $competitions = $this->createQueryBuilder('r')
+            ->select('YEAR(r.competitionDate)')
+            ->distinct()
+            ->where('r.competitionStatus = :competitionStatus')
+            ->andWhere('r.competitionApproved = :competitionApproved')
+            ->setParameter('competitionStatus', Competition::STATUS_FINISHED)
+            ->setParameter('competitionApproved', true)
+            ->getQuery()
+            ->getScalarResult();
+    }
+
 }

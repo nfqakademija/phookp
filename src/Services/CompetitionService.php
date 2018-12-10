@@ -144,14 +144,12 @@ final class CompetitionService
     }
 
 
-    public function getExpiredCompetitionsByYear()
+    /**
+     * @return array
+     */
+    public function getExpiredCompetitionsYears(): ?array
     {
-        $expiredCompetitions = $this->getExpiredCompetitions();
-        $expiredCompetitionsByYear = [];
-        foreach ($expiredCompetitions as $expiredCompetition) {
-            $expiredCompetitionsByYear[$expiredCompetition['year']][] = $expiredCompetition;
-        }
-        return $expiredCompetitionsByYear;
+      return  $expiredCompetitionsYears = $this->competitionRepository->getExpiredCompetitionsYears();
     }
 
     /**
