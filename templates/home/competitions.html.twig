@@ -46,11 +46,18 @@
                             {% if competition['location']!=null %}
                             <p class="card-text"> <i class="fa fa-map-marker-alt"> </i> {{ competition['location'] }}</p>
                             {% endif %}
-                            <div class="card-button-container d-flex flex-wrap justify-content-center">
-                                <a href="/results/{{ competition['id'] }}" class="btn button">Rezultatai</a>
-                                {% if competition['link']!= null %}
-                               <a class="mt-2" href="{{ competition['link'] }}" >Facebook nuoroda čia!</a>
+                            <div class="event-button-container d-flex flex-wrap">
+                                <div class="col-6 px-0 text-left">
+                                    <a href="/results/{{ competition['id'] }}" class="btn button">Rezultatai</a>
+                                </div>
+                                {% if competition['link'] %}
+                                    <div class="col-6 text-right">
+                                        <a href="{{ competition['link'] }}">
+                                            <i class="fab fa-facebook-square"></i>
+                                        </a>
+                                    </div>
                                 {% endif %}
+
                             </div>
                         </div>
 
