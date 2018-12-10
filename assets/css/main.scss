@@ -1,5 +1,5 @@
 body, html {
-  font-family: 'Ubuntu', sans-serif;
+  font-family:'Jura', sans-serif;
   width: 100%;
   height: 100%;
   font-weight: 100 !important;
@@ -20,13 +20,14 @@ h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
 .page-name-container {
   margin-top: 50px;
   margin-bottom: 20px;
-  background: linear-gradient(rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.35)), url("../../images/header_hq.png")  center;
+  background: linear-gradient(to top,black,transparent 90%),url(public/images/header_hq.png) 50%;
   -webkit-background-size: cover;
   background-size: cover;
   min-height: 260px;
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-end;
+  padding-bottom: 5px;
   color: white;
   h2 {
     font-size: 3rem;

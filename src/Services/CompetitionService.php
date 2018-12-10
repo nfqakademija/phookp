@@ -131,8 +131,9 @@ final class CompetitionService
             $competition = [
                 "id" => $id,
                 "name" => $name,
-                "startDate" => $startDate,
-                "finishDate" => $finishDate,
+                "year" => $startDate["year"],
+                "month"=>$startDate["month"],
+                "days"=>$startDate["day"]."-".$finishDate,
                 "link" => $link,
                 "rules" => $rules,
                 "location"=>$location
@@ -158,14 +159,13 @@ final class CompetitionService
      * @param \DateTime $startDate
      * @return string
      */
-    private function getStartDate(\DateTime $startDate): string
+    private function getStartDate(\DateTime $startDate): array
     {
         $date = explode(" ", $startDate->format("Y n j"));
         $year = $date[0];
         $month = $this->translator->trans($date[1]);
         $day = $date[2];
-        $startDate = "$year $month $day";
-        return $startDate;
+        return ["year"=>$year, "month"=>$month,"day"=>$day];
     }
 
     /**

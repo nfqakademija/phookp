@@ -1,23 +1,49 @@
 {% macro printCompetitions(competitions) %}
-{% for competition in competitions %}
-    <div class="row">
-        <div class="col-lg-6 col-m-6 col-sm-6 mobile-event">
-            <h2 class="event__name">{{ competition['name'] }}</h2>
-            {% if competition['location']!= null %}
-                <div class="event__place">
-                    <i class="fa  fa-map-marker-alt"></i> <span class="ml-2">{{ competition['location'] }}</span>
+    {% for competition in competitions %}
+        <div class="card ">
+            <div class="card-body p-0">
+                <div class="row event mx-0">
+                    <div class="col-md-3 d-none d-md-flex align-items-center justify-content-center u-bg-picture">
+                        <div class="event__date text-white font-weight-bold">
+                    <span class="year">
+                        {{ competition['year'] }}
+                    </span>
+                            <span class="month">
+                        {{ competition['month'] }}
+                        </span>
+                            <span class="days">
+                        {{ competition['days'] }}
+                        </span>
+                        </div>
+                    </div>
+                    <div class="col-md-9  event__data py-2">
+                        <h2 class="event__name">{{ competition['name'] }}</h2>
+                        <div class="d-md-none">
+                            <i class="fa fa-calendar-alt"></i> {{ competition['year'] }} {{ competition['month'] }} {{ competition['days'] }}
+                            d.
+                        </div>
+                        {% if competition['location']!= null %}
+                            <div class="event__place">
+                                <i class="fa  fa-map-marker-alt"></i> <span
+                                        class="ml-2">{{ competition['location'] }}</span>
+                            </div>
+                        {% endif %}
+                        <div class="event-button-container d-flex flex-wrap">
+                            <div class="col-6 px-0 text-left">
+                                <a href="/results/{{ competition['id'] }}" class="btn button">Rezultatai</a>
+                            </div>
+                            {% if competition['link'] %}
+                            <div class="col-6 text-right">
+                                <a href="{{ competition['link'] }}">
+                                    <i class="fab fa-facebook-square"></i>
+                                </a>
+                            </div>
+                            {% endif %}
+
+                        </div>
+                    </div>
                 </div>
-            {% endif %}
-            <div class="event__date"><i class="fa fa-calendar-alt"></i> <span
-                        class="ml-2">{{ competition['startDate'] }}
-                    - {{ competition['finishDate'] }}</span>
             </div>
-            <a href="/results/{{ competition['id'] }}">Rezultatai</a>
-            <br>
-            {% if competition['link'] %}
-                <a href="{{ competition['link'] }}">Facebook nuoroda čia!</a>
-            {% endif %}
         </div>
-    </div>
-{% endfor %}
+    {% endfor %}
 {% endmacro %}
