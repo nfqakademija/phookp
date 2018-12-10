@@ -149,7 +149,13 @@ final class CompetitionService
      */
     public function getExpiredCompetitionsYears(): ?array
     {
-      return  $expiredCompetitionsYears = $this->competitionRepository->getExpiredCompetitionsYears();
+        return $expiredCompetitionsYears = $this->competitionRepository->getExpiredCompetitionsYears();
+    }
+
+    public function getExpiredCompetitionsByYears(string $years)
+    {
+        $expiredCompetitionsByYears = $this->competitionRepository->getExpiredCompetitionByYears($years);
+        return $this->getFormattedCompetitions($expiredCompetitionsByYears);
     }
 
     /**

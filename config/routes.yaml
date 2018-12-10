@@ -6,6 +6,10 @@ homeCompetitions:
   path: /home/competitions
   controller: App\Controller\HomeController::competitions
 
+homeExpiredCompetitions:
+  path: /home/competitions/{years}
+  controller: App\Controller\HomeController::competitionsByYears
+
 homeAboutUs:
   path: /home/about/us
   controller: App\Controller\HomeController::aboutUs

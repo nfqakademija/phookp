@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Competition;
 use App\Services\CompetitionService;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
@@ -51,8 +52,24 @@ class HomeController extends Controller
             [
                 "futureCompetitions" => $futureCompetitions,
                 "expiredCompetitions" => $expiredCompetitions,
+                "expiredCompetitionsYears" => $expiredCompetitionsYears,
             ]);
     }
+
+
+    public function competitionsByYears(string $years, CompetitionService $competitionService){
+        $expiredCompetitionsYears=$competitionService->getExpiredCompetitionsYears();
+        $futureCompetitions = $competitionService->getFutureCompetitions();
+        $expiredCompetitionsByYears=$competitionService->getExpiredCompetitionsByYears($years);
+        return $this->render("home/competitions.html.twig",
+            [
+                "futureCompetitions" => $futureCompetitions,
+                "expiredCompetitions" => $expiredCompetitionsByYears,
+                "expiredCompetitionsYears" => $expiredCompetitionsYears,
+
+            ]);
+    }
+
 
     /**
      * @return Response

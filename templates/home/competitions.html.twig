@@ -50,7 +50,9 @@
                 <div class="col-lg-3">
                     <h1 class="my-4">Metai</h1>
                     <div class="list-group">
-                        <a href="#" class="list-group-item active">njn</a>
+                        {% for years in expiredCompetitionsYears %}
+                        <a href="/home/competitions/{{ years['1']}}" class="list-group-item active">{{ years['1'] }}</a>
+                        {% endfor %}
                     </div>
                 </div>
                 <div class="col-lg-9">
