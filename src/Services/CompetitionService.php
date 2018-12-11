@@ -10,9 +10,7 @@ namespace App\Services;
 
 use App\Entity\Competition;
 use App\Repository\CompetitionRepository;
-use Psr\Log\LoggerInterface;
 use Symfony\Component\Translation\TranslatorInterface;
-use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 final class CompetitionService
 {
@@ -21,14 +19,6 @@ final class CompetitionService
      * @var CompetitionRepository
      */
     private $competitionRepository;
-    /**
-     * @var LoggerInterface
-     */
-    private $logger;
-    /**
-     * @var ValidatorInterface
-     */
-    private $validator;
     /**
      * @var HashService
      */
@@ -43,23 +33,17 @@ final class CompetitionService
     /**
      * CompetitionService constructor.
      * @param CompetitionRepository $competitionRepository
-     * @param ValidatorInterface $validator
-     * @param LoggerInterface $logger
      * @param HashService $hashService
      * @param TranslatorInterface $translator
      */
     public function __construct(
         CompetitionRepository $competitionRepository,
-        ValidatorInterface $validator,
-        LoggerInterface $logger,
         HashService $hashService,
         TranslatorInterface $translator
     ) {
 
         $this->competitionRepository = $competitionRepository;
-        $this->validator = $validator;
         $this->hashService = $hashService;
-        $this->logger = $logger;
         $this->translator = $translator;
     }
 
@@ -154,9 +138,13 @@ final class CompetitionService
 
     public function getExpiredCompetitionsByYears(string $years)
     {
-        $expiredCompetitionsByYears = $this->competitionRepository->getExpiredCompetitionByYears($years);
+        $startDate=new \DateTime($years."-01-01");
+        $endDate= new \DateTime($years."-12-31");
+        $expiredCompetitionsByYears = $this->competitionRepository->getExpiredCompetitionByYears($startDate, $endDate);
         return $this->getFormattedCompetitions($expiredCompetitionsByYears);
     }
+
+
 
     /**
      * @param \DateTime $startDate

@@ -3,7 +3,7 @@ home:
   controller: App\Controller\HomeController::index
 
 homeCompetitions:
-  path: /home/competitions
+  path: /home/competitions/
   controller: App\Controller\HomeController::competitions
 
 homeExpiredCompetitions:

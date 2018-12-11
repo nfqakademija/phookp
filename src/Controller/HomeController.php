@@ -2,7 +2,6 @@
 
 namespace App\Controller;
 
-use App\Entity\Competition;
 use App\Services\CompetitionService;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
@@ -43,24 +42,31 @@ class HomeController extends Controller
      * @param CompetitionService $competitionService
      * @return Response
      */
-    public function competitions(CompetitionService $competitionService)
+    public function competitions( CompetitionService $competitionService)
     {
         $futureCompetitions = $competitionService->getFutureCompetitions();
-        $expiredCompetitionsYears=$competitionService->getExpiredCompetitionsYears();
-        $expiredCompetitions = $competitionService->getExpiredCompetitions();
+        $expiredCompetitionsYears = $competitionService->getExpiredCompetitionsYears();
+        $years=array_values($expiredCompetitionsYears)[0][1];
+        $expiredCompetitionsByYears = $competitionService->getExpiredCompetitionsByYears($years);
+
         return $this->render("home/competitions.html.twig",
             [
                 "futureCompetitions" => $futureCompetitions,
-                "expiredCompetitions" => $expiredCompetitions,
+                "expiredCompetitions" => $expiredCompetitionsByYears,
                 "expiredCompetitionsYears" => $expiredCompetitionsYears,
             ]);
     }
 
-
-    public function competitionsByYears(string $years, CompetitionService $competitionService){
-        $expiredCompetitionsYears=$competitionService->getExpiredCompetitionsYears();
+    /**
+     * @param string $years
+     * @param CompetitionService $competitionService
+     * @return Response
+     */
+    public function competitionsByYears(string $years,CompetitionService $competitionService)
+    {
+        $expiredCompetitionsYears = $competitionService->getExpiredCompetitionsYears();
         $futureCompetitions = $competitionService->getFutureCompetitions();
-        $expiredCompetitionsByYears=$competitionService->getExpiredCompetitionsByYears($years);
+        $expiredCompetitionsByYears = $competitionService->getExpiredCompetitionsByYears($years);
         return $this->render("home/competitions.html.twig",
             [
                 "futureCompetitions" => $futureCompetitions,

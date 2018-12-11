@@ -5,7 +5,6 @@ namespace App\Repository;
 use App\Entity\Competition;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use DoctrineExtensions\Query\Mysql\Date;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 
@@ -58,7 +57,11 @@ class CompetitionRepository extends ServiceEntityRepository
             ->getResult();
     }
 
-    public function getExpiredCompetitionsYears(){
+    /**
+     * @return array
+     */
+    public function getExpiredCompetitionsYears() :?array
+    {
 
         return $years = $this->createQueryBuilder('r')
             ->select('YEAR(r.competitionDate)')
@@ -72,11 +75,15 @@ class CompetitionRepository extends ServiceEntityRepository
             ->getScalarResult();
     }
 
-    public function getExpiredCompetitionByYears(string $years)
+    /**
+     * @param \DateTime $startDate
+     * @param \DateTime $endDate
+     * @return array|null
+     */
+    public function getExpiredCompetitionByYears(\DateTime $startDate, \DateTime $endDate) :?array
     {
-        $startDate=new \DateTime($years.'-01-01');
-        $endDate=new \DateTime($years.'-12-31');
         return $competitions = $this->createQueryBuilder('r')
+            ->orderBy('r.competitionDate', "DESC")
             ->where('r.competitionStatus = :competitionStatus')
             ->andWhere('r.competitionApproved = :competitionApproved')
             ->andWhere('r.competitionDate BETWEEN :startDate AND :endDate')
@@ -87,5 +94,4 @@ class CompetitionRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
     }
-
 }

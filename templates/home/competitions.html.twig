@@ -1,5 +1,5 @@
 {% extends 'base.html.twig' %}
-
+{% import 'macro/index.macro.html.twig' as myMacros %}
 {% block title %}Renginiai {{ parent() }}{% endblock %}
 
 {% block body %}
@@ -17,7 +17,8 @@
                             <div class="card-body">
                                 <h4 class="card-title">{{ competition['name'] }}</h4>
                                 <p class="card-text"><i
-                                            class="fa fa-calendar-alt"></i> {{ competition['year'] }} {{ competition['month'] }} {{ competition['days'] }} d.
+                                            class="fa fa-calendar-alt"></i> {{ competition['year'] }} {{ competition['month'] }} {{ competition['days'] }}
+                                    d.
                                 </p>
                                 <p class="card-text"><i class="fa fa-map-marker-alt"></i> {{ competition['location'] }}
                                 </p>
@@ -45,48 +46,26 @@
 
     <section id="previous-events" class=" u-pb-5">
         <div class="container">
-            <h2 class="heading heading--blue-border heading--center">Praėjusios varžybos</h2>
+            <h2 class="heading heading--blue-border heading--center" id="competitions">Praėjusios varžybos</h2>
             <div class="row">
-                <div class="col-lg-3">
+                <div class="col-lg-3 ">
                     <h1 class="my-4">Metai</h1>
                     <div class="list-group">
                         {% for years in expiredCompetitionsYears %}
-                        <a href="/home/competitions/{{ years['1']}}" class="list-group-item active">{{ years['1'] }}</a>
+                            <a href="/home/competitions/{{ years['1'] }}#competitions"
+                               class="list-group-item">{{ years['1'] }}</a>
                         {% endfor %}
                     </div>
                 </div>
                 <div class="col-lg-9">
-                <div class="event-card-container d-flex justify-content-center flex-wrap">
-                    {% for competition in expiredCompetitions %}
-                        <div class="card">
-                            <div class="card-body d-flex flex-column">
-                                <h4 class="card-title">{{ competition['name'] }}</h4>
-                                <p class="card-text"><i
-                                            class="fa fa-calendar-alt"> </i> {{ competition['year'] }} {{ competition['month'] }} {{ competition ['days'] }}
-                                    d.</p>
-                                {% if competition['location']!=null %}
-                                    <p class="card-text"><i
-                                                class="fa fa-map-marker-alt"> </i> {{ competition['location'] }}</p>
-                                {% endif %}
-                                <div class="card-button-container d-flex flex-wrap">
-                                    <div class="col-6 px-0 text-left">
-                                        <a href="/results/{{ competition['id'] }}" class="btn button">Rezultatai</a>
-                                    </div>
-                                    {% if competition['link'] %}
-                                        <div class="col-6 text-right">
-                                            <a href="{{ competition['link'] }}">
-                                                <i class="fab fa-facebook-square"></i>
-                                            </a>
-                                        </div>
-                                    {% endif %}
-                                </div>
-                            </div>
-
-                        </div>
-                    {% endfor %}
+                    <div class="event">
+                        {{ myMacros.printCompetitions(
+                            expiredCompetitions
+                        ) }}
+                    </div>
                 </div>
             </div>
-            </div>
+        </div>
     </section>
 
 
