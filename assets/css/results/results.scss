@@ -48,16 +48,7 @@
       border-right: 1px solid $mainGreen;
     }
   }
-
-
-  &__body {
-
-  }
-
-}
-
-@include medium-screen {
-  .results-table__cell--rotate{
+  &__cell--rotate{
     transform: rotate(-90deg);
     height: 90px;
     max-width: 20px;
@@ -67,5 +58,18 @@
       left: -25px;
       margin: 0;
     }
+}
+
+@include medium-screen {
+  /*.results-table__cell--rotate{
+    transform: rotate(-90deg);
+    height: 90px;
+    max-width: 20px;
+
+    &>p{
+      position: relative;
+      left: -25px;
+      margin: 0;
+    }*/
   }
 }
