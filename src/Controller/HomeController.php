@@ -15,7 +15,9 @@ class HomeController extends Controller
     public function index(CompetitionService $competitionService)
     {
         $goingCompetitions = $competitionService->getGoingCompetitions();
-        $expiredCompetitions = $competitionService->getExpiredCompetitions();
+        $expiredCompetitionsYears = $competitionService->getExpiredCompetitionsYears();
+        $years=array_values($expiredCompetitionsYears)[0][1];
+        $expiredCompetitions =  $competitionService->getExpiredCompetitionsByYears($years);
         $goingCompetitionsCount = count($goingCompetitions);
         switch ($goingCompetitionsCount) {
             case  0:
