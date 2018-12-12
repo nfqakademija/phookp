@@ -10,10 +10,14 @@
   color: $mainGreen;
 }
 
-.fa-facebook{
+.fa-facebook-f {
   -webkit-text-fill-color: white;
   -webkit-text-stroke-width: 1px;
-  -webkit-text-stroke-color: blue;
+  -webkit-text-stroke-color: $mainGreen;
+  &:hover {
+    -webkit-text-fill-color: $mainGreen;
+
+  }
 }
 
 .home-start {
@@ -62,8 +66,6 @@
 .heading--blue-border {
   border-bottom: 1px solid $mainGreen;
 }
-
-
 
 .event {
   font-size: 18px;
@@ -115,6 +117,7 @@
     .event__date {
       font-size: 20px;
       line-height: 30px;
+      border: 2px red;
       span {
         display: block;
         text-align: center;
@@ -227,7 +230,7 @@
   width: 100%;
   margin-top: 25px;
 
-  .card__competitions{
+  .card__competitions {
     flex-basis: 30%;
     width: 50%;
     margin-left: 1%;
@@ -352,8 +355,8 @@
   border-bottom: 1px solid $mainGreen;
 }
 
-.a{
-  &:hover{
+.a {
+  &:hover {
     color: darken($mainGreen, 40%);
   }
 }
