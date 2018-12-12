@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 {% import 'macro/index.macro.html.twig' as myMacros %}
 {% block title %}Sportinė karpių žūklė {{ parent() }}{% endblock %}
-
+{% set picture = 1 %}
 {% block body %}
     <div class="container-fluid home-start">
 
@@ -15,14 +15,17 @@
                         {% if goingCompetitions is defined %}
                         <h3 class="event__heading mb-4">Šiuo metu vyksta:</h3>
                         {{ myMacros.printCompetitions(
-                            goingCompetitions
+                            goingCompetitions,
+                            picture
+
                         )
                         }}
                         {% endif %}
                         {% if expiredCompetitions is defined %}
                             <h3 class="event__heading mb-4">Paskutinės varžybos:</h3>
                             {{ myMacros.printCompetitions(
-                                expiredCompetitions
+                                expiredCompetitions,
+                                picture
                             )
                             }}
                         {% endif %}

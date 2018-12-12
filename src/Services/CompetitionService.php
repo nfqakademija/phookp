@@ -136,7 +136,11 @@ final class CompetitionService
         return $expiredCompetitionsYears = $this->competitionRepository->getExpiredCompetitionsYears();
     }
 
-    public function getExpiredCompetitionsByYears(string $years)
+    /**
+     * @param string $years
+     * @return array|null
+     */
+    public function getExpiredCompetitionsByYears(string $years): ?array
     {
         $startDate=new \DateTime($years."-01-01");
         $endDate= new \DateTime($years."-12-31");

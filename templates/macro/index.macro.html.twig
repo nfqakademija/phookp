@@ -1,9 +1,13 @@
-{% macro printCompetitions(competitions) %}
+{% macro printCompetitions(competitions, picture, futureCompetition) %}
     {% for competition in competitions %}
         <div class="card ">
-            <div class="card-body p-0">
-                <div class="row event mx-0">
-                    <div class="col-md-3 d-none d-md-flex align-items-center justify-content-center u-bg-picture">
+        <div class="card-body p-0">
+            <div class="row event mx-0">
+                {% if picture == 1 %}
+                <div class="col-md-3 d-none d-md-flex align-items-center justify-content-center  u-bg-picture">
+                    {% else %}
+                    <div class="col-md-3 d-none d-md-flex align-items-center justify-content-center  u-bg-main">
+                        {% endif %}
                         <div class="event__date text-white font-weight-bold">
                     <span class="year">
                         {{ competition['year'] }}
@@ -30,16 +34,22 @@
                         {% endif %}
                         <div class="event-button-container d-flex flex-wrap">
                             <div class="col-6 px-0 text-left">
+                                {% if futureCompetition == 1 %}
+                                {% else %}
                                 <a href="/results/{{ competition['id'] }}" class="btn button">Rezultatai</a>
+                                {% endif %}
                             </div>
                             {% if competition['link'] %}
-                            <div class="col-6 text-right">
-                                <a href="{{ competition['link'] }}">
-                                    <i class="fab fa-facebook-square"></i>
-                                </a>
-                            </div>
+                                <div class="col-6 text-right">
+                                    <a href="{{ competition['link'] }}">
+                                        <i class="fab fa-facebook"></i>
+                                    </a>
+                                </div>
+                                {% else %}
+                                    <div class="col-6 text-right">
+                                        <i class="fab fa-facebook-f text-white"></i>
+                                    </div>
                             {% endif %}
-
                         </div>
                     </div>
                 </div>

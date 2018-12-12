@@ -1,5 +1,5 @@
 .u-mt-10 {
-  margin-top: 10rem ;
+  margin-top: 10rem;
 }
 
 .u-mb-10 {
@@ -26,8 +26,8 @@
   background-color: #f5f5f5;
 }
 
-.u-bg-picture{
-  background:  url("/images/date.png") no-repeat fixed ;
+.u-bg-picture {
+  background: url("/images/date.png") no-repeat fixed;
 }
 
 .bg-red {
@@ -50,6 +50,10 @@
   font-weight: 700 !important;
 }
 
+.u-bg-main-text {
+  color: $mainGreen;
+}
+
 .u-bg-main {
   background-color: $mainGreen !important;
 }
@@ -62,10 +66,10 @@
   margin-top: 0 !important;
 }
 
-.u-font-13{
+.u-font-13 {
   font-size: 13px;
 }
 
-.u-max-width-40{
+.u-max-width-40 {
   max-width: 400px;
 }
