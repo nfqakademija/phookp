@@ -13,8 +13,7 @@
             <h2 class="heading heading--blue-border heading--center">Būsimos varžybos</h2>
             <div class="row">
                 {% if futureCompetitions != null %}
-                <div class="col-lg-2"></div>
-                <div class="col-lg-10 px-0 event">
+                <div class="offset-lg-2 col-lg-8 px-0 event">
                     {% for competition in futureCompetitions %}
                         {{ myMacros.printCompetitions(
                             futureCompetitions,
@@ -46,7 +45,7 @@
                         {% endfor %}
                     </div>
                 </div>
-                <div class="col-lg-10 px-0">
+                <div class="col-lg-8 px-0">
                     <div class="event">
                         {{ myMacros.printCompetitions(
                             expiredCompetitions,
