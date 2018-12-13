@@ -29,10 +29,10 @@ class ResultFixtures extends Fixture implements DependentFixtureInterface
         $team15 = $this->getReference("3 1/4 Team_1");
 
 
-        $weighing1 = $this->getReference("weighing1");
-        $weighing2 = $this->getReference("weighing2");
-        $weighing3 = $this->getReference("weighing3");
-        $weighing4 = $this->getReference("weighing4");
+        $weighing1 = $this->getReference("weighing 1");
+        $weighing2 = $this->getReference("weighing 2");
+        $weighing3 = $this->getReference("weighing 3");
+        $weighing4 = $this->getReference("weighing 4");
 
         $result = new Result();
         $result->setTeam($team10);
