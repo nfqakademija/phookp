@@ -25,6 +25,8 @@ abstract class AbstractResultsCalculatorService implements ResultCalculationInte
             'totalCount' => $this->calculateCompetitionTotalCount($teams)
         );
 
+        $results['teamResults'] = $this->calculateDifference($results['teamResults']);
+
         return $results;
     }
 
@@ -84,5 +86,20 @@ abstract class AbstractResultsCalculatorService implements ResultCalculationInte
         }
 
         return $teamResults;
+    }
+
+    protected function calculateDifference(array $resultsArray): array
+    {
+        for($i = 1; $i < count($resultsArray); $i++)
+        {
+            $resultsArray[$i]['totalDifference'] = $this->roundUpDifference((float)$resultsArray[$i-1]["totalWeigh"] - (float)$resultsArray[$i]["totalWeigh"]);
+        }
+
+        return $resultsArray;
+    }
+
+    protected function roundUpDifference(float $diff): string
+    {
+        return number_format((float)($diff), 3, '.', '');
     }
 }

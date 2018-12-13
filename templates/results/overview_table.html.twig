@@ -1,16 +1,24 @@
 <div class="card info-card overview-table">
-    <div class="card-header u-bg-main text-white h4">
-        <i class="fas fa-chart-pie h4 px-2"></i>Varžybų santrauka
+    <div class="card-header u-bg-main text-white h4 u-text-bold">
+        <span class="fas fa-chart-pie h4 px-2 "></span>Varžybų santrauka
     </div>
-    <div class="card-body">
-        <p class="card-text">
-            Didžiausia žuvis:<i
-                    class="u-text-bold"> {{ results['bigFish']['weigh'] }} kg</i>
-        <p class="card-text"> Didžiausią žuvį pagavo: <i
-                    class="u-text-bold">{{ results['bigFish']['team'] }}</i></p>
-        <p class="card-text"> Bendras žuvų svoris: <i
-                    class="u-text-bold">{{ results['totalWeigh'] }} kg</i></p>
-        <p class="card-text"> Bendras žuvų skaičius: <i
-                    class="u-text-bold">{{ results['totalCount'] }} vnt.</i></p>
+    <div class="card-body px-0">
+        <div class="row mx-0 py-1">
+            <div class="col-7 card-text text-left">
+                Didžiausia žuvis:</div>
+            <div class="col u-text-bold"> {{ results['bigFish']['weigh'] }} kg</div>
+        </div>
+        <div class="row mx-0 py-1">
+            <div class="col-7 card-text text-left"> Pagavo: </div>
+            <div class="col u-text-bold">{{ results['bigFish']['team'] }}</div>
+        </div>
+        <div class="row mx-0 py-1">
+            <div class="col-7 card-text text-left"> Bendras svoris:</div>
+            <div class="col u-text-bold">{{ results['totalWeigh'] }} kg</div>
+        </div>
+        <div class="row mx-0 py-1">
+            <div class="col-7 card-text text-left"> Bendras skaičius:</div>
+            <div class="col u-text-bold">{{ results['totalCount'] }} vnt.</div>
+        </div>
     </div>
 </div>

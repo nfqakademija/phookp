@@ -19,7 +19,6 @@ class ResultsCalculationService implements ServiceSubscriberInterface
 {
     private $container;
 
-
     public function __construct(ContainerInterface $container)
     {
         $this->container = $container;
@@ -27,12 +26,10 @@ class ResultsCalculationService implements ServiceSubscriberInterface
 
     public function getResults(Competition $competition): array
     {
-        /**
-         * TODO
-         * nesilaikau Law of Demeter, kazkaip protingai refaktorint...
-         */
-        return $this->getCalculationService($competition)->calculateResults($competition->getTeams());
+        $results = $this->getCalculationService($competition)->calculateResults($competition->getTeams());
+        return $results;
     }
+
 
     private function getCalculationService(Competition $competition): ResultCalculationInterface
     {

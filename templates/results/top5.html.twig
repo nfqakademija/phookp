@@ -11,7 +11,7 @@
         <div class="row mx-0 d-flex flex-md-row justify-content-center">
             {% include "results/overview_table.html.twig" %}
         </div>
-
+        {#{{ dump(results) }}#}
         <div class="row table-container mb-5 mx-0">
             <div class="table-responsive-md">
                 <table class="results-table mx-auto">
@@ -70,6 +70,11 @@
                             {% endfor %}
                             <td class="u-text-bold results-table__cell">
                                 {{ result['totalWeigh'] }}
+                                {% if loop.index > 1 %}
+                                <span class="text-danger pl-2">
+                                    (-{{ result['totalDifference'] }})
+                                </span>
+                                {% endif %}
                             </td>
                         </tr>
                     {% endfor %}

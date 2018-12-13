@@ -91,6 +91,11 @@
                             {% endfor %}
                             <td class="u-text-bold results-table__cell">
                                 {{ result['totalWeigh'] }}
+                                {% if loop.index > 1 %}
+                                    <span class="text-danger pl-2">
+                                    (-{{ result['totalDifference'] }})
+                                </span>
+                                {% endif %}
                             </td>
                             <td class="u-text-bold results-table__cell">
                                 {{ result['totalCount'] }}
