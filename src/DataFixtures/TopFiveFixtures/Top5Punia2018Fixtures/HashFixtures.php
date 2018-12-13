@@ -20,7 +20,7 @@ class HashFixtures extends Fixture implements DependentFixtureInterface
     {
         $hash = new Hash();
 
-        $hash->setHash("219632ef70ff60361e803f06959e9850");
+        $hash->setHash("299632ef70ff60361e803f06959e9850");
         $hash->setCompetition($this->getReference(CompetitionFixtures::COMPETITION_REFERENCE));
 
         $manager->persist($hash);

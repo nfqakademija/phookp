@@ -25,6 +25,7 @@ class CompetitionFixtures extends Fixture
         $competition->setCompetitionStatus("finished");
         $competition->setCompetitionTeamsCount(15);
         $competition->setCompetitionType("total");
+        $competition->setCompetitionWeighingsCount(4);
         $competition->setCompetitionRules("1. Varžomasi individualiai, dalyvį gali lankyti svečiai, tačiau jie negali padėti varžybų dalyviui.
 2. Tyrinėti sektorių markeriu, jaukinti žuvį ir masalus mesti į vandenį galima tik nuo varžybų starto pradžios.
 3. Žvejoti galima 3-mis įrankiais turinčiais po 1 kablį. Paruoštų įrankių skaičius neribojamas.

@@ -1,6 +1,14 @@
 <?php
+/**
+ * Created by PhpStorm.
+ * User: sigita
+ * Date: 18.12.13
+ * Time: 12.21
+ */
 
-namespace App\DataFixtures\TotalFixtures\Pykaiciai2018Fixtures;
+namespace App\DataFixtures\TotalFixtures\DidelesZuvys_2014Fixtures;
+
+
 
 use App\Entity\Weighing;
 use Doctrine\Bundle\FixturesBundle\Fixture;
@@ -16,30 +24,38 @@ class WeighingFixtures extends Fixture implements DependentFixtureInterface
         $weighing = new Weighing();
         $weighing->setCompetition($competition);
         $weighing->setWeighingNr(1);
-        $weighing->setWeighingTime(new \DateTime("2018-08-02"));
+        $weighing->setWeighingTime(new \DateTime("2014-08-21"));
         $manager->persist($weighing);
-        $this->AddReference("weighing".$weighing->getWeighingNr(), $weighing);
 
         $weighing = new Weighing();
         $weighing->setCompetition($competition);
         $weighing->setWeighingNr(2);
-        $weighing->setWeighingTime(new \DateTime("2018-08-02"));
+        $weighing->setWeighingTime(new \DateTime("2014-08-22"));
         $manager->persist($weighing);
-        $this->AddReference("weighing".$weighing->getWeighingNr(), $weighing);
 
         $weighing = new Weighing();
         $weighing->setCompetition($competition);
         $weighing->setWeighingNr(3);
-        $weighing->setWeighingTime(new \DateTime("2018-08-03"));
+        $weighing->setWeighingTime(new \DateTime("2014-08-22"));
         $manager->persist($weighing);
-        $this->AddReference("weighing".$weighing->getWeighingNr(), $weighing);
 
         $weighing = new Weighing();
         $weighing->setCompetition($competition);
         $weighing->setWeighingNr(4);
-        $weighing->setWeighingTime(new \DateTime("2018-08-04"));
+        $weighing->setWeighingTime(new \DateTime("2014-08-22"));
         $manager->persist($weighing);
-        $this->AddReference("weighing".$weighing->getWeighingNr(), $weighing);
+
+        $weighing = new Weighing();
+        $weighing->setCompetition($competition);
+        $weighing->setWeighingNr(5);
+        $weighing->setWeighingTime(new \DateTime("2014-08-23"));
+        $manager->persist($weighing);
+
+        $weighing = new Weighing();
+        $weighing->setCompetition($competition);
+        $weighing->setWeighingNr(6);
+        $weighing->setWeighingTime(new \DateTime("2014-08-23"));
+        $manager->persist($weighing);
 
         $manager->flush();
     }
