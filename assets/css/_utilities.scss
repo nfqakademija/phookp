@@ -60,12 +60,28 @@
   color: #fff;
 }
 
+.u-text-gold {
+  color: $crownGold;
+}
+
+.u-text-silver {
+  color: $crownSilver;
+}
+
+.u-text-bronze {
+  color: $crownBronze;
+}
+
 .u-no-mt {
   margin-top: 0 !important;
 }
 
 .u-font-13{
   font-size: 13px;
+}
+
+.u-font-24{
+  font-size: 24px;
 }
 
 .u-max-width-40{

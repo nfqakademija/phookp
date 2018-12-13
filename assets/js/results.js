@@ -3,13 +3,13 @@ import tingle from 'tingle.js';
 
 var modal = new tingle.modal({
     footer: true,
-    stickyFooter: false,
-    closeMethods: ['overlay', 'button', 'escape'],
-    closeLabel: "Uzdaryti",
+    stickyFooter: true,
+    closeMethods: [],
+    closeLabel: "U&#382;daryti",
     cssClass: ['custom-class-1', 'custom-class-2'],
 });
 
-modal.addFooterBtn('Uzdaryti', 'tingle-btn tingle-btn--primary', function() {
+modal.addFooterBtn('Uždaryti', 'results-modal__button', function() {
     // here goes some logic
     modal.close();
 });
@@ -90,7 +90,7 @@ const openResultsModal = (e) => {
 
 
 
-const resultRows = document.querySelectorAll('.results-accessor');
+const resultRows = document.querySelectorAll('.js-results-accessor');
 Array.from(resultRows).forEach(function(element) {
     element.addEventListener('click', openResultsModal);
 });

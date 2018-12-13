@@ -1,7 +1,75 @@
-.event-info-container{
-  .info-card {
-    flex-basis: 49%;
-    border-radius: 0;
-    padding: 100px;
+.results-table {
+
+  position: relative;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  background-color: #fff;
+  table-layout: auto;
+  text-align: left;
+  font-size: 14px;
+  border-collapse: collapse;
+
+  &__header {
+    background-color: $mainGreen;
+    color: #fff;
+    font-weight: 700;
+    border: 1px solid #fff;
+  }
+
+  &__row {
+    height: 40px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+
+    &--th {
+      height: 40px;
+    }
+
+    &--border-bottom {
+      border-bottom: 2px solid $mainGreen;
+      margin-bottom: 5px;
+    }
+
+    &:hover {
+      background-color: #EDEDED;
+    }
+  }
+
+  &__cell {
+    padding: 5px;
+
+    &--th {
+      border: 1px solid #fff;
+    }
+
+    &--border-left {
+      border-left: 1px solid $mainGreen;
+    }
+
+    &--border-right {
+      border-right: 1px solid $mainGreen;
+    }
+  }
+  &__cell--rotate{
+    transform: rotate(-90deg);
+    height: 90px;
+    max-width: 20px;
+
+    &>p{
+      position: relative;
+      left: -25px;
+      margin: 0;
+    }
+}
+
+@include medium-screen {
+  /*.results-table__cell--rotate{
+    transform: rotate(-90deg);
+    height: 90px;
+    max-width: 20px;
+
+    &>p{
+      position: relative;
+      left: -25px;
+      margin: 0;
+    }*/
   }
 }

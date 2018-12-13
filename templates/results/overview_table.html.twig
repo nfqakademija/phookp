@@ -1,64 +1,24 @@
-{% include "results/modals/results_mobile.html.twig" %}
-<div class="container">
-    <div class="row d-flex flex-md-row justify-content-center">
-
-    <table class="mdl-data-table">
-        <tbody>
-        <tr>
-            <td class="u-bg-main u-text-white">Didžiausia žuvis</td>
-            <td class="u-text-bold"> {{ results['bigFish']['weigh'] }}kg</td>
-        </tr>
-        <tr>
-            <td class="u-bg-main u-text-white">Didžiausią žuvį pagavo</td>
-            <td class="u-text-bold">{{ results['bigFish']['team'] }}</td>
-        </tr>
-        <tr>
-            <td class="u-bg-main u-text-white">Bendras žuvų svoris</td>
-            <td class="u-text-bold"> {{ results['totalWeigh'] }}kg</td>
-        </tr>
-        <tr>
-            <td class="u-bg-main u-text-white">Bendras žuvų skaičius</td>
-            <td class="u-text-bold"> {{ results['totalCount'] }}vnt.</td>
-        </tr>
-        </tbody>
-    </table>
-
-    <table class="mdl-data-table">
-        <thead class="bg-primary text-white u-font-13 u-text-bold">
-        <tr class="">
-            <th scope="col" class="">
-                Vieta
-            </th>
-            <th scope="col" class="">
-                Sektorius
-            </th>
-            <th scope="col" class="">
-                Komanda
-            </th>
-            <th scope="col" class="">
-                Bendras svoris
-            </th>
-        </tr>
-        </thead>
-        <tbody class="u-font-13">
-        {% for result in results['teamResults']|slice(0,3) %}
-            <tr>
-                <td>
-                    {{ loop.index }}
-                </td>
-                <td>
-                    {{ result['team'].sectorNr }}
-                </td>
-                <td>
-                    {{ result['team'].teamName }}
-                </td>
-                <td class="u-text-bold">
-                    {{ result['totalWeigh'] }}kg
-                </td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
-
-</div>
+<div class="card info-card overview-table">
+    <div class="card-header u-bg-main text-white h4 u-text-bold">
+        <span class="fas fa-chart-pie h4 px-2 "></span>Varžybų santrauka
+    </div>
+    <div class="card-body px-0">
+        <div class="row mx-0 py-1">
+            <div class="col-7 card-text text-left">
+                Didžiausia žuvis:</div>
+            <div class="col u-text-bold"> {{ results['bigFish']['weigh'] }} kg</div>
+        </div>
+        <div class="row mx-0 py-1">
+            <div class="col-7 card-text text-left"> Pagavo: </div>
+            <div class="col u-text-bold">{{ results['bigFish']['team'] }}</div>
+        </div>
+        <div class="row mx-0 py-1">
+            <div class="col-7 card-text text-left"> Bendras svoris:</div>
+            <div class="col u-text-bold">{{ results['totalWeigh'] }} kg</div>
+        </div>
+        <div class="row mx-0 py-1">
+            <div class="col-7 card-text text-left"> Bendras skaičius:</div>
+            <div class="col u-text-bold">{{ results['totalCount'] }} vnt.</div>
+        </div>
+    </div>
 </div>

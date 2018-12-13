@@ -60,6 +60,7 @@ class CompetitionController extends AbstractController
     public function results(Competition $competition, ResultsCalculationService $calculationService)
     {
         $resultsArray = $calculationService->getResults($competition);
+
         return $this->render("results/".$competition->getCompetitionType().".html.twig", [
             "competition" => $competition,
             "results" => $resultsArray

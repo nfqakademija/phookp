@@ -6,118 +6,76 @@
     <div class="page-name-container">
         <h2>Renginio {{ competition.CompetitionName}} rezultatai</h2>
     </div>
-    <div class="container mt-5 ">
+    <div class="container mt-5 px-0">
 
-        <div class="row d-flex flex-md-row justify-content-center">
-            <div class="card info-card p-3 overview-table">
-                <div class="card-body">
-                    <h4 class="card-title">Big fish <i class="fa fa-fish"></i></h4>
-                    <p class="card-text">
-                     Didžiausia žuvis:<i
-                                class="u-text-bold"> {{ results['bigFish']['weigh'] }} kg</i>
-                    <p class="card-text"> Didžiausią žuvį pagavo: <i
-                                class="u-text-bold">{{ results['bigFish']['team'] }}</i></p>
-                    <p class="card-text"> Bendras žuvų svoris: <i
-                                class="u-text-bold">{{ results['totalWeigh'] }} kg</i></p>
-                    <p class="card-text"> Bendras žuvų skaičius: <i
-                                class="u-text-bold">{{ results['totalCount'] }} vnt.</i></p>
-                </div>
-                </div>
-            <div class="card info-card p-3 overview-table">
-                <div class="card-body">
-                    <h4 class="card-title">Top 3</h4>
-                    <div class="row">
-                        <div class="col">
-                            <p class="card-text">Vieta</p>
-                        </div>
-                        <div class="col">
-                            <p class="card-text">
-                                Komanda
-                            </p>
-                        </div>
-                        <div class="col">
-                            <p class="card-text">
-                                Svoris kg
-                            </p>
-
-                        </div>
-                    </div>
-                    {% for result in results['teamResults']|slice(0,3) %}
-                        <div class="row">
-                            <div class="col">
-                                <p class="card-text">{{ loop.index }}</p>
-                            </div>
-                            <div class="col">
-                                <p class="card-text">
-                                    {{ result['team'].teamName }}
-                                </p>
-                            </div>
-                            <div class="col">
-                                <p class="card-text">
-                                    {{ result['totalWeigh'] }}
-                                </p>
-
-                            </div>
-                        </div>
-                    {% endfor %}
-
-                </div>
-            </div>
-
+        <div class="row mx-0 d-flex flex-md-row justify-content-center">
+            {% include "results/overview_table.html.twig" %}
         </div>
-
-        <div class="row table-container mb-5">
+        {#{{ dump(results) }}#}
+        <div class="row table-container mb-5 mx-0">
             <div class="table-responsive-md">
-                <table class="mdl-data-table mdl-js-data-table mdl-data-table--selectable mdl-shadow--2dp mx-auto">
-                    <thead class="thead-primary">
-                    <tr class="table-head">
-                        <th scope="col"  class="mdl-data-table__cell--non-numeric">
-                            Vieta
-                        </th>
-                        <th scope="col" class="mdl-data-table__cell--non-numeric">
-                            Sektorius
-                        </th>
-                        <th scope="col" class="mdl-data-table__cell--non-numeric">
-                            Komanda
-                        </th>
-                        {% for w in 0..4 %}
-                            <th scope="col" class="mdl-data-table__cell--non-numeric d-none d-md-table-cell">
-                                TOP {{ loop.index }}
+                <table class="results-table mx-auto">
+                    <thead class="results-table__header">
+                        <tr class="results-table__row--th">
+                            <th scope="col"  class="results-table__cell results-table__cell--th text-center">
+                                #
                             </th>
-                        {% endfor %}
-                        <th scope="col" class="mdl-data-table__cell--non-numeric">
-                            Bendras svoris
-                        </th>
-                        {#<th scope="col" class="mdl-data-table__cell--non-numeric">
-                            Iš viso žuvų
-                        </th>#}
-                    </tr>
+                            <th scope="col" class="results-table__cell results-table__cell--th">
+                                Komanda
+                            </th>
+                            <th scope="col" class="results-table__cell results-table__cell--th results-table__cell--rotate">
+                                <p class="mb-0">Sektorius</p>
+                            </th>
+                            {% for w in 0..4 %}
+                                <th scope="col" class="results-table__cell results-table__cell--th d-none d-md-table-cell">
+                                    TOP {{ loop.index }} (kg)
+                                </th>
+                            {% endfor %}
+                            <th scope="col" class="results-table__cell results-table__cell--th">
+                                Bendras svoris (kg)
+                            </th>
+                        </tr>
                     </thead>
                     <tbody>
                     {% for result in results['teamResults'] %}
-                        <tr data-results-top5="{{ result['top5']|json_encode }}" data-team-name="{{ result['team'].teamName }}" class="results-accessor">
-                            <td>
-                                {{ loop.index }}
+                        <tr data-results-top5="{{ result['top5']|json_encode }}" data-team-name="{{ result['team'].teamName }}"
+                            class="js-results-accessor results-table__row {% if loop.index == 3 %}results-table__row--border-bottom{% endif %}">
+                            <td class="text-center">
+                                {% if loop.index <= 3 %}
+                                    <i class="fas fa-trophy u-font-24
+                                    {% if loop.index == 1 %}
+                                        u-text-gold
+                                    {% elseif loop.index == 2 %}
+                                        u-text-silver
+                                    {% elseif loop.index == 3 %}
+                                        u-text-bronze
+                                    {% endif %}
+                                        "></i>
+                                {% else %}
+                                    {{ loop.index }}
+                                {% endif %}
                             </td>
-                            <td>
-                                {{ result['team'].sectorNr }}
-                            </td>
-                            <td class="text-left">
+                            <td class="results-table__cell">
                                 {{ result['team'].teamName }}
                             </td>
+                            <td class="results-table__cell">
+                                {{ result['team'].sectorNr }}
+                            </td>
                             {% for w in 0..4 %}
-                                <td class="d-none d-md-table-cell">
+                                <td class="d-none d-md-table-cell results-table__cell">
                                     {% if result['top5'][w] is defined %}
-                                        {{ result['top5'][w]}} kg
+                                        {{ result['top5'][w]}}
                                     {% endif %}
                                 </td>
                             {% endfor %}
-                            <td class="u-text-bold">
-                                {{ result['totalWeigh'] }} kg
+                            <td class="u-text-bold results-table__cell">
+                                {{ result['totalWeigh'] }}
+                                {% if loop.index > 1 %}
+                                <span class="text-danger pl-2">
+                                    (-{{ result['totalDifference'] }})
+                                </span>
+                                {% endif %}
                             </td>
-                            {#<td class="u-text-bold">
-                                {{ result['totalCount'] }}
-                            </td>#}
                         </tr>
                     {% endfor %}
                     </tbody>
