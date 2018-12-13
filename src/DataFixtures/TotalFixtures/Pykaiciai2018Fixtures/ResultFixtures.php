@@ -13,26 +13,26 @@ class ResultFixtures extends Fixture implements DependentFixtureInterface
     public function load(ObjectManager $manager)
     {
         $team1 = $this->getReference("Usas Team");
-        $team2 = $this->getReference("Iron team");
+        $team2 = $this->getReference("Iron Team");
         $team3 = $this->getReference("Naujakuriai");
         $team4 = $this->getReference("Monster Carp Team");
-        $team5 = $this->getReference("Judex");
-        $team6 = $this->getReference("Common Carp team");
+        $team5 = $this->getReference("Judex_1");
+        $team6 = $this->getReference("Common Carp Team");
         $team7 = $this->getReference("Test DRIVE");
-        $team8 = $this->getReference("Carp masters");
+        $team8 = $this->getReference("Carp Masters");
         $team9 = $this->getReference("M&D carp team");
         $team10 = $this->getReference("Autsaideriai");
         $team11 = $this->getReference("PopUp");
-        $team12 = $this->getReference("Exsto NT");
+        $team12 = $this->getReference("EXSTO NT");
         $team13 = $this->getReference("LineBrakers");
         $team14 = $this->getReference("AndJust1");
-        $team15 = $this->getReference("3 1/4 team");
+        $team15 = $this->getReference("3 1/4 Team_1");
 
 
-        $weighing1 = $this->getReference("weighing_1");
-        $weighing2 = $this->getReference("weighing_2");
-        $weighing3 = $this->getReference("weighing_3");
-        $weighing4 = $this->getReference("weighing_4");
+        $weighing1 = $this->getReference("weighing1");
+        $weighing2 = $this->getReference("weighing2");
+        $weighing3 = $this->getReference("weighing3");
+        $weighing4 = $this->getReference("weighing4");
 
         $result = new Result();
         $result->setTeam($team10);
@@ -79,14 +79,7 @@ class ResultFixtures extends Fixture implements DependentFixtureInterface
         $result = new Result();
         $result->setTeam($team10);
         $result->setWeighing($weighing1);
-        $result->setWeigh(4875);
-        $result->setSpecialFish(0);
-        $manager->persist($result);
-
-        $result = new Result();
-        $result->setTeam($team10);
-        $result->setWeighing($weighing1);
-        $result->setWeigh(4975);
+        $result->setWeigh(5100);
         $result->setSpecialFish(0);
         $manager->persist($result);
 
@@ -162,8 +155,29 @@ class ResultFixtures extends Fixture implements DependentFixtureInterface
 
         $result = new Result();
         $result->setTeam($team10);
+        $result->setWeighing($weighing2);
+        $result->setWeigh(9500);
+        $result->setSpecialFish(0);
+        $manager->persist($result);
+
+        $result = new Result();
+        $result->setTeam($team10);
         $result->setWeighing($weighing3);
         $result->setWeigh(6100);
+        $result->setSpecialFish(0);
+        $manager->persist($result);
+
+        $result = new Result();
+        $result->setTeam($team10);
+        $result->setWeighing($weighing2);
+        $result->setWeigh(5600);
+        $result->setSpecialFish(0);
+        $manager->persist($result);
+
+        $result = new Result();
+        $result->setTeam($team10);
+        $result->setWeighing($weighing2);
+        $result->setWeigh(5775);
         $result->setSpecialFish(0);
         $manager->persist($result);
 
@@ -611,7 +625,7 @@ class ResultFixtures extends Fixture implements DependentFixtureInterface
         $result = new Result();
         $result->setTeam($team11);
         $result->setWeighing($weighing1);
-        $result->setWeigh(4500);
+        $result->setWeigh(4590);
         $result->setSpecialFish(0);
         $manager->persist($result);
 
@@ -933,7 +947,7 @@ class ResultFixtures extends Fixture implements DependentFixtureInterface
         $result = new Result();
         $result->setTeam($team5);
         $result->setWeighing($weighing1);
-        $result->setWeigh(1180);
+        $result->setWeigh(4720);
         $result->setSpecialFish(0);
         $manager->persist($result);
 
@@ -1074,7 +1088,7 @@ class ResultFixtures extends Fixture implements DependentFixtureInterface
         $result = new Result();
         $result->setTeam($team5);
         $result->setWeighing($weighing2);
-        $result->setWeigh(4775);
+        $result->setWeigh(8315);
         $result->setSpecialFish(0);
         $manager->persist($result);
 
@@ -1123,7 +1137,7 @@ class ResultFixtures extends Fixture implements DependentFixtureInterface
         $result = new Result();
         $result->setTeam($team5);
         $result->setWeighing($weighing3);
-        $result->setWeigh(4725);
+        $result->setWeigh(8265);
         $result->setSpecialFish(0);
         $manager->persist($result);
 
@@ -1298,7 +1312,7 @@ class ResultFixtures extends Fixture implements DependentFixtureInterface
         $result = new Result();
         $result->setTeam($team4);
         $result->setWeighing($weighing1);
-        $result->setWeigh(7375);
+        $result->setWeigh(7395);
         $result->setSpecialFish(0);
         $manager->persist($result);
 
@@ -1316,12 +1330,6 @@ class ResultFixtures extends Fixture implements DependentFixtureInterface
         $result->setSpecialFish(0);
         $manager->persist($result);
 
-        $result = new Result();
-        $result->setTeam($team4);
-        $result->setWeighing($weighing1);
-        $result->setWeigh(5800);
-        $result->setSpecialFish(0);
-        $manager->persist($result);
 
         $result = new Result();
         $result->setTeam($team4);
@@ -1340,13 +1348,6 @@ class ResultFixtures extends Fixture implements DependentFixtureInterface
         $result = new Result();
         $result->setTeam($team4);
         $result->setWeighing($weighing1);
-        $result->setWeigh(8675);
-        $result->setSpecialFish(0);
-        $manager->persist($result);
-
-        $result = new Result();
-        $result->setTeam($team4);
-        $result->setWeighing($weighing1);
         $result->setWeigh(7375);
         $result->setSpecialFish(0);
         $manager->persist($result);
@@ -1354,7 +1355,7 @@ class ResultFixtures extends Fixture implements DependentFixtureInterface
         $result = new Result();
         $result->setTeam($team4);
         $result->setWeighing($weighing1);
-        $result->setWeigh(8075);
+        $result->setWeigh(7005);
         $result->setSpecialFish(0);
         $manager->persist($result);
 
@@ -1424,13 +1425,6 @@ class ResultFixtures extends Fixture implements DependentFixtureInterface
 
         $result = new Result();
         $result->setTeam($team4);
-        $result->setWeighing($weighing1);
-        $result->setWeigh(5250);
-        $result->setSpecialFish(0);
-        $manager->persist($result);
-
-        $result = new Result();
-        $result->setTeam($team4);
         $result->setWeighing($weighing2);
         $result->setWeigh(6925);
         $result->setSpecialFish(0);
@@ -1454,13 +1448,6 @@ class ResultFixtures extends Fixture implements DependentFixtureInterface
         $result->setTeam($team4);
         $result->setWeighing($weighing2);
         $result->setWeigh(8400);
-        $result->setSpecialFish(0);
-        $manager->persist($result);
-
-        $result = new Result();
-        $result->setTeam($team4);
-        $result->setWeighing($weighing2);
-        $result->setWeigh(10300);
         $result->setSpecialFish(0);
         $manager->persist($result);
 
@@ -2709,13 +2696,6 @@ class ResultFixtures extends Fixture implements DependentFixtureInterface
         $result = new Result();
         $result->setTeam($team6);
         $result->setWeighing($weighing2);
-        $result->setWeigh(7550);
-        $result->setSpecialFish(0);
-        $manager->persist($result);
-
-        $result = new Result();
-        $result->setTeam($team6);
-        $result->setWeighing($weighing2);
         $result->setWeigh(3050);
         $result->setSpecialFish(0);
         $manager->persist($result);
@@ -2743,15 +2723,8 @@ class ResultFixtures extends Fixture implements DependentFixtureInterface
 
         $result = new Result();
         $result->setTeam($team6);
-        $result->setWeighing($weighing2);
-        $result->setWeigh(5250);
-        $result->setSpecialFish(0);
-        $manager->persist($result);
-
-        $result = new Result();
-        $result->setTeam($team6);
         $result->setWeighing($weighing3);
-        $result->setWeigh(4800);
+        $result->setWeigh(4775);
         $result->setSpecialFish(0);
         $manager->persist($result);
 
@@ -2993,6 +2966,29 @@ class ResultFixtures extends Fixture implements DependentFixtureInterface
         $result->setWeigh(7850);
         $result->setSpecialFish(0);
         $manager->persist($result);
+
+        $result = new Result();
+        $result->setTeam($team9);
+        $result->setWeighing($weighing2);
+        $result->setWeigh(7600);
+        $result->setSpecialFish(0);
+        $manager->persist($result);
+
+        $result = new Result();
+        $result->setTeam($team9);
+        $result->setWeighing($weighing2);
+        $result->setWeigh(7600);
+        $result->setSpecialFish(0);
+        $manager->persist($result);
+
+        $result = new Result();
+        $result->setTeam($team9);
+        $result->setWeighing($weighing3);
+        $result->setWeigh(7600);
+        $result->setSpecialFish(0);
+        $manager->persist($result);
+
+
 
         $result = new Result();
         $result->setTeam($team9);
@@ -4145,63 +4141,63 @@ class ResultFixtures extends Fixture implements DependentFixtureInterface
 
         $result = new Result();
         $result->setTeam($team2);
-        $result->setWeighing($weighing4);
+        $result->setWeighing($weighing3);
         $result->setWeigh(7175);
         $result->setSpecialFish(0);
         $manager->persist($result);
 
         $result = new Result();
         $result->setTeam($team2);
-        $result->setWeighing($weighing4);
+        $result->setWeighing($weighing3);
         $result->setWeigh(7675);
         $result->setSpecialFish(0);
         $manager->persist($result);
 
         $result = new Result();
         $result->setTeam($team2);
-        $result->setWeighing($weighing4);
+        $result->setWeighing($weighing3);
         $result->setWeigh(5775);
         $result->setSpecialFish(0);
         $manager->persist($result);
 
         $result = new Result();
         $result->setTeam($team2);
-        $result->setWeighing($weighing4);
+        $result->setWeighing($weighing3);
         $result->setWeigh(7925);
         $result->setSpecialFish(0);
         $manager->persist($result);
 
         $result = new Result();
         $result->setTeam($team2);
-        $result->setWeighing($weighing4);
+        $result->setWeighing($weighing3);
         $result->setWeigh(4600);
         $result->setSpecialFish(0);
         $manager->persist($result);
 
         $result = new Result();
         $result->setTeam($team2);
-        $result->setWeighing($weighing4);
+        $result->setWeighing($weighing3);
         $result->setWeigh(3675);
         $result->setSpecialFish(0);
         $manager->persist($result);
 
         $result = new Result();
         $result->setTeam($team2);
-        $result->setWeighing($weighing4);
+        $result->setWeighing($weighing3);
         $result->setWeigh(4825);
         $result->setSpecialFish(0);
         $manager->persist($result);
 
         $result = new Result();
         $result->setTeam($team2);
-        $result->setWeighing($weighing4);
+        $result->setWeighing($weighing3);
         $result->setWeigh(11775);
         $result->setSpecialFish(0);
         $manager->persist($result);
 
         $result = new Result();
         $result->setTeam($team2);
-        $result->setWeighing($weighing4);
+        $result->setWeighing($weighing3);
         $result->setWeigh(10550);
         $result->setSpecialFish(0);
         $manager->persist($result);
@@ -4230,9 +4226,1037 @@ class ResultFixtures extends Fixture implements DependentFixtureInterface
         $result = new Result();
         $result->setTeam($team2);
         $result->setWeighing($weighing4);
-        $result->setWeigh();
+        $result->setWeigh(10475);
         $result->setSpecialFish(0);
         $manager->persist($result);
+
+        $result = new Result();
+        $result->setTeam($team2);
+        $result->setWeighing($weighing4);
+        $result->setWeigh(6200);
+        $result->setSpecialFish(0);
+        $manager->persist($result);
+
+        $result = new Result();
+        $result->setTeam($team2);
+        $result->setWeighing($weighing4);
+        $result->setWeigh(8800);
+        $result->setSpecialFish(0);
+        $manager->persist($result);
+
+        $result = new Result();
+        $result->setTeam($team2);
+        $result->setWeighing($weighing4);
+        $result->setWeigh(5050);
+        $result->setSpecialFish(0);
+        $manager->persist($result);
+
+        $result = new Result();
+        $result->setTeam($team2);
+        $result->setWeighing($weighing4);
+        $result->setWeigh(5325);
+        $result->setSpecialFish(0);
+        $manager->persist($result);
+
+        $result = new Result();
+        $result->setTeam($team2);
+        $result->setWeighing($weighing4);
+        $result->setWeigh(7500);
+        $result->setSpecialFish(0);
+        $manager->persist($result);
+
+        $result = new Result();
+        $result->setTeam($team2);
+        $result->setWeighing($weighing4);
+        $result->setWeigh(4300);
+        $result->setSpecialFish(0);
+        $manager->persist($result);
+
+        $result = new Result();
+        $result->setTeam($team2);
+        $result->setWeighing($weighing4);
+        $result->setWeigh(6400);
+        $result->setSpecialFish(0);
+        $manager->persist($result);
+
+        $result = new Result();
+        $result->setTeam($team2);
+        $result->setWeighing($weighing4);
+        $result->setWeigh(4350);
+        $result->setSpecialFish(0);
+        $manager->persist($result);
+
+        $result = new Result();
+        $result->setTeam($team2);
+        $result->setWeighing($weighing4);
+        $result->setWeigh(5225);
+        $result->setSpecialFish(0);
+        $manager->persist($result);
+
+        $result = new Result();
+        $result->setTeam($team2);
+        $result->setWeighing($weighing4);
+        $result->setWeigh(6375);
+        $result->setSpecialFish(0);
+        $manager->persist($result);
+
+        $result = new Result();
+        $result->setTeam($team2);
+        $result->setWeighing($weighing4);
+        $result->setWeigh(7450);
+        $result->setSpecialFish(0);
+        $manager->persist($result);
+
+        $result = new Result();
+        $result->setTeam($team2);
+        $result->setWeighing($weighing4);
+        $result->setWeigh(4650);
+        $result->setSpecialFish(0);
+        $manager->persist($result);
+
+        $result = new Result();
+        $result->setTeam($team2);
+        $result->setWeighing($weighing4);
+        $result->setWeigh(7000);
+        $result->setSpecialFish(0);
+        $manager->persist($result);
+
+        $result = new Result();
+        $result->setTeam($team2);
+        $result->setWeighing($weighing4);
+        $result->setWeigh(5225);
+        $result->setSpecialFish(0);
+        $manager->persist($result);
+
+        $result = new Result();
+        $result->setTeam($team2);
+        $result->setWeighing($weighing4);
+        $result->setWeigh(3650);
+        $result->setSpecialFish(0);
+        $manager->persist($result);
+
+        $result = new Result();
+        $result->setTeam($team2);
+        $result->setWeighing($weighing4);
+        $result->setWeigh(4750);
+        $result->setSpecialFish(0);
+        $manager->persist($result);
+
+        $result = new Result();
+        $result->setTeam($team2);
+        $result->setWeighing($weighing4);
+        $result->setWeigh(10500);
+        $result->setSpecialFish(0);
+        $manager->persist($result);
+
+        $result = new Result();
+        $result->setTeam($team2);
+        $result->setWeighing($weighing4);
+        $result->setWeigh(5550);
+        $result->setSpecialFish(0);
+        $manager->persist($result);
+
+        $result = new Result();
+        $result->setTeam($team2);
+        $result->setWeighing($weighing4);
+        $result->setWeigh(5675);
+        $result->setSpecialFish(0);
+        $manager->persist($result);
+
+        $result = new Result();
+        $result->setTeam($team2);
+        $result->setWeighing($weighing4);
+        $result->setWeigh(5875);
+        $result->setSpecialFish(0);
+        $manager->persist($result);
+
+        $result = new Result();
+        $result->setTeam($team2);
+        $result->setWeighing($weighing4);
+        $result->setWeigh(3550);
+        $result->setSpecialFish(0);
+        $manager->persist($result);
+
+        $result = new Result();
+        $result->setTeam($team2);
+        $result->setWeighing($weighing4);
+        $result->setWeigh(6425);
+        $result->setSpecialFish(0);
+        $manager->persist($result);
+
+        $result = new Result();
+        $result->setTeam($team2);
+        $result->setWeighing($weighing4);
+        $result->setWeigh(8500);
+        $result->setSpecialFish(0);
+        $manager->persist($result);
+
+        $result = new Result();
+        $result->setTeam($team2);
+        $result->setWeighing($weighing4);
+        $result->setWeigh(3975);
+        $result->setSpecialFish(0);
+        $manager->persist($result);
+
+        $result = new Result();
+        $result->setTeam($team2);
+        $result->setWeighing($weighing4);
+        $result->setWeigh(5325);
+        $result->setSpecialFish(0);
+        $manager->persist($result);
+
+        $result = new Result();
+        $result->setTeam($team2);
+        $result->setWeighing($weighing4);
+        $result->setWeigh(5375);
+        $result->setSpecialFish(0);
+        $manager->persist($result);
+
+        $result = new Result();
+        $result->setTeam($team2);
+        $result->setWeighing($weighing4);
+        $result->setWeigh(4925);
+        $result->setSpecialFish(0);
+        $manager->persist($result);
+
+        $result = new Result();
+        $result->setTeam($team2);
+        $result->setWeighing($weighing4);
+        $result->setWeigh(5925);
+        $result->setSpecialFish(0);
+        $manager->persist($result);
+
+        $result = new Result();
+        $result->setTeam($team2);
+        $result->setWeighing($weighing4);
+        $result->setWeigh(4300);
+        $result->setSpecialFish(0);
+        $manager->persist($result);
+
+        $result = new Result();
+        $result->setTeam($team2);
+        $result->setWeighing($weighing4);
+        $result->setWeigh(6200);
+        $result->setSpecialFish(0);
+        $manager->persist($result);
+
+        $result = new Result();
+        $result->setTeam($team2);
+        $result->setWeighing($weighing4);
+        $result->setWeigh(5550);
+        $result->setSpecialFish(0);
+        $manager->persist($result);
+
+        $result = new Result();
+        $result->setTeam($team2);
+        $result->setWeighing($weighing4);
+        $result->setWeigh(6275);
+        $result->setSpecialFish(0);
+        $manager->persist($result);
+
+        $result = new Result();
+        $result->setTeam($team2);
+        $result->setWeighing($weighing4);
+        $result->setWeigh(6650);
+        $result->setSpecialFish(0);
+        $manager->persist($result);
+
+        $result = new Result();
+        $result->setTeam($team2);
+        $result->setWeighing($weighing4);
+        $result->setWeigh(7150);
+        $result->setSpecialFish(0);
+        $manager->persist($result);
+
+        $result = new Result();
+        $result->setTeam($team2);
+        $result->setWeighing($weighing4);
+        $result->setWeigh(5000);
+        $result->setSpecialFish(0);
+        $manager->persist($result);
+
+        $result = new Result();
+        $result->setTeam($team2);
+        $result->setWeighing($weighing4);
+        $result->setWeigh(5125);
+        $result->setSpecialFish(0);
+        $manager->persist($result);
+
+        $result = new Result();
+        $result->setTeam($team2);
+        $result->setWeighing($weighing4);
+        $result->setWeigh(5375);
+        $result->setSpecialFish(0);
+        $manager->persist($result);
+
+        $result = new Result();
+        $result->setTeam($team2);
+        $result->setWeighing($weighing4);
+        $result->setWeigh(5750);
+        $result->setSpecialFish(0);
+        $manager->persist($result);
+
+        $result = new Result();
+        $result->setTeam($team1);
+        $result->setWeighing($weighing1);
+        $result->setWeigh(6400);
+        $result->setSpecialFish(0);
+        $manager->persist($result);
+
+        $result = new Result();
+        $result->setTeam($team1);
+        $result->setWeighing($weighing1);
+        $result->setWeigh(4625);
+        $result->setSpecialFish(0);
+        $manager->persist($result);
+
+        $result = new Result();
+        $result->setTeam($team1);
+        $result->setWeighing($weighing1);
+        $result->setWeigh(7100);
+        $result->setSpecialFish(0);
+        $manager->persist($result);
+
+        $result = new Result();
+        $result->setTeam($team1);
+        $result->setWeighing($weighing1);
+        $result->setWeigh(5175);
+        $result->setSpecialFish(0);
+        $manager->persist($result);
+
+        $result = new Result();
+        $result->setTeam($team1);
+        $result->setWeighing($weighing1);
+        $result->setWeigh(5300);
+        $result->setSpecialFish(0);
+        $manager->persist($result);
+
+        $result = new Result();
+        $result->setTeam($team1);
+        $result->setWeighing($weighing1);
+        $result->setWeigh(5225);
+        $result->setSpecialFish(0);
+        $manager->persist($result);
+
+        $result = new Result();
+        $result->setTeam($team1);
+        $result->setWeighing($weighing1);
+        $result->setWeigh(4950);
+        $result->setSpecialFish(0);
+        $manager->persist($result);
+
+        $result = new Result();
+        $result->setTeam($team1);
+        $result->setWeighing($weighing1);
+        $result->setWeigh(5750);
+        $result->setSpecialFish(0);
+        $manager->persist($result);
+
+        $result = new Result();
+        $result->setTeam($team1);
+        $result->setWeighing($weighing1);
+        $result->setWeigh(4150);
+        $result->setSpecialFish(0);
+        $manager->persist($result);
+
+        $result = new Result();
+        $result->setTeam($team1);
+        $result->setWeighing($weighing1);
+        $result->setWeigh(6175);
+        $result->setSpecialFish(0);
+        $manager->persist($result);
+
+        $result = new Result();
+        $result->setTeam($team1);
+        $result->setWeighing($weighing1);
+        $result->setWeigh(6475);
+        $result->setSpecialFish(0);
+        $manager->persist($result);
+
+        $result = new Result();
+        $result->setTeam($team1);
+        $result->setWeighing($weighing1);
+        $result->setWeigh(5675);
+        $result->setSpecialFish(0);
+        $manager->persist($result);
+
+        $result = new Result();
+        $result->setTeam($team1);
+        $result->setWeighing($weighing1);
+        $result->setWeigh(7025);
+        $result->setSpecialFish(0);
+        $manager->persist($result);
+
+        $result = new Result();
+        $result->setTeam($team1);
+        $result->setWeighing($weighing1);
+        $result->setWeigh(8000);
+        $result->setSpecialFish(0);
+        $manager->persist($result);
+
+        $result = new Result();
+        $result->setTeam($team1);
+        $result->setWeighing($weighing1);
+        $result->setWeigh(6850);
+        $result->setSpecialFish(0);
+        $manager->persist($result);
+
+        $result = new Result();
+        $result->setTeam($team1);
+        $result->setWeighing($weighing1);
+        $result->setWeigh(8425);
+        $result->setSpecialFish(0);
+        $manager->persist($result);
+
+        $result = new Result();
+        $result->setTeam($team1);
+        $result->setWeighing($weighing1);
+        $result->setWeigh(4725);
+        $result->setSpecialFish(0);
+        $manager->persist($result);
+
+        $result = new Result();
+        $result->setTeam($team1);
+        $result->setWeighing($weighing1);
+        $result->setWeigh(5475);
+        $result->setSpecialFish(0);
+        $manager->persist($result);
+
+        $result = new Result();
+        $result->setTeam($team1);
+        $result->setWeighing($weighing1);
+        $result->setWeigh(5500);
+        $result->setSpecialFish(0);
+        $manager->persist($result);
+
+        $result = new Result();
+        $result->setTeam($team1);
+        $result->setWeighing($weighing1);
+        $result->setWeigh(6300);
+        $result->setSpecialFish(0);
+        $manager->persist($result);
+
+        $result = new Result();
+        $result->setTeam($team1);
+        $result->setWeighing($weighing1);
+        $result->setWeigh(5975);
+        $result->setSpecialFish(0);
+        $manager->persist($result);
+
+        $result = new Result();
+        $result->setTeam($team1);
+        $result->setWeighing($weighing1);
+        $result->setWeigh(4900);
+        $result->setSpecialFish(0);
+        $manager->persist($result);
+
+        $result = new Result();
+        $result->setTeam($team1);
+        $result->setWeighing($weighing1);
+        $result->setWeigh(5700);
+        $result->setSpecialFish(0);
+        $manager->persist($result);
+
+        $result = new Result();
+        $result->setTeam($team1);
+        $result->setWeighing($weighing1);
+        $result->setWeigh(4650);
+        $result->setSpecialFish(0);
+        $manager->persist($result);
+
+        $result = new Result();
+        $result->setTeam($team1);
+        $result->setWeighing($weighing1);
+        $result->setWeigh(6350);
+        $result->setSpecialFish(0);
+        $manager->persist($result);
+
+        $result = new Result();
+        $result->setTeam($team1);
+        $result->setWeighing($weighing2);
+        $result->setWeigh(6500);
+        $result->setSpecialFish(0);
+        $manager->persist($result);
+
+        $result = new Result();
+        $result->setTeam($team1);
+        $result->setWeighing($weighing2);
+        $result->setWeigh(5625);
+        $result->setSpecialFish(0);
+        $manager->persist($result);
+
+        $result = new Result();
+        $result->setTeam($team1);
+        $result->setWeighing($weighing2);
+        $result->setWeigh(6525);
+        $result->setSpecialFish(0);
+        $manager->persist($result);
+
+        $result = new Result();
+        $result->setTeam($team1);
+        $result->setWeighing($weighing2);
+        $result->setWeigh(5550);
+        $result->setSpecialFish(0);
+        $manager->persist($result);
+
+        $result = new Result();
+        $result->setTeam($team1);
+        $result->setWeighing($weighing2);
+        $result->setWeigh(8125);
+        $result->setSpecialFish(0);
+        $manager->persist($result);
+
+        $result = new Result();
+        $result->setTeam($team1);
+        $result->setWeighing($weighing2);
+        $result->setWeigh(5425);
+        $result->setSpecialFish(0);
+        $manager->persist($result);
+
+        $result = new Result();
+        $result->setTeam($team1);
+        $result->setWeighing($weighing2);
+        $result->setWeigh(4825);
+        $result->setSpecialFish(0);
+        $manager->persist($result);
+
+        $result = new Result();
+        $result->setTeam($team1);
+        $result->setWeighing($weighing2);
+        $result->setWeigh(6800);
+        $result->setSpecialFish(0);
+        $manager->persist($result);
+
+        $result = new Result();
+        $result->setTeam($team1);
+        $result->setWeighing($weighing2);
+        $result->setWeigh(6550);
+        $result->setSpecialFish(0);
+        $manager->persist($result);
+
+        $result = new Result();
+        $result->setTeam($team1);
+        $result->setWeighing($weighing2);
+        $result->setWeigh(5825);
+        $result->setSpecialFish(0);
+        $manager->persist($result);
+
+
+        $result = new Result();
+        $result->setTeam($team1);
+        $result->setWeighing($weighing2);
+        $result->setWeigh(5325);
+        $result->setSpecialFish(0);
+        $manager->persist($result);
+
+        $result = new Result();
+        $result->setTeam($team1);
+        $result->setWeighing($weighing2);
+        $result->setWeigh(4475);
+        $result->setSpecialFish(0);
+        $manager->persist($result);
+
+
+        $result = new Result();
+        $result->setTeam($team1);
+        $result->setWeighing($weighing2);
+        $result->setWeigh(4350);
+        $result->setSpecialFish(0);
+        $manager->persist($result);
+
+        $result = new Result();
+        $result->setTeam($team1);
+        $result->setWeighing($weighing2);
+        $result->setWeigh(4725);
+        $result->setSpecialFish(0);
+        $manager->persist($result);
+
+        $result = new Result();
+        $result->setTeam($team1);
+        $result->setWeighing($weighing2);
+        $result->setWeigh(3025);
+        $result->setSpecialFish(0);
+        $manager->persist($result);
+
+        $result = new Result();
+        $result->setTeam($team1);
+        $result->setWeighing($weighing2);
+        $result->setWeigh(5925);
+        $result->setSpecialFish(0);
+        $manager->persist($result);
+
+
+        $result = new Result();
+        $result->setTeam($team1);
+        $result->setWeighing($weighing2);
+        $result->setWeigh(5950);
+        $result->setSpecialFish(0);
+        $manager->persist($result);
+
+        $result = new Result();
+        $result->setTeam($team1);
+        $result->setWeighing($weighing2);
+        $result->setWeigh(6250);
+        $result->setSpecialFish(0);
+        $manager->persist($result);
+
+
+        $result = new Result();
+        $result->setTeam($team1);
+        $result->setWeighing($weighing2);
+        $result->setWeigh(5325);
+        $result->setSpecialFish(0);
+        $manager->persist($result);
+
+        $result = new Result();
+        $result->setTeam($team1);
+        $result->setWeighing($weighing2);
+        $result->setWeigh(5600);
+        $result->setSpecialFish(0);
+        $manager->persist($result);
+
+        $result = new Result();
+        $result->setTeam($team1);
+        $result->setWeighing($weighing2);
+        $result->setWeigh(4850);
+        $result->setSpecialFish(0);
+        $manager->persist($result);
+
+        $result = new Result();
+        $result->setTeam($team1);
+        $result->setWeighing($weighing2);
+        $result->setWeigh(4950);
+        $result->setSpecialFish(0);
+        $manager->persist($result);
+
+        $result = new Result();
+        $result->setTeam($team1);
+        $result->setWeighing($weighing2);
+        $result->setWeigh(4700);
+        $result->setSpecialFish(0);
+        $manager->persist($result);
+
+        $result = new Result();
+        $result->setTeam($team1);
+        $result->setWeighing($weighing2);
+        $result->setWeigh(7975);
+        $result->setSpecialFish(0);
+        $manager->persist($result);
+
+        $result = new Result();
+        $result->setTeam($team1);
+        $result->setWeighing($weighing2);
+        $result->setWeigh(5875);
+        $result->setSpecialFish(0);
+        $manager->persist($result);
+
+        $result = new Result();
+        $result->setTeam($team1);
+        $result->setWeighing($weighing2);
+        $result->setWeigh(6100);
+        $result->setSpecialFish(0);
+        $manager->persist($result);
+
+        $result = new Result();
+        $result->setTeam($team1);
+        $result->setWeighing($weighing2);
+        $result->setWeigh(6450);
+        $result->setSpecialFish(0);
+        $manager->persist($result);
+
+        $result = new Result();
+        $result->setTeam($team1);
+        $result->setWeighing($weighing2);
+        $result->setWeigh(10975);
+        $result->setSpecialFish(0);
+        $manager->persist($result);
+
+        $result = new Result();
+        $result->setTeam($team1);
+        $result->setWeighing($weighing2);
+        $result->setWeigh(7600);
+        $result->setSpecialFish(0);
+        $manager->persist($result);
+
+        $result = new Result();
+        $result->setTeam($team1);
+        $result->setWeighing($weighing2);
+        $result->setWeigh(5600);
+        $result->setSpecialFish(0);
+        $manager->persist($result);
+
+        $result = new Result();
+        $result->setTeam($team1);
+        $result->setWeighing($weighing3);
+        $result->setWeigh(5750);
+        $result->setSpecialFish(0);
+        $manager->persist($result);
+
+        $result = new Result();
+        $result->setTeam($team1);
+        $result->setWeighing($weighing3);
+        $result->setWeigh(6925);
+        $result->setSpecialFish(0);
+        $manager->persist($result);
+
+        $result = new Result();
+        $result->setTeam($team1);
+        $result->setWeighing($weighing3);
+        $result->setWeigh(4750);
+        $result->setSpecialFish(0);
+        $manager->persist($result);
+
+        $result = new Result();
+        $result->setTeam($team1);
+        $result->setWeighing($weighing3);
+        $result->setWeigh(10450);
+        $result->setSpecialFish(0);
+        $manager->persist($result);
+
+        $result = new Result();
+        $result->setTeam($team1);
+        $result->setWeighing($weighing3);
+        $result->setWeigh(6250);
+        $result->setSpecialFish(0);
+        $manager->persist($result);
+
+        $result = new Result();
+        $result->setTeam($team1);
+        $result->setWeighing($weighing3);
+        $result->setWeigh(5975);
+        $result->setSpecialFish(0);
+        $manager->persist($result);
+
+        $result = new Result();
+        $result->setTeam($team1);
+        $result->setWeighing($weighing3);
+        $result->setWeigh(5525);
+        $result->setSpecialFish(0);
+        $manager->persist($result);
+
+        $result = new Result();
+        $result->setTeam($team1);
+        $result->setWeighing($weighing3);
+        $result->setWeigh(5625);
+        $result->setSpecialFish(0);
+        $manager->persist($result);
+
+        $result = new Result();
+        $result->setTeam($team1);
+        $result->setWeighing($weighing3);
+        $result->setWeigh(4825);
+        $result->setSpecialFish(0);
+        $manager->persist($result);
+
+        $result = new Result();
+        $result->setTeam($team1);
+        $result->setWeighing($weighing3);
+        $result->setWeigh(4475);
+        $result->setSpecialFish(0);
+        $manager->persist($result);
+
+        $result = new Result();
+        $result->setTeam($team1);
+        $result->setWeighing($weighing3);
+        $result->setWeigh(5100);
+        $result->setSpecialFish(0);
+        $manager->persist($result);
+
+        $result = new Result();
+        $result->setTeam($team1);
+        $result->setWeighing($weighing3);
+        $result->setWeigh(4450);
+        $result->setSpecialFish(0);
+        $manager->persist($result);
+
+        $result = new Result();
+        $result->setTeam($team1);
+        $result->setWeighing($weighing3);
+        $result->setWeigh(6975);
+        $result->setSpecialFish(0);
+        $manager->persist($result);
+
+        $result = new Result();
+        $result->setTeam($team1);
+        $result->setWeighing($weighing3);
+        $result->setWeigh(7700);
+        $result->setSpecialFish(0);
+        $manager->persist($result);
+
+        $result = new Result();
+        $result->setTeam($team1);
+        $result->setWeighing($weighing3);
+        $result->setWeigh(7725);
+        $result->setSpecialFish(0);
+        $manager->persist($result);
+
+        $result = new Result();
+        $result->setTeam($team1);
+        $result->setWeighing($weighing3);
+        $result->setWeigh(5525);
+        $result->setSpecialFish(0);
+        $manager->persist($result);
+
+        $result = new Result();
+        $result->setTeam($team1);
+        $result->setWeighing($weighing3);
+        $result->setWeigh(4900);
+        $result->setSpecialFish(0);
+        $manager->persist($result);
+
+        $result = new Result();
+        $result->setTeam($team1);
+        $result->setWeighing($weighing3);
+        $result->setWeigh(4900);
+        $result->setSpecialFish(0);
+        $manager->persist($result);
+
+        $result = new Result();
+        $result->setTeam($team1);
+        $result->setWeighing($weighing3);
+        $result->setWeigh(4725);
+        $result->setSpecialFish(0);
+        $manager->persist($result);
+
+        $result = new Result();
+        $result->setTeam($team1);
+        $result->setWeighing($weighing3);
+        $result->setWeigh(7150);
+        $result->setSpecialFish(0);
+        $manager->persist($result);
+
+        $result = new Result();
+        $result->setTeam($team1);
+        $result->setWeighing($weighing3);
+        $result->setWeigh(5525);
+        $result->setSpecialFish(0);
+        $manager->persist($result);
+
+        $result = new Result();
+        $result->setTeam($team1);
+        $result->setWeighing($weighing3);
+        $result->setWeigh(11375);
+        $result->setSpecialFish(0);
+        $manager->persist($result);
+
+        $result = new Result();
+        $result->setTeam($team1);
+        $result->setWeighing($weighing3);
+        $result->setWeigh(3950);
+        $result->setSpecialFish(0);
+        $manager->persist($result);
+
+        $result = new Result();
+        $result->setTeam($team1);
+        $result->setWeighing($weighing3);
+        $result->setWeigh(5825);
+        $result->setSpecialFish(0);
+        $manager->persist($result);
+
+        $result = new Result();
+        $result->setTeam($team1);
+        $result->setWeighing($weighing3);
+        $result->setWeigh(4250);
+        $result->setSpecialFish(0);
+        $manager->persist($result);
+
+        $result = new Result();
+        $result->setTeam($team1);
+        $result->setWeighing($weighing4);
+        $result->setWeigh(4950);
+        $result->setSpecialFish(0);
+        $manager->persist($result);
+
+        $result = new Result();
+        $result->setTeam($team1);
+        $result->setWeighing($weighing4);
+        $result->setWeigh(4825);
+        $result->setSpecialFish(0);
+        $manager->persist($result);
+
+        $result = new Result();
+        $result->setTeam($team1);
+        $result->setWeighing($weighing4);
+        $result->setWeigh(6400);
+        $result->setSpecialFish(0);
+        $manager->persist($result);
+
+        $result = new Result();
+        $result->setTeam($team1);
+        $result->setWeighing($weighing4);
+        $result->setWeigh(4925);
+        $result->setSpecialFish(0);
+        $manager->persist($result);
+
+        $result = new Result();
+        $result->setTeam($team1);
+        $result->setWeighing($weighing4);
+        $result->setWeigh(4200);
+        $result->setSpecialFish(0);
+        $manager->persist($result);
+
+        $result = new Result();
+        $result->setTeam($team1);
+        $result->setWeighing($weighing4);
+        $result->setWeigh(4875);
+        $result->setSpecialFish(0);
+        $manager->persist($result);
+
+        $result = new Result();
+        $result->setTeam($team1);
+        $result->setWeighing($weighing4);
+        $result->setWeigh(7525);
+        $result->setSpecialFish(0);
+        $manager->persist($result);
+
+        $result = new Result();
+        $result->setTeam($team1);
+        $result->setWeighing($weighing4);
+        $result->setWeigh(7350);
+        $result->setSpecialFish(0);
+        $manager->persist($result);
+
+        $result = new Result();
+        $result->setTeam($team1);
+        $result->setWeighing($weighing4);
+        $result->setWeigh(10325);
+        $result->setSpecialFish(0);
+        $manager->persist($result);
+
+        $result = new Result();
+        $result->setTeam($team1);
+        $result->setWeighing($weighing4);
+        $result->setWeigh(5875);
+        $result->setSpecialFish(0);
+        $manager->persist($result);
+
+        $result = new Result();
+        $result->setTeam($team1);
+        $result->setWeighing($weighing4);
+        $result->setWeigh(3250);
+        $result->setSpecialFish(0);
+        $manager->persist($result);
+
+        $result = new Result();
+        $result->setTeam($team1);
+        $result->setWeighing($weighing4);
+        $result->setWeigh(5825);
+        $result->setSpecialFish(0);
+        $manager->persist($result);
+
+        $result = new Result();
+        $result->setTeam($team1);
+        $result->setWeighing($weighing4);
+        $result->setWeigh(5150);
+        $result->setSpecialFish(0);
+        $manager->persist($result);
+
+        $result = new Result();
+        $result->setTeam($team1);
+        $result->setWeighing($weighing4);
+        $result->setWeigh(7300);
+        $result->setSpecialFish(0);
+        $manager->persist($result);
+
+        $result = new Result();
+        $result->setTeam($team1);
+        $result->setWeighing($weighing4);
+        $result->setWeigh(6900);
+        $result->setSpecialFish(0);
+        $manager->persist($result);
+
+        $result = new Result();
+        $result->setTeam($team1);
+        $result->setWeighing($weighing4);
+        $result->setWeigh(5700);
+        $result->setSpecialFish(0);
+        $manager->persist($result);
+
+        $result = new Result();
+        $result->setTeam($team1);
+        $result->setWeighing($weighing4);
+        $result->setWeigh(10925);
+        $result->setSpecialFish(0);
+        $manager->persist($result);
+
+        $result = new Result();
+        $result->setTeam($team1);
+        $result->setWeighing($weighing4);
+        $result->setWeigh(5325);
+        $result->setSpecialFish(0);
+        $manager->persist($result);
+
+        $result = new Result();
+        $result->setTeam($team1);
+        $result->setWeighing($weighing4);
+        $result->setWeigh(4225);
+        $result->setSpecialFish(0);
+        $manager->persist($result);
+
+        $result = new Result();
+        $result->setTeam($team1);
+        $result->setWeighing($weighing4);
+        $result->setWeigh(4750);
+        $result->setSpecialFish(0);
+        $manager->persist($result);
+
+        $result = new Result();
+        $result->setTeam($team1);
+        $result->setWeighing($weighing4);
+        $result->setWeigh(6100);
+        $result->setSpecialFish(0);
+        $manager->persist($result);
+
+        $result = new Result();
+        $result->setTeam($team1);
+        $result->setWeighing($weighing4);
+        $result->setWeigh(6500);
+        $result->setSpecialFish(0);
+        $manager->persist($result);
+
+        $result = new Result();
+        $result->setTeam($team1);
+        $result->setWeighing($weighing4);
+        $result->setWeigh(4525);
+        $result->setSpecialFish(0);
+        $manager->persist($result);
+
+        $result = new Result();
+        $result->setTeam($team1);
+        $result->setWeighing($weighing4);
+        $result->setWeigh(6525);
+        $result->setSpecialFish(0);
+        $manager->persist($result);
+
+        $result = new Result();
+        $result->setTeam($team1);
+        $result->setWeighing($weighing4);
+        $result->setWeigh(6750);
+        $result->setSpecialFish(0);
+        $manager->persist($result);
+
+        $result = new Result();
+        $result->setTeam($team1);
+        $result->setWeighing($weighing4);
+        $result->setWeigh(6350);
+        $result->setSpecialFish(0);
+        $manager->persist($result);
+
+        $result = new Result();
+        $result->setTeam($team1);
+        $result->setWeighing($weighing4);
+        $result->setWeigh(5775);
+        $result->setSpecialFish(0);
+        $manager->persist($result);
+
+        $result = new Result();
+        $result->setTeam($team1);
+        $result->setWeighing($weighing4);
+        $result->setWeigh(4000);
+        $result->setSpecialFish(0);
+        $manager->persist($result);
+
+        $manager->flush();
     }
 
     public function getDependencies()
