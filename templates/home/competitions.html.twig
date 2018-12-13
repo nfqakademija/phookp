@@ -1,6 +1,8 @@
 {% extends 'base.html.twig' %}
-
-{% block title %}Renginiai {% endblock %}
+{% import 'macro/index.macro.html.twig' as myMacros %}
+{% block title %}Renginiai{% endblock %}
+{% set picture = 0 %}
+{% set futureCompetition=1 %}
 
 {% block body %}
     <div class="page-name-container">
@@ -10,24 +12,21 @@
         <div class="container">
             <h2 class="heading heading--blue-border heading--center">Būsimos varžybos</h2>
             <div class="row">
-                <div class="event-card-container d-flex justify-content-center flex-wrap">
-                    {% if futureCompetitions != null %}
+                {% if futureCompetitions != null %}
+                <div class="col-lg-2"></div>
+                <div class="col-lg-10 px-0 event">
                     {% for competition in futureCompetitions %}
-                    <div class="card">
-                        <div class="card-body">
-                            <h4 class="card-title">{{ competition['name'] }}</h4>
-                            <p class="card-text"> <i class="fa fa-calendar-alt"> </i>{{ competition['year'] }} {{ competition['month']}} {{ competition['days'] }}</p>
-                            <p class="card-text"> <i class="fa fa-map-marker-alt"> </i> {{ competition['location'] }}</p>
-                            <div class="card-button-container d-flex justify-content-center">
-                                <a href="{{ competition['link'] }}">Facebook nuoroda čia!</a>
-                            </div>                        </div>
-                    </div>
+                        {{ myMacros.printCompetitions(
+                            futureCompetitions,
+                            picture,
+                            futureCompetition
+                        ) }}
                     {% endfor %}
                 </div>
-                {% else %}
-                    <div class="d-flex justify-content-center align-items-center">
-                        <h6>Šiuo metu būsimų varžybų nėra.</h6>
-                    </div>
+            {% else %}
+                <div class=" event d-flex justify-content-center align-items-center">
+                    <h6>Šiuo metu būsimų varžybų nėra.</h6>
+                </div>
                 {% endif %}
             </div>
         </div>
@@ -35,40 +34,27 @@
 
     <section id="previous-events" class=" u-pb-5">
         <div class="container">
-            <h2 class="heading heading--blue-border heading--center">Praėjusios varžybos</h2>
+            <h2 class="heading heading--blue-border heading--center" id="competitions">Praėjusios varžybos</h2>
             <div class="row">
-                <div class="event-card-container d-flex justify-content-center flex-wrap">
-                    {% for competition in expiredCompetitions %}
-                    <div class="card">
-                        <div class="card-body d-flex flex-column">
-                            <h4 class="card-title">{{ competition['name'] }}</h4>
-                            <p class="card-text"> <i class="fa fa-calendar-alt"> </i>{{ competition['year'] }} {{ competition['month'] }} {{ competition ['days'] }}</p>
-                            {% if competition['location']!=null %}
-                            <p class="card-text"> <i class="fa fa-map-marker-alt"> </i> {{ competition['location'] }}</p>
-                            {% endif %}
-                            <div class="event-button-container d-flex flex-wrap">
-                                <div class="col-6 px-0 text-left">
-                                    <a href="/results/{{ competition['id'] }}" class="btn button">Rezultatai</a>
-                                </div>
-                                {% if competition['link'] %}
-                                    <div class="col-6 text-right">
-                                        <a href="{{ competition['link'] }}">
-                                            <i class="fab fa-facebook-square"></i>
-                                        </a>
-                                    </div>
-                                {% endif %}
-
-                            </div>
-                        </div>
-
+                <div class="col-lg-2">
+                    <h1 class="my-4"></h1>
+                    <div class="list-group px-0">
+                        {% for years in expiredCompetitionsYears %}
+                            <h2><a href="/home/competitions/{{ years['1'] }}#competitions"
+                                   class="list-group-item u-bg-main-text">{{ years['1'] }}</a>
+                            </h2>
+                        {% endfor %}
+                    </div>
                 </div>
-                    {% endfor %}
+                <div class="col-lg-10 px-0">
+                    <div class="event">
+                        {{ myMacros.printCompetitions(
+                            expiredCompetitions,
+                            picture
+                        ) }}
+                    </div>
+                </div>
             </div>
         </div>
     </section>
-
-
-
-
-
 {% endblock %}

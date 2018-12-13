@@ -3,8 +3,12 @@ home:
   controller: App\Controller\HomeController::index
 
 homeCompetitions:
-  path: /home/competitions
+  path: /home/competitions/
   controller: App\Controller\HomeController::competitions
+
+homeExpiredCompetitions:
+  path: /home/competitions/{years}
+  controller: App\Controller\HomeController::competitionsByYears
 
 homeAboutUs:
   path: /home/about/us

@@ -10,9 +10,7 @@ namespace App\Services;
 
 use App\Entity\Competition;
 use App\Repository\CompetitionRepository;
-use Psr\Log\LoggerInterface;
 use Symfony\Component\Translation\TranslatorInterface;
-use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 final class CompetitionService
 {
@@ -21,14 +19,6 @@ final class CompetitionService
      * @var CompetitionRepository
      */
     private $competitionRepository;
-    /**
-     * @var LoggerInterface
-     */
-    private $logger;
-    /**
-     * @var ValidatorInterface
-     */
-    private $validator;
     /**
      * @var HashService
      */
@@ -43,23 +33,17 @@ final class CompetitionService
     /**
      * CompetitionService constructor.
      * @param CompetitionRepository $competitionRepository
-     * @param ValidatorInterface $validator
-     * @param LoggerInterface $logger
      * @param HashService $hashService
      * @param TranslatorInterface $translator
      */
     public function __construct(
         CompetitionRepository $competitionRepository,
-        ValidatorInterface $validator,
-        LoggerInterface $logger,
         HashService $hashService,
         TranslatorInterface $translator
     ) {
 
         $this->competitionRepository = $competitionRepository;
-        $this->validator = $validator;
         $this->hashService = $hashService;
-        $this->logger = $logger;
         $this->translator = $translator;
     }
 
@@ -99,7 +83,7 @@ final class CompetitionService
      */
     public function getGoingCompetitions(): ?array
     {
-        $goingCompetitions = $this->competitionRepository->findCompetitions(Competition::STATUS_STARTED,"ASC");
+        $goingCompetitions = $this->competitionRepository->findCompetitions(Competition::STATUS_STARTED, "ASC");
         return $this->getFormattedCompetitions($goingCompetitions);
     }
 
@@ -108,7 +92,7 @@ final class CompetitionService
      */
     public function getExpiredCompetitions(): ?array
     {
-        $expiredCompetitions = $this->competitionRepository->findCompetitions(Competition::STATUS_FINISHED,"DESC");
+        $expiredCompetitions = $this->competitionRepository->findCompetitions(Competition::STATUS_FINISHED, "DESC");
         return $this->getFormattedCompetitions($expiredCompetitions);
     }
 
@@ -127,21 +111,44 @@ final class CompetitionService
             $finishDate = $this->getFinishDate($competition->getCompetitionDate(), $duration);
             $link = $competition->getCompetitionLink();
             $rules = $competition->getCompetitionRules();
-            $location=$competition->getCompetitionLocation();
+            $location = $competition->getCompetitionLocation();
             $competition = [
                 "id" => $id,
                 "name" => $name,
                 "year" => $startDate["year"],
-                "month"=>$startDate["month"],
-                "days"=>$startDate["day"]."-".$finishDate,
+                "month" => $startDate["month"],
+                "days" => $startDate["day"] . "-" . $finishDate,
                 "link" => $link,
                 "rules" => $rules,
-                "location"=>$location
+                "location" => $location
             ];
             array_push($formattedCompetitions, $competition);
         }
         return $formattedCompetitions;
     }
+
+
+    /**
+     * @return array
+     */
+    public function getExpiredCompetitionsYears(): ?array
+    {
+        return $expiredCompetitionsYears = $this->competitionRepository->getExpiredCompetitionsYears();
+    }
+
+    /**
+     * @param string $years
+     * @return array|null
+     */
+    public function getExpiredCompetitionsByYears(string $years): ?array
+    {
+        $startDate=new \DateTime($years."-01-01");
+        $endDate= new \DateTime($years."-12-31");
+        $expiredCompetitionsByYears = $this->competitionRepository->getExpiredCompetitionByYears($startDate, $endDate);
+        return $this->getFormattedCompetitions($expiredCompetitionsByYears);
+    }
+
+
 
     /**
      * @param \DateTime $startDate
@@ -165,7 +172,7 @@ final class CompetitionService
         $year = $date[0];
         $month = $this->translator->trans($date[1]);
         $day = $date[2];
-        return ["year"=>$year, "month"=>$month,"day"=>$day];
+        return ["year" => $year, "month" => $month, "day" => $day];
     }
 
     /**

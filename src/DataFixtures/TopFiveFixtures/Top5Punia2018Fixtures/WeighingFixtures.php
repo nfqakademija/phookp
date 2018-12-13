@@ -6,7 +6,7 @@
  * Time: 00.04
  */
 
-namespace App\DataFixtures\TopFiveFixtures;
+namespace App\DataFixtures\TopFiveFixtures\Top5Punia2018Fixtures;
 
 use App\Entity\Weighing;
 use Doctrine\Bundle\FixturesBundle\Fixture;
@@ -24,28 +24,28 @@ class WeighingFixtures extends Fixture implements DependentFixtureInterface
         $weighing->setWeighingNr(1);
         $weighing->setWeighingTime(new \DateTime("2018-09-13"));
         $manager->persist($weighing);
-        $this->setReference("weighing_".$weighing->getWeighingNr(), $weighing);
+        $this->addReference("weighing_".$weighing->getWeighingNr(), $weighing);
 
         $weighing = new Weighing();
         $weighing->setCompetition($competition);
         $weighing->setWeighingNr(2);
         $weighing->setWeighingTime(new \DateTime("2018-09-14"));
         $manager->persist($weighing);
-        $this->setReference("weighing_".$weighing->getWeighingNr(), $weighing);
+        $this->addReference("weighing_".$weighing->getWeighingNr(), $weighing);
 
         $weighing = new Weighing();
         $weighing->setCompetition($competition);
         $weighing->setWeighingNr(3);
         $weighing->setWeighingTime(new \DateTime("2018-09-14"));
         $manager->persist($weighing);
-        $this->setReference("weighing_".$weighing->getWeighingNr(), $weighing);
+        $this->addReference("weighing_".$weighing->getWeighingNr(), $weighing);
 
         $weighing = new Weighing();
         $weighing->setCompetition($competition);
         $weighing->setWeighingNr(4);
         $weighing->setWeighingTime(new \DateTime("2018-09-15"));
         $manager->persist($weighing);
-        $this->setReference("weighing_".$weighing->getWeighingNr(), $weighing);
+        $this->addReference("weighing_".$weighing->getWeighingNr(), $weighing);
 
         $manager->flush();
     }

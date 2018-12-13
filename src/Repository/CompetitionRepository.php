@@ -56,4 +56,42 @@ class CompetitionRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
     }
+
+    /**
+     * @return array
+     */
+    public function getExpiredCompetitionsYears() :?array
+    {
+
+        return $years = $this->createQueryBuilder('r')
+            ->select('YEAR(r.competitionDate)')
+            ->distinct()
+            ->orderBy('r.competitionDate', "DESC")
+            ->where('r.competitionStatus = :competitionStatus')
+            ->andWhere('r.competitionApproved = :competitionApproved')
+            ->setParameter('competitionStatus', Competition::STATUS_FINISHED)
+            ->setParameter('competitionApproved', true)
+            ->getQuery()
+            ->getScalarResult();
+    }
+
+    /**
+     * @param \DateTime $startDate
+     * @param \DateTime $endDate
+     * @return array|null
+     */
+    public function getExpiredCompetitionByYears(\DateTime $startDate, \DateTime $endDate) :?array
+    {
+        return $competitions = $this->createQueryBuilder('r')
+            ->orderBy('r.competitionDate', "DESC")
+            ->where('r.competitionStatus = :competitionStatus')
+            ->andWhere('r.competitionApproved = :competitionApproved')
+            ->andWhere('r.competitionDate BETWEEN :startDate AND :endDate')
+            ->setParameter('startDate', $startDate)
+            ->setParameter('endDate', $endDate)
+            ->setParameter('competitionStatus', Competition::STATUS_FINISHED)
+            ->setParameter('competitionApproved', true)
+            ->getQuery()
+            ->getResult();
+    }
 }

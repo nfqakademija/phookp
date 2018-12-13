@@ -1,5 +1,5 @@
 .u-mt-10 {
-  margin-top: 10rem ;
+  margin-top: 10rem;
 }
 
 .u-mb-10 {
@@ -52,8 +52,17 @@
   font-weight: 700 !important;
 }
 
+.u-bg-main-text {
+  color: $mainGreen;
+}
+
+.u-bg-main-g {
+  background-color: $mainGreen;
+  background: linear-gradient(90deg, rgba(2, 0, 36, 1) 0%, rgba(37, 106, 93, 1) 44%, rgba(37, 106, 93, 1) 100%);
+}
+
 .u-bg-main {
-  background-color: $mainGreen !important;
+  background-color: $mainGreen;
 }
 
 .u-text-white {
@@ -76,7 +85,7 @@
   margin-top: 0 !important;
 }
 
-.u-font-13{
+.u-font-13 {
   font-size: 13px;
 }
 
@@ -84,6 +93,8 @@
   font-size: 24px;
 }
 
-.u-max-width-40{
-  max-width: 400px;
+.u-max-width-40 {
+  .u-max-width-40 {
+    max-width: 400px;
+  }
 }

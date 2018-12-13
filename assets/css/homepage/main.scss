@@ -10,6 +10,16 @@
   color: $mainGreen;
 }
 
+.fa-facebook-f {
+  -webkit-text-fill-color: white;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: $mainGreen;
+  &:hover {
+    -webkit-text-fill-color: $mainGreen;
+
+  }
+}
+
 .home-start {
   min-height: 100vh;
   margin-top: -20px;
@@ -59,9 +69,7 @@
 
 .event {
   font-size: 18px;
-}
-
-.event {
+  width: 100%;
   .event__heading {
     font-size: 26px;
     border-bottom: 1px solid #cccccc;
@@ -70,7 +78,7 @@
   }
   .card {
     flex-basis: 30%;
-    min-width: 30%;
+    min-width: 47%;
     margin-left: 1%;
     box-shadow: 0 2px 2px 0 rgba(0, 0, 0, .14), 0 3px 1px -2px rgba(0, 0, 0, .2), 0 1px 5px 0 rgba(0, 0, 0, .12);
     border-radius: 2px;
@@ -109,6 +117,7 @@
     .event__date {
       font-size: 20px;
       line-height: 30px;
+      border: 2px red;
       span {
         display: block;
         text-align: center;
@@ -174,7 +183,7 @@
   border: 1px solid $mainGreen;
 
   &:hover {
-    background-color: darken($mainGreen, 10%);
+    background-color: darken($mainGreen, 40%);
     color: #fff;
   }
 }
@@ -221,13 +230,13 @@
   width: 100%;
   margin-top: 25px;
 
-  .card-button-container {
-    width: 100%;
-    display: flex;
-    justify-content: space-around;
-  }
-  .card-title {
-    font-weight: 100;
+  .card__competitions {
+    flex-basis: 30%;
+    width: 50%;
+    margin-left: 1%;
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, .14), 0 3px 1px -2px rgba(0, 0, 0, .2), 0 1px 5px 0 rgba(0, 0, 0, .12);
+    border-radius: 2px;
+    transition: 0.5s;
     text-align: left;
   }
   .card {
@@ -239,12 +248,34 @@
     border-radius: 2px;
     transition: 0.5s;
     text-align: left;
+    .card-title {
+      font-weight: 100;
+      text-align: left;
+      width: 100%;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
     .card-text {
       margin-bottom: 10px;
       text-align: left;
+      width: 100%;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
-    .button {
-      height: auto;
+    .card-button-container {
+      width: 100%;
+      display: flex;
+      .button {
+        height: auto;
+        width: auto;
+        margin-top: 5px;
+      }
+      i {
+        font-size: 29px;
+        padding-top: 10px;
+      }
     }
   }
 }
@@ -323,3 +354,10 @@
   padding: 0 10px 40px 30px;
   border-bottom: 1px solid $mainGreen;
 }
+
+.a {
+  &:hover {
+    color: darken($mainGreen, 40%);
+  }
+}
+

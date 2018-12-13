@@ -11,8 +11,6 @@ namespace App\Services;
 use App\Entity\Competition;
 use App\Entity\Team;
 use App\Repository\TeamRepository;
-use Psr\Log\LoggerInterface;
-use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class TeamService
 {
@@ -20,26 +18,14 @@ class TeamService
      * @var TeamRepository
      */
     private $teamRepository;
-    /**
-     * @var LoggerInterface
-     */
-    private $logger;
-    /**
-     * @var ValidatorInterface
-     */
-    private $validator;
 
     /**
      * TeamService constructor.
      * @param TeamRepository $teamRepository
-     * @param LoggerInterface $logger
-     * @param ValidatorInterface $validator
      */
-    public function __construct(TeamRepository $teamRepository, LoggerInterface $logger, ValidatorInterface $validator)
+    public function __construct(TeamRepository $teamRepository)
     {
         $this->teamRepository = $teamRepository;
-        $this->validator = $validator;
-        $this->logger = $logger;
     }
 
     /**
