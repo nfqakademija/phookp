@@ -1,6 +1,6 @@
 <?php
 
-namespace App\DataFixtures\TotalFixtures;
+namespace App\DataFixtures\TotalFixtures\Pykaiciai2018Fixtures;
 
 use App\Entity\Team;
 use Doctrine\Bundle\FixturesBundle\Fixture;
@@ -21,7 +21,7 @@ class TeamFixtures extends Fixture implements DependentFixtureInterface
         $team->setFirstTeamMember("Darius Pėža");
         $team->setSecondTeamMember(" Rokas Vaitkevičius");
         $manager->persist($team);
-        $this->setReference($team->getTeamName(), $team);
+        $this->AddReference("3 1/4 Team_1", $team);
 
         $team = new Team();
         $team->setCompetition($competition);
@@ -30,7 +30,7 @@ class TeamFixtures extends Fixture implements DependentFixtureInterface
         $team->setFirstTeamMember("Andrius Senkus"	);
         $team->setSecondTeamMember("Augustas Pučkorius");
         $manager->persist($team);
-        $this->setReference($team->getTeamName(), $team);
+        $this->AddReference($team->getTeamName(), $team);
 
         $team = new Team();
         $team->setCompetition($competition);
@@ -39,7 +39,7 @@ class TeamFixtures extends Fixture implements DependentFixtureInterface
         $team->setFirstTeamMember("Lukas Buivydas"	);
         $team->setSecondTeamMember("Lukas Stancelis");
         $manager->persist($team);
-        $this->setReference($team->getTeamName(), $team);
+        $this->AddReference($team->getTeamName(), $team);
 
         $team = new Team();
         $team->setCompetition($competition);
@@ -48,7 +48,7 @@ class TeamFixtures extends Fixture implements DependentFixtureInterface
         $team->setFirstTeamMember("Lebeda Mindaugas"	);
         $team->setSecondTeamMember(" Giedrius Riskevicius");
         $manager->persist($team);
-        $this->setReference($team->getTeamName(), $team);
+        $this->AddReference($team->getTeamName(), $team);
 
         $team = new Team();
         $team->setCompetition($competition);
@@ -57,7 +57,7 @@ class TeamFixtures extends Fixture implements DependentFixtureInterface
         $team->setFirstTeamMember("Gintaras Puzinauskas"	);
         $team->setSecondTeamMember("Rimantas Kicas");
         $manager->persist($team);
-        $this->setReference($team->getTeamName(), $team);
+        $this->AddReference("Judex_1", $team);
 
         $team = new Team();
         $team->setCompetition($competition);
@@ -66,7 +66,7 @@ class TeamFixtures extends Fixture implements DependentFixtureInterface
         $team->setFirstTeamMember("Vytautas BU "	);
         $team->setSecondTeamMember("Olegas Ružickis");
         $manager->persist($team);
-        $this->setReference($team->getTeamName(), $team);
+        $this->AddReference($team->getTeamName(), $team);
 
         $team = new Team();
         $team->setCompetition($competition);
@@ -146,7 +146,7 @@ class TeamFixtures extends Fixture implements DependentFixtureInterface
 
 
         $manager->flush();
-        $this->setReference($team->getTeamName(), $team);
+        $this->AddReference($team->getTeamName(), $team);
 
     }
 

@@ -6,7 +6,7 @@
  * Time: 00.04
  */
 
-namespace App\DataFixtures\TopFiveFixtures;
+namespace App\DataFixtures\TopFiveFixtures\Top5Punia2018Fixtures;
 
 use App\Entity\Hash;
 use Doctrine\Bundle\FixturesBundle\Fixture;

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\DataFixtures\TotalFixtures;
+namespace App\DataFixtures\TotalFixtures\Pykaiciai2018Fixtures;
 
 use App\Entity\Hash;
 use Doctrine\Bundle\FixturesBundle\Fixture;
