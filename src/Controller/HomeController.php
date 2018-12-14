@@ -19,24 +19,32 @@ class HomeController extends Controller
         $years=array_values($expiredCompetitionsYears)[0][1];
         $expiredCompetitions =  $competitionService->getExpiredCompetitionsByYears($years);
         $goingCompetitionsCount = count($goingCompetitions);
+        $competitions=[];
         switch ($goingCompetitionsCount) {
             case  0:
                 $expiredCompetitions = array_slice($expiredCompetitions, 0, 2);
-                return $this->render("home/index.html.twig",
+                $competitions=
                     [
                         "expiredCompetitions" => $expiredCompetitions,
-                    ]);
+                    ];
+                break;
             case  1:
                 $expiredCompetitions = array_slice($expiredCompetitions, 0, 1);
-                return $this->render("home/index.html.twig",
+                $competitions=
                     [
                         "goingCompetitions" => $goingCompetitions,
                         "expiredCompetitions" => $expiredCompetitions
-                    ]);
+                    ];
+                break;
             default:
-                return $this->render("home/index.html.twig",
-                    ["goingCompetitions" => $goingCompetitions]);
+                $competitions=
+                    ["goingCompetitions" => $goingCompetitions];
+                break;
         }
+        return $this->render("home/index.html.twig",
+            [
+                "competitions" => $competitions,
+            ]);
 
     }
 
