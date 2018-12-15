@@ -16,7 +16,7 @@ class HomeController extends Controller
     {
         $goingCompetitions = $competitionService->getGoingCompetitions();
         $expiredCompetitionsYears = $competitionService->getExpiredCompetitionsYears();
-        $years = array_values($expiredCompetitionsYears)[0][1];
+        $years = array_values($expiredCompetitionsYears)[0]['years'];
         $expiredCompetitions = $competitionService->getExpiredCompetitionsByYears($years);
         $goingCompetitionsCount = count($goingCompetitions);
         $competitions = [];
