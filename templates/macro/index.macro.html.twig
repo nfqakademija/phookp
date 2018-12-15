@@ -1,4 +1,8 @@
-{% macro printCompetitions(competitions, picture, futureCompetition, rules ) %}
+{% macro printCompetitions(competitions, picture, futureCompetition) %}
+    {% set rules =0 %}
+    {% if app.request.get('_route')=='homeCompetitions' %}
+        {% set rules =1 %}
+    {% endif %}
     {% for key, competition in competitions %}
         <div class="card  ">
         <div class="card-body p-0">
@@ -34,11 +38,11 @@
                         {% endif %}
                         <div class="event-button-container d-flex flex-wrap">
                             <div class="col-6 px-0 text-left">
-                                {% if futureCompetition == 1 %}
-                                {% else %}
                                     <a href="/results/{{ competition['id'] }}" class="btn button">Rezultatai</a>
                                     {% if rules == 1 %}
-                                        <button id="button_{{ key }}" data-container="content_{{ key }}" class="btn button collapsible">Reglamentas <i class="fas fa-caret-down"></i></button>
+                                        <button id="button_{{ key }}" data-container="content_{{ key }}"
+                                                class="btn button collapsible">Reglamentas <i
+                                                    class="fas fa-caret-down"></i></button>
                                     {% endif %}
                                 {% endif %}
                             </div>
@@ -54,9 +58,9 @@
                                 </div>
                             {% endif %}
                             {% if rules == 1 %}
-                            <div class="content" id="content_{{ key }}">
-                                {{ competition['rules'] }}
-                            </div>
+                                <div class="content" id="content_{{ key }}">
+                                    {{ competition['rules'] }}
+                                </div>
                             {% endif %}
                         </div>
                     </div>

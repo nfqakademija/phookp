@@ -2,7 +2,6 @@
 {% import 'macro/index.macro.html.twig' as myMacros %}
 {% block title %}Renginiai{% endblock %}
 {% set picture = 0 %}
-{% set rules = 1 %}
 {% set futureCompetition=0 %}
 {% block body %}
     <div class="page-name-container">
@@ -15,19 +14,17 @@
                 {% if futureCompetitions != null %}
                     {% set futureCompetition=1 %}
                     <div class="offset-lg-2 col-lg-8 px-0 event">
-                    {% for competition in futureCompetitions %}
-                        {{ myMacros.printCompetitions(
-                            futureCompetitions,
-                            picture,
-                            futureCompetition,
-                            rules
-                        ) }}
-                    {% endfor %}
-                </div>
-            {% else %}
-                <div class=" event d-flex justify-content-center align-items-center">
-                    <h6>Šiuo metu būsimų varžybų nėra.</h6>
-                </div>
+                        {% for competition in futureCompetitions %}
+                            {{ myMacros.printCompetitions(
+                                futureCompetitions,
+                                picture,
+                                futureCompetition) }}
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <div class=" event d-flex justify-content-center align-items-center">
+                        <h6>Šiuo metu būsimų varžybų nėra.</h6>
+                    </div>
                 {% endif %}
             </div>
         </div>
@@ -51,9 +48,7 @@
                         {{ myMacros.printCompetitions(
                             expiredCompetitions,
                             picture,
-                            futureCompetition,
-                            rules
-                        ) }}
+                            futureCompetition) }}
                     </div>
                 </div>
             </div>
