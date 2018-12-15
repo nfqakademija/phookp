@@ -84,6 +84,18 @@
     border-radius: 2px;
     transition: 0.5s;
     text-align: left;
+    .active, .collapsible:hover {
+      background-color: #555;
+    }
+    .collapsible{
+      background: #6c757d;
+    }
+    .content {
+      font-size: 13px;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.2s ease-out;
+    }
     .event__data {
       border-left: 1px solid #ccc;
     }
@@ -100,6 +112,7 @@
       text-overflow: ellipsis;
 
       i {
+        padding: 1%;
         font-size: 27px;
       }
     }

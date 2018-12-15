@@ -2989,7 +2989,6 @@ class ResultFixtures extends Fixture implements DependentFixtureInterface
         $manager->persist($result);
 
 
-
         $result = new Result();
         $result->setTeam($team9);
         $result->setWeighing($weighing1);

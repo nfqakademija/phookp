@@ -64,7 +64,7 @@ class CompetitionRepository extends ServiceEntityRepository
     {
 
         return $years = $this->createQueryBuilder('r')
-            ->select('YEAR(r.competitionDate)')
+            ->select('YEAR(r.competitionDate) as years')
             ->distinct()
             ->orderBy('r.competitionDate', "DESC")
             ->where('r.competitionStatus = :competitionStatus')

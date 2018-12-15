@@ -157,7 +157,7 @@ class Competition
     private $competitionLink;
 
     /**
-     * @ORM\Column(type="string", nullable=true)
+     * @ORM\Column(type="text", nullable=true)
      * @Assert\Length(
      *    max="4000",
      *    maxMessage="Taisyklių sąrašas negali viršyti 4000 simbolių"

@@ -1,5 +1,5 @@
-{% macro printCompetitions(competitions, picture, futureCompetition) %}
-    {% for competition in competitions %}
+{% macro printCompetitions(competitions, picture, futureCompetition, rules ) %}
+    {% for key, competition in competitions %}
         <div class="card  ">
         <div class="card-body p-0">
             <div class="row event mx-0">
@@ -36,7 +36,10 @@
                             <div class="col-6 px-0 text-left">
                                 {% if futureCompetition == 1 %}
                                 {% else %}
-                                <a href="/results/{{ competition['id'] }}" class="btn button">Rezultatai</a>
+                                    <a href="/results/{{ competition['id'] }}" class="btn button">Rezultatai</a>
+                                    {% if rules == 1 %}
+                                        <button id="button_{{ key }}" class="btn button collapsible">Reglamentas</button>
+                                    {% endif %}
                                 {% endif %}
                             </div>
                             {% if competition['link'] %}
@@ -45,11 +48,14 @@
                                         <i class="fab fa-facebook-f"></i>
                                     </a>
                                 </div>
-                                {% else %}
-                                    <div class="col-6 text-right">
-                                        <i class="fab fa-facebook text-white"></i>
-                                    </div>
+                            {% else %}
+                                <div class="col-6 text-right">
+                                    <i class="fab fa-facebook text-white"></i>
+                                </div>
                             {% endif %}
+                            <div class="content" id="content_{{ key }}">
+                                {{ competition['rules'] }}
+                            </div>
                         </div>
                     </div>
                 </div>

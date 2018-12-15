@@ -16,28 +16,28 @@ class HomeController extends Controller
     {
         $goingCompetitions = $competitionService->getGoingCompetitions();
         $expiredCompetitionsYears = $competitionService->getExpiredCompetitionsYears();
-        $years=array_values($expiredCompetitionsYears)[0][1];
-        $expiredCompetitions =  $competitionService->getExpiredCompetitionsByYears($years);
+        $years = array_values($expiredCompetitionsYears)[0][1];
+        $expiredCompetitions = $competitionService->getExpiredCompetitionsByYears($years);
         $goingCompetitionsCount = count($goingCompetitions);
-        $competitions=[];
+        $competitions = [];
         switch ($goingCompetitionsCount) {
             case  0:
                 $expiredCompetitions = array_slice($expiredCompetitions, 0, 2);
-                $competitions=
+                $competitions =
                     [
                         "expiredCompetitions" => $expiredCompetitions,
                     ];
                 break;
             case  1:
                 $expiredCompetitions = array_slice($expiredCompetitions, 0, 1);
-                $competitions=
+                $competitions =
                     [
                         "goingCompetitions" => $goingCompetitions,
                         "expiredCompetitions" => $expiredCompetitions
                     ];
                 break;
             default:
-                $competitions=
+                $competitions =
                     ["goingCompetitions" => $goingCompetitions];
                 break;
         }
@@ -52,11 +52,11 @@ class HomeController extends Controller
      * @param CompetitionService $competitionService
      * @return Response
      */
-    public function competitions( CompetitionService $competitionService)
+    public function competitions(CompetitionService $competitionService)
     {
         $futureCompetitions = $competitionService->getFutureCompetitions();
         $expiredCompetitionsYears = $competitionService->getExpiredCompetitionsYears();
-        $years=array_values($expiredCompetitionsYears)[0][1];
+        $years = array_values($expiredCompetitionsYears)[0]['years'];
         $expiredCompetitionsByYears = $competitionService->getExpiredCompetitionsByYears($years);
 
         return $this->render("home/competitions.html.twig",
@@ -72,7 +72,7 @@ class HomeController extends Controller
      * @param CompetitionService $competitionService
      * @return Response
      */
-    public function competitionsByYears(string $years,CompetitionService $competitionService)
+    public function competitionsByYears(string $years, CompetitionService $competitionService)
     {
         $expiredCompetitionsYears = $competitionService->getExpiredCompetitionsYears();
         $futureCompetitions = $competitionService->getFutureCompetitions();
