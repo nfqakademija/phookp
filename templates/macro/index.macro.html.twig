@@ -6,7 +6,7 @@
                 {% if picture == 1 %}
                 <div class="col-md-3 d-none d-md-flex align-items-center justify-content-center  u-bg-picture">
                     {% else %}
-                    <div class="col-md-3 d-none d-md-flex align-items-center justify-content-center  u-bg-main-g">
+                    <div class="col-md-3 d-none d-md-flex align-items-center justify-content-center  u-bg-picture">
                         {% endif %}
                         <div class="event__date text-white font-weight-bold">
                     <span class="year">
@@ -38,7 +38,7 @@
                                 {% else %}
                                     <a href="/results/{{ competition['id'] }}" class="btn button">Rezultatai</a>
                                     {% if rules == 1 %}
-                                        <button id="button_{{ key }}" data-container="content_{{ key }}" class="btn button collapsible">Reglamentas</button>
+                                        <button id="button_{{ key }}" data-container="content_{{ key }}" class="btn button collapsible">Reglamentas <i class="fas fa-caret-down"></i></button>
                                     {% endif %}
                                 {% endif %}
                             </div>
@@ -53,9 +53,11 @@
                                     <i class="fab fa-facebook text-white"></i>
                                 </div>
                             {% endif %}
+                            {% if rules == 1 %}
                             <div class="content" id="content_{{ key }}">
                                 {{ competition['rules'] }}
                             </div>
+                            {% endif %}
                         </div>
                     </div>
                 </div>
