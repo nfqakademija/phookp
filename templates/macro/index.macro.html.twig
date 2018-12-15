@@ -38,7 +38,7 @@
                                 {% else %}
                                     <a href="/results/{{ competition['id'] }}" class="btn button">Rezultatai</a>
                                     {% if rules == 1 %}
-                                        <button id="button_{{ key }}" class="btn button collapsible">Reglamentas</button>
+                                        <button id="button_{{ key }}" data-container="content_{{ key }}" class="btn button collapsible">Reglamentas</button>
                                     {% endif %}
                                 {% endif %}
                             </div>
