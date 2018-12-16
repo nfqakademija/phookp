@@ -2,7 +2,6 @@
 {% import 'macro/index.macro.html.twig' as myMacros %}
 {% block title %}Renginiai{% endblock %}
 {% set picture = 0 %}
-{% set futureCompetition=0 %}
 {% block body %}
     <div class="page-name-container">
         <h2>Varžybos</h2>
@@ -12,13 +11,12 @@
             <h2 class="heading heading--blue-border heading--center">Būsimos varžybos</h2>
             <div class="row">
                 {% if futureCompetitions != null %}
-                    {% set futureCompetition=1 %}
                     <div class="offset-lg-2 col-lg-8 px-0 event">
                         {% for competition in futureCompetitions %}
                             {{ myMacros.printCompetitions(
-                                futureCompetitions,
-                                picture,
-                                futureCompetition) }}
+                                competition,
+                                1
+                                    ) }}
                         {% endfor %}
                     </div>
                 {% else %}
@@ -37,18 +35,23 @@
                 <div class="col-lg-2">
                     <div class="list-group d-none d-sm-block px-0 ">
                         {% for years in expiredCompetitionsYears %}
-                            <h2><a href="/home/competitions/{{ years['years'] }}#competitions"
-                                   class="list-group-item u-bg-main-text">{{ years['years'] }}</a>
-                            </h2>
+                            {{ myMacros.printYears(years) }}
+                        {% endfor %}
+                    </div>
+                    <div class="list-group d-md-none sidebar">
+                        <button class="button" id="years">Metai</button>
+                        {% for years in expiredCompetitionsYears %}
+                        {{ myMacros.printYears(years) }}
                         {% endfor %}
                     </div>
                 </div>
                 <div class="col-lg-8 px-0">
-                    <div class="event">
+                    <div class="event" id="event">
+                        {% for competition in expiredCompetitions%}
                         {{ myMacros.printCompetitions(
-                            expiredCompetitions,
-                            picture,
-                            futureCompetition) }}
+                            competition,
+                            0) }}
+                        {% endfor %}
                     </div>
                 </div>
             </div>

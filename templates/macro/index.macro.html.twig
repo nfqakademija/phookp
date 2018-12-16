@@ -1,70 +1,79 @@
-{% macro printCompetitions(competitions, picture, futureCompetition) %}
+{% macro printCompetitions(competition,futureCompetition) %}
     {% set rules =0 %}
-    {% if app.request.get('_route')=='homeCompetitions' %}
+    {% if app.request.get('_route') =='homeExpiredCompetitions' or app.request.get('_route')=='homeCompetitions' %}
         {% set rules =1 %}
     {% endif %}
-    {% for key, competition in competitions %}
-        <div class="card  ">
+    {% if app.request.get('_route')=='home' %}
+        {% set picture = 1 %}
+    {% endif %}
+    <div class="card  ">
         <div class="card-body p-0">
             <div class="row event mx-0">
-                {% if picture == 1 %}
                 <div class="col-md-3 d-none d-md-flex align-items-center justify-content-center  u-bg-picture">
-                    {% else %}
-                    <div class="col-md-3 d-none d-md-flex align-items-center justify-content-center  u-bg-picture">
-                        {% endif %}
-                        <div class="event__date text-white font-weight-bold">
+                    <div class="event__date text-white font-weight-bold">
                     <span class="year">
                         {{ competition['year'] }}
                     </span>
-                            <span class="month">
+                        <span class="month">
                         {{ competition['month'] }}
                         </span>
-                            <span class="days">
+                        <span class="days">
                         {{ competition['days'] }}
                         </span>
-                        </div>
                     </div>
-                    <div class="col-md-9  event__data py-2">
-                        <h2 class="event__name">{{ competition['name'] }}</h2>
-                        <div class="d-md-none">
-                            <i class="fa fa-calendar-alt"></i> {{ competition['year'] }} {{ competition['month'] }} {{ competition['days'] }}
-                            d.
+                </div>
+                <div class="col-md-9  event__data py-2">
+                    <h2 class="event__name">{{ competition['name'] }}</h2>
+                    <div class="d-md-none">
+                        <i class="fa fa-calendar-alt"></i> {{ competition['year'] }} {{ competition['month'] }} {{ competition['days'] }}
+                        d.
+                    </div>
+                    {% if competition['location']!= null %}
+                        <div class="event__place">
+                            <i class="fa  fa-map-marker-alt"></i> <span
+                                    class="ml-2">{{ competition['location'] }}</span>
                         </div>
-                        {% if competition['location']!= null %}
-                            <div class="event__place">
-                                <i class="fa  fa-map-marker-alt"></i> <span
-                                        class="ml-2">{{ competition['location'] }}</span>
-                            </div>
-                        {% endif %}
-                        <div class="event-button-container d-flex flex-wrap">
-                            <div class="col-6 px-0 text-left">
-                                    <a href="/results/{{ competition['id'] }}" class="btn button">Rezultatai</a>
-                                    {% if rules == 1 %}
-                                        <button id="button_{{ key }}" data-container="content_{{ key }}"
-                                                class="btn button collapsible">Reglamentas <i
-                                                    class="fas fa-caret-down"></i></button>
-                                    {% endif %}
-                            </div>
-                            {% if competition['link'] %}
-                                <div class="col-6 text-right">
-                                    <a href="{{ competition['link'] }}">
-                                        <i class="fab fa-facebook-f"></i>
-                                    </a>
-                                </div>
+                    {% endif %}
+                    <div class="event-button-container d-flex flex-wrap">
+                        <div class="col-6 px-0 text-left">
+                            {% if futureCompetition == 0 %}
+                                <a href="/results/{{ competition['id'] }}" class="btn button">Rezultatai</a>
                             {% else %}
-                                <div class="col-6 text-right">
-                                    <i class="fab fa-facebook text-white"></i>
-                                </div>
                             {% endif %}
                             {% if rules == 1 %}
-                                <div class="content" id="content_{{ key }}">
-                                    {{ competition['rules'] }}
-                                </div>
+                                {% if competition['rules'] is not empty %}
+                                    <button id="button_{{ competition['id'] }}"
+                                            data-container="content_{{ competition['id'] }}"
+                                            class="btn button collapsible">Reglamentas <i
+                                                class="fas fa-caret-down"></i></button>
+                                {% endif %}
                             {% endif %}
                         </div>
+                        {% if competition['link'] %}
+                            <div class="col-6 text-right">
+                                <a href="{{ competition['link'] }}">
+                                    <i class="fab fa-facebook-f"></i>
+                                </a>
+                            </div>
+                        {% else %}
+                            <div class="col-6 text-right">
+                                <i class="fab fa-facebook text-white"></i>
+                            </div>
+                        {% endif %}
+                        {% if rules == 1 %}
+                            <div class="content" id="content_{{ competition['id'] }}">
+                                {{ competition['rules'] }}
+                            </div>
+                        {% endif %}
                     </div>
                 </div>
             </div>
         </div>
-    {% endfor %}
+    </div>
+{% endmacro %}
+
+{% macro printYears(years) %}
+    <h2><a href="/home/competitions/{{ years['years'] }}#competitions"
+           class="list-group-item u-bg-main-text">{{ years['years'] }}</a>
+    </h2>
 {% endmacro %}
