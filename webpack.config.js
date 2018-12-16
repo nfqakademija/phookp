@@ -21,6 +21,8 @@ Encore
     .addEntry('js/resultsForm', './assets/js/resultsForm.js')
     .addEntry('js/deleteTeam', './assets/js/deleteTeam.js')
     .addEntry('js/results', './assets/js/results.js')
+    .addEntry('js/sideBar', './assets/js/sideBar.js')
+    .addEntry('js/card', './assets/js/card.js')
     .addEntry('js/reglament', './assets/js/reglament.js')
     .addStyleEntry('css/app', './assets/css/app.scss')
     .addStyleEntry('css/tingle.min', './assets/css/tingle.min.css')

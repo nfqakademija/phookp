@@ -33,12 +33,12 @@
             <h2 class="heading heading--blue-border heading--center" id="competitions">Praėjusios varžybos</h2>
             <div class="row">
                 <div class="col-lg-2">
-                    <div class="list-group d-none d-sm-block px-0 ">
+                    <div class="list-group d-none d-lg-block d-xl-block px-0 ">
                         {% for years in expiredCompetitionsYears %}
                             {{ myMacros.printYears(years) }}
                         {% endfor %}
                     </div>
-                    <div class="d-sm-none">
+                    <div class="d-none d-block d-md-block d-sm-block d-lg-none">
                         <span class="u-bg-main-text years" id="open">Varžybų archyvas <i class="fas fa-angle-double-right"></i></span>
                         <div id="mySidenav" class="sidenav">
                             <a href="javascript:void(0)" id="close" class="closebtn"><i class="fas fa-angle-double-left"></i></a>
@@ -60,4 +60,7 @@
             </div>
         </div>
     </section>
+
+    <script src="{{ asset('build/js/card.js') }}"></script>
+    <script src="{{ asset('build/js/sideBar.js') }}"></script>
 {% endblock %}
