@@ -1,0 +1,32 @@
+<div class="card js-overview-table flex-fill p-0 rounded-0 shadow ml-2">
+    <div class="card-header u-bg-main text-white h4 u-text-bold rounded-0">
+        <span class="fas fa-book h4 px-2 "></span>Varžybų informacija
+    </div>
+    <div class="card-body p-1">
+        <div class="row mx-0 py-1">
+                    <div class="col-6 card-text text-left u-text-bold"> Organizatorius: </div>
+                    <div class="col">{{ competition.CompetitionOrganiser }}</div>
+                </div>
+        {% if competition.CompetitionLocation %}
+            <div class="row mx-0 py-1">
+                <div class="col-6 u-text-bold">
+                    Vieta:
+                </div>
+                   <div
+                  class="col">{{ competition.CompetitionLocation }}</div>
+            </div>
+        {% endif %}
+        <div class="row mx-0 py-1">
+            <div class="col-6 card-text text-left u-text-bold"> Pradžia: </div>
+            <div class="col">{{ competition.CompetitionDate.format("Y-m-d") }}</div>
+        </div>
+        <div class="row mx-0 py-3 d-flex justify-content-end">
+            <button class="btn btn-secondary" id="btn_rules" data-rules="{{competition.CompetitionRules}}">Reglamentas</button>
+            {% if competition.CompetitionLink %}
+                 <a href="{{ competition.CompetitionLink }}">
+                      <i class="fab fa-facebook-f h2 px-3 mb-0 u-line-height-12"></i>
+                 </a>
+            {% endif %}
+        </div>
+    </div>
+</div>

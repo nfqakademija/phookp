@@ -246,7 +246,7 @@ class OrganizerController extends AbstractController implements AuthorizedContro
         if (count($weighings) === 0 || count($weighings) < $weighingNr) {
             $weighing = new Weighing();
 
-            for ($i = 0; $i < 5; $i++) {
+            for ($i = 0; $i < 1; $i++) {
                 $result = new Result();
                 $weighing->addResult($result);
             }
@@ -257,7 +257,7 @@ class OrganizerController extends AbstractController implements AuthorizedContro
             do {
                 $result = new Result();
                 $weighing->addResult($result);
-            } while (count($weighing->getResults()) < 5);
+            } while (count($weighing->getResults()) < 1);
 
         }
 
