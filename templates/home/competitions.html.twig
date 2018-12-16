@@ -16,7 +16,7 @@
                             {{ myMacros.printCompetitions(
                                 competition,
                                 1
-                                    ) }}
+                            ) }}
                         {% endfor %}
                     </div>
                 {% else %}
@@ -38,19 +38,13 @@
                             {{ myMacros.printYears(years) }}
                         {% endfor %}
                     </div>
-                    <div class="list-group d-md-none sidebar">
-                        <button class="button" id="years">Metai</button>
-                        {% for years in expiredCompetitionsYears %}
-                        {{ myMacros.printYears(years) }}
-                        {% endfor %}
-                    </div>
                 </div>
                 <div class="col-lg-8 px-0">
                     <div class="event" id="event">
-                        {% for competition in expiredCompetitions%}
-                        {{ myMacros.printCompetitions(
-                            competition,
-                            0) }}
+                        {% for competition in expiredCompetitions %}
+                            {{ myMacros.printCompetitions(
+                                competition,
+                                0) }}
                         {% endfor %}
                     </div>
                 </div>
