@@ -14,18 +14,22 @@
                     <div class="event">
                         {% if competitions['goingCompetitions'] is defined %}
                         <h3 class="event__heading mb-4">Šiuo metu vyksta:</h3>
+                            {% for competition in competitions['goingCompetitions'] %}
                         {{ myMacros.printCompetitions(
-                            competitions['goingCompetitions'],
-                            picture
+                            competition,
+                            0
                         )
                         }}
+                            {% endfor %}
                         {% endif %}
                         {% if competitions['expiredCompetitions'] is defined %}
                             <h3 class="event__heading mb-4">Paskutinės varžybos:</h3>
+                            {% for competition in competitions['expiredCompetitions'] %}
                             {{ myMacros.printCompetitions(
-                                competitions['expiredCompetitions'],
-                                picture)
+                                competition,
+                                0)
                             }}
+                            {% endfor %}
                         {% endif %}
 
                     </div>
