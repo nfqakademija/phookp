@@ -38,6 +38,15 @@
                             {{ myMacros.printYears(years) }}
                         {% endfor %}
                     </div>
+                    <div class="d-sm-none">
+                        <span class="u-bg-main-text years" id="open">Varžybų archyvas <i class="fas fa-angle-double-right"></i></span>
+                        <div id="mySidenav" class="sidenav">
+                            <a href="javascript:void(0)" id="close" class="closebtn"><i class="fas fa-angle-double-left"></i></a>
+                            {% for years in expiredCompetitionsYears %}
+                                {{ myMacros.printYears(years) }}
+                            {% endfor %}
+                        </div>
+                    </div>
                 </div>
                 <div class="col-lg-8 px-0">
                     <div class="event" id="event">

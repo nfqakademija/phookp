@@ -88,16 +88,16 @@
       background-color: $mainGreen;
       color: white;
     }
-    .collapsible{
+    .collapsible {
       background: white;
       color: $mainGreen;
       border: solid 1px $mainGreen;
-      i{
+      i {
         font-size: 15px !important;
         padding: 0px 5px !important;
 
       }
-  }
+    }
     .content {
       font-size: 13px;
       max-height: 0;
@@ -211,6 +211,38 @@
   }
 }
 
+.sidenav {
+  height: 100%;
+  width: 0;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  background-color: white;
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 60px;
+  a {
+    padding: 8px 8px 8px 32px;
+    text-decoration: none;
+    font-size: 25px;
+    color: $mainGreen;
+    display: block;
+    transition: 0.3s;
+  }
+
+  .closebtn {
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+    cursor:pointer;
+  }
+}
+.years{
+  font-size:30px;
+  cursor:pointer;
+}
+
 .home-right-side {
   min-height: 100vh;
   background-size: cover;
@@ -302,7 +334,8 @@
     }
   }
 }
-.years-bar{
+
+.years-bar {
   margin-left: -145px;
 }
 
