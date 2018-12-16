@@ -31,7 +31,7 @@
 }
 
 .u-bg-picture {
-  background: url("/images/date.png")  fixed;
+  background: url("/images/date.png") fixed;
 }
 
 .bg-red {
@@ -59,10 +59,10 @@
 }
 
 .u-bg-main-g {
-  background: rgb(117,125,124);
-  background: linear-gradient(90deg, rgba(117,125,124,0.49901959074645486) 0%, rgba(37,106,93,1) 37%);
+  background: rgb(30, 85, 75);
+  background: linear-gradient(90deg, rgba(30, 85, 75, 0.7035013834635417) 4%, rgba(37, 106, 93, 0.9864145487296481) 47%, rgba(37, 106, 93, 0.6502800949481355) 88%);
 }
-.u-bg-main {
+  .u-bg-main {
   background-color: $mainGreen;
 }
 
@@ -76,6 +76,7 @@
 
 .u-text-silver {
   color: $crownSilver;
+
 }
 
 .u-text-bronze {
