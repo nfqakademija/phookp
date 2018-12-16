@@ -85,8 +85,10 @@ const openResultsModal = (e) => {
 
         modal.setContent(modalHeader(team) + modalContent);
         const resultsTable = document.querySelector('.js-modal-table');
+        if(resultsTable){
+            resultsTable.style.height = screen.height / 1.5+"px";
+        }
 
-        resultsTable.style.height = screen.height / 1.5+"px";
 
         modal.open();
     }

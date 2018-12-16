@@ -71,5 +71,13 @@
       left: -25px;
       margin: 0;
     }*/
+
+  }
+}
+
+@include medium-screen {
+  .js-overview-table {
+    margin-left: 0 !important;
+    //margin-bottom: 10px !important;
   }
 }
