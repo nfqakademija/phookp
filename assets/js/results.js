@@ -1,7 +1,7 @@
 import tingle from 'tingle.js';
 
 
-var modal = new tingle.modal({
+const modal = new tingle.modal({
     footer: true,
     stickyFooter: true,
     closeMethods: [],
@@ -42,7 +42,7 @@ const buildTop5Table = (results) =>{
 };
 
 const buildTotalHeader = () => {
-    return `<table><tr class="row mx-0 u-bg-main text-white u-text-bold">
+    return `<table class="w-100"><tr class="row mx-0 u-bg-main text-white u-text-bold">
                 <th class="col-4">Svėrimo nr.</th>
                 <th class="col-4">Svoris (kg)</th>
                 <th class="col-4">Žuvų skaičius</th>
@@ -60,7 +60,7 @@ const totalResultsTemplate = (number, weigh, count) => {
 
 const buildTotalTable = (weighings) => {
     const container = document.createElement('div');
-    container.className = 'table-responsive h-75';
+    container.className = 'table-responsive js-modal-table';
     const table = document.createElement('table');
     table.className = "w-100";
     for(let i = 0; i < weighings.length; i++){
@@ -84,13 +84,25 @@ const openResultsModal = (e) => {
             return;
 
         modal.setContent(modalHeader(team) + modalContent);
+        const resultsTable = document.querySelector('.js-modal-table');
+
+        resultsTable.style.height = screen.height / 1.5+"px";
+
         modal.open();
     }
 };
 
+const alignTables = () => {
+    const resultTable = document.querySelector(".results-table");
+    const style = window.getComputedStyle(resultTable, null);
+    const width = style.getPropertyValue("width");
+    document.querySelector('.js-overview-table').parentElement.style.width = width;
+};
 
+alignTables();
 
 const resultRows = document.querySelectorAll('.js-results-accessor');
 Array.from(resultRows).forEach(function(element) {
     element.addEventListener('click', openResultsModal);
 });
+
