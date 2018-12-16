@@ -49,6 +49,7 @@ class Competition
      * )
      * @Assert\Range(
      *     max="+2 years",
+     *     min="now",
      *     minMessage="Neteisingai nurodyta renginio data!",
      *     maxMessage="Negalima planuoti renginių daugiau nei du metai į priekį!"
      * )
@@ -127,7 +128,7 @@ class Competition
 
     /**
      * @ORM\Column(type="integer")
-     * @Assert\Length(
+     * @Assert\Range(
      *     min="1",
      *     max="99",
      *     minMessage="Varžybų komandų skaičius negali būti mažesnis nei 1!",
@@ -138,7 +139,7 @@ class Competition
 
     /**
      * @ORM\Column(type="integer")
-     * @Assert\Length(
+     * @Assert\Range(
      *     min="1",
      *     max="20",
      *     minMessage="Svėrimų skaičius negali būti mažesnis nei 1!",
