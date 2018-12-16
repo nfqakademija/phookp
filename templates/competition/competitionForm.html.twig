@@ -1,6 +1,5 @@
 {% extends 'base.html.twig' %}
 {% block title %} Organizuoti varžybas {% endblock %}
-{% form_theme form 'bootstrap_4_layout.html.twig' %}
 {% block body %}
     <div class="page-name-container">
         <h2>Organizuoti varžybas</h2>
@@ -20,20 +19,72 @@
                 <div class="card mt-4 form__card bg-light">
                     <div class="card-body">
                         <h3 class="card-title">Renginio sukūrimas </h3>
+                        <div class="text-danger text-left my-3">
+                            {{ form_errors(form.competitionRules) }}
+                            {{ form_errors(form.competitionLink) }}
+                            {{ form_errors(form.competitionWeighingsCount) }}
+                            {{ form_errors(form.competitionTeamsCount) }}
+                            {{ form_errors(form.competitionLocation) }}
+                            {{ form_errors(form.competitionType) }}
+                            {{ form_errors(form.competitionDuration) }}
+                            {{ form_errors(form.competitionName) }}
+                            {{ form_errors(form.competitionOrganiserEmail) }}
+                            {{ form_errors(form.competitionOrganiser) }}
+                        </div>
                         <p class="card-text">
                             {{ form_start(form) }}
                             {{ form_errors(form) }}
-                            {{ form_row(form.competitionOrganiser)  }}
-                            {{ form_row(form.competitionOrganiserEmail) }}
-                            {{ form_row(form.competitionName) }}
-                            {{ form_row(form.competitionDate) }}
-                            {{ form_row(form.competitionDuration) }}
-                            {{ form_row(form.competitionType) }}
-                            {{ form_row(form.competitionLocation) }}
-                            {{ form_row(form.competitionTeamsCount) }}
-                            {{ form_row(form.competitionWeighingsCount) }}
-                            {{ form_row(form.competitionLink) }}
-                            {{ form_row(form.competitionRules) }}
+                        <div class="has-float-label">
+                            {{ form_widget(form.competitionOrganiser) }}
+                            {{ form_help(form.competitionOrganiser) }}
+                            {{ form_label(form.competitionOrganiser) }}
+                        </div>
+                        <div class="has-float-label">
+                            {{ form_widget(form.competitionOrganiserEmail) }}
+                            {{ form_help(form.competitionOrganiserEmail) }}
+                            {{ form_label(form.competitionOrganiserEmail) }}
+                        </div>
+                        <div class="has-float-label">
+                            {{ form_widget(form.competitionName) }}
+                            {{ form_help(form.competitionName) }}
+                            {{ form_label(form.competitionName) }}
+                        </div>
+                        {{ form_row(form.competitionDate) }}
+                        <div class="has-float-label">
+                            {{ form_widget(form.competitionDuration) }}
+                            {{ form_help(form.competitionDuration) }}
+                            {{ form_label(form.competitionDuration) }}
+                        </div>
+                        <div class="has-float-label">
+                            {{ form_widget(form.competitionType) }}
+                            {{ form_help(form.competitionType) }}
+                            {{ form_label(form.competitionType) }}
+                        </div>
+                        <div class="has-float-label">
+                            {{ form_widget(form.competitionLocation) }}
+                            {{ form_help(form.competitionLocation) }}
+                            {{ form_label(form.competitionLocation) }}
+                        </div>
+                        <div class="has-float-label">
+                            {{ form_widget(form.competitionTeamsCount) }}
+                            {{ form_help(form.competitionTeamsCount) }}
+                            {{ form_label(form.competitionTeamsCount) }}
+                        </div>
+                        <div class="has-float-label">
+                            {{ form_widget(form.competitionWeighingsCount) }}
+                            {{ form_help(form.competitionWeighingsCount) }}
+                            {{ form_label(form.competitionWeighingsCount) }}
+                        </div>
+                        <div class="has-float-label">
+                            {{ form_widget(form.competitionLink) }}
+                            {{ form_help(form.competitionLink) }}
+                            {{ form_label(form.competitionLink) }}
+                        </div>
+                        <div class="has-float-label">
+                            {{ form_widget(form.competitionRules) }}
+                            {{ form_help(form.competitionRules) }}
+                            {{ form_label(form.competitionRules) }}
+                        </div>
                             {{ form_row(form.save) }}
                             {{ form_end(form) }}
                         </p>
