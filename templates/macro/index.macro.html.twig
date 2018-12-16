@@ -9,7 +9,12 @@
     <div class="card  ">
         <div class="card-body p-0">
             <div class="row event mx-0">
-                <div class="col-md-3 d-none d-md-flex align-items-center justify-content-center  u-bg-picture">
+            {% if picture is defined %}
+                                <div class="col-md-3 d-none d-md-flex align-items-center justify-content-center u-bg-picture ">
+                                {% else %}
+
+                <div class="col-md-3 d-none d-md-flex align-items-center justify-content-center u-bg-main-g ">
+                {% endif %}
                     <div class="event__date text-white font-weight-bold">
                     <span class="year">
                         {{ competition['year'] }}
