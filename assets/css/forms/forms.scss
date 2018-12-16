@@ -1,10 +1,15 @@
+@import "float-label";
+
 *:focus {
   outline: none !important;
 }
 
 .form-control {
   select {
-    border: none;
+    border-bottom: 1px solid $mainGreen !important;
+    width: auto !important;
+    min-width: 30px;
+    min-height: 35px;
   }
   &:focus {
     box-shadow: none;
@@ -66,8 +71,12 @@
 
 .form__select {
   select {
-    border-radius: 0;
-    width: 50%;
+    border: none;
+    border-bottom: 1px solid $mainGreen;
+    width: auto;
+    margin: 10px 5px;
+    padding: 5px;
+    background-color: transparent;
   }
 }
 #competition_form_competitionType {

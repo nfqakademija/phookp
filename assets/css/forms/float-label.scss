@@ -1,6 +1,8 @@
 @import "mixins";
 
 .has-float-label {
+  margin-top: 15px;
+  margin-bottom: 15px;
   @include float-label-container;
 
   @include float-label;
