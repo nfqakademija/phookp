@@ -28,6 +28,7 @@
                             {{ form_errors(form.competitionType) }}
                             {{ form_errors(form.competitionDuration) }}
                             {{ form_errors(form.competitionName) }}
+                            {{ form_errors(form.competitionDate) }}
                             {{ form_errors(form.competitionOrganiserEmail) }}
                             {{ form_errors(form.competitionOrganiser) }}
                         </div>
@@ -49,7 +50,12 @@
                             {{ form_help(form.competitionName) }}
                             {{ form_label(form.competitionName) }}
                         </div>
-                        {{ form_row(form.competitionDate) }}
+                        <div>
+                            {{ form_label(form.competitionDate) }}
+                            {{ form_widget(form.competitionDate) }}
+                            {{ form_help(form.competitionDate) }}
+
+                        </div>
                         <div class="has-float-label">
                             {{ form_widget(form.competitionDuration) }}
                             {{ form_help(form.competitionDuration) }}
