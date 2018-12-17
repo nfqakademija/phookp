@@ -106,7 +106,7 @@ class TeamService
         $isAdded = true;
         foreach ($teams as $team) {
             $sectorNr = $team->getSectorNr();
-            if ($sectorNr <= $sectorsCount) {
+            if ($sectorNr <=$sectorsCount&& $sectorNr!=0) {
                 $team->setSectorNr($sectorNr);
                 $this->create($team);
             } else {
