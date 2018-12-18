@@ -1,44 +1,12 @@
-{% extends 'no_nav_base.html.twig' %}
+{% extends 'organizer/stepper/competition_wizard.html.twig' %}%}
 {% import 'macro/panel.macro.html.twig' as myMacros %}
 {% block title %}Organizatorius{% endblock %}
 {% block body %}
-    {% if teamId is not defined %}
-        {% set teamId = null %}
-    {% endif %}
-    {% if weighingNr is not defined %}
-        {% set weighingNr = null %}
-    {% endif %}
-    {% if createTeam is not defined %}
-        {% set createTeam = null %}
-    {% endif %}
-    {% if isTeam is not defined %}
-        {% set isTeam = null %}
-    {% endif %}
     <div class="container-fluid container-index u-no-padding">
-        <div class="row justify-content-center">
-            {% for label, messages in app.flashes %}
-                {% for message in messages %}
-                    <div class="alert alert-{{ label }}">
-                        {{ message }}
-                    </div>
-                {% endfor %}
-            {% endfor %}
-        </div>
         <div class="page-name-container organizer-name-container u-no-mt ">
             <h2> {% block panelName %}Organizatoriaus panelė{% endblock %} </h2>
         </div>
-        <div class="row justify-content-center panel-container">
-            <div class="side-bar">
-                <div class="sidebar-header">
-
-                </div>
-                <div class="list-group">
-                    {{ myMacros.printMenu(
-                        createTeam, isTeam, hash, teamId, weighingNr
-                    ) }}
-
-                </div>
-            </div>
+        <div class="justify-content-center">
             <div class="col-lg-10 panel__content d-flex justify-content-center">
                 {% block panelContent %}
 

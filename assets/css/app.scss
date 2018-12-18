@@ -39,7 +39,7 @@
 .sector-button {
   min-height: 40px;
   min-width: 40px;
-  color: #3E8AEC;
+  color: $mainGreen;
   padding: 5px;
   border-right: 1px solid #e0e0e0;
 }
@@ -57,12 +57,13 @@
   }
 }
 .sector-button--active{
-  background: #FFF;
+  background: $mainGreen;
+  color: #fff;
   border-right:2px solid $mainGreen;
 }
 
 .text-box{
-  border-color: #3E8AEC;
+  border-color: $mainGreen;
   border-width: 0 0 1px 0;
 }
 .text-box--results{
@@ -85,6 +86,8 @@
   width: 38px;
   font-size: 20px;
   border: none;
+  color: #fff;
+  background-color: $mainGreen;
 }
 @media (min-width: 992px) {
 

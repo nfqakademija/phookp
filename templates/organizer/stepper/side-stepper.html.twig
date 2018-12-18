@@ -1,0 +1,24 @@
+{% set step = app.request.attributes.get('_route') %}
+<div class="stepper">
+    <a href="{{ path("organizerMain", {"hash": hash}) }}" class="stepper__row mt-5 {% if step == "organizerMain" %}stepper__row--active {% endif %}">
+        <div class="stepper__label">Instrukcija</div><div class="stepper__circle">1</div>
+    </a>
+    <div class="stepper__line-container {% if step == "organizerCreateTeams" %}stepper__line-container--active{% endif %}">
+        <div class="stepper__line-column"></div>
+    </div>
+    <a href="{{ path("organizerCreateTeams", {"hash": hash}) }}" class="stepper__row {% if step == "organizerCreateTeams" %}stepper__row--active {% endif %}">
+        <div class="stepper__label">Komandos</div> <div class="stepper__circle">2</div>
+    </a>
+    <div class="stepper__line-container {% if step == "organizerTeamsSectors" %}stepper__line-container--active{% endif %}">
+        <div class="stepper__line-column"></div>
+    </div>
+    <a href="{{ path("organizerTeamsSectors", {"hash": hash}) }}" class="stepper__row {% if step == "organizerTeamsSectors" %}stepper__row--active {% endif %}">
+        <div class="stepper__label">Sektoriai</div><div class="stepper__circle">3</div>
+    </a>
+    <div class="stepper__line-container {% if step == "organizerCompetitionFinish" %}stepper__line-container--active {% endif %}">
+        <div class="stepper__line-column"></div>
+    </div>
+    <a href="{{ path("organizerMain", {"hash": hash}) }}" class="stepper__row {% if step == "organizerCompetitionFinish" %}stepper__row--active {% endif %}">
+        <div class="stepper__label">Pradėti</div><div class="stepper__circle">4</div>
+    </a>
+</div>
