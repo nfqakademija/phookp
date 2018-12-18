@@ -1,6 +1,4 @@
-@media only screen
-and (max-device-width : 1024px)
-{
+@media only screen and (max-device-width: 1024px) {
   .form__input {
     width: 100%;
   }
@@ -15,4 +13,12 @@ and (max-device-width : 1024px)
     margin-left: 0px;
     margin-right: 0px;
   }
+
+  .form-team-name {
+    font-size: 25px;
+  }
+  .form-team-added-teams {
+    font-size: 25px;
+  }
+
 }

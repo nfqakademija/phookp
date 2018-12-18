@@ -24,21 +24,30 @@
                                     <h5>Sektorius</h5>
                                 </div>
                             </div>
-                            {{ form_start(form) }}
-                            {{ form_errors(form) }}
                             {% for key,team in form.teams %}
-                                <div class="row">
-                                    <div class="col-6">
+                            <div class="text-danger text-left my-3">
+                                {{ form_errors(team.sectorNr) }}
+                            </div>
+                            <p class="card-text">
+                                {{ form_start(form) }}
+                                {{ form_errors(form) }}
+                            <div class="row">
+                                <div class="col-6 pt-3 card-team_name px-8">
                                         <h4>{{ teams[key].teamName }} </h4>
-                                    </div>
-                                    <div class="col-6">
-                                        {{ form_row(team.sectorNr) }}
+                                </div>
+                                <div class="col-6">
+                                    <div class="has-float-label ">
+                                        {{ form_widget(team.sectorNr) }}
+                                        {{ form_help(team.sectorNr) }}
+                                        {{ form_label(team.sectorNr) }}
                                     </div>
                                 </div>
-                            {% endfor %}
-                            {{ form_row(form.save) }}
-                            {{ form_end(form) }}
+                            </div>
+                            </p>
                         </div>
+                        {% endfor %}
+                        {{ form_row(form.save) }}
+                        {{ form_end(form) }}
                     </div>
                 </div>
             </div>

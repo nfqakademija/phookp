@@ -27,7 +27,7 @@ class Team
      *   @Assert\Length(
      *     min=2,
      *     max=90,
-     *     minMessage="Komandos pavadinimo pavadinimo ilgis turi būti tarp 2 ir 90 simbolių!",
+     *     minMessage="Komandos pavadinimo  ilgis turi būti tarp 2 ir 90 simbolių!",
      *     maxMessage="Komandos pavadinimo ilgis turi būti tarp 2 ir 90 simbolių!"
      * )
      */
