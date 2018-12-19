@@ -101,11 +101,13 @@ textarea.form-control {
 .first-input-width {
   width: 100%;
   max-width: 320px;
+
 }
 
 .second-input-width {
   width: 100%;
   max-width: 305px;
+
 }
 
 .form-team-name {
@@ -116,5 +118,12 @@ textarea.form-control {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+
+}
+.form__label{
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 300px
 }
 

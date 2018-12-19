@@ -29,7 +29,7 @@
                                 <div class="has-float-label ml-3 ">
                                     {{ form_widget(team.sectorNr, {'attr':{'placeholder': label_name ,'class': 'second-input-width form__input'}}) }}
                                     {{ form_help(team.sectorNr) }}
-                                    {{ form_label(team.sectorNr,null,{'label': label_name}) }}
+                                    {{ form_label(team.sectorNr,null,{'label': label_name}, {'attr':{'class': 'form__label'}}) }}
                                 </div>
                             {% endfor %}
                             {{ form_row(form.save) }}
