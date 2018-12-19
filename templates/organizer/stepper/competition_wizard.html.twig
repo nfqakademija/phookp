@@ -15,11 +15,18 @@
 </head>
 <body>
 {% include "flashMessages.html.twig" %}
-    <div class="container-fluid h-100">
+    <div class="text-center text-white u-bg-main h4 w-100" style="height: 40px; top:0; position: absolute; z-index: 9999">Varzybu pradzios vedlys</div>
+    <div class="container-fluid h-100 px-0">
         {% include "organizer/stepper/side-stepper.html.twig" %}
-        <div class="offset-md-2 col-md-10 d-flex justify-content-center">
-            {% block body %}{% endblock %}
-        </div>
+            <div class="wizard-content flex-fill">
+                <div class="wizard-content__banner-container">
+                    <div class="page-name-container u-no-mt ">
+                        <h2> {% block panelName %}{% endblock %} </h2>
+                    </div>
+                </div>
+
+                {% block body %}{% endblock %}
+            </div>
     </div>
 {% include "footer.html.twig" %}
 {% block javascripts %}

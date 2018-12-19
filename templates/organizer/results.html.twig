@@ -1,7 +1,7 @@
-{% extends 'organizerPanel/organizerPanel.html.twig' %}
+{% extends 'organizer/stepper/competition_wizard.html.twig' %}
 {% block title %}Rezultatų įvedimas{% endblock %}
 {% block panelName %}  Sverimo nr. {{ app.request.attributes.get('weighingNr') }} rezultatai {% endblock %}
-{% block panelContent %}
+{% block body %}
     {% set hash = app.request.attributes.get('hash') %}
     {% set teamId = app.request.attributes.get('teamId') %}
     {% set weighing = app.request.attributes.get('weighingNr') %}
@@ -10,10 +10,8 @@
         sverimu juosta ir apatinis row su 'Kitas sektorius' ir 'Issaugoti' mygtukais turi but statinis (visada matomi)
         sektoriai turi scrollintis atskirai nuo rezultatu input fieldu containerio
     #}
-    <div class="container">
-            <div class="card col-md-10 offset-md-2 bg-light">
-
-                <div class="card-body px-0 p-0">
+            <div class="card px-0 bg-light">
+                <div class="card-body p-0">
                     {{ form_start(form) }}
                     <div class="row mx-0">
                         <div class="col-4 col-sm-3 col-md-2 col-lg-2 p-0" >
@@ -46,11 +44,11 @@
                                 </div>
                             {% endfor %}
                             <button type="button" class="btn btn-icon--round text text-white d-flex justify-content-center align-items-center" id="addButton">
-                               <span>+</span>
+                               <span class="fas fa-plus"></span>
                             </button>
                         </div>
                     </div>
-                    <div class="row mt-2">
+                    <div class="row mt-2 mx-0">
                         <div class="col-lg-12 d-flex justify-content-center pb-2">
                             <button class="btn button button--square mr-1">Kitas sektorius >></button>
                             <button type="submit" class="btn button button--square " id="weighing_submit" name="weighing[submit]">Išsaugoti</button>
@@ -59,6 +57,5 @@
                     {{ form_end(form) }}
                 </div>
             </div>
-    </div>
     <script src="{{ asset('build/js/resultsForm.js') }}"></script>
 {% endblock %}
