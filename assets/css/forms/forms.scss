@@ -22,11 +22,11 @@
 }
 
 .form__card {
-    border: none;
-    border-radius: 0;
+  border: none;
+  border-radius: 0;
   margin-left: 100px;
   margin-right: 100px;
-  box-shadow: 0 2px 2px 0 rgba(0,0,0,.14), 0 3px 1px -2px rgba(0,0,0,.2), 0 1px 5px 0 rgba(0,0,0,.12);
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, .14), 0 3px 1px -2px rgba(0, 0, 0, .2), 0 1px 5px 0 rgba(0, 0, 0, .12);
 
   .form-control.select {
     border: none;
@@ -39,8 +39,6 @@
   font-size: 1.5rem;
 }
 
-
-
 .form__input {
   border: none;
   background-color: transparent;
@@ -51,7 +49,7 @@
 
   &:active {
     border-color: $mainGreen;
-    box-shadow: 0 2px 2px 0 rgba(0,0,0,.22), 0 3px 1px -2px rgba(0,0,0,.25), 0 1px 5px 0 rgba(0,0,0,.22);
+    box-shadow: 0 2px 2px 0 rgba(0, 0, 0, .22), 0 3px 1px -2px rgba(0, 0, 0, .25), 0 1px 5px 0 rgba(0, 0, 0, .22);
   }
 
   &:focus {
@@ -78,10 +76,10 @@
     background-color: transparent;
   }
 }
+
 #competition_form_competitionType {
   width: 50%;
 }
-
 
 .form-group {
   select {
@@ -90,22 +88,25 @@
     margin-right: 5px;
     border: none;
     &:active {
-      border:1px solid $mainGreen;
+      border: 1px solid $mainGreen;
     }
   }
 }
 
-
 textarea.form-control {
-    border-radius: 0;
-    border: 1px solid $mainGreen;
-  }
-.first-input-width{
+  border-radius: 0;
+  border: 1px solid $mainGreen;
+}
+
+.first-input-width {
   max-width: 320px;
 }
-.second-input-width{
+
+.second-input-width {
   max-width: 305px;
 }
-.form-team-name{
-  font-size: 25px;
+
+.form-team-name {
+  border-bottom: solid 1px black;
 }
+
