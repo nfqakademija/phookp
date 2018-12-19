@@ -3,11 +3,13 @@
   $numbersColor: #fff;
 
   position: fixed;
+  display: block;
   left: 0;
   width: 200px;
-  height: 100vh;
   background-color: white;
   z-index: 1350;
+  top: 40px;
+  bottom: 40px;
 
   &__row {
     display: flex;

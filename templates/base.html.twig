@@ -17,9 +17,7 @@
         {% include "navBar/navBar.html.twig" %}
         {% include "flashMessages.html.twig" %}
         {% block body %}{% endblock %}
-<footer class="footer py-3">
-        <div class="footer__label">Copyright &copy; PHookP 2018</div>
-</footer>
+        {% include "organizer/footer.html.twig" %}
 {% block javascripts %}
     <script src="{{ asset('build/js/app.js') }}"></script>
 {% endblock %}
