@@ -1,9 +1,7 @@
 {% extends 'organizerPanel/organizerPanel.html.twig' %}
 {% block title %}Sektorių priskyrimas{% endblock %}
-{% form_theme form 'bootstrap_4_layout.html.twig' %}
 {% block panelName %}Sektorių priskyrimas{% endblock %}
 {% block panelContent %}
-
     <div class="container container-index">
         <div class="row justify-content-center">
             {% for label, messages in app.flashes %}
@@ -14,30 +12,29 @@
                 {% endfor %}
             {% endfor %}
         </div>
-        <div class="row justify-content-center">
+        <div class="row justify-content-center d-flex">
             <div class="col-lg-10">
                 <div class="card mt-4 form__card bg-light">
                     <div class="card-body">
                         <h3 class="card-title">Priskirti sektorius </h3>
-                        <div class="row d-flex">
                         {% for key,team in form.teams %}
-                        <div class="text-danger text-left my-3">
+                            {% set label_name=teams[key].teamName~' sektorius'%}
+                            <div class="text-danger text-left my-3">
                             {{ form_errors(team.sectorNr) }}
                         </div>
                         <p class="card-text">
                             {{ form_start(form) }}
                             {{ form_errors(form) }}
-                                <p class="form-team-name px-0">{{ teams[key].teamName }} </p>
-                                <div class="has-float-label ">
-                                    {{ form_widget(team.sectorNr) }}
+                                <p class="form-team-name first-input-width">{{ teams[key].teamName }} </p>
+                                <div class="has-float-label ml-3 ">
+                                    {{ form_widget(team.sectorNr, {'attr':{'placeholder': label_name ,'class': 'second-input-width form__input'}}) }}
                                     {{ form_help(team.sectorNr) }}
-                                    {{ form_label(team.sectorNr) }}
+                                    {{ form_label(team.sectorNr,null,{'label': label_name}) }}
                                 </div>
                             {% endfor %}
                             {{ form_row(form.save) }}
                             {{ form_end(form) }}
                         </div>
-                    </div>
                 </div>
             </div>
         </div>

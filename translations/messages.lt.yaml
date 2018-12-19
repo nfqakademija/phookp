@@ -16,7 +16,7 @@ form.team_registration.team_member: Komandos narys
 form.team_registration.create_button: Pridėti komandas
 form.team_registration.error_message: Nepridėjote komandos. Privalote įvesti komandos pavadinimą bei vieną komandos narį
 form.team_registration.not_added_name_message: Norint pridėti komandą privalote įvesti komandos pavadinimą bei vieną komandos narį
-form.team_sectors_assignment.add_button: Pridėti sektorius
+form.team_sectors_assignment.add_button: Priskirti sektorius
 form.team_sectors_assignment.sector: Sektorius
 form.team_sectors_assignment.success_message: Sektoriai sėkmingai pridėti
 form.team_sectors_assignment.error_message: Sektorius nerastas

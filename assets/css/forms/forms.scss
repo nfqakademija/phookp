@@ -99,14 +99,22 @@ textarea.form-control {
 }
 
 .first-input-width {
+  width: 100%;
   max-width: 320px;
 }
 
 .second-input-width {
+  width: 100%;
   max-width: 305px;
 }
 
 .form-team-name {
-  border-bottom: solid 1px black;
+  border-bottom: solid 2px $mainGrey;
+  font-size: 22px;
+  width: 100%;
+  max-width: 320px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
