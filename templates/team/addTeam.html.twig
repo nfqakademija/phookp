@@ -21,18 +21,12 @@
                         {% if teams.count != null %}
                             <ul class="team-list px-1">
                                 <div class="team-list__title">
-                                    <p>Pridėtos komandos</p>
+                                    Pridėtos komandos
                                 </div>
                                 {% for team in teams %}
-                                <div class="row">
-                                    <div class="col-6 pr-1">
                                         <li class="team-list__element ">{{ team.teamName }}
-                                        </li>
-                                    </div>
-                                    <div class="col-6 d-felx align-items-center">
                                             <span data-id="{{ team.id }}" class="fas fa-times team-list__delete"></span>
-                                    </div>
-                                    </div>
+                                        </li>
                                     {% endfor %}
                             </ul>
                         {% endif %}
