@@ -53,17 +53,14 @@ class OrganizerController extends AbstractController implements AuthorizedContro
             case Competition::STATUS_UNCONFIRMED:
                 $event = new CompetitionConfirmedEvent($competition);
                 $dispatcher->dispatch(CompetitionConfirmedEvent::NAME, $event);
-                return $this->render("organizerPanel/organizerPanel.html.twig", [
+                return $this->render("organizer/stepper/steps/instruction.html.twig", [
                     "hash" => $hash,
-                    "isTeam" => $competition->getTeams()->first(),
-                    "createTeam" => true,
+                    "competition" => $competition,
                 ]);
             case Competition::STATUS_CONFIRMED:
-                return $this->render("organizerPanel/organizerPanel.html.twig", [
+                return $this->render("organizer/stepper/steps/instruction.html.twig", [
                     "hash" => $hash,
-                    "isTeam" => $competition->getTeams()->first(),
-                    "createTeam" => true,
-
+                    "competition" => $competition,
                 ]);
             case Competition::STATUS_STARTED:
                 return $this->redirectToRoute("organizerResults", [
@@ -76,6 +73,23 @@ class OrganizerController extends AbstractController implements AuthorizedContro
                 return $this->redirectToRoute("home");
 
         }
+    }
+
+    public function instruction(string $hash, HashService $hashService){
+
+        return $this->render("organizer/stepper/steps/instruction.html.twig", [
+            "hash" => $hash,
+            "competition" => $hashService->findByHash($hash)->getCompetition()
+        ]);
+    }
+
+    public function start(string $hash, HashService $hashService){
+        $competition = $hashService->findByHash($hash)->getCompetition();
+        return $this->render("organizer/stepper/steps/start.html.twig",
+            [
+                "hash" => $hash,
+                "competition" => $competition
+            ]);
     }
 
     /**
@@ -101,7 +115,7 @@ class OrganizerController extends AbstractController implements AuthorizedContro
             $team = new Team();
             $data['teams'][] = $team;
         }
-        $form = $this->createForm(TeamsFormType::class, $data);
+        $form = $this->createForm(TeamsFormType::class, $data, ['attr' => ['class' => 'u-min-width-60']]);
         $form->add('save', SubmitType::class,
             array("label" => "form.team_registration.create_button", "attr" => ["class" => "button"]));
         $form->handleRequest($request);
@@ -112,13 +126,12 @@ class OrganizerController extends AbstractController implements AuthorizedContro
             }
             return $this->redirectToRoute("organizerCreateTeams", ['hash' => $hash]);
         }
-        return $this->render("team/addTeam.html.twig", [
+        return $this->render("organizer/stepper/steps/addTeam.html.twig", [
             "form" => $form->createView(),
             "teamsCount" => $teamsCount,
             "teams" => $competition->getTeams(),
             "hash" => $hash,
-            "isTeam" => $competition->getTeams()->first(),
-            "createTeam" => true,
+            "competition" => $competition
         ]);
 
     }
@@ -151,9 +164,7 @@ class OrganizerController extends AbstractController implements AuthorizedContro
         string $hash,
         HashService $hashService,
         TeamService $teamService,
-        TranslatorInterface $translator,
-        EventDispatcherInterface $dispatcher,
-        CompetitionService $competitionService
+        TranslatorInterface $translator, CompetitionService $competitionService, EventDispatcherInterface $dispatcher
     ) {
         $competition = $hashService->findByHash($hash)->getCompetition();
 
@@ -161,6 +172,7 @@ class OrganizerController extends AbstractController implements AuthorizedContro
             $event = new CompetitionStartedEvent($competition);
             $dispatcher->dispatch(CompetitionStartedEvent::NAME, $event);
         }
+
         $teamId = $competition->getTeams()->first()->getId();
         $data = ['teams' => $competition->getTeams()->toArray()];
         $form = $this->createForm(TeamsSectorsFormType::class, $data);
@@ -178,15 +190,11 @@ class OrganizerController extends AbstractController implements AuthorizedContro
                 $this->addFlash("danger", $translator->trans("form.team_sectors_assignment.error_message"));
             }
         }
-        return $this->render("team/sectors.html.twig", [
+        return $this->render("organizer/stepper/steps/sectors.html.twig", [
             "form" => $form->createView(),
             "teams" => $competition->getTeams(),
             "hash" => $hash,
-            "teamId" => $teamId,
-            "isTeam" => $competition->getTeams()->first(),
-            "weighingNr" => 1,
-            "createTeam" => false,
-
+            "competition" => $competition
         ]);
 
     }

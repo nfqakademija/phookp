@@ -1,0 +1,20 @@
+{% extends 'organizer/stepper/competition_wizard.html.twig' %}
+{% block title %}Sektorių priskyrimas{% endblock %}
+{% block panelName %}Pradėti varžybas{% endblock %}
+{% block body %}
+    <div class="card">
+        <div class="card-body align-items-center">
+            <div class="row mx-0 d-flex justify-content-center ">
+                <div class="text-center h5">
+                    Pridėję visas dalyvių komandas pradėkite varžybas
+                </div>
+            </div>
+            <div class="row mx-0 py-3 d-flex justify-content-center">
+                <a href="{{ path("organizerTeamsSectors", {"hash": hash}) }}" class="btn button button--square">
+                    Pradėti varžybas <i class="fas fa-hourglass-start pl-3"></i>
+                </a>
+            </div>
+
+        </div>
+    </div>
+{% endblock %}

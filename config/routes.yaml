@@ -32,6 +32,14 @@ organizerMain:
   path: /organizer/{hash}
   controller: App\Controller\OrganizerController::main
 
+organizerInstruction:
+  path: /organizer/{hash}/setup/instruction
+  controller: App\Controller\OrganizerController::instruction
+
+organizerStartConfirmation:
+  path: /organizer/{hash}/setup/start
+  controller: App\Controller\OrganizerController::start
+
 organizerCreateTeams:
   path: /organizer/{hash}/createTeams
   controller: App\Controller\OrganizerController::createTeam

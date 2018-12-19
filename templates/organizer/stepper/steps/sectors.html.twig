@@ -1,22 +1,10 @@
 {% extends 'organizer/stepper/competition_wizard.html.twig' %}
 {% block title %}Sektorių priskyrimas{% endblock %}
 {% block panelName %}Sektorių priskyrimas{% endblock %}
-{% block panelContent %}
-    <div class="container container-index">
-        <div class="row justify-content-center">
-            {% for label, messages in app.flashes %}
-                {% for message in messages %}
-                    <div class="alert alert-{{ label }}">
-                        {{ message }}
-                    </div>
-                {% endfor %}
-            {% endfor %}
-        </div>
-        <div class="row justify-content-center d-flex">
-            <div class="col-lg-10">
-                <div class="card mt-4 form__card bg-light">
-                    <div class="card-body">
-                        <h3 class="card-title">Priskirti sektorius </h3>
+{% block body %}
+
+                <div class="card mt-4 form__card bg-light border-0 shadow-0  bg-transparent u-no-box-shadow">
+                    <div class="card-body u-mb-40">
                         {% for key,team in form.teams %}
                             {% set label_name=teams[key].teamName~' sektorius'%}
                             <div class="text-danger text-left my-3">
@@ -36,9 +24,6 @@
                             {{ form_end(form) }}
                         </div>
                 </div>
-            </div>
-        </div>
-    </div>
 {% endblock %}
 
 

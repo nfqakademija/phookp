@@ -1,15 +1,10 @@
-{% extends '' %}
-<div class="col-lg-8 u-mt-minus">
+{% extends 'organizer/stepper/competition_wizard.html.twig' %}
+{% block title %}Rezultatų įvedimas{% endblock %}
+{% block panelName %}  Varžybų pradžios instrukcija {% endblock %}
+
+{% block body %}
     <div class="card mt-4">
-        <div class="card-body">
-            <h3 class="card-title"></h3>
-            <p class="card-text">
-            <div class="row justify-content-center">
-                <div class="col">
-                    <h2>Sveiki atvykę į organizatoriaus panelę!</h2>
-                    <h3>Naudojimo instrukcija :</h3>
-                </div>
-            </div>
+        <div class="card-body u-mb-40">
             <div class="row justify-content-center">
                 <div class="col">
                     <ol>
@@ -42,6 +37,9 @@
                     </ol>
                 </div>
             </div>
+            <div class="row justify-content-end py-3">
+                <a href="{{ path("organizerCreateTeams", {"hash": hash}) }}"><button class="button">Toliau...<i class="fas fa-arrow-right ml-3"></i></button></a>
+            </div>
         </div>
     </div>
-</div>
+{% endblock %}
