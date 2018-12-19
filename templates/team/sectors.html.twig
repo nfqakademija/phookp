@@ -1,6 +1,5 @@
 {% extends 'organizer/stepper/competition_wizard.html.twig' %}
 {% block title %}Sektorių priskyrimas{% endblock %}
-{% form_theme form 'bootstrap_4_layout.html.twig' %}
 {% block panelName %}Sektorių priskyrimas{% endblock %}
 {% block panelContent %}
     <div class="container container-index">
@@ -12,34 +11,30 @@
                     </div>
                 {% endfor %}
             {% endfor %}
-            <div class="col-md-8 u-mt-minus">
-                <div class="card mt-4 form__card ">
+        </div>
+        <div class="row justify-content-center d-flex">
+            <div class="col-lg-10">
+                <div class="card mt-4 form__card bg-light">
                     <div class="card-body">
-                        <div class="form">
-                            <div class="row justify-content-center">
-                                <div class="col-6">
-                                    <h5> Komanda</h5>
-                                </div>
-                                <div class="col-6">
-                                    <h5>Sektorius</h5>
-                                </div>
-                            </div>
+                        <h3 class="card-title">Priskirti sektorius </h3>
+                        {% for key,team in form.teams %}
+                            {% set label_name=teams[key].teamName~' sektorius'%}
+                            <div class="text-danger text-left my-3">
+                            {{ form_errors(team.sectorNr) }}
+                        </div>
+                        <p class="card-text">
                             {{ form_start(form) }}
                             {{ form_errors(form) }}
-                            {% for key,team in form.teams %}
-                                <div class="row">
-                                    <div class="col-6">
-                                        <h4>{{ teams[key].teamName }} </h4>
-                                    </div>
-                                    <div class="col-6">
-                                        {{ form_row(team.sectorNr) }}
-                                    </div>
+                                <p class="form-team-name first-input-width">{{ teams[key].teamName }} </p>
+                                <div class="has-float-label ml-3 ">
+                                    {{ form_widget(team.sectorNr, {'attr':{'placeholder': label_name ,'class': 'second-input-width form__input'}}) }}
+                                    {{ form_help(team.sectorNr) }}
+                                    {{ form_label(team.sectorNr,null,{'label': label_name}, {'attr':{'class': 'form__label'}}) }}
                                 </div>
                             {% endfor %}
                             {{ form_row(form.save) }}
                             {{ form_end(form) }}
                         </div>
-                    </div>
                 </div>
             </div>
         </div>

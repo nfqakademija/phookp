@@ -6,7 +6,18 @@
         <div class="page-name-container organizer-name-container u-no-mt ">
             <h2> {% block panelName %}Organizatoriaus panelė{% endblock %} </h2>
         </div>
-        <div class="justify-content-center">
+        <div class=" justify-content-center panel-container">
+            <div class="side-bar">
+                <div class="sidebar-header">
+
+                </div>
+                <div class="list-group">
+                    {{ myMacros.printMenu(
+                        createTeam, isTeam, hash, teamId, weighingNr
+                    ) }}
+
+                </div>
+            </div>
             <div class="col-lg-10 panel__content d-flex justify-content-center">
                 {% block panelContent %}
 
