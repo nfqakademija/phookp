@@ -1,7 +1,7 @@
 {% set step = app.request.attributes.get('_route') %}
 
 <div class="stepper">
-    <a href="{{ path("organizerInstruction", {"hash": hash}) }}" class="stepper__row mt-5 {% if step == "organizerInstruction" %}stepper__row--active {% endif %}">
+    <a href="{{ path("organizerInstruction", {"hash": hash}) }}" class="stepper__row mt-3 {% if step == "organizerInstruction" %}stepper__row--active {% endif %}">
         <div class="stepper__label">Instrukcija</div><div class="stepper__circle">1</div>
     </a>
     <div class="stepper__line-container {% if step == "organizerCreateTeams" %}stepper__line-container--active{% endif %}">
