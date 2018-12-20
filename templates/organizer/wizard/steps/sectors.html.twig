@@ -1,21 +1,10 @@
-{% extends 'organizer/stepper/competition_wizard.html.twig' %}
+{% extends 'organizer/wizard/competition_wizard.html.twig' %}
 {% block title %}Sektorių priskyrimas{% endblock %}
 {% block panelName %}Sektorių priskyrimas{% endblock %}
 {% block body %}
 
                 <div class="card mt-4 form__card bg-light border-0 shadow-0  bg-transparent u-no-box-shadow">
                     <div class="card-body u-mb-40">
-                        {% if app.session.flashbag.has('success') %}
-                        <div class="alert alert-success position-relative">
-                            <ul>
-                                {% for message in app.flashes('success') %}
-                                    <li>
-                                        {{ message|raw }}
-                                    </li>
-                                {% endfor %}
-                            </ul>
-                        </div>
-                        {% endif %}
                         {% for key,team in form.teams %}
                             {% set label_name=teams[key].teamName~' sektorius'%}
                             <div class="text-danger text-left my-3">

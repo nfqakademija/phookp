@@ -62,7 +62,7 @@
   background: linear-gradient(90deg, rgba(30, 85, 75, 0.7035013834635417) 4%, rgba(37, 106, 93, 0.9864145487296481) 47%, rgba(37, 106, 93, 0.6502800949481355) 88%);
 }
   .u-bg-main {
-  background-color: $mainGreen;
+  background-color: $mainGreen !important;
 }
 
 .u-text-white {

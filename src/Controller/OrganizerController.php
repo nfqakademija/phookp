@@ -20,6 +20,7 @@ use App\Form\TeamsSectorsFormType;
 use App\Form\WeighingFormType;
 use App\Services\CompetitionService;
 use App\Services\HashService;
+use App\Services\ResultsCalculationService;
 use App\Services\ResultService;
 use App\Services\TeamService;
 use App\Services\WeighingService;
@@ -53,12 +54,12 @@ class OrganizerController extends AbstractController implements AuthorizedContro
             case Competition::STATUS_UNCONFIRMED:
                 $event = new CompetitionConfirmedEvent($competition);
                 $dispatcher->dispatch(CompetitionConfirmedEvent::NAME, $event);
-                return $this->render("organizer/stepper/steps/instruction.html.twig", [
+                return $this->render("organizer/wizard/steps/instruction.html.twig", [
                     "hash" => $hash,
                     "competition" => $competition,
                 ]);
             case Competition::STATUS_CONFIRMED:
-                return $this->render("organizer/stepper/steps/instruction.html.twig", [
+                return $this->render("organizer/wizard/steps/instruction.html.twig", [
                     "hash" => $hash,
                     "competition" => $competition,
                 ]);
@@ -77,7 +78,7 @@ class OrganizerController extends AbstractController implements AuthorizedContro
 
     public function instruction(string $hash, HashService $hashService){
 
-        return $this->render("organizer/stepper/steps/instruction.html.twig", [
+        return $this->render("organizer/wizard/steps/instruction.html.twig", [
             "hash" => $hash,
             "competition" => $hashService->findByHash($hash)->getCompetition()
         ]);
@@ -85,7 +86,7 @@ class OrganizerController extends AbstractController implements AuthorizedContro
 
     public function start(string $hash, HashService $hashService){
         $competition = $hashService->findByHash($hash)->getCompetition();
-        return $this->render("organizer/stepper/steps/start.html.twig",
+        return $this->render("organizer/wizard/steps/start.html.twig",
             [
                 "hash" => $hash,
                 "competition" => $competition
@@ -126,7 +127,7 @@ class OrganizerController extends AbstractController implements AuthorizedContro
             }
             return $this->redirectToRoute("organizerCreateTeams", ['hash' => $hash]);
         }
-        return $this->render("organizer/stepper/steps/addTeam.html.twig", [
+        return $this->render("organizer/wizard/steps/addTeam.html.twig", [
             "form" => $form->createView(),
             "teamsCount" => $teamsCount,
             "teams" => $competition->getTeams(),
@@ -168,6 +169,10 @@ class OrganizerController extends AbstractController implements AuthorizedContro
     ) {
         $competition = $hashService->findByHash($hash)->getCompetition();
 
+        if(count($competition->getTeams()) < 1){
+            $this->addFlash("error", "Negalite pradėti varžybų be dalyvių komandų!");
+            return $this->redirectToRoute("organizerCreateTeams", ["hash" => $hash]);
+        }
         if (!$competitionService->competitionStatus($competition, Competition::STATUS_STARTED)) {
             $event = new CompetitionStartedEvent($competition);
             $dispatcher->dispatch(CompetitionStartedEvent::NAME, $event);
@@ -191,7 +196,7 @@ class OrganizerController extends AbstractController implements AuthorizedContro
                 $this->addFlash("danger", $translator->trans("form.team_sectors_assignment.error_message"));
             }
         }
-        return $this->render("organizer/stepper/steps/sectors.html.twig", [
+        return $this->render("organizer/wizard/steps/sectors.html.twig", [
             "form" => $form->createView(),
             "teams" => $competition->getTeams(),
             "hash" => $hash,
@@ -280,7 +285,7 @@ class OrganizerController extends AbstractController implements AuthorizedContro
             $this->addFlash('success', $translator->trans("form.results_entry.success_message"));
         }
 
-        return $this->render("organizer/results.html.twig", array(
+        return $this->render("organizer/main/results.html.twig", array(
             "teams" => $teams,
             "form" => $form->createView(),
             "competition" => $competition,
@@ -289,6 +294,18 @@ class OrganizerController extends AbstractController implements AuthorizedContro
             "teamId" => $teamId,
             "weighingNr" => $weighingNr,
         ));
+    }
+
+    public function viewResults(string $hash, ResultsCalculationService $calculationService, HashService $hashService)
+    {
+        $competition = $hashService->findByHash($hash)->getCompetition();
+        $resultsArray = $calculationService->getResults($competition);
+
+        return $this->render("organizer/main/".$competition->getCompetitionType().".html.twig", [
+            "hash" => $hash,
+            "competition" => $competition,
+            "results" => $resultsArray
+        ]);
     }
 
     /**

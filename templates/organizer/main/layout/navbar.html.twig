@@ -1,0 +1,26 @@
+<nav class="navbar navbar-default navbar-expand-lg fixed-top nav-transparent">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">
+            {#TODO:// reikia logo#}
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+                aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"><i class="fa fa-bars"></i></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarResponsive">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class=" nav-link" href="{{ path("organizerViewResults", {"hash": hash}) }}">Rezultatai
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class=" nav-link active" href="{{ path("organizerResults", {"hash": hash, "teamId": competition.teams[0].id}) }}#">Suvesti rezultatus
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link js-finish-competition" href="#" data-link="{{ path("organizerFinishedCompetition", {"hash":hash}) }}">Užbaigti varžybas</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>

@@ -24,6 +24,8 @@ Encore
     .addEntry('js/sideBar', './assets/js/sideBar.js')
     .addEntry('js/card', './assets/js/card.js')
     .addEntry('js/panel', './assets/js/panel.js')
+    .addEntry('js/organizer', './assets/js/organizer.js')
+    .addEntry('js/overview', './assets/js/overview.js')
     .addEntry('js/reglament', './assets/js/reglament.js')
     .addStyleEntry('css/app', './assets/css/app.scss')
     .addStyleEntry('css/tingle.min', './assets/css/tingle.min.css')

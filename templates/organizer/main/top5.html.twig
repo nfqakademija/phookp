@@ -1,17 +1,9 @@
-{% extends 'base.html.twig' %}
-
+{% extends 'organizer/main/layout/base.html.twig' %}
 {% block title %}Rezultatai {% endblock %}
-
+{% block panelName %}  Rezultatai {% endblock %}
 {% block body %}
-    <div class="page-name-container">
-        <h2>Renginio {{ competition.CompetitionName}} rezultatai</h2>
-    </div>
-    <div class="container mt-5 px-0">
 
-        <div class="row mx-auto d-flex">
-            {% include "results/info_table.html.twig" %}
-            {% include "results/overview_table.html.twig" %}
-        </div>
+    <div class="container mt-5 px-0">
         <div class="row table-container mb-5 mx-0">
             <div class="table-responsive-md">
                 <table class="results-table mx-auto">
@@ -85,6 +77,4 @@
 
     </div>
     <script src="{{ asset('build/js/results.js') }}"></script>
-    <script src="{{ asset('build/js/overview.js') }}"></script>
-    <script src="{{ asset('build/js/reglament.js') }}"></script>
 {% endblock %}

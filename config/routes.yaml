@@ -52,6 +52,10 @@ organizerTeamsSectors:
   path: /organizer/{hash}/teamsSectors
   controller: App\Controller\OrganizerController::addSectors
 
+organizerViewResults:
+  path: /organizer/{hash}/show/results
+  controller: App\Controller\OrganizerController::viewResults
+
 organizerResults:
   path: /organizer/{hash}/results/{teamId}/{weighingNr}
   controller: App\Controller\OrganizerController::results
