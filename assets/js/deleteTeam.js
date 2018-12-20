@@ -9,7 +9,9 @@ const sendApiCall = (e) => {
     });
 };
 
-const deleteButtons = document.querySelectorAll('.deleteButton');
-Array.from(deleteButtons).forEach(function(element) {
+const deleteTeams = document.querySelectorAll('.team-list__delete');
+Array.from(deleteTeams).forEach(function(element) {
     element.addEventListener('click', sendApiCall);
 });
+//if response statusas 200
+//tada delete pagal id

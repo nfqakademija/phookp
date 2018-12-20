@@ -1,0 +1,29 @@
+{% extends 'organizer/wizard/competition_wizard.html.twig' %}
+{% block title %}Sektorių priskyrimas{% endblock %}
+{% block panelName %}Sektorių priskyrimas{% endblock %}
+{% block body %}
+
+                <div class="card mt-4 form__card bg-light border-0 shadow-0  bg-transparent u-no-box-shadow">
+                    <div class="card-body u-mb-40">
+                        {% for key,team in form.teams %}
+                            {% set label_name=teams[key].teamName~' sektorius'%}
+                            <div class="text-danger text-left my-3">
+                            {{ form_errors(team.sectorNr) }}
+                        </div>
+                        <p class="card-text">
+                            {{ form_start(form) }}
+                            {{ form_errors(form) }}
+                                <p class="form-team-name first-input-width">{{ teams[key].teamName }} </p>
+                                <div class="has-float-label ml-3 ">
+                                    {{ form_widget(team.sectorNr, {'attr':{'placeholder': label_name ,'class': 'second-input-width form__input'}}) }}
+                                    {{ form_help(team.sectorNr) }}
+                                    {{ form_label(team.sectorNr,null,{'label': label_name}, {'attr':{'class': 'form__label'}}) }}
+                                </div>
+                            {% endfor %}
+                            {{ form_row(form.save) }}
+                            {{ form_end(form) }}
+                        </div>
+                </div>
+{% endblock %}
+
+

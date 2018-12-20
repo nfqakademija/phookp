@@ -94,17 +94,7 @@ const openResultsModal = (e) => {
     }
 };
 
-const alignTables = () => {
-    const resultTable = document.querySelector(".results-table");
-    const style = window.getComputedStyle(resultTable, null);
-    const width = style.getPropertyValue("width");
-    document.querySelector('.js-overview-table').parentElement.style.width = width;
-};
-
-alignTables();
-
 const resultRows = document.querySelectorAll('.js-results-accessor');
 Array.from(resultRows).forEach(function(element) {
     element.addEventListener('click', openResultsModal);
 });
-

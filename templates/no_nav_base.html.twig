@@ -15,13 +15,12 @@
 <body>
 {% include "flashMessages.html.twig" %}
 {% block body %}{% endblock %}
-<footer class="py-5">
-    <div class="container">
-        <p class="m-0 text-center text-black">Copyright &copy; PHookP 2018</p>
-    </div>
-</footer>
+
 {% block javascripts %}
     <script src="{{ asset('build/js/app.js') }}"></script>
 {% endblock %}
 </body>
+<footer class="footer">
+    <div class="footer__label">Copyright &copy; PHookP 2018</div>
+</footer>
 </html>

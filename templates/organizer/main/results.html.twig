@@ -1,7 +1,7 @@
-{% extends 'organizerPanel/organizerPanel.html.twig' %}
+{% extends 'organizer/main/layout/base.html.twig' %}
 {% block title %}Rezultatų įvedimas{% endblock %}
-{% block panelName %}  Sverimo nr. {{ app.request.attributes.get('weighingNr') }} rezultatai {% endblock %}
-{% block panelContent %}
+{% block panelName %}  Rezultatų įvedimas {% endblock %}
+{% block body %}
     {% set hash = app.request.attributes.get('hash') %}
     {% set teamId = app.request.attributes.get('teamId') %}
     {% set weighing = app.request.attributes.get('weighingNr') %}
@@ -10,11 +10,31 @@
         sverimu juosta ir apatinis row su 'Kitas sektorius' ir 'Issaugoti' mygtukais turi but statinis (visada matomi)
         sektoriai turi scrollintis atskirai nuo rezultatu input fieldu containerio
     #}
-    <div class="container">
-        {#{{ dump(app.request.uri) }}#}
-            <div class="card col-lg-12 u-mt-minus form__card bg-light pl-0">
-
-                <div class="card-body px-0 p-0">
+            <div class="card px-0 bg-light border-0">
+                <div class="card-header text-center h5 u-bg-main text-light px-0">
+                    {% if weighing > 1 %}
+                        <a href="{{ path(app.request.attributes.get('_route'), {
+                            'hash': hash,
+                            'teamId': teamId ,
+                            'weighingNr': weighing-1}) }}">
+                            <button class="float-left organizer-results-entry__nav-btn">
+                                <span class="fas fa-arrow-left"></span>
+                            </button>
+                        </a>
+                    {% endif %}
+                    Svėrimas nr. {{ app.request.attributes.get('weighingNr') }}
+                    {% if weighing < competition.competitionWeighingsCount %}
+                        <a href="{{ path(app.request.attributes.get('_route'), {
+                            'hash': hash,
+                            'teamId':teamId ,
+                            'weighingNr': weighing+1}) }}">
+                            <button class="float-right organizer-results-entry__nav-btn">
+                                <span class="fas fa-arrow-right"></span>
+                            </button>
+                        </a>
+                    {% endif %}
+                </div>
+                <div class="card-body p-0 u-mb-40">
                     {{ form_start(form) }}
                     <div class="row mx-0">
                         <div class="col-4 col-sm-3 col-md-2 col-lg-2 p-0" >
@@ -46,20 +66,18 @@
                                     </div>
                                 </div>
                             {% endfor %}
-                            <button type="button" class="btn btn-primary btn-icon--round text text-white d-flex justify-content-center align-items-center" id="addButton">
-                               <span>+</span>
+                            <button type="button" class="btn btn-icon--round text text-white d-flex justify-content-center align-items-center" id="addButton">
+                               <span class="fas fa-plus"></span>
                             </button>
                         </div>
                     </div>
-                    <div class="row mt-2">
+                    <div class="row mt-2 mx-0">
                         <div class="col-lg-12 d-flex justify-content-center pb-2">
-                            <button class="btn button button--square mr-1">Kitas sektorius >></button>
                             <button type="submit" class="btn button button--square " id="weighing_submit" name="weighing[submit]">Išsaugoti</button>
                         </div>
                     </div>
                     {{ form_end(form) }}
                 </div>
             </div>
-    </div>
     <script src="{{ asset('build/js/resultsForm.js') }}"></script>
 {% endblock %}

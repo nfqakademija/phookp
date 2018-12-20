@@ -1,0 +1,40 @@
+{% extends 'organizer/wizard/competition_wizard.html.twig' %}
+{% block title %}Rezultatų įvedimas{% endblock %}
+{% block panelName %}  Varžybų pradžios instrukcija {% endblock %}
+
+{% block body %}
+    <div class="card mt-4 border-0 bg-transparent u-no-box-shadow">
+        <div class="card-body u-mb-40">
+            <div class="row justify-content-center">
+                <div class="col">
+                    <ol>
+                        <li><h6>Prieš pradedant varžybas, suvedamos visos dalyvių komandos. </h6>
+                            <ul>
+                                <li> Komanda privalo turėti komandos pavadinimą ir bent vieną
+                                    komandos narį.
+                                </li>
+                                <li> Po pridėjimo turite galimybę ištrinti komandą.</li>
+                                <li> Pridėję visas komandas spauskite <u>Toliau</u>.</li>
+                            </ul>
+                        </li>
+                        <li><h6>Sekančiame lange spauskite <u>Pradėti varžybas</u>.</h6>
+                            <ul>
+                                <li> Varžybos bus pradėtos ir daugiau komandų redaguoti negalėsite.
+                                </li>
+                            </ul>
+                        </li>
+                        <li><h6>Suveskite sektoriaus numerius kiekvienai komandai ir spauskite <u>Priskirti sektorius</u>. </h6>
+                            <ul>
+                                <li>Komandoms bus priskirti išsaugoti sektoriai, atsidursite rezultatų vedimo ir peržiūros puslapyje.
+                                </li>
+                            </ul>
+                        </li>
+                    </ol>
+                </div>
+            </div>
+            <div class="row justify-content-end py-3">
+                <a href="{{ path("organizerCreateTeams", {"hash": hash}) }}"><button class="button">Toliau...<i class="fas fa-arrow-right ml-3"></i></button></a>
+            </div>
+        </div>
+    </div>
+{% endblock %}

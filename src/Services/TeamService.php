@@ -45,7 +45,8 @@ class TeamService
             if ($teamName != null && ($firstTeamMember != null || $secondTeamMember != null || $thirdTeamMember != null)) {
                 $team->setCompetition($competition);
                 $this->create($team);
-            } else {
+                $isAdded = true;
+            } elseif ($teamName === null && ($firstTeamMember != null || $secondTeamMember != null || $thirdTeamMember != null)) {
                 $isAdded = false;
             }
         }
@@ -102,11 +103,11 @@ class TeamService
      */
     public function addTeamsSectors(array $teams, Competition $competition): bool
     {
-        $sectorsCount=$competition->getCompetitionTeamsCount();
+        $sectorsCount = $competition->getCompetitionTeamsCount();
         $isAdded = true;
         foreach ($teams as $team) {
             $sectorNr = $team->getSectorNr();
-            if ($sectorNr <=$sectorsCount&& $sectorNr!=0) {
+            if ($sectorNr <= $sectorsCount && $sectorNr != 0) {
                 $team->setSectorNr($sectorNr);
                 $this->create($team);
             } else {

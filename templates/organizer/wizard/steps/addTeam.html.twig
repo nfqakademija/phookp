@@ -1,0 +1,69 @@
+{% extends 'organizer/wizard/competition_wizard.html.twig' %}
+{% block title %}Komandų pridėjimas{% endblock %}
+    {% block panelName %}Komandų pridėjimas{% endblock %}
+{% block body %}
+    <div class="card mt-4 form__card bg-light border-0 shadow-0  bg-transparent u-no-box-shadow">
+        <div class="card-body u-mb-40">
+            {% if teams.count != null %}
+                <div class="row mx-0 pl-md-5 py-3 {% if competition.CompetitionStatus == "started" %}u-disabled{% endif %}">
+                    <ul class="team-list px-1">
+                        <div class="team-list__title">
+                            Pridėtos komandos
+                        </div>
+                        {% for team in teams %}
+                            <li class="team-list__element ">{{ team.teamName }}
+                                <span data-id="{{ team.id }}" class="fas fa-times team-list__delete"></span>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% endif %}
+            <input type="hidden" id="_hash" value="{{ app.request.attributes.get('hash') }}"/>
+            <div class="row mx-0 pl-md-5 {% if competition.CompetitionStatus == "started" %}u-disabled{% endif %}">
+                {% if teamsCount!=0 %}
+
+                {% for team in form.teams %}
+                    <div class="text-danger text-left my-3">
+
+                        {{ form_errors(team.teamName) }}
+                        {{ form_errors(team.firstTeamMember) }}
+                        {{ form_errors(team.secondTeamMember) }}
+                        {{ form_errors(team.thirdTeamMember) }}
+                    </div>
+                    <p class="card-text">
+                        {{ form_start(form) }}
+                    <div class="has-float-label ">
+                        {{ form_widget(team.teamName, {'attr': {'class': 'pr-1 first-input-width form__input'}}) }}
+                        {{ form_help(team.teamName) }}
+                        {{ form_label(team.teamName) }}
+                    </div>
+                    <div class="has-float-label ml-3">
+                        {{ form_widget(team.firstTeamMember, {'attr': {'class': 'second-input-width form__input'}}) }}
+                        {{ form_help(team.firstTeamMember) }}
+                        {{ form_label(team.firstTeamMember) }}
+                    </div>
+                    <div class="has-float-label ml-3">
+                        {{ form_widget(team.secondTeamMember,  {'attr': {'class': 'second-input-width form__input'}}) }}
+                        {{ form_help(team.secondTeamMember) }}
+                        {{ form_label(team.secondTeamMember) }}
+                    </div>
+                    <div class="has-float-label ml-3">
+                        {{ form_widget(team.thirdTeamMember,  {'attr': {'class': 'second-input-width form__input'}}) }}
+                        {{ form_help(team.thirdTeamMember) }}
+                        {{ form_label(team.thirdTeamMember) }}
+                    </div>
+                {% endfor %}
+            </div>
+            {% endif %}
+            <div class="row mx-0 pl-md-5">
+                {% if teamsCount!=0 %}{{ form_end(form) }}{% endif %}
+                <a href="{{ path("organizerStartConfirmation", {"hash": hash}) }}" class="float-right">
+                    <button class="button">Toliau...<i class="fas fa-arrow-right ml-3"></i></button>
+                </a>
+
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ asset('build/js/deleteTeam.js') }}"></script>
+{% endblock %}

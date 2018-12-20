@@ -17,12 +17,25 @@
     {% block canonical_meta %}{% endblock %}
 </head>
 <body>
-        {% include "navBar/navBar.html.twig" %}
-        {% include "flashMessages.html.twig" %}
+{% include "organizer/main/layout/navbar.html.twig" %}
+<div class="container-fluid px-0">
+    <div class="wizard-content__banner-container">
+        <div class="page-name-container u-no-mt ">
+            <h2> {% block panelName %}{% endblock %} </h2>
+        </div>
+    </div>
+    <div class="container">
+        {% include "organizer/flash-messages.html.twig" %}
         {% block body %}{% endblock %}
-        {% include "footer.html.twig" %}
+    </div>
+
+</div>
+
+
 {% block javascripts %}
+    <script src="{{ asset('build/js/organizer.js') }}"></script>
     <script src="{{ asset('build/js/app.js') }}"></script>
 {% endblock %}
 </body>
+{% include "footer.html.twig" %}
 </html>
