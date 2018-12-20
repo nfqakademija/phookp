@@ -171,6 +171,7 @@ class OrganizerController extends AbstractController implements AuthorizedContro
         if (!$competitionService->competitionStatus($competition, Competition::STATUS_STARTED)) {
             $event = new CompetitionStartedEvent($competition);
             $dispatcher->dispatch(CompetitionStartedEvent::NAME, $event);
+            $this->addFlash("success", "Varžybos pradėtos. Nurodykite komandoms atitekusius sektorius.");
         }
 
         $teamId = $competition->getTeams()->first()->getId();

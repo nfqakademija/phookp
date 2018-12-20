@@ -108,6 +108,10 @@
   }
 }
 
+.u-disabled {
+  pointer-events: none;
+}
+
 @include medium-screen{
   .u-min-width-60 {
     width: 100%;

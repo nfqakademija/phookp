@@ -34,12 +34,14 @@ class Team
     private $teamName;
     /**
      * @ORM\Column(type="integer", nullable=true)
-     * * @Assert\Type(type = "integer",
+     * @Assert\Type(type = "integer",
      *              message = "Privalote įvesti skaičių"
      * )
-     * @Assert\Length(
-     *     max=2,
-     *     maxMessage="sektorius gali būti tik dviženklis skaičius!"
+     * @Assert\Range(
+     *     min="1",
+     *     max="99",
+     *     minMessage = "Sektoriaus numeris negali būti mažesnis nei 1!",
+     *     maxMessage = "Sektoriaus numeris negali būti didesnis nei 99!"
      * )
      */
     private $sectorNr;
@@ -53,6 +55,12 @@ class Team
      * @Assert\Type(type = "string",
      *              message = "Neteisingas vardo formatas"
      * )
+     * @Assert\Length(
+     *     max = "45",
+     *     min = "3",
+     *     maxMessage = "Per ilgas nario vardas!",
+     *     minMessage = "Per trumpas vardas - mažiausiai 3 simboliai!")
+     *
      */
     private $firstTeamMember;
     /**
@@ -60,6 +68,9 @@ class Team
      * @Assert\Type(type = "string",
      *              message = "Neteisingas vardo formatas"
      * )
+     * @Assert\Length(
+     *     max = "45",
+     *     maxMessage = "Per ilgas nario vardas!")
      */
     private $thirdTeamMember;
     /**
@@ -67,6 +78,9 @@ class Team
      *  @Assert\Type(type = "string",
      *              message = "Neteisingas vardo formatas"
      * )
+     * @Assert\Length(
+     *     max = "45",
+     *     maxMessage = "Per ilgas nario vardas!")
      */
     private $secondTeamMember;
 
