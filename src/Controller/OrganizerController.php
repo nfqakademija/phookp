@@ -64,10 +64,8 @@ class OrganizerController extends AbstractController implements AuthorizedContro
                     "competition" => $competition,
                 ]);
             case Competition::STATUS_STARTED:
-                return $this->redirectToRoute("organizerResults", [
+                return $this->redirectToRoute("organizerTeamsSectors", [
                     'hash' => $hash,
-                    'teamId' => $competition->getTeams()->first()->getId(),
-                    'weighingNr' => 1
                 ]);
             default:
                 $this->addFlash("success", $translator->trans("competition.finished_message"));
