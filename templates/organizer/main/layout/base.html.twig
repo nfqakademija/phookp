@@ -2,6 +2,9 @@
 <html>
 <head>
     <meta charset="UTF-8">
+    <link rel="shortcut icon" href="{{ asset("images/favicon.ico") }}" type="image/x-icon" />
+    <link rel="icon" type="image/png" href="{{ asset("images/favicon-16x16.png") }}" sizes="16x16">
+    <link rel="icon" type="image/png" href="{{ asset("images/favicon-32x32.png") }}favicon-32x32.png" sizes="32x32">
     <title>{% block title %}{{ "Sportinė žūklė" }}{% endblock %}</title>
     {% block stylesheets %}
         <link rel="stylesheet" href="{{ asset('build/css/app.css') }}">
@@ -15,19 +18,23 @@
 </head>
 <body>
 {% include "organizer/main/layout/navbar.html.twig" %}
-<div class="container-fluid px-0 h-100">
+<div class="container-fluid px-0">
     <div class="wizard-content__banner-container">
         <div class="page-name-container u-no-mt ">
             <h2> {% block panelName %}{% endblock %} </h2>
         </div>
     </div>
-    {% include "organizer/flash-messages.html.twig" %}
-    {% block body %}{% endblock %}
+    <div class="container">
+        {% include "organizer/flash-messages.html.twig" %}
+        {% block body %}{% endblock %}
+    </div>
+
 </div>
 
-{% include "footer.html.twig" %}
+
 {% block javascripts %}
     <script src="{{ asset('build/js/organizer.js') }}"></script>
 {% endblock %}
 </body>
+{% include "footer.html.twig" %}
 </html>

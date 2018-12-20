@@ -35,6 +35,10 @@
 }
 
 
+.sector-number-container{
+  max-width: 130px;
+}
+
 .sector-button {
   min-height: 40px;
   min-width: 40px;
@@ -88,6 +92,13 @@
   color: #fff;
   background-color: $mainGreen;
 }
+
+
+.navbar-brand{
+  margin-bottom: -8px;
+  margin-top: -8px;
+}
+
 @media (min-width: 992px) {
 
 
