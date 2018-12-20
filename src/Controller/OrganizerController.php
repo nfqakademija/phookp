@@ -64,7 +64,7 @@ class OrganizerController extends AbstractController implements AuthorizedContro
                     "competition" => $competition,
                 ]);
             case Competition::STATUS_STARTED:
-                return $this->redirectToRoute("organizerTeamsSectors", [
+                return $this->redirectToRoute("organizerViewResults", [
                     'hash' => $hash,
                 ]);
             default:
