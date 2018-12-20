@@ -64,9 +64,17 @@ class OrganizerController extends AbstractController implements AuthorizedContro
                     "competition" => $competition,
                 ]);
             case Competition::STATUS_STARTED:
+                foreach($competition->getTeams() as $team){
+                    if($team->getSectorNr() === null){
+                        return $this->redirectToRoute("organizerTeamsSectors", [
+                            'hash' => $hash,
+                        ]);
+                    }
+                }
                 return $this->redirectToRoute("organizerViewResults", [
                     'hash' => $hash,
                 ]);
+
             default:
                 $this->addFlash("success", $translator->trans("competition.finished_message"));
                 return $this->redirectToRoute("home");
